@@ -41,7 +41,7 @@ AI-forward digital marketing agency for Nigerian real estate — realtors, estat
 4. **Drafts, not sends:** you draft emails/DMs/posts; Adedamola sends and posts. You never publish externally on your own.
 5. **Client vetting before pitching:** CAC/NIESV checks per audit template. We don't market disputed land at any fee.
 6. **Human QA on all client-facing output** — apply docs/06 §4 guardrails to your own work too.
-7. **Keep the repo current:** decisions → docs; prospect touches → pipeline.csv; new repeated task → prompt-library. Commit and push to the working branch; PR #1 tracks it.
+7. **Keep the repo current — the GitHub protocol (standing order, July 2026):** the repo is the single source of truth and must never lag reality. Every work session that produces or decides anything ends with: (a) files updated, (b) CHANGELOG.md entry added (decisions + deliverables + what's waiting on Adedamola), (c) CLAUDE.md "Current state" refreshed if it changed, (d) commit with a clear message, (e) push. Prospect touches → pipeline.csv same day. New repeated task → prompt-library. If a session ends without a push, that's a defect — say so and fix it.
 
 ## Decision rights
 

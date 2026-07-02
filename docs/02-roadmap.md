@@ -1,6 +1,6 @@
 # Propel — 24-Month Roadmap
 
-Owners: **A** = Managing Partner, Growth & Strategy · **B** = Managing Partner, Market & Delivery (Justin) · **Team** = hires.
+Owners: **A** = Managing Partner, Growth & Strategy · **B** = Managing Partner, Market & Delivery (Adedamola) · **Team** = hires.
 Each phase has an exit gate — do not advance until the gate is met.
 
 ---

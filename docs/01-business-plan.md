@@ -98,7 +98,7 @@ Retainers are the core model; Launch and Studio are project-fee accelerants that
 | Role | Who | Responsibilities |
 |---|---|---|
 | Managing Partner — Growth & Strategy (UK/HBS partner) | Partner A | Positioning, pricing, developer/enterprise sales, financial control, AI ops design |
-| Managing Partner — Market & Delivery (Lagos partner) | Partner B (Justin) | Local network & trust-building, client relationships, delivery quality, industry presence (NIESV events, agent communities) |
+| Managing Partner — Market & Delivery (Lagos partner) | Partner B (Adedamola) | Local network & trust-building, client relationships, delivery quality, industry presence (NIESV events, agent communities) |
 | Hire 1 (Month 2–3) | Content/AI Producer | Short-form video editing, AI content pipeline, design |
 | Hire 2 (Month 4–6) | Media Buyer / Automation | Meta & Google ads, landing pages, WhatsApp/CRM flows |
 

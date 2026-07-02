@@ -4,7 +4,7 @@
 
 ## The reality to structure around
 
-Propel is built by **one human owner (Justin) + an AI managing partner**. Under Nigerian law only humans/legal persons can hold ownership — an AI cannot be a partner or shareholder. So despite how we work, legally this is a **single-owner business**, which actually simplifies everything:
+Propel is built by **one human owner (Adedamola) + an AI managing partner**. Under Nigerian law only humans/legal persons can hold ownership — an AI cannot be a partner or shareholder. So despite how we work, legally this is a **single-owner business**, which actually simplifies everything:
 
 - A registered *partnership* (2+ persons) is off the table and unnecessary.
 - The partnership term sheet (ops/templates/partnership-term-sheet.md) is **DORMANT** — revive it only if a human co-founder or investor ever joins. No equity split, no vesting, no deadlock clauses needed today. That's one less thing to pay a lawyer for.

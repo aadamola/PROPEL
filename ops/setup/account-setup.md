@@ -9,7 +9,7 @@ Primary: **@getpropel** (fallbacks in order: @getpropel.ng, @propel.ng, @propelh
 ## 1. Domain & email (do first — 15 min)
 
 - [ ] Buy domain: **getpropel.ng** (fallback: propel.ng if available, getpropel.africa) — ~₦15k–₦25k/yr at a .ng registrar (e.g., Whogohost, GO54)
-- [ ] Set up Google Workspace or Zoho Mail (Zoho free tier is fine at ₦0): **hello@** and **justin@**
+- [ ] Set up Google Workspace or Zoho Mail (Zoho free tier is fine at ₦0): **hello@** and **adedamola@**
 - [ ] Once live, switch all account registrations below to the business email
 
 ## 2. WhatsApp Business (the real HQ — 10 min)
@@ -26,9 +26,9 @@ Primary: **@getpropel** (fallbacks in order: @getpropel.ng, @propel.ng, @propelh
 - [ ] Name field: **Propel | Real Estate Marketing** (searchable — the name field is indexed)
 - [ ] Bio (paste):
   > We get realtors, surveyors & developers seen — and sold.
-  > 🏠 AI-powered marketing for Nigerian real estate
-  > 📍 Lagos · Remote-first
-  > ⬇️ Free 30-min marketing audit
+  > 🏠 AI-powered marketing, built by a real estate professional
+  > 🎓 Estate Management · NIESV-trained founder
+  > 📍 Lagos · ⬇️ Free 30-min marketing audit
 - [ ] Link: WhatsApp click-to-chat (swap to site when live)
 - [ ] Upload profile image + story highlight covers (from ops/setup/assets/ once exported from Canva)
 - [ ] Create empty highlights: *Audits · Results · Services · About*
@@ -39,11 +39,12 @@ Primary: **@getpropel** (fallbacks in order: @getpropel.ng, @propel.ng, @propelh
 - [ ] Bio: *"Marketing that sells Lagos property 🏠 Free audit ⬇️"* + WhatsApp link
 - [ ] Same profile image
 
-## 5. LinkedIn (Partner A's hunting ground)
+## 5. LinkedIn (the surveyor/valuer + developer hunting ground)
 
 - [ ] Create **Company Page**: Propel — tagline: *"AI-forward digital marketing for real estate. Lagos. We move property."*
-- [ ] Both partners update personal headlines to include "Co-founder, Propel" — personal profiles will outperform the page; the page just needs to exist and look sharp
-- [ ] Justin's headline suggestion: *"Co-founder @ Propel | Digital marketing for realtors, surveyors & developers | We move property"*
+- [ ] Update Adedamola's personal headline — the personal profile will outperform the page; the page just needs to exist and look sharp
+- [ ] Headline suggestion: *"Founder @ Propel | Estate Management + NIESV-trained | Digital marketing for realtors, surveyors & developers"*
+- [ ] LinkedIn is text-first: founder posts here need no face and no video — this is our strongest personal-brand channel given current constraints
 
 ## 6. YouTube (park it properly — 5 min)
 
@@ -67,12 +68,13 @@ Primary: **@getpropel** (fallbacks in order: @getpropel.ng, @propel.ng, @propelh
 
 **Why we don't buy followers — the 20-second version:** audit tools (HypeAuditor, Modash — free tiers) expose fake followers instantly; our prospects are *marketers' clients* being pitched accountability, and competitors WILL run that audit on us. Bought followers also crater engagement rate → Instagram/TikTok show our content to fewer real people → we pay to get buried. For an agency selling "leads not likes," it's brand suicide with no upside.
 
-**What actually builds proof in 30 days (all free or near-free):**
+**What actually builds proof in 30 days (all free or near-free — and none of it requires asking friends for follows):**
 
-1. **Seed the warm 100 (day 1):** WhatsApp broadcast to your network announcing Propel with the IG link — a personal ask to follow + share. Realistic: 80–150 real, relevant followers in week one. These are *Lagos real estate people* — worth 100× a bought bot each.
-2. **Content quality as proof (day 1+):** first 9 grid posts are portfolio-grade (the launch calendar below is designed exactly for this). A 200-follower page with stunning teardowns out-converts a 10k-bot page with dead comments. Prospects judge the *work*, not the count.
-3. **Borrow audiences (week 1–4):** comment-with-substance on the 20 biggest Nigerian real estate accounts daily (10 min/day, from the engine's engagement block); DM 5 agent friends offering a free mini-teardown → they share it, tagged.
-4. **Numbers that don't need followers:** "10 marketing audits delivered in our first month" · "₦X in listings marketed" · client testimonial screenshots. We manufacture *legitimate* proof points and pin them.
-5. **The credential badge:** "Founded by [HBS partner] + [Justin's credential]" in the bio/highlights — authority transfers.
+1. **The credential badge (day 1):** "Built by a real estate professional — Estate Management, NIESV-trained, 5 years in the industry" in bio, pinned post, and About highlight. This is proof no follower count can fake, and it's our founder's genuine authority speaking to his own professional tribe.
+2. **Content quality as proof (day 1+):** first 9 grid posts are portfolio-grade (the launch calendar is designed exactly for this). A 200-follower page with stunning teardowns out-converts a 10k-bot page with dead comments. Prospects judge the *work*, not the count.
+3. **Borrow audiences (week 1–4):** comment-with-substance on the 20 biggest Nigerian real estate accounts daily (10 min/day, from the engine's engagement block). Written comments, no face required — insider takes ("as an estate management grad, here's what this listing missed…") get profile taps.
+4. **Value-first prospect outreach (business, not friend-bugging):** free mini-teardowns DM'd to Tier-A *prospects* — they often share or repost the makeover, tagged. This is sales motion doubling as distribution.
+5. **Numbers that don't need followers:** "10 marketing audits delivered in our first month" · "₦X in listings marketed" · testimonial screenshots. Legitimate proof points, pinned.
+6. **Hashtag/location SEO + Reels distribution:** faceless Reels with strong hooks get pushed to non-followers by design — TikTok and IG Reels distribute on content quality, not audience size. Our follower count grows as an *output* of reach, not an input.
 
 **Rule going forward:** engagement rate ≥3% matters; follower count is reported to nobody. Our scorecard logic applies to ourselves.

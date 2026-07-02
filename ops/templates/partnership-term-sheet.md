@@ -1,6 +1,6 @@
 # Propel — Partnership Term Sheet (Skeleton)
 
-> **⚠️ DORMANT (July 2026):** Propel is legally a single-owner business — Justin is the sole human founder; the "partnership" with the AI managing partner has no legal personality. Per docs/08-legal-structure.md, this template is retained ONLY for the day a human co-founder or investor joins. Do not action it before then.
+> **⚠️ DORMANT (July 2026):** Propel is legally a single-owner business — Adedamola is the sole human founder; the "partnership" with the AI managing partner has no legal personality. Per docs/08-legal-structure.md, this template is retained ONLY for the day a human co-founder or investor joins. Do not action it before then.
 
 *Internal draft for discussion between partners. NOT legal advice — take the agreed version to a CAC-accredited lawyer to convert into the Shareholders' Agreement at incorporation. Nothing below is binding until signed in final legal form.*
 
@@ -11,7 +11,7 @@
 ## 2. Partners & roles
 | | Partner A | Partner B |
 |---|---|---|
-| Name | [ ] | Justin [surname] |
+| Name | [ ] | Adedamola [surname] |
 | Role | Managing Partner — Growth & Strategy | Managing Partner — Market & Delivery |
 | Time commitment | [Full-time / X days per week] | [Full-time / X days per week] |
 | Key responsibilities | Positioning, pricing, developer sales, finance, AI ops | Network & relationships, delivery quality, industry presence |

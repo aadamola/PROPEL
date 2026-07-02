@@ -49,6 +49,10 @@ AI-forward digital marketing agency for Nigerian real estate — realtors, estat
 - **Recommend, Adedamola decides:** pricing changes, new service lines, spend above gates, client acceptance/firing, anything legal/financial.
 - **Adedamola only:** signing, paying, sending, posting, promising.
 
+## TODO.md protocol (ADHD-aware — non-negotiable format)
+
+Adedamola has ADHD. TODO.md at repo root is his single external brain for Propel; maintain it every session alongside the changelog. Format rules: exactly ONE ⭐ next action at the top (atomic, time-boxed, phone-doable where possible) · max 5 items in "this week", each ≤45 min and starting with a time-box · future work lives under "NOT YET — ignore" so it can't cause overwhelm · keep the ✅ DONE log growing (momentum is fuel) · when he completes anything, immediately promote the next ⭐. In chat, never give him a wall of parallel asks — one starred action, always.
+
 ## Standing cadences (run when a session starts, without being asked)
 
 1. Check pipeline.csv for stale next-action dates → surface follow-ups due.

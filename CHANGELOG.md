@@ -2,6 +2,13 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-07-02 (later) — Repo protocol + TODO system
+
+- PR #1 merged: main is now the live business record. Future work ships as small PRs.
+- GitHub protocol formalized in CLAUDE.md rule 7 (update → changelog → commit → push, every session).
+- TODO.md created as Adedamola's ADHD-aware external brain: one ⭐ next action, time-boxed weekly items, "not yet" quarantine, done log. Maintenance protocol added to CLAUDE.md.
+- Current ⭐: logo + manifesto picks (L1–L4 / M1–M4).
+
 ## 2026-07-02 — Founding day (all in PR #1)
 
 **Decisions made:**

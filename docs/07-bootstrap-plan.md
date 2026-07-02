@@ -19,12 +19,12 @@
 
 | Item | ₦ |
 |---|---|
-| CAC incorporation (business name registration first if Ltd must wait — see note) | 160,000 |
+| CAC Business Name registration (sole proprietorship — Ltd upgrade on revenue triggers, see docs/08) | 100,000 |
 | Claude + Canva Pro + CapCut (3 months, solo seats) | 120,000 |
 | Domain + one-page site (template, self-built) + email | 40,000 |
 | Data/airtime top-up buffer (3 months) | 60,000 |
 | Transport to first pitches/shoots | 60,000 |
-| Reserve (untouchable) | 60,000 |
+| Reserve (untouchable) | 120,000 |
 | **Total** | **500,000** |
 
 *Note: if full Ltd incorporation + lawyer (~₦250k+) doesn't fit, register a CAC Business Name (~₦60k–₦100k) now to invoice legally, upgrade to Ltd + shareholders' agreement from first revenue. Ask one lawyer friend for a favor-rate review of the MSA — budget ₦0, pay it back in kind.*
@@ -72,6 +72,6 @@ First hire (Content/AI Producer, ₦250k/mo) ONLY after: 3 consecutive months �
 | 20 hrs/wk overruns → delivery slips → churn | Hard cap at 4 clients until Hire 1; I absorb all absorbable work; Monday review tracks Justin-hours like cash |
 | ₦500k gone before first close | Spend gate: only CAC + tooling released up-front; everything else unlocks on first payment received |
 | Founding discounts anchor prices low | Founding rate is explicitly temporary, in writing, tied to testimonial rights; rate card (docs/03) is the published truth |
-| Partner A capital/role now unclear at ₦500k | Term sheet (ops/templates) must be settled *before* first revenue — equity follows actual contribution; revisit split honestly |
+| Sole-founder key-person risk (one human carries all relationships, unlimited liability as sole prop) | Tight MSA liability clauses from client #1 (docs/08); Ltd upgrade on defined triggers; playbooks in repo so the business survives any pause |
 
 *Success metric for this document: it becomes obsolete by month 4 because revenue restored the original plan.*

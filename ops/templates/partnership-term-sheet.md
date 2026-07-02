@@ -1,5 +1,7 @@
 # Propel — Partnership Term Sheet (Skeleton)
 
+> **⚠️ DORMANT (July 2026):** Propel is legally a single-owner business — Justin is the sole human founder; the "partnership" with the AI managing partner has no legal personality. Per docs/08-legal-structure.md, this template is retained ONLY for the day a human co-founder or investor joins. Do not action it before then.
+
 *Internal draft for discussion between partners. NOT legal advice — take the agreed version to a CAC-accredited lawyer to convert into the Shareholders' Agreement at incorporation. Nothing below is binding until signed in final legal form.*
 
 ## 1. Company

@@ -17,9 +17,10 @@
 ## THIS WEEK — one per sitting, in this order
 
 - [ ] **(20 min)** First 10 prospect names → WhatsApp me just names + IG handles (agents you know, 1–2 surveyor firms, any developer contact). *Unblocks: I write all 10 audit teardowns.*
-- [ ] **(10 min)** Buy a fresh SIM for the business WhatsApp line (₦500, any vendor).
+- [ ] **(10 min)** Buy a fresh SIM for the business WhatsApp line (₦500, any vendor). *Also unblocks the website going live — every button on it is a WhatsApp link waiting for this number.*
 - [ ] **(15 min)** Start CAC Business Name filing: "Propel Digital" (fallbacks: Propel Media, Propel Digital Marketing) — online at cac.gov.ng or hand it to an accredited agent.
 - [ ] **(45 min)** Account sprint: open [ops/setup/account-setup.md](ops/setup/account-setup.md), go top to bottom (domain → WhatsApp Business → Instagram → TikTok → LinkedIn → Meta Business Suite). Everything is copy-paste ready.
+- [ ] **(15 min)** Shalom Park: find the right contact at IFT Realty (their site/LinkedIn), then send the outreach draft waiting in [docs/09](docs/09-shalom-park-partnership.md). Don't negotiate yet — just open the door.
 
 ## NOT YET — ignore these (I'll star them when it's time)
 

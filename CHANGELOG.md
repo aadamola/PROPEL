@@ -2,6 +2,14 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-07-04 — Website draft + Shalom Park partnership prospect
+
+- **Website draft v1 shipped** (site/index.html): one-page, mobile-first, WhatsApp-first conversion site — hero, trust bar, services, naira pricing, insider-credential section, Featured Projects slot, honest proof section, FAQ. Built from researched high-converting real estate page patterns. Blockers to go live: business WhatsApp number, domain purchase, logo pick.
+- **Shalom Park Estate (IFT Realty Ltd) added as Tier-A developer prospect** — desk check verified real, press-covered 2024 launch in Abijo, Ibeju-Lekki. Deal memo with recommended structure (hybrid fee + ≥3–5% commission, attribution clause, exclusivity terms, walk-away lines) and outreach draft in docs/09. Hard gate: CAC + title verification before anything publishes.
+- New revenue line named: **Propel Partners** (commission mandates on developer projects).
+- Pipeline + TODO updated. All work on PR #2.
+- **Waiting on Adedamola:** logo/manifesto picks (⭐) · 10 prospect names · SIM + account sprint · CAC filing · Shalom Park contact person.
+
 ## 2026-07-02 (later) — Repo protocol + TODO system
 
 - PR #1 merged: main is now the live business record. Future work ships as small PRs.

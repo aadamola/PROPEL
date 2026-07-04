@@ -18,6 +18,8 @@ Propel is a remote-first digital marketing agency serving realtors, estate surve
 | [docs/07-bootstrap-plan.md](docs/07-bootstrap-plan.md) | **Operative plan** — ₦500k / 20hrs-week bootstrap sequence (supersedes v1 capital assumptions) |
 | [docs/08-legal-structure.md](docs/08-legal-structure.md) | Legal structure: sole proprietorship now, single-shareholder Ltd on triggers |
 | [CLAUDE.md](CLAUDE.md) | AI managing partner standing instructions (auto-loads every working session) |
+| [docs/09-shalom-park-partnership.md](docs/09-shalom-park-partnership.md) | Developer commission-mandate memo: deal structure, vetting gates, outreach draft |
+| [site/index.html](site/index.html) | Website draft v1 — one-page, mobile-first, WhatsApp-first |
 | [deck/pitch-deck.md](deck/pitch-deck.md) | Slide-by-slide pitch deck content, ready to build |
 | [ops/README.md](ops/README.md) | Operating manual: AI partner capabilities, cadences, tasking guide |
 | [ops/prompt-library.md](ops/prompt-library.md) | Production prompts for listings, audits, calendars, scorecards |

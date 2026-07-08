@@ -4,23 +4,30 @@
 
 ---
 
-## ⭐ DO THIS NEXT (2 min, from your phone, right now)
+## ⭐ DO THIS NEXT — GO PUBLIC (one sitting, ~90 min, today)
 
-**Pick one logo and one manifesto post. Just reply like: "L2, M4".**
-- Logos: [L1](https://www.canva.com/d/tDszAZIPYHaCa_8) · [L2](https://www.canva.com/d/e9idgbA_m-LTyn3) · [L3](https://www.canva.com/d/WNev6bcU57O4Eb4) · [L4](https://www.canva.com/d/NmjXvhpvY-K4IaQ)
-- Manifesto: [M1](https://www.canva.com/d/a406IlhSk6DUOxM) · [M2](https://www.canva.com/d/LxJ1NJ2q_M9oMPG) · [M3](https://www.canva.com/d/YUDJrZ2zwir3Oo3) · [M4](https://www.canva.com/d/5U9dDjTLQ8oqeSl)
+**The launch sprint. Brand assets are DONE (site/assets/ — profile.png, manifesto.png, banner.png). No more waiting on picks. In order:**
 
-*Unblocks: I build the entire brand asset pack (profile images, banners, highlight covers, post templates).*
+1. **(10 min)** Buy a SIM for the business line (₦500, any vendor)
+2. **(10 min)** WhatsApp Business on that SIM — paste-ready profile in [ops/setup/account-setup.md §2](ops/setup/account-setup.md)
+3. **(10 min)** Instagram @getpropel (or first fallback) — bio in §3, upload **profile.png**
+4. **(10 min)** TikTok @getpropel — §4, same profile.png
+5. **(15 min)** LinkedIn company page — §5, upload **banner.png**
+6. **(5 min)** Post **manifesto.png** on IG + TikTok with the Day 1 caption from [ops/content/content-engine.md](ops/content/content-engine.md)
+7. **(10 min)** Meta Business Suite: link IG + WhatsApp — §7
+8. **(2 min)** Text me the WhatsApp number → I wire it into every website button + generate the QR
+
+**Done = Propel is public today.** 🚀
 
 ---
 
 ## THIS WEEK — one per sitting, in this order
 
-- [ ] **(20 min)** First 10 prospect names → WhatsApp me just names + IG handles (agents you know, 1–2 surveyor firms, any developer contact). *Unblocks: I write all 10 audit teardowns.*
-- [ ] **(10 min)** Buy a fresh SIM for the business WhatsApp line (₦500, any vendor). *Also unblocks the website going live — every button on it is a WhatsApp link waiting for this number.*
-- [ ] **(15 min)** Start CAC Business Name filing: "Propel Digital" (fallbacks: Propel Media, Propel Digital Marketing) — online at cac.gov.ng or hand it to an accredited agent.
-- [ ] **(45 min)** Account sprint: open [ops/setup/account-setup.md](ops/setup/account-setup.md), go top to bottom (domain → WhatsApp Business → Instagram → TikTok → LinkedIn → Meta Business Suite). Everything is copy-paste ready.
-- [ ] **(15 min)** Shalom Park: find the right contact at IFT Realty (their site/LinkedIn), then send the outreach draft waiting in [docs/09](docs/09-shalom-park-partnership.md). Don't negotiate yet — just open the door.
+- [ ] **(20 min)** First 10 prospect names → WhatsApp me just names + IG handles. *Unblocks: I write all 10 audit teardowns.*
+- [ ] **(15 min)** Start CAC Business Name filing: "Propel Digital" (fallbacks: Propel Media, Propel Digital Marketing) — cac.gov.ng or an accredited agent.
+- [ ] **(15 min)** Shalom Park: find the right contact at IFT Realty (their site/LinkedIn), send the outreach draft in [docs/09](docs/09-shalom-park-partnership.md). Don't negotiate — just open the door.
+- [ ] **(10 min)** Buy domain getpropel.ng (₦15k–₦25k) → tell me; I'll prep the site for hosting.
+- [ ] **(5 min, optional)** Re-authorize Canva (claude.ai → connector settings) if you want the L1–L4 designs as alternates; my generated assets carry us fine meanwhile.
 
 ## NOT YET — ignore these (I'll star them when it's time)
 

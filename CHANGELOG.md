@@ -2,6 +2,13 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-07-08 — Launch assets + Propel Concierge product
+
+- **Decision: go public now, improve in flight.** TODO ⭐ is a single 90-minute launch sprint.
+- **Brand assets produced in-house** (Canva connector down; rendered via headless Chromium): site/assets/profile.png (1080²), manifesto.png (1080×1350, Day-1 post), banner.png (LinkedIn). Canva L1–L4 candidates remain optional alternates.
+- **New headline product: Propel Concierge** (docs/10) — 24/7 AI agents answering IG/WhatsApp DMs from client-warranted listing facts; qualification, inspection booking, hot-lead handoff. Tiers: Lite ₦450k+₦100k/mo · Pro ₦800k+₦150k/mo · Developer ₦1.2m+₦250k/mo. Rate card (docs/03) and website updated; old OS "AI Lead Concierge" line-item superseded. Strategic role: churn armor, wedge product, attribution engine for commission mandates.
+- **Waiting on Adedamola:** the 90-min launch sprint · WhatsApp number to me afterward · prospect names · CAC · Shalom Park contact.
+
 ## 2026-07-04 — Website draft + Shalom Park partnership prospect
 
 - **Website draft v1 shipped** (site/index.html): one-page, mobile-first, WhatsApp-first conversion site — hero, trust bar, services, naira pricing, insider-credential section, Featured Projects slot, honest proof section, FAQ. Built from researched high-converting real estate page patterns. Blockers to go live: business WhatsApp number, domain purchase, logo pick.

@@ -2,6 +2,13 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-07-08 (later) — Shalom Park demo pack (spec work = the pitch)
+
+- **Full demo pack built at demos/shalom-park/** — one use case per offering: Presence sample week + 3 written posts · Leads funnel + 6 ad variants + demo landing page (landing-demo.html) · 90-day Launch re-launch concept ("Built like someone plans to live here") · Studio shoot plan (one day → a month of assets) · **interactive Concierge WhatsApp simulation** (concierge-demo.html — the meeting opener) · CONCEPT-watermarked IG post PNG.
+- **Rules locked in demos README:** pitch-only until signed (spec work ≠ client work — never faked as social proof); all facts placeholder/[VERIFY] until IFT warrants them; public use only if labeled CONCEPT.
+- **Charging model:** demos anchor the hybrid ask — Launch Lite + Concierge Developer ≈ ₦2.4m + ≥3% attributed commission (docs/09 updated with meeting flow).
+- Honest-proof sequence: mandate signed → "marketing partner" badge → real numbers → flagship case study.
+
 ## 2026-07-08 — Launch assets + Propel Concierge product
 
 - **Decision: go public now, improve in flight.** TODO ⭐ is a single 90-minute launch sprint.

@@ -30,6 +30,10 @@ This is a **commission mandate**, not a retainer — a new revenue line ("Propel
 3. Simple 2–3 page **Marketing Mandate Agreement** (adapted from our MSA): scope, fee/commission, attribution mechanism, exclusivity, term, testimonial rights, facts-warranty clause, liability cap. Lawyer favor-rate review.
 4. Pipeline entry updated at every touch (done — see ops/crm/pipeline.csv).
 
+## The demo pack (built July 2026 — this IS the pitch)
+
+A full spec-work pack now exists at **demos/shalom-park/**: one demo per offering — sample content week (Presence), 6 ad variants + demo landing page (Leads), 90-day re-launch concept (Launch), shoot plan (Studio), an **interactive WhatsApp AI-agent simulation** (Concierge — open concierge-demo.html on any phone), and a CONCEPT-watermarked IG post. Meeting flow: Concierge demo first (60 seconds, their phone), landing page second, content pack third — then the hybrid offer. Fee anchor with demos in hand: **Launch Lite + Concierge Developer bundle ≈ ₦2.4m + ≥3% commission.** Usage rules in demos/shalom-park/README.md: pitch-only until signed, never presented publicly as client work, all facts placeholder until warranted.
+
 ## Outreach draft (Adedamola sends via LinkedIn/email/site contact — adjust tone to channel)
 
 > Subject: Selling Shalom Park to the diaspora — a marketing proposal

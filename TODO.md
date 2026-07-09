@@ -25,7 +25,7 @@
 
 - [ ] **(20 min)** First 10 prospect names → WhatsApp me just names + IG handles. *Unblocks: I write all 10 audit teardowns.*
 - [ ] **(15 min)** Start CAC Business Name filing: "Propel Digital" (fallbacks: Propel Media, Propel Digital Marketing) — cac.gov.ng or an accredited agent.
-- [ ] **(15 min)** Shalom Park: find the right contact at IFT Realty (their site/LinkedIn), send the outreach draft in [docs/09](docs/09-shalom-park-partnership.md). Don't negotiate — just open the door.
+- [ ] **(15 min)** Shalom Park: find the right contact at IFT Realty (their site/LinkedIn), send the outreach draft in [docs/09](docs/09-shalom-park-partnership.md). Don't negotiate — just open the door. *When the meeting lands: the full demo pack is ready in [demos/shalom-park/](demos/shalom-park/) — open concierge-demo.html on their phone first.*
 - [ ] **(10 min)** Buy domain getpropel.ng (₦15k–₦25k) → tell me; I'll prep the site for hosting.
 - [ ] **(5 min, optional)** Re-authorize Canva (claude.ai → connector settings) if you want the L1–L4 designs as alternates; my generated assets carry us fine meanwhile.
 

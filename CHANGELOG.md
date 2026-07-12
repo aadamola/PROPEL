@@ -2,6 +2,47 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-07-13 (later²) — Rental sector: decided, bounded, parked (docs/14)
+
+- Founder raised the rental gap. Partner assessment: generic lettings REJECTED (per-deal agent economics can't sustain retainers; wedge dilution at launch). Two rental-adjacent sub-segments APPROVED as the Phase-2 lane using existing products: **shortlet operators** (occupancy = recurring budgeted pain; Concierge PMF arguably stronger than sales) and **property management firms** (NIESV tribe; vacancy-fill framing). Activation triggers defined; launch copy/rate card untouched. Freeze holds — this was a decision memo, not a rebuild.
+
+## 2026-07-13 (later) — Ops tools shipped: quality rules are now code
+
+- **Stale-reference sweep re-run:** repo is clean — the 5 remaining legacy-tool mentions are decision records (rejections/replacements), which belong. **Root cause of what ADEDAMOLA saw: `main` is stale because PR #2 (11 commits of upgrades) is unmerged. Merging PR #2 is the fix.**
+- **Built and tested (tools/):** `pipeline-check.js` (overdue follow-up gate, exits red until cleared) · `listing-intake.js` (rule-2 enforcer — listings BLOCKED from production without sighted docs, written warranty, and clean claims; demo sheet correctly fails with 4 flags) · `scorecard-gen.js` (metrics JSON → honest client scorecard, machine-computed deltas). Zero dependencies; port to n8n nodes on the VPS later.
+- QA harness still 14/14. Freeze holds: these are execution systems, not new strategy.
+
+## 2026-07-13 — BACKEND HARDENING COMPLETE → FREEZE. Storefront is next.
+
+- **Founder caught real drift:** docs/06 stack table and two other files still described the pre-upgrade stack (Midjourney/Make/Zapier/HubSpot era). Fixed: docs/06 rewritten as **Stack v1.1** — two-zone layout (trust perimeter / engine room), tiered models T1–T4, official-API-only transport, n8n replacing Make/Zapier, Airtable CRM; docs/10 orchestration + docs/04 CRM lines aligned.
+- **Missing artifact created:** ops/templates/msa-sow-skeleton.md — the contract armor every doc referenced but nothing contained (facts warranty, liability cap, indemnity, NDPA processor terms, AI disclosure, kill switch, commission-mandate attribution, lawyer question list). Roadmap 0.5 now has its artifact.
+- Indexes trued up: CLAUDE.md source-of-truth table (docs/09–13, demos, sandbox), README (12/13/sandbox/MSA), ops/README directory map.
+- Verified: QA harness 14/14 · working tree clean · branch pushed · PR #2 carries everything.
+- **BACKEND FREEZE declared:** planning docs are complete and consistent. From this commit, repo changes are execution records (pipeline touches, QA results, campaign data, client artifacts) — not new strategy. New planning docs require a named trigger (docs/02 gates, docs/08 triggers, quarterly re-scans). *Partner note: past this point, more backend polish is procrastination with a clean conscience.*
+- **STOREFRONT GATE (the only path now):** ① 90-min go-public sprint (SIM → WhatsApp Business → IG/TikTok/LinkedIn → manifesto post → send me the number) ② domain + VPS purchase (~₦40k) → I deploy site + sandbox ③ CAC filing ④ 10 prospect names → teardowns ⑤ Shalom Park outreach (overdue). All human-hands items; everything producible is done.
+
+## 2026-07-12 (late night) — Agentic + open-model strategy: "power inside walls" (docs/13)
+
+- **Founder pushed back on the OpenClaw hold — and was right.** Two-zone doctrine adopted: trust perimeter (client-facing/client data — rules unchanged, frontier-grade, guardrailed) vs. engine room (internal, public/fictional data — most aggressive tooling in the market).
+- **OpenClaw ADOPTED in containment ("Agent DMZ"):** ① Red Team Engine — autonomously attacks our own Concierge; every found exploit becomes a permanent QA test (creative unpredictability turned into our moat) · ② Market Intelligence Analyst — weekly public-data corridor sweeps building the benchmarks dataset · ③ Prospect Research Desk. No client data, no send capability, human QA, kill switch. Client-facing autonomy stays banned.
+- **Tiered model policy:** T1 client-facing = frontier (unchanged) · T2 internal bulk generation = DeepSeek V4 Flash/Qwen/GLM at 5–30× cheaper (~80–90% token-cost cut; human QA already mandatory) · T3 agent brains = Kimi-class for agentic stability · T4 embeddings = open models. Hard line: client PII never to third-country APIs (NDPA); open models may compete for the Concierge brain via the bake-off but require a vetted data path.
+- docs/12 OpenClaw verdict updated; rate card unchanged (efficiency → margin).
+
+## 2026-07-12 (night) — WATCH-list re-adjudication + bake-off harness BUILT
+
+- Founder directed: flip all WATCH → ADOPT and implement. Partner re-adjudicated item-by-item rather than blanket-flipping:
+  - **Promoted to ADOPT (evaluation):** Flowise (joins Dify + n8n-native in a 3-way Concierge brain bake-off) · full TTS bench (Fish Speech, XTTS-v2, OpenVoice, CosyVoice join Chatterbox + ElevenLabs in the voice ear-test).
+  - **Held at WATCH (partner override, flip conditions documented in docs/12):** Botpress (pure redundancy) · OpenClaw-class autonomous agent (unvetted broad tool access near client data contradicts guardrail model + NDPA posture). Founder may overrule explicitly; risk will be changelogged with the decision.
+- **Implemented today — sandbox/apex-gardens/:** fictional-estate KB · machine-readable QA suites (6 injection attacks, 8 grounding checks, 5 policy behaviors) · runnable retrieval-first reference prototype enforcing the guardrail architecture. **Test result: 14/14 PASS.** This harness is now the exam every production brain must beat; it also powers the public "try it yourself" demo.
+- Remaining implementation gated on physical unlocks (VPS, WhatsApp number, API billing) — on the launch-sprint path.
+
+## 2026-07-12 (evening) — AI stack refresh from ecosystem scan (docs/12)
+
+- **Strategic ruling: official WhatsApp Cloud API only for client production.** The ecosystem's hottest gateways (Evolution API, WAHA, OpenWA) ride the unofficial Web protocol — ToS-violating, active Meta ban enforcement. Rejected for production; "official APIs only" added to the Quality Charter as a sales weapon.
+- **Adopted for sandbox evaluation:** Dify (self-hosted RAG brain) vs. n8n-native agent nodes bake-off on the Apex Gardens KB; ElevenLabs production track + Chatterbox open-source cost-down track for Voice-Note Concierge (client voice cloning = consent-gated premium tier).
+- **Watch (not deploy):** viral autonomous-agent project (~380k stars) — broad tool access contradicts our narrow, KB-grounded guardrail model; Botpress; Flowise; Fish Speech/XTTS bench.
+- **New cadence:** quarterly stack re-scan. Rate card unchanged — tool changes improve margin, not prices. docs/06 now points to docs/12.
+
 ## 2026-07-12 (later) — Repo audit: sync confirmed, drift fixed
 
 - **Sync verified:** working tree clean · local = origin branch (ce186e7) · PR #2 open/mergeable with all 5 post-merge commits (25 files, +1,015 lines). One merge takes everything.

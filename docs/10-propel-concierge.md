@@ -24,7 +24,7 @@
 | Channels | WhatsApp Business Platform (Cloud API) via BSP; Instagram + Messenger via Meta Messaging API — one inbox integration covers all three |
 | Brain | Claude API with per-client system prompt (persona, tone, guardrails) + retrieval over the client's knowledge base |
 | Knowledge base | Structured listing sheets + FAQs, client-warranted in writing; versioned per client in their folder; updated weekly or on new listing |
-| Orchestration | Make.com/managed bot platform to start (speed over purity); custom agent-SDK build when volume justifies |
+| Orchestration | Self-hosted n8n on VPS (docs/12 architecture); custom agent-SDK build when volume justifies |
 | CRM | Lead + transcript logged to client's pipeline (Propel OS); tags = source, score, status |
 | Compliance | Meta 24-hour messaging window rules respected (template messages beyond window); NDPA consent line in first response; opt-out honored instantly |
 

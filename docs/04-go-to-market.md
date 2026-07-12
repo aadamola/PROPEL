@@ -67,7 +67,7 @@ It's easier to upsell a delighted ₦250k client to ₦450k than to close cold a
 
 ## 5. Sales Infrastructure
 
-- **CRM from day 1** (HubSpot free tier or NG-friendly alternative): every target, stage, and next-step logged; weekly pipeline review Monday standup.
+- **CRM from day 1** (Airtable + the repo's ops/crm/pipeline.csv mirror, per docs/06 v1.1 stack): every target, stage, and next-step logged; weekly pipeline review Monday standup.
 - **Assets needed before first outreach:** rate card PDF, MSA/SOW, 3 sample content packs (create for fictional listings), audit-video template, proposal template, onboarding checklist.
 - **KPIs:** audit calls booked/week (target 5+ by month 2) · proposal→close ≥25% warm · CAC <₦100k blended · time-to-onboard <5 days.
 

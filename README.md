@@ -23,6 +23,12 @@ Propel is a remote-first digital marketing agency serving realtors, estate surve
 | [docs/10-propel-concierge.md](docs/10-propel-concierge.md) | Propel Concierge product spec — 24/7 AI DM agents |
 | [docs/11-feasibility-qa-systems.md](docs/11-feasibility-qa-systems.md) | Systems feasibility, binding QA standards, corridor market doctrine |
 | [demos/shalom-park/](demos/shalom-park) | Developer pitch demo pack (spec work, pitch-only until signed) |
+| [docs/12-ai-stack-refresh.md](docs/12-ai-stack-refresh.md) | Stack rulings: official-API-only transport, brain bake-off, voice tracks |
+| [docs/13-agentic-and-open-models.md](docs/13-agentic-and-open-models.md) | Two-zone doctrine: contained autonomous agents + tiered open-model policy |
+| [sandbox/apex-gardens/](sandbox/apex-gardens) | QA harness + fictional demo estate (14/14 tests passing) |
+| [ops/templates/msa-sow-skeleton.md](ops/templates/msa-sow-skeleton.md) | Contract armor: MSA + SOW skeleton for lawyer review |
+| [docs/14-rental-sector-decision.md](docs/14-rental-sector-decision.md) | Rental sector ruling: shortlets + PM firms as Phase-2 lane, triggers defined |
+| [tools/](tools) | Runnable ops tools: pipeline gate, listing validator, scorecard generator |
 | [deck/pitch-deck.md](deck/pitch-deck.md) | Slide-by-slide pitch deck content, ready to build |
 | [ops/README.md](ops/README.md) | Operating manual: AI partner capabilities, cadences, tasking guide |
 | [ops/prompt-library.md](ops/prompt-library.md) | Production prompts for listings, audits, calendars, scorecards |

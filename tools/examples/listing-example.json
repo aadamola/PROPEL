@@ -1,0 +1,14 @@
+{
+  "_comment": "DEMO listing facts sheet (fictional). Copy this shape for real intakes. Flip title_docs_sighted/client_warranty_received to true ONLY when literally true.",
+  "property_name": "Apex Gardens 4-Bedroom Semi-Detached (DEMO)",
+  "location": "Lekki Phase 1, Lagos (fictional)",
+  "price_ngn": 240000000,
+  "title_status": "Governor's Consent (DEMO)",
+  "title_docs_sighted": false,
+  "client_warranty_received": false,
+  "availability_count": 3,
+  "size_sqm": 260,
+  "features": ["boys quarters", "rooftop terrace", "EV-ready garage"],
+  "payment_plans": ["outright (5% discount)", "12-month (30% deposit)", "18-month (35% deposit)"],
+  "marketing_notes": "Guaranteed 40% ROI if you buy now — last unit almost sold out!"
+}

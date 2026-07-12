@@ -2,6 +2,12 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-07-13 (later) — Ops tools shipped: quality rules are now code
+
+- **Stale-reference sweep re-run:** repo is clean — the 5 remaining legacy-tool mentions are decision records (rejections/replacements), which belong. **Root cause of what ADEDAMOLA saw: `main` is stale because PR #2 (11 commits of upgrades) is unmerged. Merging PR #2 is the fix.**
+- **Built and tested (tools/):** `pipeline-check.js` (overdue follow-up gate, exits red until cleared) · `listing-intake.js` (rule-2 enforcer — listings BLOCKED from production without sighted docs, written warranty, and clean claims; demo sheet correctly fails with 4 flags) · `scorecard-gen.js` (metrics JSON → honest client scorecard, machine-computed deltas). Zero dependencies; port to n8n nodes on the VPS later.
+- QA harness still 14/14. Freeze holds: these are execution systems, not new strategy.
+
 ## 2026-07-13 — BACKEND HARDENING COMPLETE → FREEZE. Storefront is next.
 
 - **Founder caught real drift:** docs/06 stack table and two other files still described the pre-upgrade stack (Midjourney/Make/Zapier/HubSpot era). Fixed: docs/06 rewritten as **Stack v1.1** — two-zone layout (trust perimeter / engine room), tiered models T1–T4, official-API-only transport, n8n replacing Make/Zapier, Airtable CRM; docs/10 orchestration + docs/04 CRM lines aligned.

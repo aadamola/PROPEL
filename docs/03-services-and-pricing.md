@@ -78,9 +78,28 @@ One-off systems builds with optional care plan:
 | Build | Scope | Price |
 |---|---|---|
 | WhatsApp Business + CRM setup | Business profile, catalogs, quick replies, CRM pipeline, lead routing | ₦350,000 |
-| AI Lead Concierge | AI chatbot qualifying leads 24/7 (budget/area/timeline), handing hot leads to WhatsApp with full context | ₦500,000 |
-| Full OS | Both of the above + email/SMS nurture sequences + reporting dashboard | ₦900,000 |
+| Full OS | The above + email/SMS nurture sequences + reporting dashboard | ₦700,000 |
 | Care plan (optional) | Monitoring, tweaks, monthly optimization | ₦100,000/mo |
+
+## 6. Propel Concierge — *The AI agent that answers every DM* ⭐ NEW
+
+24/7 AI agents on WhatsApp + Instagram trained on the client's verified listings: instant answers, lead qualification (budget/area/timeline), inspection booking, hot-lead handoff with full context. Full spec: [docs/10-propel-concierge.md](10-propel-concierge.md).
+
+| Tier | Setup | Monthly care |
+|---|---|---|
+| **Concierge Lite** (WhatsApp only, ≤20 listings) | ₦450,000 | ₦100,000 |
+| **Concierge Pro** (WhatsApp + IG + Messenger, CRM, booking) | ₦800,000 | ₦150,000 |
+| **Concierge Developer** (per project: routing, attribution, diaspora tuning) | ₦1,200,000 | ₦250,000 |
+
+Guardrail clients love: the agent answers ONLY from client-warranted listing facts — it never guesses prices or title status, and escalates anything legal to the licensed human. Retainer clients get 15% off setup. Every deployment passes the Propel Systems QA suite (docs/11 §3).
+
+**Add-ons & offerings in validation (docs/11 §4 — not yet rate-card-final):**
+| Item | Status | Indicative price |
+|---|---|---|
+| Document Vault (secure expiring doc links + verified credentials) | Add-on, live | ₦200,000 setup + ₦50,000/mo |
+| Voice-Note Concierge (AI WhatsApp voice replies) | Add-on, live | Included in Pro/Developer tiers |
+| Broker Hub (live inventory + co-branded flyers for broker networks) | VALIDATION | ₦600,000 setup + ₦150,000/mo |
+| Outbound Voice AI (live qualification calls) | Month-3+ pilot | TBD after consent/latency testing |
 
 ---
 

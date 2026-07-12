@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Propel Concierge — Shalom Park Demo</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:#081c3a;display:flex;flex-direction:column;align-items:center;min-height:100vh;padding:16px}
+  .demo-banner{background:#00e57a;color:#081c3a;font-weight:800;font-size:.8rem;letter-spacing:.08em;padding:8px 16px;border-radius:99px;margin-bottom:12px}
+  .phone{width:100%;max-width:420px;background:#0b141a;border-radius:24px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.5);display:flex;flex-direction:column;height:78vh;min-height:560px}
+  .wa-head{background:#1f2c34;padding:14px 16px;display:flex;align-items:center;gap:12px}
+  .avatar{width:42px;height:42px;border-radius:50%;background:#00e57a;color:#081c3a;font-weight:900;display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+  .wa-head b{color:#e9edef;font-size:1rem;display:block}
+  .wa-head small{color:#8696a0;font-size:.75rem}
+  .chat{flex:1;overflow-y:auto;padding:16px 12px;background:#0b141a;display:flex;flex-direction:column;gap:10px}
+  .msg{max-width:82%;padding:10px 13px;border-radius:12px;font-size:.92rem;line-height:1.45;color:#e9edef;animation:pop .25s ease;white-space:pre-line}
+  @keyframes pop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .in{background:#1f2c34;align-self:flex-start;border-top-left-radius:4px}
+  .out{background:#005c4b;align-self:flex-end;border-top-right-radius:4px}
+  .sys{align-self:center;background:#182229;color:#8696a0;font-size:.72rem;padding:6px 12px;border-radius:8px;text-align:center;max-width:92%}
+  .time{display:block;font-size:.62rem;color:#8696a0;text-align:right;margin-top:4px}
+  .bar{background:#1f2c34;padding:12px}
+  .next{width:100%;background:#00e57a;border:none;color:#081c3a;font-weight:800;font-size:1rem;padding:14px;border-radius:12px;cursor:pointer}
+  .next:disabled{opacity:.55}
+  .note{color:#8696a0;font-size:.72rem;text-align:center;margin-top:10px;max-width:420px;line-height:1.5}
+</style>
+</head>
+<body>
+<div class="demo-banner">CONCEPT DEMO · SIMULATED CONVERSATION · PLACEHOLDER FACTS</div>
+<div class="phone">
+  <div class="wa-head">
+    <div class="avatar">SP</div>
+    <div><b>Shalom Park Estate</b><small>Propel Concierge · replies in seconds, 24/7</small></div>
+  </div>
+  <div class="chat" id="chat"></div>
+  <div class="bar"><button class="next" id="next">▶ Tap to play the conversation</button></div>
+</div>
+<p class="note">Every buyer message here is typical of real diaspora inquiries. Prices and details are placeholders — the live agent answers only from IFT Realty's verified facts sheet, and hands anything sensitive to your sales team instantly.</p>
+
+<script>
+const script = [
+  ['sys','Saturday · 2:47 AM Lagos time (9:47 PM in Toronto)'],
+  ['in','Good evening. I saw Shalom Park on Instagram. I\'m based in Canada. Is the 4 bedroom still available and how much?'],
+  ['out','Good evening! Great to hear from you 🇨🇦 Yes — 4-bedroom semi-detached duplexes are currently available.\n\nPricing (demo placeholder): from ₦[XX]m, with structured payment plans from [XX]% initial deposit.\n\nWould you like the full price list PDF here on WhatsApp?'],
+  ['in','Yes please. But honestly my main worry is documentation. I\'ve heard too many stories about buying from abroad.'],
+  ['out','A very wise concern — and exactly the right question to ask first.\n\nShalom Park\'s estate documentation is completed with the Lagos State Government [demo: live agent cites the exact verified documents here]. Our sales team shares the documentation pack for your lawyer\'s independent review before you commit anything.\n\nNo pressure, papers first. 📋'],
+  ['in','Ok good. Can I actually see the place? I\'m not in Nigeria until December.'],
+  ['out','You don\'t need to wait till December 👌\n\nWe run LIVE video inspections — a real person walks the estate and your unit on video call while you ask questions and direct the camera.\n\nAvailable slots this week (demo):\n🗓 Tuesday 7pm Lagos / 2pm Toronto\n🗓 Saturday 4pm Lagos / 11am Toronto\n\nShall I reserve one?'],
+  ['in','Saturday works.'],
+  ['out','Done ✅ Saturday, 4pm Lagos / 11am Toronto — live video inspection, 4-bed semi-detached.\n\nSo the right person prepares for your call, three quick questions:\n\n1️⃣ Is the 4-bed your target, or would you also like to see the 5-bed options?'],
+  ['in','Mainly the 4 bed. Maybe the 5 bed detached if the price difference is small'],
+  ['out','Noted — 4-bed primary, 5-bed detached to compare 👍\n\n2️⃣ Are you buying cash, or would the structured payment plan suit you better?'],
+  ['in','Payment plan probably. 18-24 months if possible'],
+  ['out','Understood — and plans in that range exist (demo placeholder; exact terms come from the sales team in writing).\n\n3️⃣ Last one: is this for your family\'s use, rental income, or long-term investment?'],
+  ['in','Family. We\'re relocating in about 2 years'],
+  ['out','Perfect — a 2-year relocation timeline fits the payment structure beautifully. 🏡\n\nYou\'re booked for Saturday. You\'ll receive:\n📄 Price list + payment plans (in writing)\n📄 Documentation pack for your lawyer\n📹 Video call link + reminder\n\nAnd a senior sales advisor now has your full context — you won\'t repeat yourself. Anything else tonight?'],
+  ['in','No that\'s great. Very fast responses by the way 😅'],
+  ['out','That\'s the job 😊 2:47am, 2:47pm — every inquiry gets this. Speak Saturday!'],
+  ['sys','— HANDOFF TO HUMAN SALES TEAM —\n\n🔥 HOT LEAD · Toronto-based · 4-bed semi-D (5-bed compare) · 18–24mo plan · family relocation ~2yrs · docs-focused buyer · video inspection SAT 4pm WAT · full transcript attached'],
+  ['sys','This conversation ran while your sales team slept — and this buyer messaged YOU, not the next estate on their feed. That is Propel Concierge.'],
+];
+const chat = document.getElementById('chat');
+const btn = document.getElementById('next');
+let i = 0;
+btn.addEventListener('click', () => {
+  if (i >= script.length) return;
+  const [kind, text] = script[i];
+  const div = document.createElement('div');
+  div.className = kind === 'sys' ? 'sys' : 'msg ' + kind;
+  div.textContent = text;
+  if (kind !== 'sys') {
+    const t = document.createElement('span');
+    t.className = 'time';
+    t.textContent = '2:' + (47 + Math.floor(i/2)) + ' AM';
+    div.appendChild(t);
+  }
+  chat.appendChild(div);
+  chat.scrollTop = chat.scrollHeight;
+  i++;
+  btn.textContent = i >= script.length ? 'Demo complete — imagine this on your line' : '▶ Next message';
+  if (i >= script.length) btn.disabled = true;
+});
+</script>
+</body>
+</html>

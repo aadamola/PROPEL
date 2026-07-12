@@ -1,4 +1,5 @@
 name,firm,segment,tier,source,stage,package_target,est_mrr_ngn,next_action,next_action_date,owner,notes
-EXAMPLE Adewale Ogun,Adewale & Co,surveyor_valuer,A,warm_intro_justin,audit_scheduled,presence_growth,450000,Send audit video before Thursday call,2026-07-09,B,NIESV Lagos member; active on IG but no lead capture
+EXAMPLE Adewale Ogun,Adewale & Co,surveyor_valuer,A,warm_intro,audit_scheduled,presence_growth,450000,Send audit video before Thursday call,2026-07-09,B,NIESV Lagos member; active on IG but no lead capture
+IFT Realty Ltd (contact TBD),Shalom Park Estate — Abijo Ibeju-Lekki,developer,A,adedamola_sourced,research_done,partners_commission_mandate,0,OVERDUE (was 2026-07-08): Adedamola confirm contact + send outreach (docs/09); demo pack ready in demos/shalom-park,2026-07-15,B,Desk check done: real 2024 press-covered project; verify CAC + title docs before any marketing; deal shape docs/09; full demo pack built 07-08
 ,,,,,,,,,,,
 ,,,,,,,,,,,

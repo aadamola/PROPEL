@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Propel — We Move Property | Real Estate Marketing, Lagos</title>
+<meta name="description" content="AI-powered digital marketing for Nigerian real estate. Built by a real estate professional. Realtors, surveyors & valuers, developers — we sell inspections booked, not likes. Free 30-min marketing audit.">
+<style>
+  :root{
+    --navy:#081c3a; --navy2:#0c2650; --green:#00e57a; --green-dark:#00b862;
+    --white:#ffffff; --mist:#b8c4d9; --card:#0f2c5c;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Arial,sans-serif;background:var(--navy);color:var(--white);line-height:1.6}
+  img{max-width:100%}
+  a{color:var(--green);text-decoration:none}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+  section{padding:72px 0}
+  h1,h2,h3{line-height:1.15;letter-spacing:-.02em}
+  h2{font-size:clamp(1.7rem,4.5vw,2.6rem);margin-bottom:14px}
+  .sub{color:var(--mist);max-width:640px;font-size:1.05rem}
+  .accent{color:var(--green)}
+  .btn{display:inline-block;padding:16px 28px;border-radius:12px;font-weight:700;font-size:1.05rem;text-align:center;transition:transform .15s ease}
+  .btn:active{transform:scale(.97)}
+  .btn-green{background:var(--green);color:var(--navy)}
+  .btn-ghost{border:2px solid var(--green);color:var(--green)}
+  .btn-block{display:block;width:100%}
+
+  /* Top bar */
+  .top{position:sticky;top:0;z-index:50;background:rgba(8,28,58,.92);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.08)}
+  .top .wrap{display:flex;align-items:center;justify-content:space-between;padding-top:14px;padding-bottom:14px}
+  .logo{font-weight:900;font-size:1.35rem;letter-spacing:.06em}
+  .logo span{color:var(--green)}
+  .top .btn{padding:10px 18px;font-size:.95rem}
+
+  /* Hero */
+  .hero{padding:88px 0 72px;background:
+    radial-gradient(900px 420px at 85% -10%, rgba(0,229,122,.14), transparent 60%),
+    radial-gradient(700px 380px at -10% 110%, rgba(0,229,122,.08), transparent 55%)}
+  .hero h1{font-size:clamp(2.4rem,8vw,4.2rem);font-weight:900;margin-bottom:18px}
+  .hero p{font-size:clamp(1.05rem,2.6vw,1.3rem);color:var(--mist);max-width:620px;margin-bottom:32px}
+  .cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:28px}
+  .micro{color:var(--mist);font-size:.9rem}
+
+  /* Trust bar */
+  .trust{background:var(--navy2);border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);padding:26px 0}
+  .trust .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;text-align:center}
+  .trust b{display:block;color:var(--green);font-size:1.02rem}
+  .trust small{color:var(--mist)}
+
+  /* Cards */
+  .grid{display:grid;gap:18px;margin-top:36px}
+  .g3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+  .card{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:26px}
+  .card h3{font-size:1.15rem;margin-bottom:8px}
+  .card p{color:var(--mist);font-size:.97rem}
+  .tag{display:inline-block;background:rgba(0,229,122,.14);color:var(--green);font-size:.75rem;font-weight:700;padding:4px 10px;border-radius:99px;margin-bottom:12px;letter-spacing:.04em}
+
+  /* Pricing */
+  .price-card{display:flex;flex-direction:column}
+  .price{font-size:2rem;font-weight:900;margin:10px 0 2px}
+  .per{color:var(--mist);font-size:.85rem;margin-bottom:16px}
+  .price-card ul{list-style:none;margin:0 0 22px;flex:1}
+  .price-card li{padding:7px 0;border-bottom:1px solid rgba(255,255,255,.06);color:var(--mist);font-size:.95rem}
+  .price-card li::before{content:"✓ ";color:var(--green);font-weight:700}
+  .flag{border:2px solid var(--green)}
+  .flag .tag{background:var(--green);color:var(--navy)}
+
+  /* Steps */
+  .step{display:flex;gap:16px;align-items:flex-start;margin-top:26px}
+  .num{flex:0 0 44px;height:44px;border-radius:50%;background:var(--green);color:var(--navy);font-weight:900;font-size:1.2rem;display:flex;align-items:center;justify-content:center}
+
+  /* Featured project */
+  .project{background:linear-gradient(135deg,var(--navy2),var(--card));border:1px solid rgba(0,229,122,.25);border-radius:20px;padding:34px;margin-top:36px}
+  .project h3{font-size:1.5rem;margin-bottom:8px}
+  .badge{display:inline-block;background:rgba(255,255,255,.1);color:var(--mist);font-size:.75rem;padding:4px 10px;border-radius:99px;margin-bottom:14px}
+
+  /* FAQ */
+  details{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:18px 20px;margin-top:12px}
+  summary{cursor:pointer;font-weight:700}
+  details p{color:var(--mist);margin-top:10px;font-size:.96rem}
+
+  /* Footer */
+  footer{background:var(--navy2);padding:44px 0;border-top:1px solid rgba(255,255,255,.07)}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:center}
+  footer small{color:var(--mist)}
+
+  /* Floating WhatsApp */
+  .wa-float{position:fixed;right:18px;bottom:18px;z-index:60;background:var(--green);color:var(--navy);font-weight:800;border-radius:99px;padding:15px 22px;box-shadow:0 8px 24px rgba(0,0,0,.35)}
+  @media(max-width:640px){
+    section{padding:56px 0}
+    .cta-row .btn{flex:1 1 100%}
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════════
+  PROPEL — one-page site DRAFT v1
+  · All WhatsApp links point to wa.me/234XXXXXXXXXX → replace with the
+    business line once the SIM exists.
+  · Featured Project (Shalom Park) is a PLACEHOLDER: do NOT publish that
+    section live until (a) partnership agreement signed and (b) title/
+    approval documents sighted and warranted in writing. Until then keep
+    the data-live="false" section hidden or remove it.
+  · Case-study section holds honest placeholders only — no invented results.
+═══════════════════════════════════════════════════════════════ -->
+
+<div class="top">
+  <div class="wrap">
+    <div class="logo">PRO<span>PEL</span></div>
+    <a class="btn btn-green" href="https://wa.me/234XXXXXXXXXX?text=Hi%20Propel%2C%20I%20want%20a%20free%20marketing%20audit">Free Audit →</a>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>We move <span class="accent">property.</span></h1>
+    <p>AI-powered digital marketing for Nigerian real estate — realtors, estate surveyors &amp; valuers, and developers. We don't sell likes. We sell <b style="color:var(--white)">inspections booked and deals closed.</b></p>
+    <div class="cta-row">
+      <a class="btn btn-green" href="https://wa.me/234XXXXXXXXXX?text=Hi%20Propel%2C%20I%20want%20a%20free%20marketing%20audit">Get your free 30-min audit</a>
+      <a class="btn btn-ghost" href="#packages">See packages &amp; pricing</a>
+    </div>
+    <div class="micro">No forms. No waiting. The audit happens on WhatsApp — where your buyers already are.</div>
+  </div>
+</header>
+
+<div class="trust">
+  <div class="wrap">
+    <div><b>Built by a real estate professional</b><small>B.Sc. Estate Management · NIESV-trained founder</small></div>
+    <div><b>5+ years in the industry</b><small>We speak C of O, off-plan &amp; Ibeju-Lekki natively</small></div>
+    <div><b>AI-accelerated delivery</b><small>Listing package in 48 hours, not 2 weeks</small></div>
+    <div><b>Leads, not likes</b><small>Weekly scorecard: leads · DMs · inspections booked</small></div>
+  </div>
+</div>
+
+<section id="problem">
+  <div class="wrap">
+    <h2>Your buyers moved online.<br>Most marketing didn't.</h2>
+    <p class="sub">Property discovery now starts on Instagram, TikTok and Google — including thousands of diaspora buyers who can't inspect in person and buy through content. One missed deal at 5% commission on a ₦60m property is <b style="color:var(--green)">₦3,000,000 gone.</b> Your marketing isn't an expense; its absence is.</p>
+  </div>
+</section>
+
+<section id="services" style="background:var(--navy2)">
+  <div class="wrap">
+    <h2>One stop. Every piece of the machine.</h2>
+    <p class="sub">Five products that plug together — start with one, scale into the system.</p>
+    <div class="grid g3">
+      <div class="card"><span class="tag">PRESENCE</span><h3>Content that stops the scroll</h3><p>AI-accelerated social media management built only for real estate. Listings, authority content, and a grid that closes deals while you sleep.</p></div>
+      <div class="card"><span class="tag">LEADS</span><h3>Pipeline you can count</h3><p>Meta, Google &amp; TikTok campaigns with landing pages and WhatsApp capture. Accountable to cost-per-qualified-lead — reported weekly.</p></div>
+      <div class="card"><span class="tag">LAUNCH</span><h3>Sell out the project</h3><p>Full project marketing for off-plan developments: brand, campaign, content and sales enablement — from launch to sold out.</p></div>
+      <div class="card"><span class="tag">STUDIO</span><h3>Content diaspora buyers trust</h3><p>Listing videos, drone shoots, 360° virtual tours and photography through our vetted Lagos production crews.</p></div>
+      <div class="card" style="border-color:rgba(0,229,122,.45)"><span class="tag">CONCIERGE — NEW</span><h3>An AI agent answering every DM, 24/7</h3><p>Instagram + WhatsApp inquiries answered in seconds — price, location, payment plans, inspection booking — trained on your verified listings. It qualifies every buyer and hands you the hot ones with full context. No more "sorry for the late reply."</p></div>
+      <div class="card" style="display:flex;flex-direction:column;justify-content:center"><h3>Not sure where to start?</h3><p style="margin-bottom:16px">The free audit tells you exactly which gap is costing you the most.</p><a class="btn btn-green btn-block" href="https://wa.me/234XXXXXXXXXX?text=Hi%20Propel%2C%20audit%20please">Start with the audit</a></div>
+    </div>
+  </div>
+</section>
+
+<section id="packages">
+  <div class="wrap">
+    <h2>Transparent naira pricing.</h2>
+    <p class="sub">Monthly retainers, paid in advance, 3-month minimum. Ad spend (if any) goes from you directly to the platforms — we never hold your ad money.</p>
+    <div class="grid g3">
+      <div class="card price-card">
+        <span class="tag">STARTER</span>
+        <div class="price">₦250k</div><div class="per">per month</div>
+        <ul><li>Instagram + TikTok managed</li><li>4 posts weekly incl. 2 Reels</li><li>4 listing packages monthly</li><li>Monthly strategy call + report</li></ul>
+        <a class="btn btn-ghost btn-block" href="https://wa.me/234XXXXXXXXXX?text=Hi%20Propel%2C%20Starter%20plan">Ask about Starter</a>
+      </div>
+      <div class="card price-card flag">
+        <span class="tag">MOST POPULAR — GROWTH + LEADS</span>
+        <div class="price">₦700k</div><div class="per">per month (bundle)</div>
+        <ul><li>Everything in Growth Presence</li><li>7 posts weekly incl. 4 Reels</li><li>Meta ads + landing page + WhatsApp capture</li><li>10 listing packages monthly</li><li>Weekly lead scorecard</li></ul>
+        <a class="btn btn-green btn-block" href="https://wa.me/234XXXXXXXXXX?text=Hi%20Propel%2C%20Growth%20bundle">Ask about the bundle</a>
+      </div>
+      <div class="card price-card">
+        <span class="tag">DEVELOPERS</span>
+        <div class="price">₦1.5m+</div><div class="per">per project launch</div>
+        <ul><li>Project brand kit + campaign</li><li>Launch content pack (20+ assets)</li><li>Lead system + sales-team reviews</li><li>Scale to full sell-out partnership</li></ul>
+        <a class="btn btn-ghost btn-block" href="https://wa.me/234XXXXXXXXXX?text=Hi%20Propel%2C%20project%20launch">Talk about your project</a>
+      </div>
+    </div>
+    <p class="micro" style="margin-top:18px">Founding-client rates available for a limited number of early partners — ask on WhatsApp.</p>
+  </div>
+</section>
+
+<section id="why" style="background:var(--navy2)">
+  <div class="wrap">
+    <h2>Marketing built <span class="accent">by</span> real estate people —<br>not another generalist agency.</h2>
+    <p class="sub" style="margin-bottom:8px">Propel's founder holds a B.Sc. in Estate Management, passed the NIESV examination, and has spent 5 years inside the Nigerian property industry. We know what a Governor's Consent is. We know why omonile stories terrify buyers. We know the difference between a lead and a "how much, last price" time-waster.</p>
+    <p class="sub">That insider knowledge, multiplied by an AI-powered delivery engine, means a level of speed, volume and market fluency traditional agencies can't match — at prices they can't touch.</p>
+    <div class="grid g3">
+      <div class="step"><div class="num">1</div><div><h3>Free WhatsApp audit</h3><p class="sub">30 minutes. We show you the 3 gaps costing you deals — useful whether or not you hire us.</p></div></div>
+      <div class="step"><div class="num">2</div><div><h3>Your plan, in days</h3><p class="sub">Package recommendation, onboarding inside 5 working days, first content live the same week.</p></div></div>
+      <div class="step"><div class="num">3</div><div><h3>Leads on a scorecard</h3><p class="sub">Every Friday: leads, DMs, inspections booked, cost per lead. Numbers, not vibes.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED PROJECT — data-live="false" until agreement + docs verified -->
+<section id="projects" data-live="false">
+  <div class="wrap">
+    <h2>Featured projects</h2>
+    <p class="sub">Developments we market under commission mandate — every project vetted, every document sighted before it appears here.</p>
+    <div class="project">
+      <span class="badge">PARTNERSHIP IN PROGRESS — LISTING GOES LIVE AFTER VERIFICATION</span>
+      <h3>Shalom Park Estate — Abijo, Ibeju-Lekki</h3>
+      <p class="sub" style="margin-bottom:20px">Gated estate community in the Lekki growth corridor. Condominiums, semi-detached &amp; detached duplexes, and serviced plots. Full details, pricing and inspection booking will appear here once our partnership documentation is complete.</p>
+      <a class="btn btn-green" href="https://wa.me/234XXXXXXXXXX?text=Hi%20Propel%2C%20I%27m%20interested%20in%20Shalom%20Park">Register interest on WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<section id="proof" style="background:var(--navy2)">
+  <div class="wrap">
+    <h2>Proof, the honest way.</h2>
+    <p class="sub">We're new and we say so. No rented followers, no invented testimonials — our results page fills with real scorecards as our founding clients get theirs. Want to be one of them?</p>
+    <!-- Case-study cards get inserted here as they become TRUE. -->
+    <div style="margin-top:26px"><a class="btn btn-green" href="https://wa.me/234XXXXXXXXXX?text=Hi%20Propel%2C%20founding%20client%20details%20please">Ask about founding-client slots</a></div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <h2>Questions Lagos always asks.</h2>
+    <details><summary>Can you guarantee sales?</summary><p>No one honest can. We guarantee the system: content shipped, campaigns live, qualified leads reported weekly — and you see everything in your Friday scorecard.</p></details>
+    <details><summary>My cousin manages my page for ₦80k. Why pay more?</summary><p>We're not selling posts, we're selling inspections booked. One extra closed deal at 5% commission on a ₦60m property pays for a year of the difference.</p></details>
+    <details><summary>Do you handle my ad budget?</summary><p>Never. Ad spend goes from your card directly to Meta/Google/TikTok. We manage the campaigns; your money stays yours. Cleaner for everyone.</p></details>
+    <details><summary>Do you verify the properties you market?</summary><p>We market only what clients warrant in writing with documentation. Facts we can't verify don't get published — that policy protects you and your buyers.</p></details>
+    <details><summary>Will an AI agent annoy my buyers?</summary><p>It answers only from your verified listing facts — it never guesses prices or title status, never negotiates, and hands anything sensitive straight to you. Buyers get instant answers at 2am; you get qualified leads with full context. The thing that actually annoys buyers is silence.</p></details>
+    <details><summary>Where's your office?</summary><p>We're remote-first by design — that's why our prices beat agencies carrying Lekki rent. We show up physically where it matters: shoots, launches and inspections.</p></details>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <div class="logo">PRO<span>PEL</span></div>
+      <small>We move property. · Lagos, Nigeria</small>
+    </div>
+    <div style="display:flex;gap:16px;flex-wrap:wrap">
+      <a href="https://instagram.com/getpropel">Instagram</a>
+      <a href="https://tiktok.com/@getpropel">TikTok</a>
+      <a href="https://linkedin.com/company/getpropel">LinkedIn</a>
+      <a href="https://wa.me/234XXXXXXXXXX">WhatsApp</a>
+    </div>
+    <small>© 2026 Propel Digital. All facts about marketed properties are warranted by their owners/developers.</small>
+  </div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/234XXXXXXXXXX?text=Hi%20Propel%2C%20free%20audit%20please">💬 Free audit</a>
+
+</body>
+</html>

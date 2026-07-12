@@ -2,6 +2,12 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-07-12 (later) — Repo audit: sync confirmed, drift fixed
+
+- **Sync verified:** working tree clean · local = origin branch (ce186e7) · PR #2 open/mergeable with all 5 post-merge commits (25 files, +1,015 lines). One merge takes everything.
+- **Drift fixed:** CLAUDE.md current-state rewritten (was still founding-week: logo-pick blocker, PR #1 watch) · brand-assets tracker marked superseded by in-house PNGs · docs/01 services list now includes Concierge (+Vault/Voice-Note/Broker Hub pointer) · PR #2 title/body updated to reflect full scope · Shalom Park pipeline follow-up flagged OVERDUE, re-dated 07-15.
+- **Surfaced per cadence rule:** Shalom Park outreach is 4 days overdue — it's in this week's TODO with the demo pack ready.
+
 ## 2026-07-12 — Feasibility study integrated + binding QA standard (docs/11)
 
 - **Founder-supplied feasibility study critically integrated**, not pasted: corridor market doctrine (Island/Lekki/Mainland) adopted for GTM targeting; institutional QA regime adopted in full and made binding on all Propel Systems delivery (prompt-injection tests, 0% grounding failures, Meta window compliance, number warm-up, race-condition control, latency budgets).

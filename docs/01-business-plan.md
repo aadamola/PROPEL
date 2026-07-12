@@ -70,9 +70,10 @@ Full detail and pricing in [docs/03-services-and-pricing.md](03-services-and-pri
 2. **Propel Leads** — paid advertising (Meta/Google/TikTok) + landing pages + WhatsApp/CRM lead capture and AI qualification (the ROI product).
 3. **Propel Launch** — project marketing for off-plan developments: brand, campaign, content, and sales enablement per project (the big-ticket product).
 4. **Propel Studio** — production: listing videos, drone shoots, virtual tours, photography (the physical-touch product; partner-network delivered).
-5. **Propel OS** — marketing systems setup: CRM, WhatsApp Business automation, email/SMS nurture, AI chatbot lead qualification (the stickiness product).
+5. **Propel OS** — marketing systems setup: CRM, WhatsApp Business automation, email/SMS nurture (the stickiness product).
+6. **Propel Concierge** *(added July 2026 — docs/10)* — 24/7 AI agents answering Instagram/WhatsApp inquiries from client-warranted listing facts: qualification, inspection booking, hot-lead handoff. Add-ons: Document Vault, Voice-Note Concierge; Broker Hub in validation (docs/11 §4).
 
-Retainers are the core model; Launch and Studio are project-fee accelerants that upsell into retainers.
+Retainers are the core model; Launch and Studio are project-fee accelerants that upsell into retainers; Concierge is the churn armor and attribution engine for commission mandates.
 
 ---
 

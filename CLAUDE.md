@@ -62,7 +62,8 @@ Adedamola has ADHD. TODO.md at repo root is his single external brain for Propel
 
 ## Current state (update every session that changes it)
 
-- **Phase:** Sprint 1 (docs/07 §3) — sell before building. No revenue yet, no accounts live yet.
-- **Waiting on Adedamola:** account-setup sprint (45 min), logo pick (L1–L4) + manifesto pick (M1–M4) from ops/setup/brand-assets.md, first 10 Tier-A prospect names for pipeline.csv, CAC Business Name filing.
-- **Next AI-partner deliverables once unblocked:** full profile asset pack from chosen logo, 10 audit teardowns, founding-client outreach drafts.
-- **PR #1** (aadamola/PROPEL) is the running record; watching for review activity.
+- **Phase:** Sprint 1 (docs/07 §3) — go-public + sell. No revenue yet; accounts not yet live.
+- **Built and ready:** brand assets (site/assets/ — in-house PNGs; Canva picks now optional), website draft v1 (site/), Propel Concierge product (docs/10) + binding QA standard (docs/11), Shalom Park demo pack (demos/shalom-park/, pitch-only), Document Vault + Voice-Note Concierge add-ons, Broker Hub in validation.
+- **Waiting on Adedamola (⭐ = launch sprint in TODO.md):** 90-min go-public sitting (SIM → WhatsApp Business → IG/TikTok/LinkedIn → post manifesto → send me the number) · first 10 prospect names · CAC Business Name filing · Shalom Park contact person (outreach draft ready, docs/09 — **overdue since 2026-07-08**) · domain purchase.
+- **Next AI-partner deliverables once unblocked:** wire WhatsApp number + QR into site, 10 audit teardowns, founding-client outreach drafts, Apex Gardens demo sandbox build.
+- **PR #2** (aadamola/PROPEL) is the running record — open, carries all work since PR #1 merged; one merge takes everything. Canva connector needs re-auth (optional).

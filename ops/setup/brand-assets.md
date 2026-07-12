@@ -1,5 +1,7 @@
 # Propel — Brand Assets Tracker
 
+> **STATUS UPDATE (2026-07-08): launch assets shipped in-house** — see **site/assets/** (profile.png, manifesto.png, banner.png, rendered from site/assets-src/). These are the PRIMARY launch assets; nothing below blocks going public. The Canva candidates remain optional alternates (Canva connector currently needs re-auth).
+
 *Generated in Canva (partner session, July 2026). Pick winners, then we convert to editable designs, build the full profile pack from them, and export finals into this folder.*
 
 ## Logo — 4 candidates (pick one)

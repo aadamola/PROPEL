@@ -2,6 +2,13 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-07-12 (late night) — Agentic + open-model strategy: "power inside walls" (docs/13)
+
+- **Founder pushed back on the OpenClaw hold — and was right.** Two-zone doctrine adopted: trust perimeter (client-facing/client data — rules unchanged, frontier-grade, guardrailed) vs. engine room (internal, public/fictional data — most aggressive tooling in the market).
+- **OpenClaw ADOPTED in containment ("Agent DMZ"):** ① Red Team Engine — autonomously attacks our own Concierge; every found exploit becomes a permanent QA test (creative unpredictability turned into our moat) · ② Market Intelligence Analyst — weekly public-data corridor sweeps building the benchmarks dataset · ③ Prospect Research Desk. No client data, no send capability, human QA, kill switch. Client-facing autonomy stays banned.
+- **Tiered model policy:** T1 client-facing = frontier (unchanged) · T2 internal bulk generation = DeepSeek V4 Flash/Qwen/GLM at 5–30× cheaper (~80–90% token-cost cut; human QA already mandatory) · T3 agent brains = Kimi-class for agentic stability · T4 embeddings = open models. Hard line: client PII never to third-country APIs (NDPA); open models may compete for the Concierge brain via the bake-off but require a vetted data path.
+- docs/12 OpenClaw verdict updated; rate card unchanged (efficiency → margin).
+
 ## 2026-07-12 (night) — WATCH-list re-adjudication + bake-off harness BUILT
 
 - Founder directed: flip all WATCH → ADOPT and implement. Partner re-adjudicated item-by-item rather than blanket-flipping:

@@ -2,6 +2,14 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-07-12 — Feasibility study integrated + binding QA standard (docs/11)
+
+- **Founder-supplied feasibility study critically integrated**, not pasted: corridor market doctrine (Island/Lekki/Mainland) adopted for GTM targeting; institutional QA regime adopted in full and made binding on all Propel Systems delivery (prompt-injection tests, 0% grounding failures, Meta window compliance, number warm-up, race-condition control, latency budgets).
+- **Partner corrections:** budget reconciled to ₦300k operating envelope inside docs/07's ₦500k (one source of truth) · ₦120k pre-proof Meta ads deferred to first signed pilot · "PROPEL AI"/propelai.com.ng brand fork rejected (suite named Propel Systems under one brand) · cost-led DeepSeek choice rejected for client-facing production (retrieval-first + production-grade model; hallucinated prices are the kill risk) · all market stats marked [VERIFY].
+- **Offering map:** DM bot = existing Concierge (+ speed-to-lead framing) · Diaspora Trust Validator → **Document Vault** add-on (₦200k + ₦50k/mo, with watermarking + access-log intel) · Broker Portal → **Broker Hub** (VALIDATION, ₦600k + ₦150k/mo indicative) · outbound voice calls deferred; replaced at launch by **Voice-Note Concierge** (AI WhatsApp voice replies — Lagos-native, no latency/robocall problems).
+- **Innovations added:** QA charter as public marketing asset · fictional "Apex Gardens (Demo)" sandbox estate = publicly usable try-it-yourself demo (complements pitch-only Shalom Park pack) · 30-day sandbox plan with reconciled budget.
+- docs/03 + docs/10 + README updated.
+
 ## 2026-07-08 (later) — Shalom Park demo pack (spec work = the pitch)
 
 - **Full demo pack built at demos/shalom-park/** — one use case per offering: Presence sample week + 3 written posts · Leads funnel + 6 ad variants + demo landing page (landing-demo.html) · 90-day Launch re-launch concept ("Built like someone plans to live here") · Studio shoot plan (one day → a month of assets) · **interactive Concierge WhatsApp simulation** (concierge-demo.html — the meeting opener) · CONCEPT-watermarked IG post PNG.

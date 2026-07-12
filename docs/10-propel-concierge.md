@@ -53,6 +53,10 @@ Care plan covers: API/BSP costs passthrough at our scale, KB updates, transcript
 3. **Data moat:** every conversation teaches us what Lagos + diaspora buyers actually ask — feeding our benchmarks library and content engine.
 4. **Perfect fit for commission mandates:** on deals like Shalom Park, Concierge IS the attribution mechanism — every lead it touches is logged as ours.
 
+## QA standard (binding)
+
+Every deployment passes the **Propel Systems QA suite (docs/11 §3)** before go-live and after any KB/prompt change: prompt-injection resistance, 0% grounding failures on price/availability/title, session durability, Meta 24-hr window compliance, number warm-up, phone validation, latency budgets, kill-switch drill. Add-ons: **Document Vault** (secure expiring doc links + credential display, docs/11 §4.2) and **Voice-Note Concierge** (AI WhatsApp voice replies, docs/11 §4.4).
+
 ## Delivery workflow (target: signed → live in 7 days)
 
 Day 1: intake — listing sheets, FAQs, tone; facts warranty signed. Day 2–3: KB build + persona prompt + test suite (50 standard questions incl. adversarial: "is this omonile land?", "last price?"). Day 4: client tests on their own phone; edge cases fixed. Day 5–7: channels connected, soft-launch monitored, handoff drill with client's sales flow. Then weekly QA cadence.

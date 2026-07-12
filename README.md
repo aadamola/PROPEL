@@ -20,6 +20,9 @@ Propel is a remote-first digital marketing agency serving realtors, estate surve
 | [CLAUDE.md](CLAUDE.md) | AI managing partner standing instructions (auto-loads every working session) |
 | [docs/09-shalom-park-partnership.md](docs/09-shalom-park-partnership.md) | Developer commission-mandate memo: deal structure, vetting gates, outreach draft |
 | [site/index.html](site/index.html) | Website draft v1 — one-page, mobile-first, WhatsApp-first |
+| [docs/10-propel-concierge.md](docs/10-propel-concierge.md) | Propel Concierge product spec — 24/7 AI DM agents |
+| [docs/11-feasibility-qa-systems.md](docs/11-feasibility-qa-systems.md) | Systems feasibility, binding QA standards, corridor market doctrine |
+| [demos/shalom-park/](demos/shalom-park) | Developer pitch demo pack (spec work, pitch-only until signed) |
 | [deck/pitch-deck.md](deck/pitch-deck.md) | Slide-by-slide pitch deck content, ready to build |
 | [ops/README.md](ops/README.md) | Operating manual: AI partner capabilities, cadences, tasking guide |
 | [ops/prompt-library.md](ops/prompt-library.md) | Production prompts for listings, audits, calendars, scorecards |

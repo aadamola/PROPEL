@@ -41,12 +41,18 @@ ops/
 ├── README.md                      ← this manual
 ├── prompt-library.md              ← production prompts (Listing Turbo, audits, calendars)
 ├── crm/pipeline.csv               ← prospect pipeline tracker
+├── setup/
+│   ├── account-setup.md           ← go-public sprint + social-proof plan
+│   └── brand-assets.md            ← asset tracker (in-house PNGs primary, site/assets/)
+├── content/
+│   └── content-engine.md          ← weekly rhythm + 14-day faceless launch calendar
 └── templates/
     ├── proposal.md                ← one-page client proposal
     ├── marketing-audit.md         ← the audit that opens every sale
     ├── onboarding-checklist.md    ← signed → live in 5 days
     ├── weekly-scorecard.md        ← the report every client gets
-    └── partnership-term-sheet.md  ← partner agreement skeleton (lawyer input required)
+    ├── msa-sow-skeleton.md        ← contract armor (lawyer review required)
+    └── partnership-term-sheet.md  ← DORMANT (single-owner; see docs/08)
 ```
 
 ## 5. Tasking me well (30 seconds of context saves an hour)

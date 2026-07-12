@@ -8,22 +8,33 @@
 
 ---
 
-## 1. Stack (budget ≈ ₦300k–₦450k/month, scales with clients; ~$200–300/mo at ₦1,500/$)
+## 1. Stack v1.1 (upgraded per docs/12–13; two-zone doctrine + tiered models)
+
+**Zone A — Trust perimeter (client-facing, client data · conservative by design):**
 
 | Layer | Tool (primary / fallback) | What it does for us |
 |---|---|---|
-| **LLM workhorse** | Claude (API + apps) | Listing copy, video scripts, content calendars, audit reports, proposal drafts, client-voice fine-tuned via style guides |
-| **Agentic ops** | Claude Code / agent SDK workflows | Batch-generate weekly content packs per client from a brief; auto-draft weekly scorecard commentary from campaign data |
-| **Image/creative** | Midjourney or equivalent + Canva Pro | Ad creative variants, lifestyle/staging visuals, brand templates per client |
-| **Video** | CapCut Pro + AI tools (script-to-edit assist, captioning, dubbing) | Reels at volume; auto-captioning (crucial — most property Reels are watched muted) |
-| **Voice/avatar (selective)** | ElevenLabs / HeyGen | Voiceovers for walkthroughs; multilingual variants (Yoruba/Pidgin/Hausa) for reach campaigns |
-| **Automation glue** | Make.com or Zapier + Google Workspace | Lead routing, report generation, content approval flows |
-| **WhatsApp layer** | WhatsApp Business API via NG-friendly provider (e.g., Twilio/local BSP) | AI lead concierge, broadcast compliance, chat-to-CRM logging |
-| **CRM** | HubSpot free→starter (or NG alternative) | Pipeline for us + templated pipelines we deploy for clients (Propel OS) |
-| **Ads** | Meta Business Suite, Google Ads, TikTok Ads + AI creative testing | Campaign management; AI generates copy/creative variants, humans set strategy and budgets |
-| **Analytics/reporting** | Looker Studio dashboards + our scorecard template | One live dashboard per ₦600k+ client; weekly auto-scorecards for all |
+| **T1 client-facing LLM** | Frontier-grade small model (Claude Haiku-class API), retrieval-first — model only phrases; facts come from the client KB | Concierge conversations; anything a buyer reads in real time. 100% pass on the sandbox QA harness required before deploy |
+| **WhatsApp/IG transport** | **Meta OFFICIAL Cloud API + IG Messaging API only** (docs/12 §1 ruling — never unofficial gateways) | Concierge channels, template compliance, chat-to-CRM logging; number warm-up protocol per docs/11 §3 |
+| **Concierge brain** | Bake-off winner: Dify vs. n8n-native agents vs. Flowise (sandbox/apex-gardens harness decides) | RAG over client-warranted KB; escalation logic |
+| **Voice (client-facing)** | ElevenLabs production track / TTS-bench winner as cost-down (Chatterbox, XTTS-v2, Fish Speech…) | Voice-Note Concierge; voiceovers; cloning only with written consent |
+| **Data + Document Vault** | Airtable/Sheets KBs + CRM · S3-class storage, expiring signed URLs, watermarked PDFs | Client KBs, pipeline, secure doc delivery with access logs |
 
-*Procurement rules: prefer NGN-billed or one-time-cost tools where quality is equal; annual plans only after a tool survives 90 days; every tool named in the quarterly stack audit or it dies.*
+**Zone B — Engine room (internal · public/fictional/our-own data · cheapest capable tool wins):**
+
+| Layer | Tool | What it does for us |
+|---|---|---|
+| **T2 bulk generation** | DeepSeek V4 Flash / Qwen / GLM-class APIs (5–30× cheaper) | Content-pack first drafts, ad-variant brainstorms, summaries, lead tagging, QA test generation — all human-QA'd before use |
+| **T3 agentic ops (Agent DMZ)** | OpenClaw-class agent, Kimi-class brain, contained per docs/13 §2 | Red Team Engine (attacks our Concierge) · Market Intel Analyst (corridor sweeps) · Prospect Research Desk |
+| **Partner ops** | Claude (API + apps) / Claude Code workflows | Strategy, analysis, weekly packs, scorecard commentary, repo upkeep |
+| **Automation glue** | **Self-hosted n8n on VPS** (replaces Make/Zapier — unlimited runs, ₦10k/mo) + Google Workspace | Lead routing, report generation, approval flows |
+| **Image/creative** | Canva Pro + image-gen per task tier (frontier for client brand work, open models for internal drafts) | Ad variants, brand templates, staging visuals |
+| **Video** | CapCut Pro + AI assist (captioning is non-negotiable — property Reels are watched muted) | Reels at volume |
+| **CRM (ours)** | Airtable + pipeline.csv mirror (HubSpot free only if a client workflow demands it) | Our pipeline + templated client pipelines (Propel OS) |
+| **Ads** | Meta Business Suite, Google Ads, TikTok Ads + AI creative testing | Humans set strategy/budgets; AI generates variants |
+| **Analytics/reporting** | Looker Studio + scorecard template | Live dashboard per ₦600k+ client; weekly auto-scorecards |
+
+*Procurement rules: prefer NGN-billed or one-time-cost tools where quality is equal; annual plans only after a tool survives 90 days; every tool named in the quarterly stack re-scan (docs/12 §5) or it dies. Hard line: client PII never to third-country APIs without NDPA assessment (docs/13 §3).*
 
 ---
 

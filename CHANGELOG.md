@@ -2,6 +2,15 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-07-13 — BACKEND HARDENING COMPLETE → FREEZE. Storefront is next.
+
+- **Founder caught real drift:** docs/06 stack table and two other files still described the pre-upgrade stack (Midjourney/Make/Zapier/HubSpot era). Fixed: docs/06 rewritten as **Stack v1.1** — two-zone layout (trust perimeter / engine room), tiered models T1–T4, official-API-only transport, n8n replacing Make/Zapier, Airtable CRM; docs/10 orchestration + docs/04 CRM lines aligned.
+- **Missing artifact created:** ops/templates/msa-sow-skeleton.md — the contract armor every doc referenced but nothing contained (facts warranty, liability cap, indemnity, NDPA processor terms, AI disclosure, kill switch, commission-mandate attribution, lawyer question list). Roadmap 0.5 now has its artifact.
+- Indexes trued up: CLAUDE.md source-of-truth table (docs/09–13, demos, sandbox), README (12/13/sandbox/MSA), ops/README directory map.
+- Verified: QA harness 14/14 · working tree clean · branch pushed · PR #2 carries everything.
+- **BACKEND FREEZE declared:** planning docs are complete and consistent. From this commit, repo changes are execution records (pipeline touches, QA results, campaign data, client artifacts) — not new strategy. New planning docs require a named trigger (docs/02 gates, docs/08 triggers, quarterly re-scans). *Partner note: past this point, more backend polish is procrastination with a clean conscience.*
+- **STOREFRONT GATE (the only path now):** ① 90-min go-public sprint (SIM → WhatsApp Business → IG/TikTok/LinkedIn → manifesto post → send me the number) ② domain + VPS purchase (~₦40k) → I deploy site + sandbox ③ CAC filing ④ 10 prospect names → teardowns ⑤ Shalom Park outreach (overdue). All human-hands items; everything producible is done.
+
 ## 2026-07-12 (late night) — Agentic + open-model strategy: "power inside walls" (docs/13)
 
 - **Founder pushed back on the OpenClaw hold — and was right.** Two-zone doctrine adopted: trust perimeter (client-facing/client data — rules unchanged, frontier-grade, guardrailed) vs. engine room (internal, public/fictional data — most aggressive tooling in the market).

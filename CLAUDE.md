@@ -25,8 +25,12 @@ AI-forward digital marketing agency for Nigerian real estate — realtors, estat
 | File | What |
 |---|---|
 | docs/07-bootstrap-plan.md | **Operative plan** — budget, sequence, 20-hr week |
-| docs/01–06 | Destination plan: business plan, roadmap, pricing, GTM, financials, AI stack |
+| docs/01–06 | Destination plan: business plan, roadmap, pricing, GTM, financials, AI stack (06 = stack v1.1) |
 | docs/08-legal-structure.md | Legal structure decision + Ltd upgrade triggers |
+| docs/09 + demos/shalom-park/ | Shalom Park deal memo + pitch-only demo pack |
+| docs/10–11 | Propel Concierge spec + binding QA standard & corridor doctrine |
+| docs/12–13 | Stack rulings (official-API-only, bake-off) + two-zone agentic/open-model doctrine |
+| sandbox/apex-gardens/ | QA harness + fictional demo estate (run: node concierge-prototype.js --test) |
 | ops/README.md | Capability manual & tasking guide |
 | ops/prompt-library.md | Production prompts (P1–P6) — use these, don't freestyle |
 | ops/templates/ | Proposal, audit, onboarding, scorecard (term sheet = DORMANT, see docs/08) |

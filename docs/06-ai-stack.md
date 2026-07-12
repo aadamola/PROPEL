@@ -1,5 +1,7 @@
 # Propel — AI Stack & Operations
 
+> **Stack updates live in [docs/12-ai-stack-refresh.md](12-ai-stack-refresh.md)** (July 2026 scan: Dify/n8n-agent bake-off, official-Cloud-API-only transport ruling, ElevenLabs/Chatterbox voice tracks). Quarterly re-scan cadence applies. Where docs/12 and this file conflict, docs/12 wins.
+
 *"AI-forward" is not a tagline; it's the margin engine. Target: one pod of 3 delivers what a traditional 15-person agency delivers, at ≥60% gross margin.*
 
 **Operating rule:** if a task is done twice, it gets a prompt template; if it's done weekly, it gets an automation; if it's done for every client, it gets a productized workflow with a QA checklist.

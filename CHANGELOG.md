@@ -2,6 +2,13 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-07-12 (evening) — AI stack refresh from ecosystem scan (docs/12)
+
+- **Strategic ruling: official WhatsApp Cloud API only for client production.** The ecosystem's hottest gateways (Evolution API, WAHA, OpenWA) ride the unofficial Web protocol — ToS-violating, active Meta ban enforcement. Rejected for production; "official APIs only" added to the Quality Charter as a sales weapon.
+- **Adopted for sandbox evaluation:** Dify (self-hosted RAG brain) vs. n8n-native agent nodes bake-off on the Apex Gardens KB; ElevenLabs production track + Chatterbox open-source cost-down track for Voice-Note Concierge (client voice cloning = consent-gated premium tier).
+- **Watch (not deploy):** viral autonomous-agent project (~380k stars) — broad tool access contradicts our narrow, KB-grounded guardrail model; Botpress; Flowise; Fish Speech/XTTS bench.
+- **New cadence:** quarterly stack re-scan. Rate card unchanged — tool changes improve margin, not prices. docs/06 now points to docs/12.
+
 ## 2026-07-12 (later) — Repo audit: sync confirmed, drift fixed
 
 - **Sync verified:** working tree clean · local = origin branch (ce186e7) · PR #2 open/mergeable with all 5 post-merge commits (25 files, +1,015 lines). One merge takes everything.

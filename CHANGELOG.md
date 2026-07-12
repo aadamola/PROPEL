@@ -2,6 +2,10 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-07-13 (later²) — Rental sector: decided, bounded, parked (docs/14)
+
+- Founder raised the rental gap. Partner assessment: generic lettings REJECTED (per-deal agent economics can't sustain retainers; wedge dilution at launch). Two rental-adjacent sub-segments APPROVED as the Phase-2 lane using existing products: **shortlet operators** (occupancy = recurring budgeted pain; Concierge PMF arguably stronger than sales) and **property management firms** (NIESV tribe; vacancy-fill framing). Activation triggers defined; launch copy/rate card untouched. Freeze holds — this was a decision memo, not a rebuild.
+
 ## 2026-07-13 (later) — Ops tools shipped: quality rules are now code
 
 - **Stale-reference sweep re-run:** repo is clean — the 5 remaining legacy-tool mentions are decision records (rejections/replacements), which belong. **Root cause of what ADEDAMOLA saw: `main` is stale because PR #2 (11 commits of upgrades) is unmerged. Merging PR #2 is the fix.**

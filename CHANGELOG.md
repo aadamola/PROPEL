@@ -2,6 +2,14 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-07-12 (night) — WATCH-list re-adjudication + bake-off harness BUILT
+
+- Founder directed: flip all WATCH → ADOPT and implement. Partner re-adjudicated item-by-item rather than blanket-flipping:
+  - **Promoted to ADOPT (evaluation):** Flowise (joins Dify + n8n-native in a 3-way Concierge brain bake-off) · full TTS bench (Fish Speech, XTTS-v2, OpenVoice, CosyVoice join Chatterbox + ElevenLabs in the voice ear-test).
+  - **Held at WATCH (partner override, flip conditions documented in docs/12):** Botpress (pure redundancy) · OpenClaw-class autonomous agent (unvetted broad tool access near client data contradicts guardrail model + NDPA posture). Founder may overrule explicitly; risk will be changelogged with the decision.
+- **Implemented today — sandbox/apex-gardens/:** fictional-estate KB · machine-readable QA suites (6 injection attacks, 8 grounding checks, 5 policy behaviors) · runnable retrieval-first reference prototype enforcing the guardrail architecture. **Test result: 14/14 PASS.** This harness is now the exam every production brain must beat; it also powers the public "try it yourself" demo.
+- Remaining implementation gated on physical unlocks (VPS, WhatsApp number, API billing) — on the launch-sprint path.
+
 ## 2026-07-12 (evening) — AI stack refresh from ecosystem scan (docs/12)
 
 - **Strategic ruling: official WhatsApp Cloud API only for client production.** The ecosystem's hottest gateways (Evolution API, WAHA, OpenWA) ride the unofficial Web protocol — ToS-violating, active Meta ban enforcement. Rejected for production; "official APIs only" added to the Quality Charter as a sales weapon.

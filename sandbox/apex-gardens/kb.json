@@ -1,0 +1,39 @@
+{
+  "_meta": {
+    "estate": "Apex Gardens Residences",
+    "status": "FICTIONAL DEMO ESTATE — all data invented for testing and public demos. Clearly labeled DEMO in every output.",
+    "location": "Lekki Phase 1, Lagos (fictional address: 1 Apex Gardens Drive)",
+    "developer": "Apex Gardens Development Co. (fictional)",
+    "kb_version": "1.0",
+    "last_updated": "2026-07-12"
+  },
+  "documentation": {
+    "title_status": "Governor's Consent (DEMO)",
+    "lasrera_registration": "DEMO-LAS-0000",
+    "docs_available_for_lawyer_review": true
+  },
+  "payment_plans": [
+    { "id": "outright", "name": "Outright", "structure": "100% at signing, 5% discount" },
+    { "id": "plan12", "name": "12-month plan", "structure": "30% initial deposit, balance over 12 equal monthly installments" },
+    { "id": "plan18", "name": "18-month plan", "structure": "35% initial deposit, balance over 18 equal monthly installments" }
+  ],
+  "units": [
+    { "id": "2B-COND", "type": "2-Bedroom Condo", "price_ngn": 95000000, "available": 4, "size_sqm": 110, "features": ["ensuite rooms", "fitted kitchen", "24hr power", "gym access"] },
+    { "id": "3B-TERR", "type": "3-Bedroom Terrace", "price_ngn": 160000000, "available": 2, "size_sqm": 185, "features": ["boys quarters", "private parking x2", "smart home wiring"] },
+    { "id": "4B-SEMI", "type": "4-Bedroom Semi-Detached", "price_ngn": 240000000, "available": 3, "size_sqm": 260, "features": ["boys quarters", "rooftop terrace", "EV-ready garage"] },
+    { "id": "5B-DET", "type": "5-Bedroom Detached", "price_ngn": 380000000, "available": 1, "size_sqm": 340, "features": ["swimming pool option", "2-bed guest chalet option", "private garden"] }
+  ],
+  "inspection": {
+    "physical": "Tuesdays & Saturdays, 10am-4pm WAT, booked in advance",
+    "virtual": "Live virtual inspections on video call: Tuesdays 7pm WAT and Saturdays 4pm WAT (diaspora-friendly slots)"
+  },
+  "faqs": [
+    { "q": "infrastructure", "a": "Apex Gardens (DEMO) features underground power distribution, estate water treatment plant, covered drainage, CCTV and 24hr gated security." },
+    { "q": "service charge", "a": "Estimated service charge is ₦1.2m/year for condos and ₦1.8m/year for terraces/detached (DEMO figures), covering power, security, waste and facility management." },
+    { "q": "completion", "a": "Phase 1 handover scheduled Q2 2027 (DEMO). Construction updates are shared monthly with buyers." },
+    { "q": "resale", "a": "Units may be resold after 50% payment with a documented transfer process and 2% administrative fee (DEMO terms)." }
+  ],
+  "escalation_contacts": {
+    "sales_lead": "DEMO Sales Team (handoff simulated in sandbox)"
+  }
+}

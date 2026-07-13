@@ -2,6 +2,13 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-07-13 (later³) — Brand v1 ADOPTED · PRs #2+#3 merged · full asset pack shipped
+
+- **Founder adopted the in-house identity as official Brand v1:** green upward arrow + PROPEL wordmark, navy/green/white. Canva candidates retired to archive.
+- **Pack completed** (site/assets/): profile mark, manifesto post, LinkedIn banner, YouTube banner, 4 IG highlight covers, 512px brand mark for favicon/watermarks — every asset the account-setup sprint needs now exists. Website header carries the mark.
+- **PR #2 and PR #3 merged** — main holds the complete frozen backend (a merge-snapshot gap orphaned 6 commits; recovered via cherry-pick into PR #3, verified 14/14 tests on merged state).
+- **Nothing producible remains before launch.** ⭐ unchanged: the 90-minute go-public sprint.
+
 ## 2026-07-13 (later²) — Rental sector: decided, bounded, parked (docs/14)
 
 - Founder raised the rental gap. Partner assessment: generic lettings REJECTED (per-deal agent economics can't sustain retainers; wedge dilution at launch). Two rental-adjacent sub-segments APPROVED as the Phase-2 lane using existing products: **shortlet operators** (occupancy = recurring budgeted pain; Concierge PMF arguably stronger than sales) and **property management firms** (NIESV tribe; vacancy-fill framing). Activation triggers defined; launch copy/rate card untouched. Freeze holds — this was a decision memo, not a rebuild.

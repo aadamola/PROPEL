@@ -30,7 +30,8 @@
   /* Top bar */
   .top{position:sticky;top:0;z-index:50;background:rgba(8,28,58,.92);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.08)}
   .top .wrap{display:flex;align-items:center;justify-content:space-between;padding-top:14px;padding-bottom:14px}
-  .logo{font-weight:900;font-size:1.35rem;letter-spacing:.06em}
+  .logo{font-weight:900;font-size:1.35rem;letter-spacing:.06em;display:flex;align-items:center;gap:9px}
+  .logo::before{content:'';width:0;height:0;border-left:9px solid transparent;border-right:9px solid transparent;border-bottom:14px solid var(--green)}
   .logo span{color:var(--green)}
   .top .btn{padding:10px 18px;font-size:.95rem}
 

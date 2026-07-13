@@ -1,6 +1,18 @@
 # Propel — Brand Assets Tracker
 
-> **STATUS UPDATE (2026-07-08): launch assets shipped in-house** — see **site/assets/** (profile.png, manifesto.png, banner.png, rendered from site/assets-src/). These are the PRIMARY launch assets; nothing below blocks going public. The Canva candidates remain optional alternates (Canva connector currently needs re-auth).
+> **✅ ADOPTED AS OFFICIAL BRAND v1 (founder decision, 2026-07-13):** the in-house identity — **green upward arrow + PROPEL wordmark (navy #081c3a / green #00e57a / white)** — is Propel's official brand. The Canva candidates below are RETIRED (kept for archive only).
+>
+> **The complete pack (site/assets/):**
+> | Asset | File | Use |
+> |---|---|---|
+> | Profile mark | profile.png (1080²) | IG, TikTok, WhatsApp, LinkedIn, YouTube avatar |
+> | Day-1 manifesto post | manifesto.png (1080×1350) | First feed post, all platforms |
+> | Wide banner | banner.png (1584×396) | LinkedIn company cover |
+> | YouTube banner | youtube-banner.png (2560×1440, safe-zone centered) | YouTube channel art |
+> | Highlight covers ×4 | highlight-audits/-results/-services/-about.png (1080×1920) | IG story highlights |
+> | Brand mark | mark-512.png (512²) | Favicon, watermark, app icons |
+>
+> Source HTML for every asset lives in site/assets-src/ — regenerate/resize anytime with headless Chromium. The website header now carries the arrow mark (site/index.html).
 
 *Generated in Canva (partner session, July 2026). Pick winners, then we convert to editable designs, build the full profile pack from them, and export finals into this folder.*
 

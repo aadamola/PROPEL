@@ -2,6 +2,12 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-07-13 (later⁴) — New private repo created: GL_RADAR
+
+- **At ADEDAMOLA's request, created a new GitHub repository: `aadamola/GL_RADAR`** (private, README-initialized) — https://github.com/aadamola/GL_RADAR.
+- Purpose not yet stated; awaiting ADEDAMOLA's brief on what GL_RADAR is for before any scaffolding, docs, or code go into it. Until then it sits outside the Propel operating protocol (this repo remains the single source of truth for Propel).
+- No Propel strategy, plans, or state changed in this session.
+
 ## 2026-07-13 (later³) — Brand v1 ADOPTED · PRs #2+#3 merged · full asset pack shipped
 
 - **Founder adopted the in-house identity as official Brand v1:** green upward arrow + PROPEL wordmark, navy/green/white. Canva candidates retired to archive.

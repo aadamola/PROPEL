@@ -2,6 +2,11 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-07-14 — GL_RADAR briefed and built (separate venture, own repo)
+
+- ADEDAMOLA delivered the GL_RADAR brief: FMCG/nightlife arm of Radar Lagos — packaged cocktails sold at raves. Built in full in `aadamola/GL_RADAR` (operating prompt v2, launch plan, compliance posture, sales SOP, copy pack, visual identity + mark, flow-tested checkout/operator prototypes). It stays cleanly outside Propel; this repo remains Propel-only.
+- **Partner flag (docs there, mirrored here):** GL_RADAR now competes with Propel Sprint 1 for the same ~20 founder-hours/week — Propel's go-public ⭐ and the overdue Shalom Park outreach are still open. Asked ADEDAMOLA to set a weekly hour cap for GL_RADAR. Propel plans unchanged.
+
 ## 2026-07-13 (later⁴) — New private repo created: GL_RADAR
 
 - **At ADEDAMOLA's request, created a new GitHub repository: `aadamola/GL_RADAR`** (private, README-initialized) — https://github.com/aadamola/GL_RADAR.

@@ -2,6 +2,13 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-07-14 — 🔥 Shalom Park requested the DM/comment demo
+
+- **First hot developer signal:** IFT Realty asked for a demo of DM + comment integration. Pipeline stage → DEMO_REQUESTED; target package Concierge Developer (₦1.2m + ₦250k/mo + commission per docs/09).
+- **Our-side cost analysis:** tap-through demo ₦0 (exists); live sandbox demo ~₦35k–₦50k one-off (VPS ₦10–15k/mo + LLM credit; official Meta APIs free, comment→DM webhook free). Production COGS ≈ ₦30–60k/mo vs ₦250k/mo care price → 75%+ margin confirmed.
+- **Guardrails set:** live demo on OUR Apex Gardens sandbox accounts only — anything on their IG/listings is the paid pilot. TikTok comment automation not promised (API-limited).
+- **Launch sprint is now client-critical path** (IG business account + Meta Business Suite are demo prerequisites). TODO flagged.
+
 ## 2026-07-13 (later³) — Brand v1 ADOPTED · PRs #2+#3 merged · full asset pack shipped
 
 - **Founder adopted the in-house identity as official Brand v1:** green upward arrow + PROPEL wordmark, navy/green/white. Canva candidates retired to archive.

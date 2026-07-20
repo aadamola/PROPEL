@@ -4,6 +4,8 @@
 
 ---
 
+> 🔥 **WHY TODAY: Shalom Park requested the DM/comment demo.** The live demo runs on OUR accounts — this sprint is now the critical path to a ₦1.2m+ deal. Show them the tap-through demo (demos/shalom-park/concierge-demo.html, works on any phone) while we build the live one.
+
 ## ⭐ DO THIS NEXT — GO PUBLIC (one sitting, ~90 min, today)
 
 **The launch sprint. Brand assets are DONE (site/assets/ — profile.png, manifesto.png, banner.png). No more waiting on picks. In order:**

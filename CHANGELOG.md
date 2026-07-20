@@ -2,6 +2,13 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-07-20 — LLM credit ruling: Claude Haiku 4.5 (T1) + DeepSeek V4 Flash (T2/T3)
+
+- **Founder asked which LLM credits we buy (OpenAI vs Claude vs Gemini vs Chinese).** Full July-2026 price sweep run; ruling written into docs/13 §3.
+- **Buying:** Claude Haiku 4.5 credit ~$10–15 for the client-facing Concierge ($1/$5 per 1M; prompt caching → cached KB reads ~0.1×, decisive for our big-KB/short-turn traffic shape) + DeepSeek V4 Flash ~$5 for internal bulk & agent brains ($0.14/$0.28 — no Western model within 10×). **Total ≈ ₦22–30k**, inside the tooling gate.
+- **Not buying:** OpenAI (GPT-5.6 Luna loses to Haiku on output price with no caching edge), Gemini (3 Flash $0.50/$3 held as named T1 alternate if Haiku disappoints in the bake-off), Kimi/GLM (upgrade paths only). Chinese models stay out of T1 on the NDPA/trust-perimeter line, not price.
+- **Per-client production estimate: $10–25/mo (₦15–40k)** — confirms the ₦30–60k COGS / 75%+ margin on Concierge Developer. Purchase trigger = launch sprint (billing needs founder's cards).
+
 ## 2026-07-14 — 🔥 Shalom Park requested the DM/comment demo
 
 - **First hot developer signal:** IFT Realty asked for a demo of DM + comment integration. Pipeline stage → DEMO_REQUESTED; target package Concierge Developer (₦1.2m + ₦250k/mo + commission per docs/09).

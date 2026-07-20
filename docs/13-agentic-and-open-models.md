@@ -40,6 +40,18 @@ Autonomous dossier-building on Tier-B prospects from public socials/websites: po
 
 **Data governance line (hard):** client PII, client documents, and anything confidential **never** goes to third-country APIs without an NDPA cross-border assessment — T2/T3 run on public, fictional (Apex Gardens), or our-own data only. This line is also a *sales asset*: "your buyer data never leaves our vetted stack."
 
+### Credit purchase ruling (2026-07-20) — which credits we actually buy
+
+Priced against the July-2026 market (all $/1M tokens in→out; ₦ at ~₦1,500/$):
+
+| Slot | Winner | Price | Runners-up & why they lost |
+|---|---|---|---|
+| **T1 — client-facing Concierge** | **Claude Haiku 4.5** — $1 / $5; **prompt caching cuts cached KB/system-prompt reads to ~0.1×** (~$0.10/1M), which is decisive for our shape of traffic (big cached KB, short live turns) | ~$10–15 first credit | GPT-5.6 Luna $1/$6 (pricier out, no caching edge for us) · Gemini 3 Flash $0.50/$3 (**named alternate** — flips in if Haiku disappoints in the sandbox bake-off) · Chinese models excluded from T1 by the NDPA/trust-perimeter line, not price |
+| **T2/T3 — internal bulk + agent brains** | **DeepSeek V4 Flash** — $0.14 / $0.28; nothing Western is within an order of magnitude | ~$5 first credit | Kimi K2.6 $0.95/$4 (upgrade path if agent sessions need 2M context/stability) · GLM-5.2 $1.40/$4.40 |
+| **Not buying now** | OpenAI, Gemini, Kimi, GLM | ₦0 | No workload where any of them beats the winner at its tier; revisit at the quarterly re-scan |
+
+**Initial spend: ≈ $15–20 ≈ ₦22k–₦30k total** — inside the docs/07 tooling gate, no founder flag needed. **Production estimate per Concierge client: $10–25/mo (₦15k–₦40k) with caching**, consistent with the ₦30–60k/mo COGS and 75%+ margin already quoted on the Developer tier. Buy trigger: the launch sprint (API billing needs the business identity/cards ADEDAMOLA controls).
+
 **Open models as Concierge brains?** Allowed to *compete*: any open model may enter the bake-off harness. Production requires 100% on injection+grounding suites AND an acceptable data path (self-hosted or vetted regional hosting — not a third-country consumer API). The exam doesn't care about the flag on the model; the data path does.
 
 ## 4. What this changes in the money

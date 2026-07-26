@@ -2,6 +2,15 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-07-26 (later) — 🏗️ PRODUCTION MODE — the Concierge stops being a demo
+
+- **Number + handle received and wired:** WhatsApp Business **+234 901 912 0968**, Instagram **@getpropel.ng**. All 11 site CTAs now point at the live wa.me link; footer IG corrected; **WhatsApp QR generated** (site/assets/whatsapp-qr.png + .svg, brand colours).
+- **Production checklist opened: ops/production-checklist.md** — phased, gated, owner-tagged (Phase 0 foundations → 1 Propel's own live Concierge → 2 Apex Gardens demo instance → 3 Shalom Park pilot 🔒 → 4 care).
+- **Partner ruling on "build the real one for them":** build the real *system* now — do **not** point it at Shalom Park's assets yet. No contact, no signature, no warranted facts (rule 2), no vetting (rule 5). Phase 3 is a KB swap + number swap on a system already proven in production, which makes "we go live in days" an honest claim in the meeting instead of a promise.
+- **Four production constraints discovered in build research — they change what we PROMISE:** IG comment→DM allows **one** automated private reply per comment (7-day window) · ~200 automated DMs/hour/account · **Advanced Access needs Meta App Review, 5–10 business days** · **Meta Business Verification needs registered business docs → CAC filing is on the critical path**, not background admin. Also: direct-migrating 09019120968 to Cloud API would kill the WhatsApp Business app on it → **second SIM (₦500) for the API rig**, founder's line stays human.
+- **Spend flagged per rule 1:** Phase 0 total ≈ **₦60k** first month (SIM ₦500 + domain ₦20k + VPS ₦15k/mo + LLM credits ₦25k) — above the ₦50k gate, awaiting ADEDAMOLA's greenlight. ₦40k of it was already in the storefront plan.
+- **⭐ moved to: buy the second SIM.** CAC promoted to loud #1 weekly item on long-clock grounds.
+
 ## 2026-07-26 — 🚀 PROPEL IS PUBLIC · Shalom Park brief drafted
 
 - **ADEDAMOLA went live: WhatsApp Business + Instagram are set up.** The launch sprint's hard part is done — the storefront gate (docs/07 §3 / 2026-07-13 changelog) is broken open. Remaining sprint items (TikTok, LinkedIn, manifesto post, Meta Business Suite link) demoted to normal weekly items; none of them blocks anything.

@@ -36,6 +36,7 @@ AI-forward digital marketing agency for Nigerian real estate — realtors, estat
 | ops/templates/ | Proposal, audit, onboarding, scorecard (term sheet = DORMANT, see docs/08) |
 | ops/setup/ + ops/content/ | Account setup, brand assets tracker, content engine + launch calendar |
 | ops/crm/pipeline.csv | Pipeline — keep it current after every prospect touch |
+| ops/production-checklist.md | **Live production build track** — phases, gates, owners, blockers |
 
 ## Operating rules (non-negotiable)
 
@@ -66,7 +67,8 @@ Adedamola has ADHD. TODO.md at repo root is his single external brain for Propel
 
 ## Current state (update every session that changes it)
 
-- **Phase:** Sprint 1 (docs/07 §3) — **LIVE as of 2026-07-26: WhatsApp Business + Instagram are set up.** No revenue yet; selling starts now. TikTok/LinkedIn/manifesto post outstanding but non-blocking.
+- **Phase:** **PRODUCTION MODE (2026-07-26).** Propel is public — WhatsApp Business **+234 901 912 0968**, Instagram **@getpropel.ng**, both wired into the site with QR. Now building the real Concierge: run **ops/production-checklist.md**. No revenue yet; selling and building run in parallel.
+- **Standing ruling:** the Concierge gets built on OUR assets first (Propel's own line + Apex Gardens sandbox). A client's live accounts are touched only past Phase-3 gates — signature, vetting, and a **warranted facts sheet**. Never before.
 - **Built and ready:** brand assets (site/assets/ — in-house PNGs; Canva picks now optional), website draft v1 (site/), Propel Concierge product (docs/10) + binding QA standard (docs/11), Shalom Park demo pack (demos/shalom-park/, pitch-only), Document Vault + Voice-Note Concierge add-ons, Broker Hub in validation.
 - **Waiting on Adedamola (⭐ in TODO.md = send me the WhatsApp number + IG handle, 2 min):** then — send the Shalom Park brief (drafted, demos/shalom-park/05-concierge-brief.md, due 2026-07-29) · TikTok/LinkedIn/manifesto post · Meta Business Suite link (gates the live demo) · first 10 prospect names · CAC Business Name filing · domain purchase.
 - **Next AI-partner deliverables once unblocked:** wire WhatsApp number + QR into site, 10 audit teardowns, founding-client outreach drafts, Apex Gardens live demo build (needs Meta Business Suite + VPS + the ~₦25k LLM credits ruled in docs/13 §3).

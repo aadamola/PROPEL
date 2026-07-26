@@ -4,38 +4,39 @@
 
 ---
 
-> ✅ **2026-07-26: WhatsApp Business + Instagram are LIVE.** You went public. The rest of the sprint is small and it can wait — one thing unblocks everything else right now.
+> 🏗️ **2026-07-26: WE ARE IN PRODUCTION MODE.** WhatsApp + IG are live, your number is wired into the whole website, your QR code is generated. Full build plan: [ops/production-checklist.md](ops/production-checklist.md) — you don't need to read it, I'm running it. Your items are below, in order.
 
-## ⭐ DO THIS NEXT — send me two lines (2 min, from your phone)
+## ⭐ DO THIS NEXT — buy a second SIM (10 min, ₦500)
 
-**Message me:**
+Any vendor. **This is the number the AI runs on.**
 
-1. The **WhatsApp Business number**
-2. The **Instagram handle** you got
+Why a second one: putting 09019120968 on the automation platform would kill the WhatsApp Business app on that line — the one you chat with prospects on. ₦500 keeps your human line human and gives the robot its own.
 
-That's it. The moment I have them I: wire the number into every button on the website, generate your WhatsApp QR code, and finish the Shalom Park brief — it's written and waiting on your signature line ([demos/shalom-park/05-concierge-brief.md](demos/shalom-park/05-concierge-brief.md)).
+**Send me the new number when you have it and I start building the live Concierge.**
 
 ---
 
 ## THIS WEEK — one per sitting, in this order
 
-- [ ] **(15 min)** Finish the sprint: TikTok @getpropel + LinkedIn company page — bios in [ops/setup/account-setup.md](ops/setup/account-setup.md) §4–5. Upload profile.png / banner.png from site/assets/.
-- [ ] **(5 min)** Post **manifesto.png** on IG with the Day 1 caption from [ops/content/content-engine.md](ops/content/content-engine.md).
-- [ ] **(10 min)** Meta Business Suite: link IG + WhatsApp (§7). *Prerequisite for the Shalom Park live demo — don't skip it.*
-- [ ] **(10 min)** Send the Shalom Park brief — drafted and ready, you just find the right contact at IFT Realty (their site/LinkedIn), paste and send.
-- [ ] **(20 min)** First 10 prospect names → WhatsApp me just names + IG handles. *Unblocks: I write all 10 audit teardowns.*
-- [ ] **(15 min)** Start CAC Business Name filing: "Propel Digital" (fallbacks: Propel Media, Propel Digital Marketing) — cac.gov.ng or an accredited agent.
-- [ ] **(10 min)** Buy domain getpropel.ng (₦15k–₦25k) → tell me; I'll prep the site for hosting.
+- [ ] **(15 min)** 🕐 **Start CAC filing** — "Propel Digital" (fallbacks: Propel Media, Propel Digital Marketing), cac.gov.ng or an accredited agent. *This one has a long clock and I need it: Meta won't let us run automation on a client's account until the business is verified with registered documents. Start it, then forget it.*
+- [ ] **(10 min)** Buy domain getpropel.ng (₦15k–₦25k) → tell me; I deploy the site.
+- [ ] **(10 min)** Buy the VPS (₦10–15k/mo) → I install everything.
+- [ ] **(10 min)** LLM credits ~₦25k — I'll send you the two exact top-up links.
+- [ ] **(10 min)** Meta Business Suite: link @getpropel.ng + WhatsApp, convert IG to a Business account ([ops/setup/account-setup.md](ops/setup/account-setup.md) §7).
+- [ ] **(10 min)** Send the Shalom Park brief — written and ready, you just find the contact at IFT Realty and paste ([demos/shalom-park/05-concierge-brief.md](demos/shalom-park/05-concierge-brief.md)).
+- [ ] **(20 min)** First 10 prospect names → WhatsApp me names + IG handles. *Unblocks 10 audit teardowns.*
+- [ ] **(15 min)** Finish the socials: TikTok + LinkedIn page (§4–5), then post manifesto.png with the Day 1 caption.
 
 ## NOT YET — ignore these (I'll star them when it's time)
 
-Buying LLM credits (~₦25k — I'll hand you the exact links when the demo needs them) · VPS purchase · recording first voice notes · first audit calls. None of this is actionable yet. Don't think about them.
+Testing the bot · the Shalom Park pilot build · voice notes · first audit calls. Nothing here is actionable until the week's items land. Don't think about them.
 
 ## WAITING ON ME (AI partner) — nothing for you to do here
 
-- Website WhatsApp buttons + QR code → starts the moment you send the number
+- ✅ Website wired to your number · ✅ WhatsApp QR generated (site/assets/whatsapp-qr.png)
+- Live Concierge build on the new SIM → starts the moment you send it + VPS exists
+- Meta app + App Review submission → starts after CAC + Business Suite link
 - 10 audit teardowns → starts the moment you send names
-- Shalom Park live demo build → needs Meta Business Suite linked + VPS
 
 ## ✅ DONE (look how far this has come)
 

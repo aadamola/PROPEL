@@ -4,25 +4,26 @@
 
 ---
 
-## The sequencing ruling (read this first)
+## The sequencing ruling — UPDATED 2026-07-26 (they paid)
 
-ADEDAMOLA's instruction: *"move on from the demo and build the real one for them."* Agreed on the build — with one correction on the target.
+**Shalom Park is a paying client.** Contacted, agreed, setup fee received, marketing-use rights granted. The commercial gate that governed this section is **cleared** — we build for them, and we say their name publicly.
 
-**We build the real production system now. We do NOT point it at Shalom Park's accounts yet.** Three reasons, all of them ours, none of them negotiable:
+Two gates survive the payment, because money doesn't clear them:
 
-1. **They haven't been contacted.** No meeting, no signature, no mandate. Building on a prospect's live assets before signature is free work — and free work is what a developer accepts, thanks for, and never pays for.
-2. **We have no warranted facts** (rule 2). Every price, title claim and availability figure a Concierge speaks must come from a signed facts sheet. IFT Realty hasn't given us one. A bot answering "₦[guess]m, C of O" to a real buyer is a liability with our name on it.
-3. **They aren't vetted yet** (rule 5). CAC search, title docs sighted, site visit — none done.
+- **Vetting (rule 5)** — CAC search on IFT Realty, title/approval documents sighted, site visit. A client paying us is not evidence their title is clean, and we don't market land we haven't seen the paper for.
+- **Warranted facts (rule 2)** — **this is the hard build blocker.** The Concierge cannot state a price, title status, payment plan or availability figure that isn't on a signed facts sheet. Form ready at `ops/templates/warranted-facts-sheet.md`; request drafted at `clients/shalom-park/01-kickoff-messages.md`.
 
-**What we build instead is not a lesser thing — it is the same rig.** One production system, two instances:
+**Build order is unchanged, and that's deliberate.** Our own assets first — not as a delay, but because the external clocks (Meta App Review, business verification) run for ~2 weeks regardless, and their facts sheet has to come back before their KB can exist. Everything that doesn't depend on either gets built now.
+
+**One production system, three instances:**
 
 | Instance | Runs on | Purpose | Status |
 |---|---|---|---|
 | **Propel's own Concierge** | our WhatsApp + @getpropel.ng | Answers our real prospects 24/7 — and is itself the proof we sell | Phase 1 |
 | **Apex Gardens demo** | our sandbox number | The estate Shalom Park messages *from their own phone* in the meeting | Phase 2 |
-| **Shalom Park pilot** | their assets | The paid deployment | Phase 3 — **gated on signature + facts sheet** |
+| **Shalom Park deployment** | their assets | **The paid build — client waiting** | Phase 3 — **gated on facts sheet + vetting + App Review** |
 
-Phase 3 is a **KB swap and a number swap** on a system already proven in production. That's the whole point: when they sign, we go live in days, and we can say so honestly in the meeting because it's true.
+Phase 3 is a **KB swap and a number swap** on a system already proven in production. That's why this order delivers faster, not slower.
 
 ---
 
@@ -43,10 +44,10 @@ Verified July 2026 — every one of these is a thing cheap competitors over-prom
 
 ## Phase 0 — Foundations (unblocks everything)
 
-**Spend gate: total ≈ ₦60k first month — above the ₦50k flag, ADEDAMOLA greenlights before anything is bought.** (₦40k of it — domain + VPS — was already in the storefront plan.)
+**Spend gate: total ≈ ₦60k first month.** Client revenue has now landed, so this is funded out of receipts rather than the ₦500k capital — but it still needs ADEDAMOLA's greenlight per rule 1. (₦40k of it — domain + VPS — was already in the storefront plan.)
 
-- [ ] **(A · 10 min · ₦500)** Second SIM for the API rig. Keeps 09019120968 human.
-- [ ] **(A · 15 min)** **Start CAC Business Name filing** — "Propel Digital" (fallbacks: Propel Media, Propel Digital Marketing). *Long external clock; gates Meta Business Verification → App Review → client deployments. Start it, don't wait for it.*
+- [x] **(A · ₦500)** ~~Second SIM for the API rig~~ ✅ **DONE — 09112714482.** Keeps 09019120968 human.
+- [ ] **(A · 15 min)** 🔴 **Start CAC Business Name filing** — "Propel Digital" (fallbacks: Propel Media, Propel Digital Marketing). *No longer admin: Meta Business Verification requires registered business documents, and that gates App Review, which gates automation on **a client's** account. **This now blocks a paid deliverable.***
 - [ ] **(A · 10 min · ₦15–25k)** Buy getpropel.ng.
 - [ ] **(A · 10 min · ₦10–15k/mo)** VPS (2–4GB, Lagos/EU region). Tell me the credentials channel and I take it from there.
 - [ ] **(A · 10 min · ~₦25k)** LLM credits per docs/13 §3: Claude Haiku 4.5 (~$12) + DeepSeek V4 Flash (~$5). I hand over exact top-up links.
@@ -72,14 +73,12 @@ Verified July 2026 — every one of these is a thing cheap competitors over-prom
 - [ ] **(B)** One-page "how it works" leave-behind for the meeting.
 - [ ] **(A)** Demo-ready: they message it live, from their own phone, in the room.
 
-## Phase 3 — Shalom Park pilot 🔒 GATED
+## Phase 3 — Shalom Park deployment 💰 PAID CLIENT
 
-**Do not start any item here until all four gates are green.**
-
-- [ ] 🔒 **Gate 1:** Brief sent, meeting held, live demo shown.
-- [ ] 🔒 **Gate 2:** Vetting clean — CAC search on IFT Realty, title/approval docs sighted, site visit done (docs/09).
-- [ ] 🔒 **Gate 3:** Marketing Mandate Agreement signed (ops/templates/msa-sow-skeleton.md) — scope, fee, commission, attribution, facts warranty, liability cap, kill switch.
-- [ ] 🔒 **Gate 4:** **Warranted facts sheet received in writing** — every price, unit type, title status, payment plan. No warranty, no deployment. No exceptions.
+- [x] ✅ **Gate 1 — commercial:** contacted, agreed, **setup fee paid**, marketing-use rights granted (2026-07-26).
+- [ ] ⬜ **Gate 2 — vetting:** CAC search on IFT Realty, title/approval docs sighted, site visit (docs/09). *Combine documents + site visit into one trip.*
+- [ ] ⬜ **Gate 3 — terms in writing:** confirmation-of-terms note sent and acknowledged (`clients/shalom-park/01-kickoff-messages.md` #1). A "confirmed" reply counts — don't stall goodwill chasing a signature.
+- [ ] 🔴 **Gate 4 — warranted facts sheet returned and signed.** **The hard blocker.** Form: `ops/templates/warranted-facts-sheet.md`; request: kickoff message #2. Until it lands, their KB cannot exist and the bot escalates on every factual question.
 
 Then, and only then:
 
@@ -101,9 +100,10 @@ Then, and only then:
 
 | Blocked | On | Owner |
 |---|---|---|
+| Concierge rig build | **VPS purchase** (SIM ✅ done) | A |
 | Everything in Phase 0–1 | ₦60k spend greenlight | A |
-| Concierge rig build | Second SIM + VPS | A |
-| Any client-account deployment | CAC → Meta verification → App Review (~2+ weeks total) | A starts, B submits |
-| Shalom Park pilot | The brief being sent (demos/shalom-park/05-concierge-brief.md) | A |
+| **Shalom Park KB — the paid deliverable** | **Warranted facts sheet returned** | A sends request, client returns |
+| **Automation on Shalom Park's accounts** | CAC → Meta verification → App Review (~2+ weeks of external clocks) | A starts CAC, B submits |
+| Publishing any Shalom Park price/title fact | Facts sheet + documents sighted | A |
 
 *Sources for the constraints table: [Meta — migrate an existing WhatsApp number](https://developers.facebook.com/docs/whatsapp/cloud-api/get-started/migrate-existing-whatsapp-number-to-a-business-account/) · [WhatsApp coexistence: app + API on one number](https://leadnotifi.com/articles/whatsapp-coexistence-business-app-and-api) · [Instagram DM automation rules 2026](https://www.inro.social/blog/instagram-dm-automation-guide-2026) · [Instagram comment-to-DM guide](https://quickdm.app/blog/instagram-comment-to-dm-automation-complete-guide) · [Instagram DM compliance 2026](https://creatorflow.so/blog/instagram-dm-compliance-meta-rules/).*

@@ -2,6 +2,18 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-07-26 (evening) — 💰 FIRST REVENUE — Shalom Park is a paying client
+
+- **IFT Realty contacted, agreed, and PAID the setup fee.** Marketing-use rights granted — we may name them publicly. Propel's first revenue, from the deal docs/09 was written for. Pipeline stage → CLIENT_PAID. Client file opened: `clients/shalom-park/`.
+- **Second SIM registered: 09112714482** — the AI line. 09019120968 stays ADEDAMOLA's human line, unmigrated, per the Cloud API ruling.
+- **Gate re-adjudication (partner ruling):** payment clears the *commercial* gate — build for them, name them publicly. It does **not** clear vetting (rule 5: CAC search, title docs sighted, site visit) or warranted facts (rule 2). A client paying us is not evidence their title is clean. Two gates stay shut; build order unchanged.
+- **Built to unblock it — two artifacts:**
+  - `ops/templates/warranted-facts-sheet.md` — reusable client form doing double duty as **legal warranty and Concierge KB source**. Sections A–H: entity, development, title & approvals, units/prices, payment, delivery, an explicit *"things the Concierge must NOT say"* section, and a **change-notification clause** that puts stale-fact liability where it belongs. Design principle: **blank is safe, wrong is not** — unfilled fields ship as escalation triggers, never assumptions.
+  - `clients/shalom-park/01-kickoff-messages.md` — three sequenced drafts: confirmation-of-terms (converts a relationship deal into a written record without stalling goodwill — a "confirmed" reply counts), the facts-sheet request framed as *build input, not paperwork*, and a held-back access request.
+- **Marketing-rights ruling recorded:** publishable today = the client relationship and the work-in-progress. Not publishable = any price/title/unit/availability fact (needs the sheet) or any result (we've delivered nothing yet). Site Featured Projects flipped `data-live="true"` with the relationship claim only; every figure stays off the page.
+- **CAC escalated to 🔴:** Meta Business Verification requires registered business documents → gates App Review → gates automation on a *client's* account. **It now blocks a paid deliverable.**
+- **Open commercial questions (non-blocking):** exact amount received, care-fee start and rate, commission rate, whether anything is in writing.
+
 ## 2026-07-26 (later) — 🏗️ PRODUCTION MODE — the Concierge stops being a demo
 
 - **Number + handle received and wired:** WhatsApp Business **+234 901 912 0968**, Instagram **@getpropel.ng**. All 11 site CTAs now point at the live wa.me link; footer IG corrected; **WhatsApp QR generated** (site/assets/whatsapp-qr.png + .svg, brand colours).

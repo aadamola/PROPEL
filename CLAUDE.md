@@ -66,8 +66,8 @@ Adedamola has ADHD. TODO.md at repo root is his single external brain for Propel
 
 ## Current state (update every session that changes it)
 
-- **Phase:** Sprint 1 (docs/07 §3) — go-public + sell. No revenue yet; accounts not yet live.
+- **Phase:** Sprint 1 (docs/07 §3) — **LIVE as of 2026-07-26: WhatsApp Business + Instagram are set up.** No revenue yet; selling starts now. TikTok/LinkedIn/manifesto post outstanding but non-blocking.
 - **Built and ready:** brand assets (site/assets/ — in-house PNGs; Canva picks now optional), website draft v1 (site/), Propel Concierge product (docs/10) + binding QA standard (docs/11), Shalom Park demo pack (demos/shalom-park/, pitch-only), Document Vault + Voice-Note Concierge add-ons, Broker Hub in validation.
-- **Waiting on Adedamola (⭐ = launch sprint in TODO.md):** 90-min go-public sitting (SIM → WhatsApp Business → IG/TikTok/LinkedIn → post manifesto → send me the number) · first 10 prospect names · CAC Business Name filing · Shalom Park contact person (outreach draft ready, docs/09 — **overdue since 2026-07-08**) · domain purchase.
-- **Next AI-partner deliverables once unblocked:** wire WhatsApp number + QR into site, 10 audit teardowns, founding-client outreach drafts, Apex Gardens demo sandbox build.
+- **Waiting on Adedamola (⭐ in TODO.md = send me the WhatsApp number + IG handle, 2 min):** then — send the Shalom Park brief (drafted, demos/shalom-park/05-concierge-brief.md, due 2026-07-29) · TikTok/LinkedIn/manifesto post · Meta Business Suite link (gates the live demo) · first 10 prospect names · CAC Business Name filing · domain purchase.
+- **Next AI-partner deliverables once unblocked:** wire WhatsApp number + QR into site, 10 audit teardowns, founding-client outreach drafts, Apex Gardens live demo build (needs Meta Business Suite + VPS + the ~₦25k LLM credits ruled in docs/13 §3).
 - **PR #2** (aadamola/PROPEL) is the running record — open, carries all work since PR #1 merged; one merge takes everything. Canva connector needs re-auth (optional).

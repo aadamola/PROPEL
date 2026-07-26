@@ -2,6 +2,13 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-07-26 — 🚀 PROPEL IS PUBLIC · Shalom Park brief drafted
+
+- **ADEDAMOLA went live: WhatsApp Business + Instagram are set up.** The launch sprint's hard part is done — the storefront gate (docs/07 §3 / 2026-07-13 changelog) is broken open. Remaining sprint items (TikTok, LinkedIn, manifesto post, Meta Business Suite link) demoted to normal weekly items; none of them blocks anything.
+- **Shalom Park brief written and send-ready** (demos/shalom-park/05-concierge-brief.md): two versions (email/LinkedIn primary, WhatsApp short), plain-language, benefit-led, **no specs and no price** — its only job is to book the live demo. Six advantages framed for a developer: instant reply, diaspora time-zone cover, comment capture, sales-team leverage, full enquiry logging, and approved-facts-only safety on official Meta platforms. Sending notes attached (don't quote fees, don't promise TikTok automation, tap-through as the fast fallback).
+- **Pipeline:** IFT Realty next action → send the brief, due 2026-07-29, owner ADEDAMOLA.
+- **Only blocker on the AI side:** the WhatsApp number + IG handle. They gate the site buttons, the QR code, and the brief's signature line — now the single ⭐ in TODO.md.
+
 ## 2026-07-20 — LLM credit ruling: Claude Haiku 4.5 (T1) + DeepSeek V4 Flash (T2/T3)
 
 - **Founder asked which LLM credits we buy (OpenAI vs Claude vs Gemini vs Chinese).** Full July-2026 price sweep run; ruling written into docs/13 §3.

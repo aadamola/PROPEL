@@ -76,9 +76,9 @@ Verified July 2026 — every one of these is a thing cheap competitors over-prom
 ## Phase 3 — Shalom Park deployment 💰 PAID CLIENT
 
 - [x] ✅ **Gate 1 — commercial:** contacted, agreed, **setup fee paid**, marketing-use rights granted (2026-07-26).
-- [ ] ⬜ **Gate 2 — vetting:** CAC search on IFT Realty, title/approval docs sighted, site visit (docs/09). *Combine documents + site visit into one trip.*
+- [ ] 🟡 **Gate 2 — vetting:** ✅ site visit done (2026-07-26, four-stage inventory recorded in `clients/shalom-park/README.md`) · ⬜ CAC search on IFT Realty · ⬜ title/approval documents sighted. *Bare-land plots raise the diligence bar — sight the paper before any plot price publishes.*
 - [ ] ⬜ **Gate 3 — terms in writing:** confirmation-of-terms note sent and acknowledged (`clients/shalom-park/01-kickoff-messages.md` #1). A "confirmed" reply counts — don't stall goodwill chasing a signature.
-- [ ] 🔴 **Gate 4 — warranted facts sheet returned and signed.** **The hard blocker.** Form: `ops/templates/warranted-facts-sheet.md`; request: kickoff message #2. Until it lands, their KB cannot exist and the bot escalates on every factual question.
+- [ ] 🔴 **Gate 4 — warranted facts sheet returned and signed.** **The hard blocker.** Client-ready Word document issued: `clients/shalom-park/docs/Shalom-Park-Property-Facts-Sheet.docx` (pre-filled with the observed unit mix, so they confirm rather than compose). Request wording: kickoff message #2. Until it lands, their KB cannot exist and the bot escalates on every factual question.
 
 Then, and only then:
 

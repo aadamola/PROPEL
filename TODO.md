@@ -11,7 +11,7 @@
 Both are **written and waiting** in [clients/shalom-park/01-kickoff-messages.md](clients/shalom-park/01-kickoff-messages.md). You fill in the ₦ amounts and dates, then paste.
 
 1. **Confirmation of terms** — warm, one paragraph of "here's what we agreed", asks only for a "confirmed" reply.
-2. **The facts sheet request** — attach [ops/templates/warranted-facts-sheet.md](ops/templates/warranted-facts-sheet.md).
+2. **The facts sheet request** — attach the Word document I built: **clients/shalom-park/docs/Shalom-Park-Property-Facts-Sheet.docx**. It's branded, client-ready, and already pre-filled with the unit mix you counted on the site visit, so they're confirming numbers instead of writing a document from scratch.
 
 **Why this is the ⭐ and not the build:** their assistant cannot state a single price, title status or payment plan until that sheet comes back signed. It's not paperwork — it's the data the thing runs on. Every day it sits is a day their build waits.
 
@@ -26,7 +26,7 @@ Both are **written and waiting** in [clients/shalom-park/01-kickoff-messages.md]
 - [ ] **(10 min)** Buy domain getpropel.ng (₦15k–₦25k) → tell me; I deploy the site.
 - [ ] **(10 min)** LLM credits ~₦25k — I'll send you the two exact top-up links.
 - [ ] **(10 min)** Meta Business Suite: link @getpropel.ng + WhatsApp, convert IG to a Business account ([ops/setup/account-setup.md](ops/setup/account-setup.md) §7).
-- [ ] **(1 trip)** Shalom Park site visit + sight the title documents in one go. *Last open vetting gate — we don't publish a price for land we haven't seen the paper for.*
+- [ ] **(1 ask)** Shalom Park: sight the title + approval documents. *Site visit ✅ done. This is the last open vetting gate — and with bare-land plots in the mix it matters more, not less. We don't publish a price for land we haven't seen the paper for.*
 - [ ] **(20 min)** First 10 prospect names → WhatsApp me names + IG handles. *Unblocks 10 audit teardowns. You have a client now — that's the line that opens doors.*
 - [ ] **(15 min)** Finish the socials: TikTok + LinkedIn page (§4–5), then post manifesto.png with the Day 1 caption.
 

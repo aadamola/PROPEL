@@ -2,6 +2,13 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-07-26 (night) — Site visit done · facts sheet issued as a client-ready document
+
+- **ADEDAMOLA completed the Shalom Park site visit.** Vetting gate part-cleared; CAC search + title-document sighting remain. Four-stage inventory observed first-hand: **3× 4-bed semi-detached (completed) · 16× 2-bed condominiums (under development) · 5-bed semi-detached (off-plan) · serviced plots (bare land)**. Logged as **[OBSERVED — NOT WARRANTED]**: first-hand beats their website, but it still isn't publishable until warranted.
+- **Facts sheet converted to a branded Word document** — `clients/shalom-park/docs/Shalom-Park-Property-Facts-Sheet.docx`. Propel-branded cover, eight sections, fill-in fields, signature/warranty page — **and pre-filled with the observed unit mix**, so IFT Realty confirm numbers rather than compose a document. Pre-filled forms come back; blank ones don't.
+- **Campaign read from the mix (clients/shalom-park/README.md):** the 3 completed semis are the content engine (only finished units can be filmed — they carry credibility for the units that don't exist yet) · the 16 condos are the volume campaign and the cleanest attribution proof · **off-plan + bare land are where the Concierge earns its fee** (longest, most question-heavy diaspora cycles) · bare land raises the title-diligence bar, since plot sales are where Lagos disputes concentrate.
+- *Build note: document verified structurally (23 tables, no adjacent-table corruption, full content) but not visually — LibreOffice is broken in this container and fails even on a minimal file.*
+
 ## 2026-07-26 (evening) — 💰 FIRST REVENUE — Shalom Park is a paying client
 
 - **IFT Realty contacted, agreed, and PAID the setup fee.** Marketing-use rights granted — we may name them publicly. Propel's first revenue, from the deal docs/09 was written for. Pipeline stage → CLIENT_PAID. Client file opened: `clients/shalom-park/`.

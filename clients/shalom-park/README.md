@@ -23,14 +23,36 @@
 
 The DM + comment Concierge on Shalom Park's Instagram and WhatsApp — the thing they asked for and paid to start. Build track: `ops/production-checklist.md`.
 
+## Site visit — 2026-07-26 (ADEDAMOLA, first-hand)
+
+**Inventory observed on the ground:**
+
+| Product | Stage | Count observed |
+|---|---|---|
+| 4-bedroom semi-detached | **Developed / completed** | 3 units |
+| 2-bedroom condominium | **Under development** | 16 units |
+| 5-bedroom semi-detached | **Off-plan** | not counted |
+| Serviced plots | **Bare land** | not counted |
+
+**Status of these figures: [OBSERVED — NOT WARRANTED].** First-hand observation outranks their website, but it is still not a publishable fact. They are pre-filled into the client's facts sheet for IFT Realty to confirm and price. Nothing here goes into an ad, a post or the Concierge until it comes back signed.
+
+### What the mix tells us (campaign read)
+
+Four products at four stages is unusually broad, and it changes how we build:
+
+- **The 3 completed 4-bed semis are the content engine.** Only finished units can be filmed. They carry the walkthroughs, the drone footage and the credibility for everything else on the estate — including the units that don't exist yet. Shoot these first.
+- **The 16 condos are the volume campaign.** A defined, countable inventory with a deadline is the cleanest thing to run paid acquisition against, and the clearest place to prove attribution and earn commission.
+- **Off-plan 5-bed + bare land are where the Concierge earns its fee.** These are the longest, most question-heavy sales cycles — diaspora buyers interrogate off-plan for weeks before committing. That is precisely the workload a 24/7 assistant absorbs and a human sales team cannot.
+- **Bare land raises the diligence bar, not lowers it.** Plot sales are where Lagos title disputes concentrate. Section C of the facts sheet is non-optional here, and the documents must be sighted before a single plot price is published.
+
 ## Gate status (Phase 3, production checklist)
 
 | Gate | Status |
 |---|---|
 | 1 — Contact + commercial agreement | ✅ **CLEARED** — contacted, agreed, paid |
-| 2 — Vetting: CAC search, title docs sighted, site visit | ⬜ **OPEN** — payment does not verify title (rule 5) |
+| 2 — Vetting | 🟡 **PART-CLEARED** — ✅ site visit done 2026-07-26 · ⬜ CAC search on IFT Realty · ⬜ title/approval documents sighted |
 | 3 — Terms in writing | ⬜ **OPEN** — confirmation-of-terms note drafted, `01-kickoff-messages.md` |
-| 4 — Warranted facts sheet | ⬜ **OPEN — this is the hard build blocker.** The Concierge cannot speak a price, a title status or a payment plan without it. Form ready: `ops/templates/warranted-facts-sheet.md` |
+| 4 — Warranted facts sheet | ⬜ **OPEN — the hard build blocker.** Client-ready document issued: `docs/Shalom-Park-Property-Facts-Sheet.docx` (pre-filled with the observed unit mix). |
 
 **Ruling:** Gate 1 clearing unblocks *building for them*. It does not unblock *publishing property facts* or *pointing the bot at real buyers* — Gates 2 and 4 govern that, and money doesn't clear them. Everything that doesn't depend on their facts gets built now; the KB is filled the day the sheet comes back.
 
@@ -51,3 +73,4 @@ The DM + comment Concierge on Shalom Park's Instagram and WhatsApp — the thing
 ## Log
 
 - **2026-07-26** — Contacted, agreed, **setup fee paid**. Marketing-use rights granted. Client file opened; facts sheet + kickoff drafts prepared.
+- **2026-07-26** — **Site visit completed.** Inventory observed across four stages (see above). Client-ready facts sheet issued as a Word document, pre-filled with the observed mix. Vetting gate now part-cleared; CAC search and title-document sighting remain.

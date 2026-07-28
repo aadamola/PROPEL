@@ -2,6 +2,15 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-07-28 — 📋 SIGNED FACTS SHEET RETURNED → Shalom Park KB is BUILT
+
+- **IFT Realty returned the facts sheet signed** (Nanameme Collins, Sales Executive, 2026-07-27) — richer than expected: prices, title status, payment terms, escalation roster, restrictions and location detail. **Gate 4 cleared; the hard build blocker is lifted.** Archived at `clients/shalom-park/docs/facts-sheet-SIGNED-2026-07-27.pdf`.
+- **KB built and validated: `clients/shalom-park/kb.json`** — every field traces to the signed sheet; **15 unsupplied fields wired as `null` + `escalate_always` entries** so the assistant escalates rather than guesses; their 4 restrictions plus our 2 standing ones in `must_not_say`; escalation routing Collins → Mercy → Tobi with the approved 15-minute unclaimed-hot-lead SMS alert; their "no auto-send layout map / title pages" honoured in config.
+- **Warranted and now sayable:** Governor's Consent + confirmed layout approval + **warranted "no litigation, acquisition or dispute"** · 10.37 ha, 27 units + 89 plots, ~30% developed · 4-bed semi ₦185m (3 available) · 2-bed condo ₦95m (**5 of 16 left** — honest scarcity, re-verified weekly before any campaign uses it) · 5-bed off-plan ₦200m · plots ₦125k/sqm · 50% down, 3/6/12-month plans · instant allocation · virtual inspections + diaspora proxy allowed.
+- **Audit raised five items (`02-facts-sheet-audit.md`):** 🔴 **the ₦95m 2-bed condo price looks wrong against a ₦185m finished 4-bed semi — confirm before any advert runs** · title documents still unsighted (Gate 2), and no name on the Consent · LASRERA blank · instalment interest/markup entirely blank (the gap buyers hit first) · excluded costs named but unquantified.
+- **Two business conversations flagged to the client, once:** their **25% cancellation forfeiture with refund only after resale (+180 days)** is severe — our handling is settled (state it plainly every time, then hand to a human; never bury it), with a recommendation that they test it with their lawyer and consider softening it, since they've ruled out discounts. And their inbound volume is **1–2 enquiries/day**, which reframes the Concierge honestly: at ₦95m–₦200m a unit it is insurance on expensive assets, not a volume reliever — and it points at the real gap, which is traffic (no active campaigns), i.e. the Leads/Launch upsell on the 16-condo inventory.
+- Follow-up drafted: `03-followup-questions.md` — eight open fields in one message.
+
 ## 2026-07-26 (night) — Site visit done · facts sheet issued as a client-ready document
 
 - **ADEDAMOLA completed the Shalom Park site visit.** Vetting gate part-cleared; CAC search + title-document sighting remain. Four-stage inventory observed first-hand: **3× 4-bed semi-detached (completed) · 16× 2-bed condominiums (under development) · 5-bed semi-detached (off-plan) · serviced plots (bare land)**. Logged as **[OBSERVED — NOT WARRANTED]**: first-hand beats their website, but it still isn't publishable until warranted.

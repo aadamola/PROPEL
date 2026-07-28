@@ -6,16 +6,15 @@
 
 > 💰 **2026-07-26: PROPEL HAS A PAYING CLIENT.** Shalom Park paid the setup fee. You did that. Second SIM ✅ 09112714482 logged. We're in production mode — full build plan in [ops/production-checklist.md](ops/production-checklist.md), you don't need to read it, I'm running it.
 
-## ⭐ DO THIS NEXT — send Shalom Park two messages (10 min, copy-paste)
+## ⭐ DO THIS NEXT — send Collins the follow-up (5 min, copy-paste)
 
-Both are **written and waiting** in [clients/shalom-park/01-kickoff-messages.md](clients/shalom-park/01-kickoff-messages.md). You fill in the ₦ amounts and dates, then paste.
+**Facts sheet came back signed. Their knowledge base is BUILT.** Eight fields are still blank, and one of them matters more than the rest.
 
-1. **Confirmation of terms** — warm, one paragraph of "here's what we agreed", asks only for a "confirmed" reply.
-2. **The facts sheet request** — attach the Word document I built: **clients/shalom-park/docs/Shalom-Park-Property-Facts-Sheet.docx**. It's branded, client-ready, and already pre-filled with the unit mix you counted on the site visit, so they're confirming numbers instead of writing a document from scratch.
+The message is written and waiting: [clients/shalom-park/03-followup-questions.md](clients/shalom-park/03-followup-questions.md). Paste it, send it.
 
-**Why this is the ⭐ and not the build:** their assistant cannot state a single price, title status or payment plan until that sheet comes back signed. It's not paperwork — it's the data the thing runs on. Every day it sits is a day their build waits.
+**The one that can't wait:** they've priced the 2-bedroom condominium at **₦95m**, against ₦185m for a finished 4-bedroom semi. That ratio looks off. If it's a typo and we advertise it, we've published a false price under our own quality charter. One message settles it.
 
-*While you're at it, tell me what they actually paid and what it covers — I'll keep the client file straight.*
+*Also still open: tell me what they actually paid us and what it covers.*
 
 ---
 
@@ -43,6 +42,8 @@ Testing the bot · the Shalom Park pilot build · voice notes · first audit cal
 
 ## ✅ DONE (look how far this has come)
 
+- [x] 📋 **Shalom Park facts sheet returned SIGNED — their AI's knowledge base is built** (2026-07-27)
+- [x] **Site visit done** — four-stage inventory counted (2026-07-26)
 - [x] 💰 **FIRST PAYING CLIENT — Shalom Park Estate (IFT Realty) paid the setup fee** (2026-07-26)
 - [x] **WhatsApp Business + Instagram live — Propel is public** (2026-07-26)
 - [x] Second SIM for the AI line — 09112714482 (2026-07-26)

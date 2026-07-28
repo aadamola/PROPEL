@@ -52,7 +52,7 @@ Four products at four stages is unusually broad, and it changes how we build:
 | 1 — Contact + commercial agreement | ✅ **CLEARED** — contacted, agreed, paid |
 | 2 — Vetting | 🟡 **PART-CLEARED** — ✅ site visit done 2026-07-26 · ⬜ CAC search on IFT Realty · ⬜ title/approval documents sighted |
 | 3 — Terms in writing | ⬜ **OPEN** — confirmation-of-terms note drafted, `01-kickoff-messages.md` |
-| 4 — Warranted facts sheet | ⬜ **OPEN — the hard build blocker.** Client-ready document issued: `docs/Shalom-Park-Property-Facts-Sheet.docx` (pre-filled with the observed unit mix). |
+| 4 — Warranted facts sheet | ✅ **CLEARED 2026-07-27** — returned signed by Nanameme Collins (Sales Executive). Archived `docs/facts-sheet-SIGNED-2026-07-27.pdf`; audited in `02-facts-sheet-audit.md`; **KB built: `kb.json`**. |
 
 **Ruling:** Gate 1 clearing unblocks *building for them*. It does not unblock *publishing property facts* or *pointing the bot at real buyers* — Gates 2 and 4 govern that, and money doesn't clear them. Everything that doesn't depend on their facts gets built now; the KB is filled the day the sheet comes back.
 
@@ -74,3 +74,4 @@ Four products at four stages is unusually broad, and it changes how we build:
 
 - **2026-07-26** — Contacted, agreed, **setup fee paid**. Marketing-use rights granted. Client file opened; facts sheet + kickoff drafts prepared.
 - **2026-07-26** — **Site visit completed.** Inventory observed across four stages (see above). Client-ready facts sheet issued as a Word document, pre-filled with the observed mix. Vetting gate now part-cleared; CAC search and title-document sighting remain.
+- **2026-07-27** — **SIGNED FACTS SHEET RETURNED.** Gate 4 cleared. Prices, title status (Governor's Consent), payment terms, escalation team and restrictions all warranted. KB built (`kb.json`, 15 gaps wired as escalation triggers). Audit raised: 2-bed condo price query, unsighted title documents, blank LASRERA, blank instalment markup, and the 25% cancellation-forfeiture clause. Follow-up drafted: `03-followup-questions.md`.

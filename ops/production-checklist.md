@@ -78,11 +78,13 @@ Verified July 2026 — every one of these is a thing cheap competitors over-prom
 - [x] ✅ **Gate 1 — commercial:** contacted, agreed, **setup fee paid**, marketing-use rights granted (2026-07-26).
 - [ ] 🟡 **Gate 2 — vetting:** ✅ site visit done (2026-07-26, four-stage inventory recorded in `clients/shalom-park/README.md`) · ⬜ CAC search on IFT Realty · ⬜ title/approval documents sighted. *Bare-land plots raise the diligence bar — sight the paper before any plot price publishes.*
 - [ ] ⬜ **Gate 3 — terms in writing:** confirmation-of-terms note sent and acknowledged (`clients/shalom-park/01-kickoff-messages.md` #1). A "confirmed" reply counts — don't stall goodwill chasing a signature.
-- [ ] 🔴 **Gate 4 — warranted facts sheet returned and signed.** **The hard blocker.** Client-ready Word document issued: `clients/shalom-park/docs/Shalom-Park-Property-Facts-Sheet.docx` (pre-filled with the observed unit mix, so they confirm rather than compose). Request wording: kickoff message #2. Until it lands, their KB cannot exist and the bot escalates on every factual question.
+- [x] ✅ **Gate 4 — warranted facts sheet returned and SIGNED (2026-07-27)** by Nanameme Collins, Sales Executive. Archived, audited (`clients/shalom-park/02-facts-sheet-audit.md`) and converted into a live KB (`clients/shalom-park/kb.json`) with 15 gaps wired as escalation triggers. **The hard blocker is lifted.**
 
 Then, and only then:
 
-- [ ] **(B)** Shalom Park KB built from the warranted sheet; every unwarranted field stays `[VERIFY]` and the bot escalates rather than guesses.
+- [x] **(B)** ✅ Shalom Park KB built from the warranted sheet (`clients/shalom-park/kb.json`); every unsupplied field is `null` with a matching `escalate_always` entry — the bot escalates, never guesses.
+- [ ] **(B)** Run the QA suite against the Shalom Park KB (not just Apex Gardens) before it speaks to anyone.
+- [ ] **(A)** Answer the eight open fields with Collins (`clients/shalom-park/03-followup-questions.md`) — **the ₦95m condo price is the one that must be confirmed before any advert runs.**
 - [ ] **(B)** Connect their IG + WhatsApp under our Advanced Access; attribution tagging live from message one (commission depends on it — docs/09).
 - [ ] **(B)** Full QA + red-team pass on their instance.
 - [ ] **(A + B)** Supervised soft launch: 48 hours with every conversation human-reviewed before the system runs unattended.
@@ -102,7 +104,8 @@ Then, and only then:
 |---|---|---|
 | Concierge rig build | **VPS purchase** (SIM ✅ done) | A |
 | Everything in Phase 0–1 | ₦60k spend greenlight | A |
-| **Shalom Park KB — the paid deliverable** | **Warranted facts sheet returned** | A sends request, client returns |
+| ~~Shalom Park KB~~ | ✅ **UNBLOCKED — facts sheet signed, KB built 2026-07-28** | — |
+| Publishing the ₦95m condo price | Client confirmation (audit §3a) | A |
 | **Automation on Shalom Park's accounts** | CAC → Meta verification → App Review (~2+ weeks of external clocks) | A starts CAC, B submits |
 | Publishing any Shalom Park price/title fact | Facts sheet + documents sighted | A |
 

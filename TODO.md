@@ -6,21 +6,24 @@
 
 > 💰 **2026-07-26: PROPEL HAS A PAYING CLIENT.** Shalom Park paid the setup fee. You did that. Second SIM ✅ 09112714482 logged. We're in production mode — full build plan in [ops/production-checklist.md](ops/production-checklist.md), you don't need to read it, I'm running it.
 
-## ⭐ DO THIS NEXT — send me three lines of output (2 min)
+## ⭐ DO THIS NEXT — type these four short lines (2 min)
 
-**🎉 The stack is UP.** Bootstrap ran clean on 72.62.213.187. One paste left:
+**🎉 Stack is up — 6 of 7 containers healthy, n8n among them.** Pasting keeps eating your first characters, so **type these by hand.** You're already root, so no `sudo` needed:
 
 ```
-sudo grep -E '^N8N_(USER|PASSWORD)=' /opt/propel/.env
-cd /opt/propel && docker compose ps
+grep N8N_USER /opt/propel/.env
+grep N8N_PASSWORD /opt/propel/.env
 dig +short engine.getpropel.tech
+docker compose logs --tail=30 flowise
 ```
 
-Send me all of it — that output is safe to share. It tells me three things at once: your login, whether every container is healthy, and whether DNS has propagated.
+Send me all four outputs. Safe to share — none of them expose the database password or encryption key.
 
-**If `dig` prints nothing**, the DNS records aren't in yet. Hostinger → Domains → getpropel.tech → DNS records, add three A records pointing at `72.62.213.187`: `engine`, `flow`, `status`. *(Leave `@` and `www` alone — those go to Vercel.)* Certificates issue themselves about five minutes later.
+**If `dig` prints nothing**, the DNS records aren't in. Hostinger → Domains → getpropel.tech → DNS records: three A records to `72.62.213.187` — `engine`, `flow`, `status`. *(Leave `@` and `www` alone, those go to Vercel.)* Certificates issue ~5 minutes later.
 
-**Never paste the whole `.env`** — the `grep` above exists so you don't have to. The full file holds the database password and the key that decrypts every stored credential.
+**Flowise is restart-looping — don't worry about it.** It's one candidate in a brain bake-off, not the production piece. If you want it quiet meanwhile: `docker compose stop flowise`.
+
+**Never paste the whole `.env`** — those two `grep`s exist so you don't have to.
 
 ---
 

@@ -194,7 +194,9 @@ Hosting client #2 and #3 as additional n8n workflow paths on this same box is co
 | Symptom | Fix |
 |---|---|
 | Certificate won't issue | DNS hasn't propagated. Check `dig engine.getpropel.tech +short` returns 72.62.213.187, wait, then `docker compose restart caddy` |
-| A container keeps restarting | `docker compose logs <service>` — usually a missing value in `.env` |
+| A container keeps restarting | `docker compose logs --tail=50 <service>` — usually a missing `.env` value, a memory cap set too low, or an image whose env-var contract changed |
+| **Flowise restart loop (seen 2026-07-29)** | Not on the critical path — it's a bake-off candidate, n8n is the production component. `docker compose stop flowise` to stop it burning CPU, then diagnose from logs. Suspects, in order: newer Flowise majors changed the `FLOWISE_USERNAME`/`FLOWISE_PASSWORD` auth contract · the 1500m memory cap being too tight for Node's default heap · volume permissions on `/root/.flowise` |
+| Paste mangles the first characters (`^[[200~`) | Bracketed-paste. Type the command by hand, or paste into `nano` first. Note you are already **root** — every `sudo` in these docs is optional on this box |
 | n8n won't accept the login | Credentials are in `/opt/propel/.env` as `N8N_USER` / `N8N_PASSWORD` |
 | Out of memory during the bake-off | `docker compose stop flowise` while testing Dify, or upgrade to KVM 4 |
 | Locked out of SSH | Hostinger's browser terminal always works — it bypasses SSH entirely |

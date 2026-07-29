@@ -2,6 +2,13 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-07-29 (evening) — PR #5 merged · bootstrap 404 diagnosed
+
+- **Bootstrap `curl` returned 404 on the server.** Cause: the runbook URL pointed at `main`, but all ten commits were sitting unmerged on the feature branch — `main` had never seen `vps-bootstrap.sh`. Repo access was fine (other files on `main` returned 200). *My defect: I published a runbook URL for a path that didn't exist yet.*
+- **Also found stale:** CLAUDE.md claimed "PR #2 is the running record — open." PR #2 merged on 2026-07-12; **no PR was open at all.** Opened **PR #5** with the ten commits and merged it. CLAUDE.md corrected to state that no PR stands open by default — the wrong assumption is what produced the broken URL.
+- **Runbook URLs flipped back to `main`** and verified. Standing rule recorded: a runbook URL pointing at a feature branch is a landmine, because the branch eventually disappears — merge first, then publish the `main` URL.
+- Cleaned a duplicated "THIS WEEK" heading in TODO.md.
+
 ## 2026-07-29 (later) — 🌐 INFRASTRUCTURE LIVE: getpropel.tech + KVM 2 bought · architecture adopted with three corrections
 
 - **Bought and live:** domain **getpropel.tech** (Hostinger) and **Hostinger KVM 2 — 72.62.213.187**, Manchester UK, Ubuntu 24.04, 2 vCPU / 8 GB / 100 GB / 8 TB. Repo swept: every `getpropel.ng` domain reference migrated to `.tech` (the Instagram **handle** @getpropel.ng is unchanged — different thing, deliberately preserved).

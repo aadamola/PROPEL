@@ -23,7 +23,7 @@
 **Step 2 — Hostinger → VPS → Browser terminal.** Paste:
 
 ```
-curl -fsSL -o bootstrap.sh https://raw.githubusercontent.com/aadamola/PROPEL/claude/propel-realestate-marketing-plan-wxjj3x/ops/setup/vps-bootstrap.sh
+curl -fsSL -o bootstrap.sh https://raw.githubusercontent.com/aadamola/PROPEL/main/ops/setup/vps-bootstrap.sh
 sudo bash bootstrap.sh
 ```
 

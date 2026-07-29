@@ -1,14 +1,14 @@
 # Propel — Accounts & Assets Setup (45-minute human sprint)
 
-*Everything below is ready to paste. Do these in order; tick as you go. Use ONE email for all business accounts (e.g., hello@getpropel.ng once domain email exists; Gmail until then) and store every password in a password manager from minute one.*
+*Everything below is ready to paste. Do these in order; tick as you go. Use ONE email for all business accounts (e.g., hello@getpropel.tech once domain email exists; Gmail until then) and store every password in a password manager from minute one.*
 
 ## 0. Handle strategy
 
-Primary: **@getpropel** (fallbacks in order: @getpropel.ng, @propel.ng, @propelhq.ng, @usepropel.africa). Check all platforms BEFORE creating any account — the handle must match everywhere. Namechk.com checks all at once.
+✅ **TAKEN: @getpropel.ng** on Instagram (2026-07-26). Use the same handle on TikTok and LinkedIn for consistency; domain is **getpropel.tech**.
 
 ## 1. Domain & email (do first — 15 min)
 
-- [ ] Buy domain: **getpropel.ng** (fallback: propel.ng if available, getpropel.africa) — ~₦15k–₦25k/yr at a .ng registrar (e.g., Whogohost, GO54)
+- [ ] ✅ **DONE** — domain **getpropel.tech** bought on Hostinger (2026-07-29). Subdomain map in [vps-setup.md](vps-setup.md) §0b
 - [ ] Set up Google Workspace or Zoho Mail (Zoho free tier is fine at ₦0): **hello@** and **adedamola@**
 - [ ] Once live, switch all account registrations below to the business email
 

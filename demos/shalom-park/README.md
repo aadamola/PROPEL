@@ -18,6 +18,7 @@
 | Studio | Shoot plan: walkthrough script + drone shot list | 04-studio-demo.md |
 | Concierge | Interactive WhatsApp AI-agent simulation (diaspora buyer) | concierge-demo.html |
 | Visual | Concept IG post (watermarked CONCEPT) | assets/ig-concept.png |
+| **Outreach** | **Send-ready brief on the DM + comment system** (email/LinkedIn + WhatsApp versions) | **05-concierge-brief.md** |
 
 ## How this makes them a PAYING client (the ladder)
 

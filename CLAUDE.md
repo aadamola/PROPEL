@@ -36,6 +36,7 @@ AI-forward digital marketing agency for Nigerian real estate — realtors, estat
 | ops/templates/ | Proposal, audit, onboarding, scorecard (term sheet = DORMANT, see docs/08) |
 | ops/setup/ + ops/content/ | Account setup, brand assets tracker, content engine + launch calendar |
 | ops/crm/pipeline.csv | Pipeline — keep it current after every prospect touch |
+| ops/production-checklist.md | **Live production build track** — phases, gates, owners, blockers |
 
 ## Operating rules (non-negotiable)
 
@@ -66,8 +67,12 @@ Adedamola has ADHD. TODO.md at repo root is his single external brain for Propel
 
 ## Current state (update every session that changes it)
 
-- **Phase:** Sprint 1 (docs/07 §3) — go-public + sell. No revenue yet; accounts not yet live.
+- **Phase:** **PRODUCTION MODE with a paying client (2026-07-26).** Propel is public — WhatsApp **+234 901 912 0968** (human line), **+234 911 271 4482** (AI line), Instagram **@getpropel.ng**, site wired with QR. **Shalom Park Estate (IFT Realty) paid the setup fee — first revenue.** Build track: **ops/production-checklist.md**; client record: **clients/shalom-park/**.
+- **Standing ruling:** the Concierge gets built on OUR assets first (Propel's own line + Apex Gardens sandbox). Payment clears the commercial gate only — a client's live accounts are touched, and their facts published, only past **vetting (rule 5) and a signed warranted facts sheet (rule 2)**. Money never clears those two.
+- **Every new client starts with ops/templates/warranted-facts-sheet.md.** It is the sole permitted source for that client's KB, ads and copy. Blank fields ship as escalation triggers, never assumptions.
 - **Built and ready:** brand assets (site/assets/ — in-house PNGs; Canva picks now optional), website draft v1 (site/), Propel Concierge product (docs/10) + binding QA standard (docs/11), Shalom Park demo pack (demos/shalom-park/, pitch-only), Document Vault + Voice-Note Concierge add-ons, Broker Hub in validation.
-- **Waiting on Adedamola (⭐ = launch sprint in TODO.md):** 90-min go-public sitting (SIM → WhatsApp Business → IG/TikTok/LinkedIn → post manifesto → send me the number) · first 10 prospect names · CAC Business Name filing · Shalom Park contact person (outreach draft ready, docs/09 — **overdue since 2026-07-08**) · domain purchase.
-- **Next AI-partner deliverables once unblocked:** wire WhatsApp number + QR into site, 10 audit teardowns, founding-client outreach drafts, Apex Gardens demo sandbox build.
+- **Infrastructure LIVE (2026-07-29):** domain **getpropel.tech** (Hostinger) · **Hostinger KVM 2 VPS 72.62.213.187** (Manchester UK, Ubuntu 24.04, 2 vCPU / 8 GB / 100 GB; monthly term expiring 2026-08-29 — review before renewal). Subdomain map: root + `docs.` → Vercel · `engine.` (Meta webhooks) + `flow.` + `status.` → VPS · `app.` reserved. Stack scripted in **ops/setup/vps-bootstrap.sh** (Caddy auto-TLS, n8n, Postgres, Redis, Qdrant, Flowise, Uptime Kuma; `core`/`dmz` network split with CPU caps). **I have no route to the server — ADEDAMOLA pastes and imports; I author.**
+- **Waiting on Adedamola (⭐ in TODO.md = 3 DNS records + paste the bootstrap, 15 min):** then — 🔴 CAC filing (blocks Meta verification → App Review → automation on their accounts) · ~₦25k LLM credits · Meta Business Suite link · title-document sighting · Collins follow-up (**₦95m condo price unconfirmed**) · 10 prospect names.
+- **Next AI-partner deliverables once unblocked:** deploy the rig on the VPS (n8n + brain bake-off, official APIs), Propel's own live Concierge on 09112714482, Apex Gardens demo instance, Shalom Park KB the day the facts sheet returns, 10 audit teardowns.
+- **Open commercial questions on the Shalom Park deal:** amount received, care-fee rate/start, commission rate, anything in writing — logged in clients/shalom-park/README.md.
 - **PR #2** (aadamola/PROPEL) is the running record — open, carries all work since PR #1 merged; one merge takes everything. Canva connector needs re-auth (optional).

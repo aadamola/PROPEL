@@ -248,6 +248,13 @@ services:
     image: flowiseai/flowise:latest
     <<: *restart
     networks: [core]
+    # Newer Flowise images run as a non-root user, but the documented
+    # data paths live under /root — so the container cannot create
+    # /root/.flowise/logs and crash-loops on EACCES. Running as root
+    # restores the image's documented behaviour. Acceptable here: this
+    # is an internal bake-off tool on the core network, not exposed
+    # beyond Caddy, and it holds no client data.
+    user: root
     cpus: 1.0
     mem_limit: 1500m
     environment:
@@ -343,13 +350,17 @@ cat <<DONE
 
  The root domain and docs. go to Vercel, NOT here.
 
- Your logins are in /opt/propel/.env  —  view with:
+ To get your n8n login — this prints ONLY those two lines,
+ so nothing sensitive can be copied by accident:
+
+   sudo grep -E '^N8N_(USER|PASSWORD)=' /opt/propel/.env
+
+ That output is safe to share. The full file is NOT:
+ it also holds the database password, the encryption key
+ that decrypts every stored credential, and the API keys.
+ View it only if you need to (mind the spaces in the path):
 
    sudo cat /opt/propel/.env
-
- SEND ME THE n8n USERNAME AND PASSWORD ONLY.
- Never paste the whole file into chat: it also holds the
- database password, encryption key and API keys.
 
  Useful commands:
    cd /opt/propel && docker compose ps        # what is running

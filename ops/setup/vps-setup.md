@@ -137,13 +137,21 @@ This is the docs/13 Agent DMZ doctrine in actual configuration rather than prose
 
 ## 4. Security handoff — important
 
-When it finishes it prints where your credentials live:
+Get the n8n login with a command that prints **only** those two lines — safe to paste anywhere:
 
 ```bash
-sudo cat /opt/propel/.env
+sudo grep -E '^N8N_(USER|PASSWORD)=' /opt/propel/.env
 ```
 
-**Send me the n8n username and password only.** Never paste that whole file into any chat — it also contains the database password, the n8n encryption key (which decrypts every stored credential), and the API keys. If you ever do paste it somewhere, tell me and we rotate everything.
+The full file (`sudo cat /opt/propel/.env`) is **not** safe to share: it holds the database password, the n8n encryption key that decrypts every stored credential, and the API keys. If it ever gets pasted somewhere it shouldn't, say so and we rotate everything rather than hope.
+
+**Post-install check — one paste, three answers:**
+
+```bash
+sudo grep -E '^N8N_(USER|PASSWORD)=' /opt/propel/.env   # the login
+cd /opt/propel && docker compose ps                     # all containers running?
+dig +short engine.getpropel.tech                        # DNS propagated?
+```
 
 ## 5. What I do next, and what stays yours
 
@@ -186,7 +194,9 @@ Hosting client #2 and #3 as additional n8n workflow paths on this same box is co
 | Symptom | Fix |
 |---|---|
 | Certificate won't issue | DNS hasn't propagated. Check `dig engine.getpropel.tech +short` returns 72.62.213.187, wait, then `docker compose restart caddy` |
-| A container keeps restarting | `docker compose logs <service>` — usually a missing value in `.env` |
+| A container keeps restarting | `docker compose logs --tail=50 <service>` — usually a missing `.env` value, a memory cap set too low, or an image whose env-var contract changed |
+| **Flowise restart loop — SOLVED 2026-07-29** | `EACCES: permission denied, mkdir '/root/.flowise/logs'`. The current image runs as a **non-root** user while its documented data paths sit under `/root`, so it cannot create its own log directory. Fix: `user: root` on the flowise service (now in the bootstrap). Re-run the bootstrap to apply. |
+| Paste mangles the first characters (`^[[200~`) | Bracketed-paste. Type the command by hand, or paste into `nano` first. Note you are already **root** — every `sudo` in these docs is optional on this box |
 | n8n won't accept the login | Credentials are in `/opt/propel/.env` as `N8N_USER` / `N8N_PASSWORD` |
 | Out of memory during the bake-off | `docker compose stop flowise` while testing Dify, or upgrade to KVM 4 |
 | Locked out of SSH | Hostinger's browser terminal always works — it bypasses SSH entirely |

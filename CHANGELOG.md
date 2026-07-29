@@ -2,6 +2,20 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-07-29 (night, later) — DNS live · Flowise crash solved · re-run pending
+
+- **DNS propagated:** `engine.getpropel.tech` → 72.62.213.187. The webhook host Meta will call now resolves; certificates issue on the next Caddy pass.
+- **Flowise crash diagnosed and fixed:** `EACCES: permission denied, mkdir '/root/.flowise/logs'` — the current image runs as a **non-root** user while its documented data paths live under `/root`, so it can't create its own log directory. Added `user: root` to that service only, with the reasoning recorded inline: it's an internal bake-off tool on the core network, unexposed beyond Caddy, holding no client data. Everything else stays as shipped.
+- **n8n credentials received** — held in session, **deliberately never written to the repo**. Standing rule: no credential, key or token ever enters version control, not even in a runbook example.
+- **Rotation note:** the n8n password travelled through chat to reach me. Fine for a box with nothing in it yet — but rotate it before the Concierge holds real buyer conversations, and rotate the n8n encryption key with it.
+
+## 2026-07-29 (night) — 🎉 THE STACK IS UP
+
+- **Bootstrap ran clean on 72.62.213.187.** Caddy, n8n, Postgres, Redis, Qdrant, Flowise and Uptime Kuma are running behind automatic HTTPS, hardened, with nightly backups. Propel has production infrastructure.
+- **Credential-handling improved after a near-miss:** the completion banner told ADEDAMOLA to `cat` the whole `.env` and then send only two lines — asking a human to hand-filter a file containing the database password and the encryption key that decrypts every stored credential. Replaced with `grep -E '^N8N_(USER|PASSWORD)='`, which prints **only** the shareable lines. *Design principle: don't ask people to be careful with a secret when you can hand them a command that can't leak it.*
+- Post-install check now one paste, three answers: login + `docker compose ps` + `dig engine.getpropel.tech`.
+- Remaining before the Concierge build: the n8n login, container health, and DNS propagation.
+
 ## 2026-07-29 (evening) — PR #5 merged · bootstrap 404 diagnosed
 
 - **Bootstrap `curl` returned 404 on the server.** Cause: the runbook URL pointed at `main`, but all ten commits were sitting unmerged on the feature branch — `main` had never seen `vps-bootstrap.sh`. Repo access was fine (other files on `main` returned 200). *My defect: I published a runbook URL for a path that didn't exist yet.*

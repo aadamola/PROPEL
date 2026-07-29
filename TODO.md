@@ -6,30 +6,27 @@
 
 > 💰 **2026-07-26: PROPEL HAS A PAYING CLIENT.** Shalom Park paid the setup fee. You did that. Second SIM ✅ 09112714482 logged. We're in production mode — full build plan in [ops/production-checklist.md](ops/production-checklist.md), you don't need to read it, I'm running it.
 
-## ⭐ DO THIS NEXT — DNS records, then one paste (~15 min)
+## ⭐ DO THIS NEXT — re-run the bootstrap, it fixes Flowise (3 min)
 
-**VPS is live. Domain is bought. This turns them into a running system.**
+**DNS is live ✅ and I have your n8n login.** One crash left: Flowise couldn't create its own log folder. Fixed in the script — re-running applies it and keeps every password you already have.
 
-**Step 1 — Hostinger → Domains → getpropel.tech → DNS records.** Add three A records, all pointing to `72.62.213.187`:
-
-| Type | Name | Points to |
-|---|---|---|
-| A | `engine` | 72.62.213.187 |
-| A | `flow` | 72.62.213.187 |
-| A | `status` | 72.62.213.187 |
-
-*Leave `@` and `www` alone — those go to Vercel when the site deploys.*
-
-**Step 2 — Hostinger → VPS → Browser terminal.** Paste:
+Type this (you're root, no `sudo` needed):
 
 ```
+cd ~
 curl -fsSL -o bootstrap.sh https://raw.githubusercontent.com/aadamola/PROPEL/main/ops/setup/vps-bootstrap.sh
-sudo bash bootstrap.sh
+bash bootstrap.sh
 ```
 
-Answer `getpropel.tech` and your email. Then leave it for ~10 minutes.
+Same two answers: `getpropel.tech` and your email. Much faster this time — packages and images are cached.
 
-**Step 3 —** run `sudo cat /opt/propel/.env` and send me **the N8N_USER and N8N_PASSWORD lines only.** Never the whole file — it holds the database password and the key that decrypts every stored credential.
+Then confirm all seven are up:
+
+```
+cd /opt/propel && docker compose ps
+```
+
+**Then open `https://engine.getpropel.tech` in your browser** and log in with the n8n details. If the padlock shows, certificates issued and we are fully live.
 
 ---
 

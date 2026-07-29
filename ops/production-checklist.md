@@ -58,7 +58,10 @@ Verified July 2026 — every one of these is a thing cheap competitors over-prom
 ## Phase 1 — Propel's own Concierge (our number, our proof)
 
 - [x] **(B)** ✅ Stack authored and syntax-verified: `ops/setup/vps-bootstrap.sh` — Caddy (auto-TLS) + n8n + Postgres + Redis + Qdrant + Flowise + Uptime Kuma, hardened (ufw, fail2ban, unattended-upgrades, conditional SSH lockdown), nightly backups with 14-day retention. **Runs on ADEDAMOLA's paste — I have no route to the server from here.**
-- [ ] 🔴 **(A · 10 min)** Create the 3 DNS records, paste the bootstrap command, send me the n8n login (that line only — never the whole `.env`). **This is the only thing between us and a running Concierge.**
+- [x] **(A)** ✅ **STACK IS UP** (2026-07-29) — bootstrap ran clean on 72.62.213.187.
+- [ ] 🔴 **(A · 2 min)** Send the n8n login + `dig +short engine.getpropel.tech`. **The only thing between us and a running Concierge.**
+- [ ] **(B)** Diagnose the Flowise restart loop from logs (2026-07-29). *Not critical path — bake-off candidate; n8n is healthy.*
+- [ ] **(B)** **Pin every image tag.** The stack ships on `:latest`, which means an unattended pull can change production under us. Pin to the digests actually running once the box is stable.
 - [ ] **(B)** Build **Propel's own KB**: services, pricing bands, the audit offer, who we are, what we don't do.
 - [ ] **(B)** Wire the flow: IG comment → one private reply → WhatsApp → qualify → book audit → log to CRM → hand to ADEDAMOLA.
 - [ ] **(B)** Guardrails live: retrieval-first, no invented facts, escalation template, kill switch, AI disclosure in first message, NDPA privacy line.

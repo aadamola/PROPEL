@@ -23,7 +23,7 @@
 **Step 2 — Hostinger → VPS → Browser terminal.** Paste:
 
 ```
-curl -fsSL -o bootstrap.sh https://raw.githubusercontent.com/aadamola/PROPEL/main/ops/setup/vps-bootstrap.sh
+curl -fsSL -o bootstrap.sh https://raw.githubusercontent.com/aadamola/PROPEL/claude/propel-realestate-marketing-plan-wxjj3x/ops/setup/vps-bootstrap.sh
 sudo bash bootstrap.sh
 ```
 
@@ -36,11 +36,6 @@ Answer `getpropel.tech` and your email. Then leave it for ~10 minutes.
 ## THIS WEEK — one per sitting, in this order
 
 - [ ] **(5 min)** 🔴 **Send Collins the follow-up** — [clients/shalom-park/03-followup-questions.md](clients/shalom-park/03-followup-questions.md). Eight open fields, one message. **Lead with the ₦95m condo price** — if that's a typo and we advertise it, we've published a false price under our own quality charter.
-
----
-
-## THIS WEEK — one per sitting, in this order
-
 - [ ] **(15 min)** 🔴 **Start CAC filing** — "Propel Digital" (fallbacks: Propel Media, Propel Digital Marketing), cac.gov.ng or an accredited agent. *This is no longer admin. Meta won't let us run automation on a **client's** account until our business is verified with registered documents — so this now blocks something Shalom Park has paid for. ~2 weeks of clock. Start it, then forget it.*
 - [ ] **(10 min)** LLM credits ~₦25k — I'll send you the two exact top-up links once the box is up.
 - [ ] **(10 min)** Meta Business Suite: link @getpropel.ng + WhatsApp, convert IG to a Business account ([ops/setup/account-setup.md](ops/setup/account-setup.md) §7).

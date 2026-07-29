@@ -93,13 +93,15 @@ Certificates issue automatically about five minutes after the records propagate.
 Open Hostinger's **Browser terminal** (VPS → Overview), or SSH in, then:
 
 ```bash
-curl -fsSL -o bootstrap.sh https://raw.githubusercontent.com/aadamola/PROPEL/main/ops/setup/vps-bootstrap.sh
+curl -fsSL -o bootstrap.sh https://raw.githubusercontent.com/aadamola/PROPEL/claude/propel-realestate-marketing-plan-wxjj3x/ops/setup/vps-bootstrap.sh
 sudo bash bootstrap.sh
 ```
 
 Answer `getpropel.tech` when it asks for the domain.
 
-*(If the repo is private, open `ops/setup/vps-bootstrap.sh`, copy the contents, and paste them into `nano bootstrap.sh` instead.)*
+> **Note on that URL:** it points at the working branch, not `main`, because this work is still in the open PR. **Once the PR merges, swap `claude/propel-realestate-marketing-plan-wxjj3x` for `main`** — a URL pointing at a branch that later gets deleted is a broken runbook.
+>
+> *(Fallback if curl ever fails: open `ops/setup/vps-bootstrap.sh` on GitHub, copy it, and paste into `nano bootstrap.sh` on the server.)*
 
 It asks two questions — your domain and an email for certificate notices — then runs unattended for 5–10 minutes.
 

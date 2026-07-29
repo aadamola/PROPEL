@@ -50,6 +50,30 @@ Priced against the July-2026 market (all $/1M tokens in→out; ₦ at ~₦1,500/
 | **T2/T3 — internal bulk + agent brains** | **DeepSeek V4 Flash** — $0.14 / $0.28; nothing Western is within an order of magnitude | ~$5 first credit | Kimi K2.6 $0.95/$4 (upgrade path if agent sessions need 2M context/stability) · GLM-5.2 $1.40/$4.40 |
 | **Not buying now** | OpenAI, Gemini, Kimi, GLM | ₦0 | No workload where any of them beats the winner at its tier; revisit at the quarterly re-scan |
 
+### Routing ruling (2026-07-29) — adopting the hybrid, correcting the models
+
+ADEDAMOLA proposed a dual-model architecture: a fast cheap model for ~90% of chats, a deep-reasoning model for the ~10% needing financial calculation or legal interpretation. **The architecture is adopted — the model choices and the reasoning workload are not.** Three corrections, in order of severity:
+
+**1. Arithmetic never goes to a language model.** The proposal routed custom installment breakdowns to a reasoning model. A bot that miscalculates a payment plan on a ₦95m unit is a catastrophe we would own. **All arithmetic runs in a deterministic n8n Function node** over warranted numbers — same inputs, same output, every time, auditable. Reasoning models are for language, not for money. *(Moot for Shalom Park today: facts-sheet Section E instalment markup is blank, so the assistant escalates on it regardless.)*
+
+**2. Legal interpretation is never the bot's job.** The proposal named "legal penalty interpretations" as a reasoning task. The clause in question is Shalom Park's 25% cancellation forfeiture. The assistant **quotes it verbatim and hands to a human** — it does not interpret, soften, or reason about legal consequence. No model tier changes this.
+
+**3. Buyer conversations never touch a Chinese API.** The proposal put DeepSeek R1 on complex *buyer* queries. That breaches the trust-perimeter line above: buyer PII to a third-country API without an NDPA assessment. DeepSeek stays engine-room, on public/fictional/our-own data. This is not a price judgement — DeepSeek is excellent and cheap — it is a jurisdiction one.
+
+**Also stale:** Gemini 1.5/2.0 Flash and DeepSeek R1 are 2024–2025 models, and the quoted $0.075/1M is Gemini 1.5 Flash's old rate. Current (July 2026): Gemini 3 Flash $0.50/$3 · DeepSeek V4 Flash $0.14/$0.28 · Haiku 4.5 $1/$5.
+
+**Resulting routing:**
+
+| Workload | Handler |
+|---|---|
+| ~90% of buyer chat | **Claude Haiku 4.5** (ruled above), **Gemini 3 Flash** the named alternate — decided by the sandbox bake-off, not by assertion |
+| Prices, totals, instalment maths | **Deterministic code.** No LLM. |
+| Legal, refund, penalty questions | **Verbatim quote + human escalation.** No LLM reasoning. |
+| Anything absent from the KB | Escalate. Unchanged. |
+| Internal drafts, research, agent brains | DeepSeek V4 Flash — engine room only |
+
+*On latency:* the proposed <500ms target is fine but is not the binding constraint. Our competitive gap against a human sales team is measured in hours, not milliseconds; a 1–2 second reply reads as instant on WhatsApp. Do not trade accuracy or guardrails for milliseconds.
+
 **Initial spend: ≈ $15–20 ≈ ₦22k–₦30k total** — inside the docs/07 tooling gate, no founder flag needed. **Production estimate per Concierge client: $10–25/mo (₦15k–₦40k) with caching**, consistent with the ₦30–60k/mo COGS and 75%+ margin already quoted on the Developer tier. Buy trigger: the launch sprint (API billing needs the business identity/cards ADEDAMOLA controls).
 
 **Open models as Concierge brains?** Allowed to *compete*: any open model may enter the bake-off harness. Production requires 100% on injection+grounding suites AND an acceptable data path (self-hosted or vetted regional hosting — not a third-country consumer API). The exam doesn't care about the flag on the model; the data path does.

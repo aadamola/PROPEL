@@ -10,7 +10,7 @@
 |---|---|---|
 | Budget = ₦300,000 | **₦300k is the operating envelope inside our ₦500k plan** (₦500k − ₦100k CAC − ₦100k untouchable reserve). Reconciled table in §5. | One capital number, one source of truth (docs/07). |
 | ₦120k on Meta ads now | **Deferred until first pilot is signed.** | Spend gate (docs/07 §1): no paid acquisition before proof. Our CAC engine is founder network + the Shalom Park-style demo pack — ads amplify proof, they don't replace it. |
-| Rebrand "PROPEL AI", propelai.com.ng | **Rejected — no brand fork.** Brand stays Propel (@getpropel, getpropel.ng); the automation suite is the **Propel Systems** product line. | Two brands at week zero = split equity in both. The AI story is a product line, not a new company. |
+| Rebrand "PROPEL AI", propelai.com.ng | **Rejected — no brand fork.** Brand stays Propel (@getpropel.ng, getpropel.tech); the automation suite is the **Propel Systems** product line. | Two brands at week zero = split equity in both. The AI story is a product line, not a new company. |
 | DeepSeek R1 as the LLM (cost-led) | **Rejected for client-facing production.** Retrieval-first architecture + a top-tier small model (e.g., Claude Haiku-class API). | Our kill risk is a hallucinated price or title status. At our volumes the cost delta is thousands of naira/month; one wrong ₦-figure to one buyer costs a client. Also: enterprise clients ask what's under the hood — model provenance is part of the trust sell. Cost control comes from the architecture (KB retrieval answers, LLM only phrases), not from the cheapest model. |
 | "24/7 AI Sales Concierge" as new offering | **Already exists** — docs/10 Propel Concierge. Study's QA regime merged into it (§3). | No duplicate products. |
 | Market stats (₦360–430m averages, ₦270m LASRERA recovery, 150-day time-on-market, mortgage <1% GDP) | **Adopted as working hypotheses, all marked [VERIFY].** None enters client-facing content until sourced. | Truth rule #2. Directionally credible (LASRERA enforcement is real and useful to our trust thesis), but we don't publish unsourced numbers. |
@@ -67,7 +67,7 @@ Days 1–3: VPS + self-hosted n8n + domain/email live · Days 4–7: Apex Garden
 
 | Line | ₦ |
 |---|---|
-| Domain (getpropel.ng — NOT propelai) + Zoho mail | 25,000 |
+| Domain (getpropel.tech — NOT propelai) + Zoho mail | 25,000 |
 | VPS (self-hosted n8n) — 3 months | 30,000 |
 | LLM API credit (production-grade model, retrieval-first) | 25,000 |
 | WhatsApp BSP/Cloud API + tooling test credit | 25,000 |

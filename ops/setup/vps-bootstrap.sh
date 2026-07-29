@@ -23,7 +23,7 @@ die() { printf '\n\033[1;31m✖ %s\033[0m\n' "$*" >&2; exit 1; }
 [ "$(id -u)" -eq 0 ] || die "Run with sudo: sudo bash vps-bootstrap.sh"
 
 if [ -z "$DOMAIN" ]; then
-  read -rp "Root domain (e.g. getpropel.ng): " DOMAIN
+  read -rp "Root domain (e.g. getpropel.tech): " DOMAIN
 fi
 if [ -z "$EMAIL" ]; then
   read -rp "Email for TLS certificate notices: " EMAIL
@@ -105,7 +105,10 @@ FLOWISE_PASSWORD=$(gen)
 QDRANT_API_KEY=$(gen)
 
 # LLM keys — fill these in, then: docker compose up -d
+# T1 client-facing (bake-off: Haiku 4.5 vs Gemini 3 Flash)
 ANTHROPIC_API_KEY=
+GEMINI_API_KEY=
+# T2/T3 engine room ONLY — never buyer conversations (docs/13 §3)
 DEEPSEEK_API_KEY=
 
 # Meta / WhatsApp — fill in after App Review
@@ -129,7 +132,8 @@ cat > caddy/Caddyfile <<EOF
     email $EMAIL
 }
 
-n8n.$DOMAIN {
+# The webhook host. Meta Cloud API calls land here.
+engine.$DOMAIN {
     reverse_proxy n8n:5678
 }
 
@@ -147,6 +151,13 @@ log "Writing docker-compose.yml"
 cat > docker-compose.yml <<'YAML'
 name: propel
 
+# ── Two isolated networks ────────────────────────────────────
+#  core : the client-facing path (webhooks, brain, data).
+#  dmz  : autonomous agents and heavy background jobs.
+# Nothing on dmz can reach core. A runaway research agent or a
+# video render can never touch a buyer conversation or the KB.
+# ─────────────────────────────────────────────────────────────
+
 x-restart: &restart
   restart: unless-stopped
 
@@ -154,6 +165,7 @@ services:
   caddy:
     image: caddy:2-alpine
     <<: *restart
+    networks: [core]
     ports: ["80:80", "443:443"]
     volumes:
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile:ro
@@ -164,6 +176,7 @@ services:
   postgres:
     image: postgres:16-alpine
     <<: *restart
+    networks: [core]
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -179,6 +192,7 @@ services:
   redis:
     image: redis:7-alpine
     <<: *restart
+    networks: [core]
     command: ["redis-server", "--appendonly", "yes"]
     volumes:
       - redis_data:/data
@@ -186,6 +200,7 @@ services:
   qdrant:
     image: qdrant/qdrant:latest
     <<: *restart
+    networks: [core]
     environment:
       QDRANT__SERVICE__API_KEY: ${QDRANT_API_KEY}
     volumes:
@@ -194,11 +209,21 @@ services:
   n8n:
     image: n8nio/n8n:latest
     <<: *restart
+    networks: [core]
+    # Reserved headroom so no background job can starve the webhook path.
+    cpus: 1.5
+    mem_limit: 2g
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:5678/healthz || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
     environment:
-      N8N_HOST: n8n.${DOMAIN}
+      N8N_HOST: engine.${DOMAIN}
       N8N_PROTOCOL: https
-      WEBHOOK_URL: https://n8n.${DOMAIN}/
-      N8N_EDITOR_BASE_URL: https://n8n.${DOMAIN}/
+      WEBHOOK_URL: https://engine.${DOMAIN}/
+      N8N_EDITOR_BASE_URL: https://engine.${DOMAIN}/
       N8N_PROXY_HOPS: 1
       GENERIC_TIMEZONE: Africa/Lagos
       TZ: Africa/Lagos
@@ -212,6 +237,7 @@ services:
       DB_POSTGRESDB_USER: ${POSTGRES_USER}
       DB_POSTGRESDB_PASSWORD: ${POSTGRES_PASSWORD}
       ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
+      GEMINI_API_KEY: ${GEMINI_API_KEY}
       DEEPSEEK_API_KEY: ${DEEPSEEK_API_KEY}
     volumes:
       - n8n_data:/home/node/.n8n
@@ -221,6 +247,9 @@ services:
   flowise:
     image: flowiseai/flowise:latest
     <<: *restart
+    networks: [core]
+    cpus: 1.0
+    mem_limit: 1500m
     environment:
       FLOWISE_USERNAME: ${FLOWISE_USER}
       FLOWISE_PASSWORD: ${FLOWISE_PASSWORD}
@@ -234,8 +263,31 @@ services:
   uptime-kuma:
     image: louislam/uptime-kuma:1
     <<: *restart
+    networks: [core]
+    mem_limit: 512m
     volumes:
       - kuma_data:/app/data
+
+  # ── DMZ TEMPLATE ───────────────────────────────────────────
+  # Copy this shape for any agent or heavy background worker.
+  # Rules, non-negotiable (docs/13 Agent DMZ):
+  #   networks: [dmz]   — never [core], never both
+  #   cpus / mem_limit  — always capped, or a render pegs both
+  #                       vCPUs and buyers wait on replies
+  #   no client data, no send capability, outputs human-QA'd
+  #
+  # example-agent:
+  #   image: some/agent:latest
+  #   <<: *restart
+  #   networks: [dmz]
+  #   cpus: 0.5
+  #   mem_limit: 1g
+
+networks:
+  core:
+    driver: bridge
+  dmz:
+    driver: bridge
 
 volumes:
   caddy_data: {}
@@ -285,9 +337,11 @@ cat <<DONE
  Point these DNS A records at this server's IP, then wait ~5 min
  for certificates to issue automatically:
 
-   n8n.$DOMAIN
+   engine.$DOMAIN     <- Meta webhooks land here
    flow.$DOMAIN
    status.$DOMAIN
+
+ The root domain and docs. go to Vercel, NOT here.
 
  Your logins are in /opt/propel/.env  —  view with:
 

@@ -6,15 +6,30 @@
 
 > 💰 **2026-07-26: PROPEL HAS A PAYING CLIENT.** Shalom Park paid the setup fee. You did that. Second SIM ✅ 09112714482 logged. We're in production mode — full build plan in [ops/production-checklist.md](ops/production-checklist.md), you don't need to read it, I'm running it.
 
-## ⭐ DO THIS NEXT — buy the VPS + domain (one sitting, ~20 min)
+## ⭐ DO THIS NEXT — DNS records, then one paste (~15 min)
 
-Full detail: [ops/setup/vps-setup.md](ops/setup/vps-setup.md). The short version:
+**VPS is live. Domain is bought. This turns them into a running system.**
 
-1. **Hostinger → VPS → KVM 2** (2 vCPU, 8 GB RAM, 100 GB). Location **London**. OS **Ubuntu 24.04 LTS**, plain — no app template.
-2. **Term: 12 months, ~₦150k.** Above our ₦50k gate, so it's your call — reasoning in the doc. *Set a phone reminder for month 11: renewal jumps 2–3×.*
-3. **Buy getpropel.ng in the same sitting.** Not optional — Meta refuses to send webhooks to anything without a real domain and certificate. No domain, no Concierge.
-4. **Send me the VPS IP** → I give you the DNS records to create.
-5. Then paste one command (in the doc) and the whole stack builds itself in ~10 minutes.
+**Step 1 — Hostinger → Domains → getpropel.tech → DNS records.** Add three A records, all pointing to `72.62.213.187`:
+
+| Type | Name | Points to |
+|---|---|---|
+| A | `engine` | 72.62.213.187 |
+| A | `flow` | 72.62.213.187 |
+| A | `status` | 72.62.213.187 |
+
+*Leave `@` and `www` alone — those go to Vercel when the site deploys.*
+
+**Step 2 — Hostinger → VPS → Browser terminal.** Paste:
+
+```
+curl -fsSL -o bootstrap.sh https://raw.githubusercontent.com/aadamola/PROPEL/main/ops/setup/vps-bootstrap.sh
+sudo bash bootstrap.sh
+```
+
+Answer `getpropel.tech` and your email. Then leave it for ~10 minutes.
+
+**Step 3 —** run `sudo cat /opt/propel/.env` and send me **the N8N_USER and N8N_PASSWORD lines only.** Never the whole file — it holds the database password and the key that decrypts every stored credential.
 
 ---
 
@@ -46,6 +61,7 @@ Testing the bot · the Shalom Park pilot build · voice notes · first audit cal
 
 ## ✅ DONE (look how far this has come)
 
+- [x] 🖥️ **VPS live (KVM 2, 8 GB) + domain getpropel.tech bought** (2026-07-29)
 - [x] 📋 **Shalom Park facts sheet returned SIGNED — their AI's knowledge base is built** (2026-07-27)
 - [x] **Site visit done** — four-stage inventory counted (2026-07-26)
 - [x] 💰 **FIRST PAYING CLIENT — Shalom Park Estate (IFT Realty) paid the setup fee** (2026-07-26)

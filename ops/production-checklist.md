@@ -48,8 +48,8 @@ Verified July 2026 — every one of these is a thing cheap competitors over-prom
 
 - [x] **(A · ₦500)** ~~Second SIM for the API rig~~ ✅ **DONE — 09112714482.** Keeps 09019120968 human.
 - [ ] **(A · 15 min)** 🔴 **Start CAC Business Name filing** — "Propel Digital" (fallbacks: Propel Media, Propel Digital Marketing). *No longer admin: Meta Business Verification requires registered business documents, and that gates App Review, which gates automation on **a client's** account. **This now blocks a paid deliverable.***
-- [ ] **(A · 10 min · ₦15–25k)** Buy getpropel.ng. **Hard prerequisite — Meta will not send webhooks to an IP or a self-signed certificate.**
-- [ ] **(A · 10 min · ~₦150k/yr)** **Hostinger KVM 2** — 2 vCPU / 8 GB / 100 GB, London, Ubuntu 24.04 plain. Full spec + reasoning + one-paste build script: `ops/setup/vps-setup.md` + `ops/setup/vps-bootstrap.sh`. *8 GB is sized for the three-way brain bake-off; 4 GB cannot run it.*
+- [x] **(A)** ✅ Domain **getpropel.tech** bought (Hostinger, 2026-07-29).
+- [x] **(A)** ✅ **Hostinger KVM 2 LIVE** — 72.62.213.187, Manchester UK, Ubuntu 24.04, 8 GB. *Monthly term, expires 2026-08-29 — review before renewal (vps-setup.md §0).*
 - [ ] **(A · 10 min · ~₦25k)** LLM credits per docs/13 §3: Claude Haiku 4.5 (~$12) + DeepSeek V4 Flash (~$5). I hand over exact top-up links.
 - [ ] **(A · 10 min)** Meta Business Suite: link @getpropel.ng + WhatsApp; convert IG to Business account.
 - [ ] **(B)** Meta developer app created, webhooks scaffolded, permissions mapped.
@@ -58,7 +58,7 @@ Verified July 2026 — every one of these is a thing cheap competitors over-prom
 ## Phase 1 — Propel's own Concierge (our number, our proof)
 
 - [x] **(B)** ✅ Stack authored and syntax-verified: `ops/setup/vps-bootstrap.sh` — Caddy (auto-TLS) + n8n + Postgres + Redis + Qdrant + Flowise + Uptime Kuma, hardened (ufw, fail2ban, unattended-upgrades, conditional SSH lockdown), nightly backups with 14-day retention. **Runs on ADEDAMOLA's paste — I have no route to the server from here.**
-- [ ] **(A · 10 min)** Paste the bootstrap command, create DNS records, send me the n8n login (that line only — never the whole `.env`).
+- [ ] 🔴 **(A · 10 min)** Create the 3 DNS records, paste the bootstrap command, send me the n8n login (that line only — never the whole `.env`). **This is the only thing between us and a running Concierge.**
 - [ ] **(B)** Build **Propel's own KB**: services, pricing bands, the audit offer, who we are, what we don't do.
 - [ ] **(B)** Wire the flow: IG comment → one private reply → WhatsApp → qualify → book audit → log to CRM → hand to ADEDAMOLA.
 - [ ] **(B)** Guardrails live: retrieval-first, no invented facts, escalation template, kill switch, AI disclosure in first message, NDPA privacy line.

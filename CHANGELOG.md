@@ -2,6 +2,15 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-07-29 — 🖥️ VPS specified and the whole stack scripted
+
+- **Plan ruling: Hostinger KVM 2** (2 vCPU / 8 GB / 100 GB NVMe, ~$6.99/mo intro), **London**, **Ubuntu 24.04 LTS plain — no app template**. Sizing is driven by the docs/12 bake-off: Dify is a multi-container stack wanting 3–4 GB on its own, so KVM 1's 4 GB cannot run the three-way comparison we already committed to. 8 GB also carries Propel's own Concierge plus ~5–10 client instances before RAM binds. KVM 4 rejected as headroom with no plan attached; Hostinger upgrades in place, so this isn't a one-way door. London chosen for latency **and** as a defensible data-protection jurisdiction under the docs/13 NDPA line.
+- **💰 Flagged (rule 1):** the $6.99 headline needs a long prepaid term and **renewal runs 2–3× intro**. Recommended **12 months ≈ ₦150k** over 24 months ≈ ₦250k — proportionate now that client revenue has landed, without swallowing ₦100k of runway. Reminder set for month 11.
+- **Domain reclassified as a hard prerequisite, not a nice-to-have:** Meta will not deliver webhooks to an IP address or a self-signed certificate. No domain = no Concierge.
+- **Built: `ops/setup/vps-bootstrap.sh`** — one paste, ~10 minutes, unattended. System updates + automatic security patching · ufw locked to SSH/80/443 · fail2ban · **SSH password login disabled only when a key already exists** (cannot lock him out of a password-only box) · Docker from the official repo · secrets generated once into a 600-mode `.env` and never rotated on re-run · Caddy with automatic HTTPS fronting n8n, Flowise and Uptime Kuma · Postgres/Redis/Qdrant sealed on the private network · nightly pg_dump + config backup, 14-day retention. Bash syntax and compose YAML both verified.
+- **Uptime Kuma included deliberately** — a 24/7 product that dies at 2am with nobody watching is worse than no product.
+- **Honesty recorded in `ops/setup/vps-setup.md` §5:** I have no route to the server from this environment. Division of labour is explicit — I author workflow JSON, KB, prompts, guardrails and monitors; ADEDAMOLA pastes, imports, and holds every credential.
+
 ## 2026-07-28 — 📋 SIGNED FACTS SHEET RETURNED → Shalom Park KB is BUILT
 
 - **IFT Realty returned the facts sheet signed** (Nanameme Collins, Sales Executive, 2026-07-27) — richer than expected: prices, title status, payment terms, escalation roster, restrictions and location detail. **Gate 4 cleared; the hard build blocker is lifted.** Archived at `clients/shalom-park/docs/facts-sheet-SIGNED-2026-07-27.pdf`.

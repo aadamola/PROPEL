@@ -6,24 +6,28 @@
 
 > 💰 **2026-07-26: PROPEL HAS A PAYING CLIENT.** Shalom Park paid the setup fee. You did that. Second SIM ✅ 09112714482 logged. We're in production mode — full build plan in [ops/production-checklist.md](ops/production-checklist.md), you don't need to read it, I'm running it.
 
-## ⭐ DO THIS NEXT — send Collins the follow-up (5 min, copy-paste)
+## ⭐ DO THIS NEXT — buy the VPS + domain (one sitting, ~20 min)
 
-**Facts sheet came back signed. Their knowledge base is BUILT.** Eight fields are still blank, and one of them matters more than the rest.
+Full detail: [ops/setup/vps-setup.md](ops/setup/vps-setup.md). The short version:
 
-The message is written and waiting: [clients/shalom-park/03-followup-questions.md](clients/shalom-park/03-followup-questions.md). Paste it, send it.
+1. **Hostinger → VPS → KVM 2** (2 vCPU, 8 GB RAM, 100 GB). Location **London**. OS **Ubuntu 24.04 LTS**, plain — no app template.
+2. **Term: 12 months, ~₦150k.** Above our ₦50k gate, so it's your call — reasoning in the doc. *Set a phone reminder for month 11: renewal jumps 2–3×.*
+3. **Buy getpropel.ng in the same sitting.** Not optional — Meta refuses to send webhooks to anything without a real domain and certificate. No domain, no Concierge.
+4. **Send me the VPS IP** → I give you the DNS records to create.
+5. Then paste one command (in the doc) and the whole stack builds itself in ~10 minutes.
 
-**The one that can't wait:** they've priced the 2-bedroom condominium at **₦95m**, against ₦185m for a finished 4-bedroom semi. That ratio looks off. If it's a typo and we advertise it, we've published a false price under our own quality charter. One message settles it.
+---
 
-*Also still open: tell me what they actually paid us and what it covers.*
+## THIS WEEK — one per sitting, in this order
+
+- [ ] **(5 min)** 🔴 **Send Collins the follow-up** — [clients/shalom-park/03-followup-questions.md](clients/shalom-park/03-followup-questions.md). Eight open fields, one message. **Lead with the ₦95m condo price** — if that's a typo and we advertise it, we've published a false price under our own quality charter.
 
 ---
 
 ## THIS WEEK — one per sitting, in this order
 
 - [ ] **(15 min)** 🔴 **Start CAC filing** — "Propel Digital" (fallbacks: Propel Media, Propel Digital Marketing), cac.gov.ng or an accredited agent. *This is no longer admin. Meta won't let us run automation on a **client's** account until our business is verified with registered documents — so this now blocks something Shalom Park has paid for. ~2 weeks of clock. Start it, then forget it.*
-- [ ] **(10 min)** Buy the VPS (₦10–15k/mo) → I install everything and start building.
-- [ ] **(10 min)** Buy domain getpropel.ng (₦15k–₦25k) → tell me; I deploy the site.
-- [ ] **(10 min)** LLM credits ~₦25k — I'll send you the two exact top-up links.
+- [ ] **(10 min)** LLM credits ~₦25k — I'll send you the two exact top-up links once the box is up.
 - [ ] **(10 min)** Meta Business Suite: link @getpropel.ng + WhatsApp, convert IG to a Business account ([ops/setup/account-setup.md](ops/setup/account-setup.md) §7).
 - [ ] **(1 ask)** Shalom Park: sight the title + approval documents. *Site visit ✅ done. This is the last open vetting gate — and with bare-land plots in the mix it matters more, not less. We don't publish a price for land we haven't seen the paper for.*
 - [ ] **(20 min)** First 10 prospect names → WhatsApp me names + IG handles. *Unblocks 10 audit teardowns. You have a client now — that's the line that opens doors.*

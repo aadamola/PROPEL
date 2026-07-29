@@ -137,13 +137,21 @@ This is the docs/13 Agent DMZ doctrine in actual configuration rather than prose
 
 ## 4. Security handoff — important
 
-When it finishes it prints where your credentials live:
+Get the n8n login with a command that prints **only** those two lines — safe to paste anywhere:
 
 ```bash
-sudo cat /opt/propel/.env
+sudo grep -E '^N8N_(USER|PASSWORD)=' /opt/propel/.env
 ```
 
-**Send me the n8n username and password only.** Never paste that whole file into any chat — it also contains the database password, the n8n encryption key (which decrypts every stored credential), and the API keys. If you ever do paste it somewhere, tell me and we rotate everything.
+The full file (`sudo cat /opt/propel/.env`) is **not** safe to share: it holds the database password, the n8n encryption key that decrypts every stored credential, and the API keys. If it ever gets pasted somewhere it shouldn't, say so and we rotate everything rather than hope.
+
+**Post-install check — one paste, three answers:**
+
+```bash
+sudo grep -E '^N8N_(USER|PASSWORD)=' /opt/propel/.env   # the login
+cd /opt/propel && docker compose ps                     # all containers running?
+dig +short engine.getpropel.tech                        # DNS propagated?
+```
 
 ## 5. What I do next, and what stays yours
 

@@ -6,30 +6,21 @@
 
 > 💰 **2026-07-26: PROPEL HAS A PAYING CLIENT.** Shalom Park paid the setup fee. You did that. Second SIM ✅ 09112714482 logged. We're in production mode — full build plan in [ops/production-checklist.md](ops/production-checklist.md), you don't need to read it, I'm running it.
 
-## ⭐ DO THIS NEXT — DNS records, then one paste (~15 min)
+## ⭐ DO THIS NEXT — send me three lines of output (2 min)
 
-**VPS is live. Domain is bought. This turns them into a running system.**
-
-**Step 1 — Hostinger → Domains → getpropel.tech → DNS records.** Add three A records, all pointing to `72.62.213.187`:
-
-| Type | Name | Points to |
-|---|---|---|
-| A | `engine` | 72.62.213.187 |
-| A | `flow` | 72.62.213.187 |
-| A | `status` | 72.62.213.187 |
-
-*Leave `@` and `www` alone — those go to Vercel when the site deploys.*
-
-**Step 2 — Hostinger → VPS → Browser terminal.** Paste:
+**🎉 The stack is UP.** Bootstrap ran clean on 72.62.213.187. One paste left:
 
 ```
-curl -fsSL -o bootstrap.sh https://raw.githubusercontent.com/aadamola/PROPEL/main/ops/setup/vps-bootstrap.sh
-sudo bash bootstrap.sh
+sudo grep -E '^N8N_(USER|PASSWORD)=' /opt/propel/.env
+cd /opt/propel && docker compose ps
+dig +short engine.getpropel.tech
 ```
 
-Answer `getpropel.tech` and your email. Then leave it for ~10 minutes.
+Send me all of it — that output is safe to share. It tells me three things at once: your login, whether every container is healthy, and whether DNS has propagated.
 
-**Step 3 —** run `sudo cat /opt/propel/.env` and send me **the N8N_USER and N8N_PASSWORD lines only.** Never the whole file — it holds the database password and the key that decrypts every stored credential.
+**If `dig` prints nothing**, the DNS records aren't in yet. Hostinger → Domains → getpropel.tech → DNS records, add three A records pointing at `72.62.213.187`: `engine`, `flow`, `status`. *(Leave `@` and `www` alone — those go to Vercel.)* Certificates issue themselves about five minutes later.
+
+**Never paste the whole `.env`** — the `grep` above exists so you don't have to. The full file holds the database password and the key that decrypts every stored credential.
 
 ---
 

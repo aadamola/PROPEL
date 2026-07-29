@@ -2,6 +2,13 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-07-29 (night) — 🎉 THE STACK IS UP
+
+- **Bootstrap ran clean on 72.62.213.187.** Caddy, n8n, Postgres, Redis, Qdrant, Flowise and Uptime Kuma are running behind automatic HTTPS, hardened, with nightly backups. Propel has production infrastructure.
+- **Credential-handling improved after a near-miss:** the completion banner told ADEDAMOLA to `cat` the whole `.env` and then send only two lines — asking a human to hand-filter a file containing the database password and the encryption key that decrypts every stored credential. Replaced with `grep -E '^N8N_(USER|PASSWORD)='`, which prints **only** the shareable lines. *Design principle: don't ask people to be careful with a secret when you can hand them a command that can't leak it.*
+- Post-install check now one paste, three answers: login + `docker compose ps` + `dig engine.getpropel.tech`.
+- Remaining before the Concierge build: the n8n login, container health, and DNS propagation.
+
 ## 2026-07-29 (evening) — PR #5 merged · bootstrap 404 diagnosed
 
 - **Bootstrap `curl` returned 404 on the server.** Cause: the runbook URL pointed at `main`, but all ten commits were sitting unmerged on the feature branch — `main` had never seen `vps-bootstrap.sh`. Repo access was fine (other files on `main` returned 200). *My defect: I published a runbook URL for a path that didn't exist yet.*

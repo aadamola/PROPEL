@@ -6,24 +6,27 @@
 
 > 💰 **2026-07-26: PROPEL HAS A PAYING CLIENT.** Shalom Park paid the setup fee. You did that. Second SIM ✅ 09112714482 logged. We're in production mode — full build plan in [ops/production-checklist.md](ops/production-checklist.md), you don't need to read it, I'm running it.
 
-## ⭐ DO THIS NEXT — type these four short lines (2 min)
+## ⭐ DO THIS NEXT — re-run the bootstrap, it fixes Flowise (3 min)
 
-**🎉 Stack is up — 6 of 7 containers healthy, n8n among them.** Pasting keeps eating your first characters, so **type these by hand.** You're already root, so no `sudo` needed:
+**DNS is live ✅ and I have your n8n login.** One crash left: Flowise couldn't create its own log folder. Fixed in the script — re-running applies it and keeps every password you already have.
+
+Type this (you're root, no `sudo` needed):
 
 ```
-grep N8N_USER /opt/propel/.env
-grep N8N_PASSWORD /opt/propel/.env
-dig +short engine.getpropel.tech
-docker compose logs --tail=30 flowise
+cd ~
+curl -fsSL -o bootstrap.sh https://raw.githubusercontent.com/aadamola/PROPEL/main/ops/setup/vps-bootstrap.sh
+bash bootstrap.sh
 ```
 
-Send me all four outputs. Safe to share — none of them expose the database password or encryption key.
+Same two answers: `getpropel.tech` and your email. Much faster this time — packages and images are cached.
 
-**If `dig` prints nothing**, the DNS records aren't in. Hostinger → Domains → getpropel.tech → DNS records: three A records to `72.62.213.187` — `engine`, `flow`, `status`. *(Leave `@` and `www` alone, those go to Vercel.)* Certificates issue ~5 minutes later.
+Then confirm all seven are up:
 
-**Flowise is restart-looping — don't worry about it.** It's one candidate in a brain bake-off, not the production piece. If you want it quiet meanwhile: `docker compose stop flowise`.
+```
+cd /opt/propel && docker compose ps
+```
 
-**Never paste the whole `.env`** — those two `grep`s exist so you don't have to.
+**Then open `https://engine.getpropel.tech` in your browser** and log in with the n8n details. If the padlock shows, certificates issued and we are fully live.
 
 ---
 

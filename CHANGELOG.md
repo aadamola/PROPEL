@@ -2,6 +2,13 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-07-29 (night, later) — DNS live · Flowise crash solved · re-run pending
+
+- **DNS propagated:** `engine.getpropel.tech` → 72.62.213.187. The webhook host Meta will call now resolves; certificates issue on the next Caddy pass.
+- **Flowise crash diagnosed and fixed:** `EACCES: permission denied, mkdir '/root/.flowise/logs'` — the current image runs as a **non-root** user while its documented data paths live under `/root`, so it can't create its own log directory. Added `user: root` to that service only, with the reasoning recorded inline: it's an internal bake-off tool on the core network, unexposed beyond Caddy, holding no client data. Everything else stays as shipped.
+- **n8n credentials received** — held in session, **deliberately never written to the repo**. Standing rule: no credential, key or token ever enters version control, not even in a runbook example.
+- **Rotation note:** the n8n password travelled through chat to reach me. Fine for a box with nothing in it yet — but rotate it before the Concierge holds real buyer conversations, and rotate the n8n encryption key with it.
+
 ## 2026-07-29 (night) — 🎉 THE STACK IS UP
 
 - **Bootstrap ran clean on 72.62.213.187.** Caddy, n8n, Postgres, Redis, Qdrant, Flowise and Uptime Kuma are running behind automatic HTTPS, hardened, with nightly backups. Propel has production infrastructure.

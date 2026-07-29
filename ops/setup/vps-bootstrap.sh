@@ -248,6 +248,13 @@ services:
     image: flowiseai/flowise:latest
     <<: *restart
     networks: [core]
+    # Newer Flowise images run as a non-root user, but the documented
+    # data paths live under /root — so the container cannot create
+    # /root/.flowise/logs and crash-loops on EACCES. Running as root
+    # restores the image's documented behaviour. Acceptable here: this
+    # is an internal bake-off tool on the core network, not exposed
+    # beyond Caddy, and it holds no client data.
+    user: root
     cpus: 1.0
     mem_limit: 1500m
     environment:

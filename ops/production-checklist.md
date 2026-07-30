@@ -62,7 +62,7 @@ Verified July 2026 — every one of these is a thing cheap competitors over-prom
 - [ ] 🔴 **(A · 2 min)** Send the n8n login + `dig +short engine.getpropel.tech`. **The only thing between us and a running Concierge.**
 - [ ] **(B)** Diagnose the Flowise restart loop from logs (2026-07-29). *Not critical path — bake-off candidate; n8n is healthy.*
 - [ ] **(B)** **Pin every image tag.** The stack ships on `:latest`, which means an unattended pull can change production under us. Pin to the digests actually running once the box is stable.
-- [ ] **(B)** Build **Propel's own KB**: services, pricing bands, the audit offer, who we are, what we don't do.
+- [x] **(B)** ✅ **Propel's own KB built** — `ops/concierge/propel-kb.json`: full rate card from docs/03, the free-audit offer, differentiators, honesty rules (no invented results), 6 must-not-say topics, 5 escalation triggers, AI disclosure and the never-claim-chartered guard.
 - [ ] **(B)** Wire the flow: IG comment → one private reply → WhatsApp → qualify → book audit → log to CRM → hand to ADEDAMOLA.
 - [ ] **(B)** Guardrails live: retrieval-first, no invented facts, escalation template, kill switch, AI disclosure in first message, NDPA privacy line.
 - [ ] **(B)** **Run the binding QA suite** (`sandbox/apex-gardens/qa-tests.json` — injection / grounding / policy). *Nothing talks to a human until it passes clean.*

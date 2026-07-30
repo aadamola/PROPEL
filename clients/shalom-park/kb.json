@@ -1,0 +1,207 @@
+{
+  "_meta": {
+    "estate": "Shalom Park Estate",
+    "developer": "IFT Realty Ltd",
+    "status": "LIVE CLIENT KB — every fact below traces to the signed warranted facts sheet.",
+    "source_document": "docs/facts-sheet-SIGNED-2026-07-27.pdf",
+    "warranted_by": "Nanameme Collins, Sales Executive, IFT Realty Ltd",
+    "warranted_date": "2026-07-27",
+    "kb_version": "1.0",
+    "last_updated": "2026-07-28",
+    "review_due": "2026-08-27",
+    "publication_gate": "DOCUMENTS NOT YET SIGHTED — see _blocked_until_sighted. Title claims must not publish until Gate 2 closes.",
+    "hard_rule": "The assistant answers ONLY from this file. Anything not present here is an escalation, never an inference."
+  },
+
+  "_blocked_until_sighted": {
+    "note": "Client warrants these; Propel has NOT yet sighted the documents (CLAUDE.md rule 2 + production checklist Gate 2). Do not publish in ads, posts or landing pages until sighted. The assistant may state title TYPE conversationally because it is warranted, but must route all documentation detail to a human.",
+    "items": ["Governor's Consent", "Approved layout"]
+  },
+
+  "developer": {
+    "legal_name": "IFT Realty Ltd",
+    "rc_number": "640603",
+    "registered_address": "No 1, Shalom Park Estate",
+    "cac_verified_by_propel": false
+  },
+
+  "location": {
+    "address": "Shalom Park Estate, Abijo, opposite GRA Second Gate, Ibeju-Lekki 105101, Lagos, Nigeria",
+    "lga": "Ibeju-Lekki",
+    "state": "Lagos",
+    "landmarks": [
+      "Lekki-Epe Expressway — under 5 minutes' drive from the inner GRA sections",
+      "Novare Lekki Mall (Shoprite Sangotedo) — about 7–10 minutes west along the expressway",
+      "Lufasi Nature Park — roughly 5–8 minutes",
+      "Caleb British International School — about 5 minutes, within Abijo",
+      "Chois Gardens & Fidiso Estate — neighbouring residential zones, 2–5 minutes"
+    ],
+    "schools_nearby": ["Satrop Schools", "Chalcedony Schools", "Corona Schools Lekki", "Kayron International Schools", "Villac International"],
+    "hospitals_nearby": ["First Graceland Hospitals", "Griggs Specialist Hospitals", "Tranquil and Quest Specialist Hospitals", "Vigor Hospitals", "Dales Healthcare"],
+    "access_roads": ["Victoria Island", "Lekki-Epe Expressway", "Eleko Junction", "Lekki Deep Sea Port"]
+  },
+
+  "development": {
+    "total_land_size": "10.37 hectares",
+    "total_inventory": "27 units and 89 plots",
+    "overall_stage_percent": 30,
+    "estimated_completion_date": null,
+    "development_type": null
+  },
+
+  "documentation": {
+    "title_status": "Governor's Consent",
+    "layout_approval": "Confirmed layout approval",
+    "litigation_acquisition_or_dispute": "None — warranted 'NO' by IFT Realty on 2026-07-27",
+    "docs_available_for_review": ["Governor's Consent", "Approved layout"],
+    "title_reference_number": null,
+    "registered_in_name_of": null,
+    "survey_plan_number": null,
+    "approving_authority": null,
+    "lasrera_registration": null
+  },
+
+  "units": [
+    {
+      "id": "4B-SEMI",
+      "type": "4-Bedroom Semi-Detached",
+      "beds": 4,
+      "baths": 4,
+      "stage": "Completed / developed",
+      "total_units": 3,
+      "available": 3,
+      "finishing": "Finished",
+      "price_ngn": 185000000,
+      "price_status": null
+    },
+    {
+      "id": "2B-COND",
+      "type": "2-Bedroom Condominium",
+      "beds": 2,
+      "baths": 2,
+      "stage": "Under development",
+      "total_units": 16,
+      "available": 5,
+      "finishing": "Finished",
+      "price_ngn": 95000000,
+      "price_status": null,
+      "_propel_flag": "PRICE QUERY — unusual ratio to the 4-bed semi. Confirmed with client before any publication."
+    },
+    {
+      "id": "5B-SEMI",
+      "type": "5-Bedroom Semi-Detached",
+      "beds": 5,
+      "baths": 5,
+      "stage": "Off-plan",
+      "total_units": 4,
+      "available": 4,
+      "finishing": "Finished",
+      "price_ngn": 200000000,
+      "price_status": null
+    },
+    {
+      "id": "PLOTS",
+      "type": "Serviced plots / bare land",
+      "stage": "Bare land",
+      "total_units": null,
+      "available": null,
+      "price_ngn_per_sqm": 125000,
+      "price_status": null,
+      "_propel_flag": "Plot sizes and availability not supplied — assistant must escalate on both."
+    }
+  ],
+
+  "pricing_terms": {
+    "included_in_price": "Purchase price only",
+    "excluded_from_price": ["Legal fees", "Utility connection (electricity and water)", "Homeowners association fee"],
+    "excluded_amounts_supplied": false,
+    "negotiable": false,
+    "negotiation_note": "Prices are not negotiable. No discount authority stated."
+  },
+
+  "payment": {
+    "initial_deposit": "50% down payment",
+    "plan_durations": ["3 months", "6 months", "12 months"],
+    "interest_or_markup": null,
+    "account_name": "IFT REALTY LTD",
+    "account_number_policy": "NEVER state account numbers in chat. Always hand to a human.",
+    "refund_policy": {
+      "summary": "On cancellation for any reason, the purchaser forfeits 25% of the agreed purchase price as a cancellation penalty. Refunds are made only after the property is resold to a third party, and the developer has up to 180 days from the date of resale to make any net refund.",
+      "assistant_handling": "STATE PLAINLY AND ALWAYS HAND TO A HUMAN. Never soften, summarise away, or omit the 25% forfeiture or the resale condition. A buyer who discovers this after paying is a dispute; a buyer who is told upfront is an informed buyer."
+    }
+  },
+
+  "delivery": {
+    "allocation": "Instant allocation",
+    "documents_buyer_receives": ["Receipt", "Contract of sale", "Legal documentation", "Survey"],
+    "handover_timeline": "Varies by product: land is allocated instantly; off-plan properties are given a handover timeline at purchase.",
+    "handover_dates_supplied": false,
+    "building_restrictions": "No building beyond 4 storeys."
+  },
+
+  "amenities": {
+    "delivered": {
+      "security": "Gated access, CCTV and patrols — delivered",
+      "power": "Diesel generator supply; developments are solar-compatible",
+      "water_and_drainage": "Water treatment and drainage — delivered",
+      "roads_and_lighting": "Roads and street lighting — delivered"
+    },
+    "planned": {},
+    "recreation": "Not applicable / none stated"
+  },
+
+  "inspection": {
+    "physical": "Any day of the week, including weekends. Representatives are on site.",
+    "meeting_point": "On site — representatives are on standby.",
+    "virtual": "Yes — via Zoom, FaceTime or WhatsApp video call.",
+    "diaspora_representative_allowed": true,
+    "walkthrough_video_url": null
+  },
+
+  "escalation_contacts": {
+    "primary": { "name": "Collins", "whatsapp": "08064834680", "hours": "Mon–Fri, 8am–8pm" },
+    "secondary": { "name": "Mercy", "whatsapp": "09035508012", "hours": "Weekends / evening cover" },
+    "supervisor": { "name": "Tobi", "whatsapp": "07035461661", "hours": "Emergency overrides" },
+    "unclaimed_hot_lead_sms_alert_minutes": 15,
+    "may_autosend_layout_map": false,
+    "may_autosend_title_pages": false
+  },
+
+  "must_not_say": [
+    { "topic": "Rental-yield or short-let income projections", "instead": "State only contractually fixed facts; hand the buyer to a human for anything about returns." },
+    { "topic": "Resale or appreciation estimates", "instead": "No projected values; route the buyer to a human." },
+    { "topic": "Comparisons with other estates", "instead": "Describe Shalom Park's own facts only." },
+    { "topic": "Timelines that are not contractually fixed", "instead": "Give only dates confirmed in writing; otherwise 'the team will confirm'." },
+    { "topic": "Bank account numbers", "instead": "Hand every payment-ready buyer to a human." },
+    { "topic": "Artificial scarcity", "instead": "State availability only as recorded here, re-verified weekly." }
+  ],
+
+  "escalate_always": [
+    "Estate completion date",
+    "Off-plan handover dates",
+    "Title document reference number, registered owner, survey plan number",
+    "Approving authority and LASRERA registration",
+    "Instalment interest, markup or the total price on 3/6/12-month plans",
+    "Exact amounts for legal fees, utility connection or homeowners association fee",
+    "Plot sizes and plot availability",
+    "Whether a stated price is current, promotional or subject to review",
+    "Refund and cancellation questions (state the policy, then hand to a human)",
+    "Anything at all not written in this file"
+  ],
+
+  "fact_maintenance": {
+    "notifier": "Emmanuel Osijo",
+    "channels": ["WhatsApp", "Email"],
+    "max_notification_delay": "1 week",
+    "unit_count_update_frequency": "Monthly",
+    "scheduled_review_frequency": "Monthly",
+    "next_review": "2026-08-27"
+  },
+
+  "context_for_propel_only": {
+    "current_inbound_volume_per_day": "1-2",
+    "claimed_after_hours_response": "30 minutes",
+    "active_paid_campaigns": false,
+    "active_discounts_or_incentives": false
+  }
+}

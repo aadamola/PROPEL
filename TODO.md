@@ -4,47 +4,67 @@
 
 ---
 
-## ⭐ DO THIS NEXT — GO PUBLIC (one sitting, ~90 min, today)
+> 💰 **2026-07-26: PROPEL HAS A PAYING CLIENT.** Shalom Park paid the setup fee. You did that. Second SIM ✅ 09112714482 logged. We're in production mode — full build plan in [ops/production-checklist.md](ops/production-checklist.md), you don't need to read it, I'm running it.
 
-**The launch sprint. Brand assets are DONE (site/assets/ — profile.png, manifesto.png, banner.png). No more waiting on picks. In order:**
+## ⭐ DO THIS NEXT — re-run the bootstrap, it fixes Flowise (3 min)
 
-1. **(10 min)** Buy a SIM for the business line (₦500, any vendor)
-2. **(10 min)** WhatsApp Business on that SIM — paste-ready profile in [ops/setup/account-setup.md §2](ops/setup/account-setup.md)
-3. **(10 min)** Instagram @getpropel (or first fallback) — bio in §3, upload **profile.png**
-4. **(10 min)** TikTok @getpropel — §4, same profile.png
-5. **(15 min)** LinkedIn company page — §5, upload **banner.png**
-6. **(5 min)** Post **manifesto.png** on IG + TikTok with the Day 1 caption from [ops/content/content-engine.md](ops/content/content-engine.md)
-7. **(10 min)** Meta Business Suite: link IG + WhatsApp — §7
-8. **(2 min)** Text me the WhatsApp number → I wire it into every website button + generate the QR
+**DNS is live ✅ and I have your n8n login.** One crash left: Flowise couldn't create its own log folder. Fixed in the script — re-running applies it and keeps every password you already have.
 
-**Done = Propel is public today.** 🚀
+Type this (you're root, no `sudo` needed):
+
+```
+cd ~
+curl -fsSL -o bootstrap.sh https://raw.githubusercontent.com/aadamola/PROPEL/main/ops/setup/vps-bootstrap.sh
+bash bootstrap.sh
+```
+
+Same two answers: `getpropel.tech` and your email. Much faster this time — packages and images are cached.
+
+Then confirm all seven are up:
+
+```
+cd /opt/propel && docker compose ps
+```
+
+**Then open `https://engine.getpropel.tech` in your browser** and log in with the n8n details. If the padlock shows, certificates issued and we are fully live.
 
 ---
 
 ## THIS WEEK — one per sitting, in this order
 
-- [ ] **(20 min)** First 10 prospect names → WhatsApp me just names + IG handles. *Unblocks: I write all 10 audit teardowns.*
-- [ ] **(15 min)** Start CAC Business Name filing: "Propel Digital" (fallbacks: Propel Media, Propel Digital Marketing) — cac.gov.ng or an accredited agent.
-- [ ] **(15 min)** Shalom Park: find the right contact at IFT Realty (their site/LinkedIn), send the outreach draft in [docs/09](docs/09-shalom-park-partnership.md). Don't negotiate — just open the door. *When the meeting lands: the full demo pack is ready in [demos/shalom-park/](demos/shalom-park/) — open concierge-demo.html on their phone first.*
-- [ ] **(10 min)** Buy domain getpropel.ng (₦15k–₦25k) → tell me; I'll prep the site for hosting.
-- [ ] **(5 min, optional)** Re-authorize Canva (claude.ai → connector settings) if you want the L1–L4 designs as alternates; my generated assets carry us fine meanwhile.
+- [ ] **(5 min)** 🔴 **Send Collins the follow-up** — [clients/shalom-park/03-followup-questions.md](clients/shalom-park/03-followup-questions.md). Eight open fields, one message. **Lead with the ₦95m condo price** — if that's a typo and we advertise it, we've published a false price under our own quality charter.
+- [ ] **(15 min)** 🔴 **Start CAC filing** — "Propel Digital" (fallbacks: Propel Media, Propel Digital Marketing), cac.gov.ng or an accredited agent. *This is no longer admin. Meta won't let us run automation on a **client's** account until our business is verified with registered documents — so this now blocks something Shalom Park has paid for. ~2 weeks of clock. Start it, then forget it.*
+- [ ] **(10 min)** LLM credits ~₦25k — I'll send you the two exact top-up links once the box is up.
+- [ ] **(10 min)** Meta Business Suite: link @getpropel.ng + WhatsApp, convert IG to a Business account ([ops/setup/account-setup.md](ops/setup/account-setup.md) §7).
+- [ ] **(1 ask)** Shalom Park: sight the title + approval documents. *Site visit ✅ done. This is the last open vetting gate — and with bare-land plots in the mix it matters more, not less. We don't publish a price for land we haven't seen the paper for.*
+- [ ] **(20 min)** First 10 prospect names → WhatsApp me names + IG handles. *Unblocks 10 audit teardowns. You have a client now — that's the line that opens doors.*
+- [ ] **(15 min)** Finish the socials: TikTok + LinkedIn page (§4–5), then post manifesto.png with the Day 1 caption.
 
 ## NOT YET — ignore these (I'll star them when it's time)
 
-Posting Day 1 content · recording first voice notes · sending outreach · first audit calls. None of this is actionable until the week's items are done. Don't think about them.
+Testing the bot · the Shalom Park pilot build · voice notes · first audit calls. Nothing here is actionable until the week's items land. Don't think about them.
 
 ## WAITING ON ME (AI partner) — nothing for you to do here
 
-- Brand asset pack → starts the moment you send picks
+- ✅ Website wired to your number · ✅ WhatsApp QR generated (site/assets/whatsapp-qr.png)
+- Live Concierge build on the new SIM → starts the moment you send it + VPS exists
+- Meta app + App Review submission → starts after CAC + Business Suite link
 - 10 audit teardowns → starts the moment you send names
-- Founding-client outreach drafts → after teardowns
 
 ## ✅ DONE (look how far this has come)
 
+- [x] 🖥️ **VPS live (KVM 2, 8 GB) + domain getpropel.tech bought** (2026-07-29)
+- [x] 📋 **Shalom Park facts sheet returned SIGNED — their AI's knowledge base is built** (2026-07-27)
+- [x] **Site visit done** — four-stage inventory counted (2026-07-26)
+- [x] 💰 **FIRST PAYING CLIENT — Shalom Park Estate (IFT Realty) paid the setup fee** (2026-07-26)
+- [x] **WhatsApp Business + Instagram live — Propel is public** (2026-07-26)
+- [x] Second SIM for the AI line — 09112714482 (2026-07-26)
 - [x] Business plan, roadmap, pricing, GTM, financial model, AI stack (docs/01–06)
 - [x] Bootstrap plan fitted to real life: ₦500k, 20 hrs/week (docs/07)
 - [x] Legal decision made: sole prop now, Ltd on triggers (docs/08)
 - [x] Ops system: templates, prompts, CRM, operating manual (ops/)
 - [x] 14-day faceless launch calendar, fully written (ops/content/)
-- [x] 8 brand candidates generated in Canva
+- [x] Brand v1 adopted + full asset pack shipped (site/assets/)
+- [x] Shalom Park demo pack + send-ready brief written (demos/shalom-park/)
+- [x] LLM credit decision made: Haiku 4.5 + DeepSeek, ~₦25k when needed (docs/13)
 - [x] PR #1 merged — the whole business is on GitHub main

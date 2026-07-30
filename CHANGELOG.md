@@ -101,6 +101,17 @@
 - **Guardrails set:** live demo on OUR Apex Gardens sandbox accounts only — anything on their IG/listings is the paid pilot. TikTok comment automation not promised (API-limited).
 - **Launch sprint is now client-critical path** (IG business account + Meta Business Suite are demo prerequisites). TODO flagged.
 
+## 2026-07-14 — GL_RADAR briefed and built (separate venture, own repo)
+
+- ADEDAMOLA delivered the GL_RADAR brief: FMCG/nightlife arm of Radar Lagos — packaged cocktails sold at raves. Built in full in `aadamola/GL_RADAR` (operating prompt v2, launch plan, compliance posture, sales SOP, copy pack, visual identity + mark, flow-tested checkout/operator prototypes). It stays cleanly outside Propel; this repo remains Propel-only.
+- **Partner flag (docs there, mirrored here):** GL_RADAR now competes with Propel Sprint 1 for the same ~20 founder-hours/week — Propel's go-public ⭐ and the overdue Shalom Park outreach are still open. Asked ADEDAMOLA to set a weekly hour cap for GL_RADAR. Propel plans unchanged.
+
+## 2026-07-13 (later⁴) — New private repo created: GL_RADAR
+
+- **At ADEDAMOLA's request, created a new GitHub repository: `aadamola/GL_RADAR`** (private, README-initialized) — https://github.com/aadamola/GL_RADAR.
+- Purpose not yet stated; awaiting ADEDAMOLA's brief on what GL_RADAR is for before any scaffolding, docs, or code go into it. Until then it sits outside the Propel operating protocol (this repo remains the single source of truth for Propel).
+- No Propel strategy, plans, or state changed in this session.
+
 ## 2026-07-13 (later³) — Brand v1 ADOPTED · PRs #2+#3 merged · full asset pack shipped
 
 - **Founder adopted the in-house identity as official Brand v1:** green upward arrow + PROPEL wordmark, navy/green/white. Canva candidates retired to archive.

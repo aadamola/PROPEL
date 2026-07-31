@@ -1,0 +1,64 @@
+{
+  "name": "Propel — Meta Webhook Verification",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "GET",
+        "path": "whatsapp",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "wa-verify-in",
+      "name": "WhatsApp verify (GET)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [0, 0],
+      "webhookId": "propel-wa-verify"
+    },
+    {
+      "parameters": {
+        "httpMethod": "GET",
+        "path": "instagram",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "ig-verify-in",
+      "name": "Instagram verify (GET)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [0, 220],
+      "webhookId": "propel-ig-verify"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Meta sends: hub.mode=subscribe, hub.verify_token, hub.challenge\n// Echo the challenge back as plain text ONLY when the token matches.\nconst q = $input.first().json.query || {};\nconst expected = $env.META_VERIFY_TOKEN;\n\nif (!expected) {\n  return [{ json: { ok: false, status: 500, body: 'META_VERIFY_TOKEN not set on this n8n instance' } }];\n}\nif (q['hub.mode'] === 'subscribe' && q['hub.verify_token'] === expected) {\n  return [{ json: { ok: true, status: 200, body: q['hub.challenge'] } }];\n}\nreturn [{ json: { ok: false, status: 403, body: 'Forbidden' } }];"
+      },
+      "id": "verify-logic",
+      "name": "Check token, echo challenge",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [240, 110]
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $json.body }}",
+        "options": {
+          "responseCode": "={{ $json.status }}"
+        }
+      },
+      "id": "verify-out",
+      "name": "Respond to Meta",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [480, 110]
+    }
+  ],
+  "connections": {
+    "WhatsApp verify (GET)": { "main": [[{ "node": "Check token, echo challenge", "type": "main", "index": 0 }]] },
+    "Instagram verify (GET)": { "main": [[{ "node": "Check token, echo challenge", "type": "main", "index": 0 }]] },
+    "Check token, echo challenge": { "main": [[{ "node": "Respond to Meta", "type": "main", "index": 0 }]] }
+  },
+  "settings": { "executionOrder": "v1" },
+  "pinData": {}
+}

@@ -2,6 +2,17 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-07-31 — Month-1 review · Meta app package built · ⭐ moved to selling
+
+- **Repo integrity check: clean.** Working tree empty · QA harness **14/14** · all 3 KBs valid · stale-tool sweep clean (remaining hits are decision records) · 15 docs, 7 templates, 3 tools, 1 client. Pipeline gate: **2 overdue, both ADEDAMOLA's**.
+- **Progress report + scale assessment written:** `ops/reports/2026-07-31-progress-and-scale.md`.
+- **The finding that matters — pipeline of one.** One real prospect in `pipeline.csv`, and it's the client who already said yes. 100% revenue concentration, no second conversation in flight, and the ten prospect names that fix it have been requested for three weeks. **Infrastructure was never the constraint; sales motion is** — and I've contributed to the drift by producing infrastructure, which is easier than selling. ⭐ moved off building and onto the ten names.
+- **Revenue strategy, ranked by naira-per-founder-hour:** ① confirm/start the ₦250k/mo care fee — **MRR currently reads zero and may be revenue already owed** ② **the commission mandate is drastically underweighted**: at ₦185m–₦200m/unit, 3% = ₦5.5m–₦6m on one sale ≈ two years of care fees, and attribution is exactly what the Concierge produces — that chain (CAC → App Review → attribution) is the real reason CAC is urgent ③ **lead with Concierge, don't upsell it** — Shalom Park asked for it unprompted; the rate card leads with retainers while the market pulls on Concierge ④ charge ₦50k for the teardown so prospecting self-funds ⑤ sell the NIESV tribe.
+- **AI leverage ruling: the highest-value application right now is the prospecting engine, not the client-facing bot.** The Agent DMZ's Prospect Research Desk turns one 20-minute name list into a week of qualified outreach. Built next, ahead of further Concierge polish. Three moats named: the warranted-facts architecture is *contractual*, not technical, and therefore hard to copy · the official-API stance · the QA harness as a closing artifact. **Resisting further model shopping — the routing ruling is settled.**
+- **Scaling tripwires recorded:** sales capacity binds now · every client deployment waits on App Review from client #2 · facts-sheet maintenance goes linear at #3–4 · **instance split at 5 clients** · 8 GB binds at 5–10 · single VPS means never selling 99.9%.
+- **Meta developer app — everything producible shipped:** `ops/setup/meta-app-setup.md` with the dependency chain, app/product/webhook configuration, Instagram prerequisites, permission map, and the **full App Review submission package** — use-case copy for each permission, screencast script (including the escalation scene that wins reviews), reviewer test instructions, and a rejection-risk table. Plus `ops/concierge/workflows/00-webhook-verification.json`, the handshake endpoint Meta calls before it will accept a webhook, with the verify token read from env so no secret enters version control.
+- **Blocker surfaced:** App Review cannot be submitted without a live privacy policy and data-deletion page. Neither exists — I'll draft both against NDPA; they ship with the site.
+
 ## 2026-07-29 (night, later) — DNS live · Flowise crash solved · re-run pending
 
 - **DNS propagated:** `engine.getpropel.tech` → 72.62.213.187. The webhook host Meta will call now resolves; certificates issue on the next Caddy pass.

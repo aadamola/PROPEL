@@ -52,15 +52,17 @@ Verified July 2026 — every one of these is a thing cheap competitors over-prom
 - [x] **(A)** ✅ **Hostinger KVM 2 LIVE** — 72.62.213.187, Manchester UK, Ubuntu 24.04, 8 GB. *Monthly term, expires 2026-08-29 — review before renewal (vps-setup.md §0).*
 - [ ] **(A · 10 min · ~₦25k)** LLM credits per docs/13 §3: Claude Haiku 4.5 (~$12) + DeepSeek V4 Flash (~$5). I hand over exact top-up links.
 - [ ] **(A · 10 min)** Meta Business Suite: link @getpropel.ng + WhatsApp; convert IG to Business account.
-- [ ] **(B)** Meta developer app created, webhooks scaffolded, permissions mapped.
-- [ ] **(B)** **Submit App Review for Advanced Access** the moment business verification allows. *Start the 5–10 day clock early.*
+- [x] **(B)** ✅ **Meta app runbook + App Review package written** — `ops/setup/meta-app-setup.md`: dependency chain, app/product/webhook config, IG prerequisites, permission map, and the full **App Review submission text** (use-case copy, screencast script, reviewer test instructions, rejection-risk table). Webhook-verification workflow ready to import: `ops/concierge/workflows/`.
+- [ ] **(A)** Create the Meta app + register 09112714482 + set webhooks (`ops/setup/meta-app-setup.md` §9).
+- [ ] **(B)** Draft privacy policy + data-deletion pages — **App Review cannot be submitted without both live**.
+- [ ] **(A)** **Submit App Review for Advanced Access** once Business Verification clears. *5–10 business days.*
 
 ## Phase 1 — Propel's own Concierge (our number, our proof)
 
 - [x] **(B)** ✅ Stack authored and syntax-verified: `ops/setup/vps-bootstrap.sh` — Caddy (auto-TLS) + n8n + Postgres + Redis + Qdrant + Flowise + Uptime Kuma, hardened (ufw, fail2ban, unattended-upgrades, conditional SSH lockdown), nightly backups with 14-day retention. **Runs on ADEDAMOLA's paste — I have no route to the server from here.**
-- [x] **(A)** ✅ **STACK IS UP** (2026-07-29) — bootstrap ran clean on 72.62.213.187.
-- [ ] 🔴 **(A · 2 min)** Send the n8n login + `dig +short engine.getpropel.tech`. **The only thing between us and a running Concierge.**
-- [ ] **(B)** Diagnose the Flowise restart loop from logs (2026-07-29). *Not critical path — bake-off candidate; n8n is healthy.*
+- [x] **(A)** ✅ **STACK IS UP** (2026-07-29) — all 7 containers healthy after the Flowise fix; DNS resolving; n8n credentials received.
+- [ ] **(A · 2 min)** Confirm `https://engine.getpropel.tech` loads with a valid certificate (my sandbox blocks outbound checks to it).
+- [x] **(B)** ✅ Flowise crash solved — `EACCES` on `/root/.flowise/logs`; image runs non-root, fixed with `user: root`.
 - [ ] **(B)** **Pin every image tag.** The stack ships on `:latest`, which means an unattended pull can change production under us. Pin to the digests actually running once the box is stable.
 - [x] **(B)** ✅ **Propel's own KB built** — `ops/concierge/propel-kb.json`: full rate card from docs/03, the free-audit offer, differentiators, honesty rules (no invented results), 6 must-not-say topics, 5 escalation triggers, AI disclosure and the never-claim-chartered guard.
 - [ ] **(B)** Wire the flow: IG comment → one private reply → WhatsApp → qualify → book audit → log to CRM → hand to ADEDAMOLA.

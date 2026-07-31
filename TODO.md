@@ -20,6 +20,8 @@ Send the names and I write all 10 audit teardowns — that's your entire outreac
 
 ## THIS WEEK — one per sitting, in this order
 
+- [ ] **(1 message)** 🔴 **Ask Shalom Park who holds the CAC documents + can grant Meta admin.** Script ready in [clients/shalom-park/04-meta-access-pack.md](clients/shalom-park/04-meta-access-pack.md). *Not Collins — he's a Sales Executive with neither. Then do the setup on a 20-min screen share, don't send a checklist.*
+- [ ] **(1 afternoon)** ⚡ **Prove the fast lane** — test app + Meta's free test number, send one message ([ops/setup/meta-app-setup.md](ops/setup/meta-app-setup.md) §9b Step 0). *Settles whether App Review is needed before we promise them a date.*
 - [ ] **(1 conversation)** 💰 **Confirm the Shalom Park care fee and commission rate.** *Possibly revenue already owed — MRR currently reads zero because nothing is confirmed as started. Ask what the setup fee covered, when the ₦250k/mo begins, and pin the commission %.*
 - [ ] **(5 min)** 🔴 **Send Collins the follow-up** — [clients/shalom-park/03-followup-questions.md](clients/shalom-park/03-followup-questions.md). Eight open fields, one message. **Lead with the ₦95m condo price** — if that's a typo and we advertise it, we've published a false price under our own quality charter.
 - [ ] **(15 min)** 🔴 **Start CAC filing** — "Propel Digital" (fallbacks: Propel Media, Propel Digital Marketing), cac.gov.ng or an accredited agent. *This is no longer admin. Meta won't let us run automation on a **client's** account until our business is verified with registered documents — so this now blocks something Shalom Park has paid for. ~2 weeks of clock. Start it, then forget it.*

@@ -178,6 +178,31 @@ Both are **required** and must be live URLs before submission:
 
 **Run both tracks in parallel.** Client-owned app = the fast lane to deliver the build Shalom Park has already paid for. Our own CAC → verification → app = the asset that makes client #2 onward cheap. **CAC filing stays 🔴 urgent and is not deferred by this.**
 
+### Step 0 — the cheap test that settles it (do this before promising anything)
+
+**Cost: an afternoon. Value: removes the only unknown in the plan.**
+
+1. Create a throwaway Meta Business portfolio (or use Propel's, unverified as it is).
+2. Create an app inside it, add the WhatsApp product.
+3. Use the **free test number** Meta issues instantly — no verification required for it.
+4. Send a message to it and reply from the API.
+
+**Read the result like this:**
+
+| Outcome | Meaning |
+|---|---|
+| Send and receive both work on an unverified portfolio | Self-integration confirmed. **The fast lane is real** — proceed with the client-owned build |
+| Works but blocked at "add a real phone number" | Business Verification is the gate, App Review is not. Still much faster — verification is days, not weeks |
+| Blocked at the API call with a permissions error | App Review is required regardless of who owns the app. **Fast lane is dead; tell the client honestly and fall back to our own filing** |
+
+Whichever it is, we learn it in one afternoon rather than three weeks into a client's expectations.
+
+### Client-facing pack
+
+Written for the client, plain language, no jargon: **`clients/shalom-park/04-meta-access-pack.md`** — who to ask, a 20-minute screen-share script with five steps and a visible "done" signal for each, and the WhatsApp-number decision framed so they choose correctly.
+
+**Delivery method matters more than the document.** The failure mode for this path is a technical checklist sitting unread in a director's inbox for three weeks. Identify the person by message; do the setup live on a call.
+
 ### What to ask the client (fold into the care-fee conversation)
 
 > To get your assistant live faster, the cleanest setup is for it to run inside Shalom Park's own Meta Business account rather than ours — you keep full ownership of the WhatsApp number, the Instagram account and all the conversation data, and you can revoke our access any time in two taps.

@@ -55,7 +55,8 @@ Verified July 2026 — every one of these is a thing cheap competitors over-prom
 - [x] **(B)** ✅ **Meta app runbook + App Review package written** — `ops/setup/meta-app-setup.md`: dependency chain, app/product/webhook config, IG prerequisites, permission map, and the full **App Review submission text** (use-case copy, screencast script, reviewer test instructions, rejection-risk table). Webhook-verification workflow ready to import: `ops/concierge/workflows/`.
 - [ ] **(A)** Create the Meta app + register 09112714482 + set webhooks (`ops/setup/meta-app-setup.md` §9).
 - [ ] **(A · afternoon)** ⚡ **PROVE THE FAST LANE:** create a test app inside a client-owned portfolio and send one message. If self-integration works without App Review, Shalom Park's build stops waiting on our CAC (`meta-app-setup.md` §9b). **Verify before promising them any date.**
-- [ ] **(A)** Ask Shalom Park who holds the CAC documents + can grant portfolio admin — *not Collins; he's a Sales Executive*. Fold into the care-fee conversation.
+- [ ] 🔴 **(A · 1 message)** Ask Shalom Park **who holds the CAC documents and can grant Meta portfolio admin** — *not Collins; he's a Sales Executive with neither*. Script: `clients/shalom-park/04-meta-access-pack.md`.
+- [ ] **(A · 20 min call)** Run the access pack live on screen share — portfolio, accounts, verification, partner access, WhatsApp number decision. **Do not send it as a checklist and hope.**
 - [ ] **(B)** Draft privacy policy + data-deletion pages — **App Review cannot be submitted without both live**.
 - [ ] **(A)** **Submit App Review for Advanced Access** once Business Verification clears. *5–10 business days.*
 
@@ -67,7 +68,10 @@ Verified July 2026 — every one of these is a thing cheap competitors over-prom
 - [x] **(B)** ✅ Flowise crash solved — `EACCES` on `/root/.flowise/logs`; image runs non-root, fixed with `user: root`.
 - [ ] **(B)** **Pin every image tag.** The stack ships on `:latest`, which means an unattended pull can change production under us. Pin to the digests actually running once the box is stable.
 - [x] **(B)** ✅ **Propel's own KB built** — `ops/concierge/propel-kb.json`: full rate card from docs/03, the free-audit offer, differentiators, honesty rules (no invented results), 6 must-not-say topics, 5 escalation triggers, AI disclosure and the never-claim-chartered guard.
-- [ ] **(B)** Wire the flow: IG comment → one private reply → WhatsApp → qualify → book audit → log to CRM → hand to ADEDAMOLA.
+- [x] **(B)** ✅ **Attribution ledger designed + SQL written** — `ops/concierge/attribution-ledger.md` + `sql/001-attribution-ledger.sql`: append-only, hash-chained, DB-enforced immutability, 12-month window, hashed-contact export view, NDPA position. **Protects a ₦5.5m–₦6m per-unit commission claim even if the client revokes our Meta access.**
+- [ ] **(B)** Wire the flow: IG comment → one private reply → WhatsApp → qualify → book audit → **log to the ledger** → hand to ADEDAMOLA.
+- [ ] **(B)** `tools/verify-ledger.js` — recompute the chain, exit non-zero on a break.
+- [ ] **(B)** Monthly reconciliation workflow + client-facing export. *This is what actually collects commission — the habit, not the clause.*
 - [ ] **(B)** Guardrails live: retrieval-first, no invented facts, escalation template, kill switch, AI disclosure in first message, NDPA privacy line.
 - [ ] **(B)** **Run the binding QA suite** (`sandbox/apex-gardens/qa-tests.json` — injection / grounding / policy). *Nothing talks to a human until it passes clean.*
 - [ ] **(A · 20 min)** Ear test: message it like a hostile buyer. Try to break it. Tell me what felt wrong.

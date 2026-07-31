@@ -64,6 +64,12 @@ Four products at four stages is unusually broad, and it changes how we build:
 
 ⛔ **Not yet — needs delivery:** results, lead numbers, "we sold X units." We have produced nothing yet. The case study gets written when there are real numbers.
 
+## Commission protection — hard build requirement
+
+If the Concierge runs inside **IFT Realty's** Meta portfolio (the fast-lane option, `ops/setup/meta-app-setup.md` §9b), every attributed lead **must be written to Propel's own database at the moment of capture**, not only to systems they control.
+
+Reason: commission on a single unit is ₦5.5m–₦6m at 3%. If our only evidence of which buyer we produced lives inside infrastructure the client can revoke, we have no claim the day a dispute starts. This is not distrust — it's the same logic as the attribution clause in docs/09, applied to where the data physically sits.
+
 ## Critical path to delivery
 
 **CAC filing → Meta Business Verification → App Review (Advanced Access) → automation on their accounts.** ~2+ weeks of external clocks, and it now blocks a client who has already paid. This moved CAC from admin to urgent.

@@ -151,6 +151,39 @@ Both are **required** and must be live URLs before submission:
 | "No demonstrated human handoff" | Screencast step 4 exists specifically to show escalation |
 | Business not verified | CAC → Business Verification must complete first. **The queue** |
 
+## 9b. ALTERNATIVE PATH — build inside the client's own Business portfolio
+
+*Founder proposal, 2026-07-31. **Adopted as a parallel track, not a replacement.***
+
+**The idea:** instead of waiting on Propel's CAC → Business Verification → App Review, create the app inside **IFT Realty's own Meta Business portfolio**, using **their** CAC (**RC 640603**, already on the signed facts sheet — we know they're registered). The app, the WhatsApp Business Account and the Instagram account all then sit in the same portfolio, and Propel operates as an admin on it.
+
+**Why it likely works:** App Review's Advanced Access exists to govern apps touching assets owned by *other* businesses. When the app and the assets belong to the same portfolio, that's self-integration — the pattern any company uses to run its own Cloud API. It is the standard agency move: build inside the client's Business Manager.
+
+> ⚠️ **Confidence: high on the pattern, not verified on the timeline.** I could not confirm from Meta's current documentation that zero review is required for this configuration in July 2026, and their rules tighten regularly. **Verify in the console before promising Shalom Park a date** — creating the app and sending one test message costs nothing and settles it in an afternoon. Do not put a delivery date in front of the client until it's proven.
+
+### What we gain
+
+- Skips **our** two-to-four week queue for this client entirely
+- Their buyer data lives in their portfolio — cleaner under NDPA, and a genuine trust story: *"you keep ownership, we get managed access, you revoke it in two taps"* (already the wording in kickoff message #3)
+- Conversation charges bill to their account, not ours — no float risk for a bootstrap
+
+### What we give up — and this is the real cost
+
+1. **We don't own the asset.** App, WABA and access all sit in their portfolio. In a dispute they can lock us out instantly — and we'd be on a commission mandate where a single unit is worth ₦5.5m–₦6m. **Hard engineering requirement that falls out of this: every attributed lead must write to OUR database at the moment of capture, not only to their systems.** If our commission evidence lives only inside infrastructure they control, we have no commission claim. Non-negotiable in the build.
+2. **It doesn't scale.** Every future client would repeat the whole dance — their documents, their admin, their patience. Our own verified app is a one-time cost that then serves every client through a single OAuth grant. This is a tactical unblock for client #1, not a strategy for clients #2–N.
+3. **The bottleneck moves, it doesn't disappear.** It shifts from *our* CAC to *their* internal authority and responsiveness. Business Verification needs company documents and portfolio-admin rights — **Collins is a Sales Executive and probably has neither.** This needs whoever holds company documents (the chairman, or Emmanuel Osijo who already owns fact-notification). If they're slow, this path is slower than our own filing, not faster.
+4. **Our CAC is still required regardless** — for invoicing, a business bank account, contracts, credibility, and our own app for every client after this one. This path defers nothing on that front.
+
+### Ruling
+
+**Run both tracks in parallel.** Client-owned app = the fast lane to deliver the build Shalom Park has already paid for. Our own CAC → verification → app = the asset that makes client #2 onward cheap. **CAC filing stays 🔴 urgent and is not deferred by this.**
+
+### What to ask the client (fold into the care-fee conversation)
+
+> To get your assistant live faster, the cleanest setup is for it to run inside Shalom Park's own Meta Business account rather than ours — you keep full ownership of the WhatsApp number, the Instagram account and all the conversation data, and you can revoke our access any time in two taps.
+>
+> Two things needed: whoever holds the company's CAC documents to complete Meta's business verification, and admin access granted to me on the Business portfolio. Who's the right person for that?
+
 ## 9. Order of operations
 
 - [ ] **(A)** Start CAC filing 🔴 *front of the queue*

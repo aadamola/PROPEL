@@ -14,8 +14,20 @@ CREATE TABLE IF NOT EXISTS lead (
     channel                TEXT        NOT NULL
         CHECK (channel IN ('whatsapp','instagram_dm','instagram_comment')),
     source_ref             TEXT,
+    -- Idempotency: Meta redelivers webhooks. Same message must not create two leads.
+    provider_message_id    TEXT        UNIQUE,
+    -- PLAINTEXT. Protected by disk encryption, file permissions and DB access
+    -- control -- NOT by column encryption. Labelled honestly on purpose: a column
+    -- commented "encrypted at rest" that isn't is worse than plaintext, because
+    -- it creates assurance nobody checks.
     contact_e164           TEXT,
     contact_hash           TEXT        NOT NULL,
+    -- Mutable operational state. The immutable evidence lives in lead_event.
+    qualified_unit_type    TEXT,
+    qualified_budget_ngn   NUMERIC(15,2),
+    assigned_sales_rep     TEXT,
+    conversion_status      TEXT        NOT NULL DEFAULT 'qualified'
+        CHECK (conversion_status IN ('new','qualified','handed_off','closed_won','closed_lost','expired')),
     first_contact_at       TIMESTAMPTZ NOT NULL DEFAULT now(),
     attribution_expires_at TIMESTAMPTZ NOT NULL
         GENERATED ALWAYS AS (first_contact_at + INTERVAL '12 months') STORED,

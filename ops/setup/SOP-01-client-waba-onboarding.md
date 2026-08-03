@@ -94,6 +94,20 @@ Subscribe: `messages`, `message_template_status_update`.
 
 ---
 
+## 3b. Provisioning — one command
+
+Both steps are scripted. Run on the VPS:
+
+```bash
+sudo bash /opt/propel/ops/setup/apply-client-ledger.sh shalom-park
+```
+
+Generates the per-client verify token into `.env`, applies the attribution ledger, and prints the webhook URL. Idempotent — a re-run will not rotate a live token.
+
+**It never echoes the token to the terminal.** Scrollback and shell history are not secret stores, and these windows get screenshotted. Read it only when the Meta console asks: `grep META_VERIFY_TOKEN_SHALOM_PARK /opt/propel/.env`.
+
+> ⚠️ **Correction: the connection details in the source spec don't exist on this box.** `propel_db` / `propel_admin` / `n8n_db` would fail — the real names are container `propel-postgres-1` (compose service `postgres`), user `propel`, database `n8n`. The script reads them from `.env` rather than hardcoding, so it can't drift.
+
 ## 4. Credential handling 🔒
 
 > ⚠️ **Correction: the source spec hardcoded `PROPEL_META_VERIFY_TOKEN_2026_SHALOM` in plaintext.** A verify token written into a document that lives in a repo and gets emailed is not a secret. Anyone holding it can subscribe their own traffic to our endpoint.
@@ -115,13 +129,15 @@ SHALOM_WABA_PHONE_ID=<phone number id>
 | | |
 |---|---|
 | **Rotation** | Every 6 months, and immediately on any staff change either side |
-| **On compromise** | Client revokes the System User in Business Settings — instant, and *they* hold that switch |
+| **On compromise** | `sudo bash ops/setup/propel-revoke-token.sh <client>` cuts our side instantly. **Meta-side revocation is the client's action** — a System User token is revoked by its owner, not its holder. Both halves required; the script says so rather than implying it's done |
 | **On offboarding** | We ask them to revoke it. We do not wait to be asked |
 | **Audit** | Token age reviewed at the monthly reconciliation |
 
 ---
 
 ## 5. Attribution wiring — not optional
+
+> 🔴 **Correction with money attached: the source spec set the attribution window to 180 days. docs/09 agreed 12 months.** Halving the window halves the period in which a closing earns us commission — on a sales cycle where diaspora buyers routinely take months on off-plan, that is real revenue given away in a schema comment. The ledger stays at **12 months**, and if a client ever negotiates it down, that is a commercial decision made in a contract, not a default in a database.
 
 Every inbound message writes to Propel's ledger **before** any handoff (`ops/concierge/attribution-ledger.md`).
 
@@ -162,8 +178,10 @@ A professional exit is a sales asset; improvising one is a dispute. On terminati
 | Webhook verification | Green on first attempt |
 | Token expiry events | Zero |
 | Time from token issued → assistant live | ≤ 24 hours |
-| QA suite before any real buyer | 100% pass, no exceptions |
+| QA suite before any real buyer | **14/14 tests across 4 suites**, 100% pass, no exceptions |
 
+> ⚠️ **Correction: our QA suite is 14 tests across 4 suites, not 25 scenarios.** We sell the fact that we test — so the number we quote has to be the number that exists. Overstating our own test coverage in a document that becomes sales material is the exact failure mode our facts-warranty exists to prevent.
+>
 > ⚠️ **Removed from the source spec: "display name approved in under 2 hours" and "<500ms latency" as headline KPIs.** Display-name approval is Meta's queue, not our performance — publishing it as a target means owning a delay we cannot influence, and a client will quote it back. Latency is real but not the differentiator; our gap against a human sales team is measured in hours, and we never trade guardrails for milliseconds.
 
 ---

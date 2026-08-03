@@ -82,6 +82,33 @@ The assistant needs a WhatsApp number, and there's a genuine choice:
 
 ---
 
+## Pre-session email (send once the right person is identified)
+
+*Operator runbook for the session itself: `ops/setup/SOP-01-client-waba-onboarding.md`.*
+
+> **Subject: 15 minutes to put Shalom Park's 24/7 assistant live**
+>
+> Dear [name],
+>
+> We're ready to connect Shalom Park Estate's WhatsApp to the assistant.
+>
+> One thing worth saying upfront: **we set this up inside IFT Realty's own Meta Business account, not ours.** Shalom Park owns the number, the display name, the verification and every conversation. If we ever stop working together, all of it stays with you — you'd simply switch our access off.
+>
+> Before the call, please have ready:
+>
+> 1. **Facebook admin access** to IFT Realty's Meta Business account *(business.facebook.com)* — this needs to be someone with admin rights, not just an employee login
+> 2. **The CAC certificate** for IFT Realty Ltd, for Meta's business verification
+> 3. **A new, unused SIM** for the assistant, with the phone to hand
+>
+> On point 3 — this matters, so I'd rather flag it than have it bite us: a number connected to the WhatsApp API **can no longer be used in the WhatsApp app on a phone.** So we must not use Collins' line or any number your team is actively selling on; it would take that line out of service and the chat history doesn't transfer. A fresh SIM costs about ₦500 and avoids the problem entirely.
+>
+> Session: [date / time] · [link]
+>
+> Adedamola · Propel
+> getpropel.tech
+
+---
+
 ## What we do once access lands
 
 | Step | Who | Time |

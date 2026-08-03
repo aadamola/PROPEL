@@ -197,6 +197,10 @@ Both are **required** and must be live URLs before submission:
 
 Whichever it is, we learn it in one afternoon rather than three weeks into a client's expectations.
 
+### The executable procedure
+
+**`ops/setup/SOP-01-client-waba-onboarding.md`** is now the operator runbook for this path — ownership model, the number decision, phases A–E, credential handling, attribution wiring, offboarding, risks and KPIs. Run identically for every client.
+
 ### Client-facing pack
 
 Written for the client, plain language, no jargon: **`clients/shalom-park/04-meta-access-pack.md`** — who to ask, a 20-minute screen-share script with five steps and a visible "done" signal for each, and the WhatsApp-number decision framed so they choose correctly.

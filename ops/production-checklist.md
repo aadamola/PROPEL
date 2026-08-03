@@ -56,7 +56,8 @@ Verified July 2026 — every one of these is a thing cheap competitors over-prom
 - [ ] **(A)** Create the Meta app + register 09112714482 + set webhooks (`ops/setup/meta-app-setup.md` §9).
 - [ ] **(A · afternoon)** ⚡ **PROVE THE FAST LANE:** create a test app inside a client-owned portfolio and send one message. If self-integration works without App Review, Shalom Park's build stops waiting on our CAC (`meta-app-setup.md` §9b). **Verify before promising them any date.**
 - [ ] 🔴 **(A · 1 message)** Ask Shalom Park **who holds the CAC documents and can grant Meta portfolio admin** — *not Collins; he's a Sales Executive with neither*. Script: `clients/shalom-park/04-meta-access-pack.md`.
-- [ ] **(A · 20 min call)** Run the access pack live on screen share — portfolio, accounts, verification, partner access, WhatsApp number decision. **Do not send it as a checklist and hope.**
+- [ ] **(A · 20 min call)** Run **SOP #01** live on screen share (`ops/setup/SOP-01-client-waba-onboarding.md`): Business Manager → verification → WABA + **new dedicated SIM** → Employee-role System User → permanent token → webhook. **Do not send it as a checklist and hope.**
+- [ ] **(A)** 🔴 **Never bind Collins' 08064834680.** It would kill the WhatsApp app on the primary sales rep's working line. New SIM, always.
 - [ ] **(B)** Draft privacy policy + data-deletion pages — **App Review cannot be submitted without both live**.
 - [ ] **(A)** **Submit App Review for Advanced Access** once Business Verification clears. *5–10 business days.*
 

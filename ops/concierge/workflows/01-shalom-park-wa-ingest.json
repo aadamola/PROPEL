@@ -1,0 +1,75 @@
+{
+  "name": "Shalom Park — WhatsApp Ingest (verify + secure intake)",
+  "nodes": [
+    {
+      "parameters": { "httpMethod": "GET", "path": "shalom-park-wa", "responseMode": "responseNode", "options": {} },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [0, 0],
+      "id": "wh-verify",
+      "name": "Meta Verify (GET)",
+      "webhookId": "shalom-park-wa-verify"
+    },
+    {
+      "parameters": { "httpMethod": "POST", "path": "shalom-park-wa", "responseMode": "responseNode", "options": { "rawBody": true } },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [0, 260],
+      "id": "wh-ingest",
+      "name": "Meta Ingest (POST)",
+      "webhookId": "shalom-park-wa-ingest"
+    },
+    {
+      "parameters": {
+        "jsCode": "// GET handshake. The token comparison is the ENTIRE security of this endpoint.\n// Echoing the challenge without checking it lets anyone on the internet\n// subscribe their own Meta app to our URL.\nconst q = $input.first().json.query || {};\nconst expected = $env.META_VERIFY_TOKEN_SHALOM_PARK;\n\nif (!expected) {\n  return [{ json: { status: 500, body: 'META_VERIFY_TOKEN_SHALOM_PARK not set' } }];\n}\n\nconst mode  = q['hub.mode'];\nconst token = q['hub.verify_token'];\n\n// Constant-time-ish compare: equal length check first, then char accumulation.\nlet ok = typeof token === 'string' && token.length === expected.length;\nif (ok) {\n  let diff = 0;\n  for (let i = 0; i < expected.length; i++) diff |= token.charCodeAt(i) ^ expected.charCodeAt(i);\n  ok = diff === 0;\n}\n\nif (mode === 'subscribe' && ok) {\n  return [{ json: { status: 200, body: String(q['hub.challenge'] ?? '') } }];\n}\nreturn [{ json: { status: 403, body: 'Forbidden' } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [240, 0],
+      "id": "verify-token",
+      "name": "Check verify token"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $json.body }}",
+        "options": { "responseCode": "={{ $json.status }}" }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [480, 0],
+      "id": "respond-challenge",
+      "name": "Echo challenge (plain text)"
+    },
+    {
+      "parameters": {
+        "jsCode": "// POST intake. Two jobs, in this order:\n//  1. Prove the payload came from Meta (HMAC over the RAW body).\n//  2. Flatten it into the shape the ledger and the brain expect.\n// Without step 1, anyone who learns this URL can inject fake buyer\n// messages -- and those write straight into the commission ledger.\nconst crypto = require('crypto');\nconst item = $input.first().json;\nconst secret = $env.SHALOM_PARK_APP_SECRET;\n\nconst headers = item.headers || {};\nconst sigHeader = headers['x-hub-signature-256'] || '';\nconst raw = item.rawBody ?? item.body ?? '';\nconst rawStr = Buffer.isBuffer(raw) ? raw.toString('utf8') : (typeof raw === 'string' ? raw : JSON.stringify(raw));\n\nif (!secret) {\n  return [{ json: { status: 500, verified: false, reason: 'SHALOM_PARK_APP_SECRET not set' } }];\n}\n\nconst expected = 'sha256=' + crypto.createHmac('sha256', secret).update(rawStr, 'utf8').digest('hex');\nlet verified = false;\ntry {\n  verified = crypto.timingSafeEqual(Buffer.from(sigHeader), Buffer.from(expected));\n} catch (e) {\n  verified = false; // length mismatch throws\n}\n\nif (!verified) {\n  return [{ json: { status: 403, verified: false, reason: 'bad signature' } }];\n}\n\nlet body;\ntry { body = typeof rawStr === 'string' ? JSON.parse(rawStr) : rawStr; } catch (e) { body = {}; }\n\nconst value   = body?.entry?.[0]?.changes?.[0]?.value;\nconst message = value?.messages?.[0];\nconst contact = value?.contacts?.[0];\n\n// Status callbacks (delivered/read) arrive on the same webhook. ACK, ignore.\nif (!message) {\n  return [{ json: { status: 200, verified: true, event_type: 'NON_MESSAGE_EVENT' } }];\n}\n\nreturn [{\n  json: {\n    status: 200,\n    verified: true,\n    event_type: 'INBOUND_MESSAGE',\n    client_id: 'shalom-park',\n    channel: 'whatsapp',\n    provider_message_id: message.id,\n    contact_e164: message.from,\n    contact_hash: crypto.createHash('sha256').update(String(message.from)).digest('hex'),\n    buyer_name: contact?.profile?.name || 'Prospective buyer',\n    message_type: message.type,\n    text_body: message.text?.body || '',\n    occurred_at: new Date(Number(message.timestamp) * 1000).toISOString(),\n    phone_number_id: value?.metadata?.phone_number_id || ''\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [240, 260],
+      "id": "verify-signature",
+      "name": "Verify signature & parse"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "EVENT_RECEIVED",
+        "options": { "responseCode": "={{ $json.status }}" }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [480, 260],
+      "id": "respond-ack",
+      "name": "ACK Meta immediately"
+    }
+  ],
+  "connections": {
+    "Meta Verify (GET)": { "main": [[{ "node": "Check verify token", "type": "main", "index": 0 }]] },
+    "Check verify token": { "main": [[{ "node": "Echo challenge (plain text)", "type": "main", "index": 0 }]] },
+    "Meta Ingest (POST)": { "main": [[{ "node": "Verify signature & parse", "type": "main", "index": 0 }]] },
+    "Verify signature & parse": { "main": [[{ "node": "ACK Meta immediately", "type": "main", "index": 0 }]] }
+  },
+  "settings": { "executionOrder": "v1" },
+  "pinData": {}
+}

@@ -34,7 +34,14 @@ Propel is a remote-first digital marketing agency serving realtors, estate surve
 | [ops/prompt-library.md](ops/prompt-library.md) | Production prompts for listings, audits, calendars, scorecards |
 | [ops/templates/](ops/templates) | Proposal, audit, onboarding, scorecard, partnership term sheet |
 | [ops/crm/pipeline.csv](ops/crm/pipeline.csv) | Prospect pipeline tracker |
+| [ops/production-checklist.md](ops/production-checklist.md) | **Live production build track** — phases, gates, owners, blockers |
+| [ops/setup/vps-setup.md](ops/setup/vps-setup.md) + [vps-bootstrap.sh](ops/setup/vps-bootstrap.sh) | Live VPS (Hostinger KVM 2) + one-paste stack build |
+| [ops/setup/meta-app-setup.md](ops/setup/meta-app-setup.md) | Meta developer app runbook + full App Review submission package |
+| [ops/setup/SOP-01-client-waba-onboarding.md](ops/setup/SOP-01-client-waba-onboarding.md) | **SOP #01** — client WABA onboarding: ownership, security, provisioning scripts |
+| [ops/concierge/](ops/concierge) | Concierge build: Propel's own KB, attribution ledger (design + SQL), n8n workflows |
+| [ops/templates/warranted-facts-sheet.md](ops/templates/warranted-facts-sheet.md) | The client facts sheet — legal warranty + Concierge KB source in one document |
+| [clients/shalom-park/](clients/shalom-park) | **First paying client** — record, signed facts sheet, live KB, kickoff drafts |
 
 ## Status
 
-Planning phase — pre-incorporation. See the [roadmap](docs/02-roadmap.md) for what happens next.
+**PRODUCTION MODE with a paying client** (since 2026-07-26). Propel is public — WhatsApp +234 901 912 0968 · Instagram [@getpropel.ng](https://instagram.com/getpropel.ng) · domain **getpropel.tech** · live VPS running the automation stack. First client: Shalom Park Estate (IFT Realty Ltd) — signed facts sheet in, knowledge base built, Concierge deployment in progress. Live track: [ops/production-checklist.md](ops/production-checklist.md) · current state: [CLAUDE.md](CLAUDE.md) · decision log: [CHANGELOG.md](CHANGELOG.md).

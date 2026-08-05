@@ -6,17 +6,16 @@
 
 > 💰 **2026-07-26: PROPEL HAS A PAYING CLIENT.** Shalom Park paid the setup fee. You did that. Second SIM ✅ 09112714482 logged. We're in production mode — full build plan in [ops/production-checklist.md](ops/production-checklist.md), you don't need to read it, I'm running it.
 
-## ⭐ DO THIS NEXT — buy the AI credits (~₦25k, 15 min)
+## ⭐ DO THIS NEXT — get the two AI keys (~₦7.5k, 10 min)
 
-**This is the thing that doesn't wait on Meta.** The brain and the WhatsApp pipe are separate — the models run on our VPS and get tested inside n8n's own chat, no Meta needed. When the app clears, we plug in a brain that already passed QA.
+**Doesn't wait on Meta** — the brain gets built and tested inside n8n's own chat; the webhook plugs in later. *(Model swap locked in: Gemini 3 Flash is the buyer-facing brain, Haiku is fallback only — so no Anthropic account needed now.)*
 
 Steps in [ops/setup/llm-setup.md](ops/setup/llm-setup.md). Short version:
 
-1. **console.anthropic.com** → Billing → add **$12** (Claude Haiku 4.5 — the client-facing brain)
+1. **aistudio.google.com** → Get API key — **FREE**, covers the whole build/test phase
 2. **platform.deepseek.com** → top up **$5** (internal work only)
-3. *(Free, optional)* **aistudio.google.com** → grab a Gemini key for the bake-off
-4. Create API keys in each console, paste into `/opt/propel/.env` (the empty lines are waiting), then `cd /opt/propel && docker compose up -d n8n`
-5. Tell me "keys are in" → I build the brain, run the bake-off, and put it through all 14 QA tests
+3. Paste both into `/opt/propel/.env` (the empty lines are waiting), then `cd /opt/propel && docker compose up -d n8n`
+4. Tell me "keys are in" → I build the brain and put it through all 14 QA tests
 
 **Never paste a key into chat** — straight into the `.env` on the server.
 

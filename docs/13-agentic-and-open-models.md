@@ -46,9 +46,9 @@ Priced against the July-2026 market (all $/1M tokens in→out; ₦ at ~₦1,500/
 
 | Slot | Winner | Price | Runners-up & why they lost |
 |---|---|---|---|
-| **T1 — client-facing Concierge** | **Claude Haiku 4.5** — $1 / $5; **prompt caching cuts cached KB/system-prompt reads to ~0.1×** (~$0.10/1M), which is decisive for our shape of traffic (big cached KB, short live turns) | ~$10–15 first credit | GPT-5.6 Luna $1/$6 (pricier out, no caching edge for us) · Gemini 3 Flash $0.50/$3 (**named alternate** — flips in if Haiku disappoints in the sandbox bake-off) · Chinese models excluded from T1 by the NDPA/trust-perimeter line, not price |
+| **T1 — client-facing Concierge** | **Gemini 3 Flash** — $0.50 / $3, with a **free AI Studio tier** covering the entire build/test phase *(FOUNDER SWAP 2026-08-05 — see note below)* | **₦0 to start** (free tier), pay-as-you-go after | **Claude Haiku 4.5 $1/$5 — the named fallback**, flips in if Gemini fails the QA suite or the ear test. Its prompt-caching economics (~0.1× cached reads) remain the counter-argument at scale · GPT-5.6 Luna $1/$6 · Chinese models excluded from T1 by the NDPA/trust-perimeter line, not price |
 | **T2/T3 — internal bulk + agent brains** | **DeepSeek V4 Flash** — $0.14 / $0.28; nothing Western is within an order of magnitude | ~$5 first credit | Kimi K2.6 $0.95/$4 (upgrade path if agent sessions need 2M context/stability) · GLM-5.2 $1.40/$4.40 |
-| **Not buying now** | OpenAI, Gemini, Kimi, GLM | ₦0 | No workload where any of them beats the winner at its tier; revisit at the quarterly re-scan |
+| **Not buying now** | OpenAI, Anthropic (fallback slot), Kimi, GLM | ₦0 | No workload where any of them beats the winner at its tier; Anthropic opens only if Gemini fails QA; revisit at the quarterly re-scan |
 
 ### Routing ruling (2026-07-29) — adopting the hybrid, correcting the models
 
@@ -66,7 +66,7 @@ ADEDAMOLA proposed a dual-model architecture: a fast cheap model for ~90% of cha
 
 | Workload | Handler |
 |---|---|
-| ~90% of buyer chat | **Claude Haiku 4.5** (ruled above), **Gemini 3 Flash** the named alternate — decided by the sandbox bake-off, not by assertion |
+| ~90% of buyer chat | **Gemini 3 Flash** (founder swap 2026-08-05), **Claude Haiku 4.5** the named fallback — the QA suite and ear test remain the binding gate |
 | Prices, totals, instalment maths | **Deterministic code.** No LLM. |
 | Legal, refund, penalty questions | **Verbatim quote + human escalation.** No LLM reasoning. |
 | Anything absent from the KB | Escalate. Unchanged. |
@@ -74,7 +74,9 @@ ADEDAMOLA proposed a dual-model architecture: a fast cheap model for ~90% of cha
 
 *On latency:* the proposed <500ms target is fine but is not the binding constraint. Our competitive gap against a human sales team is measured in hours, not milliseconds; a 1–2 second reply reads as instant on WhatsApp. Do not trade accuracy or guardrails for milliseconds.
 
-**Initial spend: ≈ $15–20 ≈ ₦22k–₦30k total** — inside the docs/07 tooling gate, no founder flag needed. **Production estimate per Concierge client: $10–25/mo (₦15k–₦40k) with caching**, consistent with the ₦30–60k/mo COGS and 75%+ margin already quoted on the Developer tier. Buy trigger: the launch sprint (API billing needs the business identity/cards ADEDAMOLA controls).
+**Founder swap, 2026-08-05 — Gemini 3 Flash promoted from alternate to T1 primary; Haiku 4.5 becomes the named fallback.** The economics favour it: half the price per token, a free tier that makes the whole build/test phase cost ₦0, one paid account instead of two, and no second dollar-card hurdle. Two conditions attached, both binding: **① the QA gate doesn't move** — Gemini ships only if it passes the same 14-test suite and the founder ear test, and Haiku flips in on failure, not on debate; **② re-check the arithmetic at scale** — Anthropic's prompt caching (~0.1× cached reads) can undercut Gemini's sticker price once volume is real, so the monthly cost review compares actual bills, not list prices. NDPA position unchanged: Google is a US provider like Anthropic; the trust-perimeter line stays where it was.
+
+**Initial spend: ≈ $5 ≈ ₦7.5k total** *(down from ₦22–30k — the swap deleted the Anthropic purchase from the critical path)* — inside the docs/07 tooling gate, no founder flag needed. **Production estimate per Concierge client: $10–25/mo (₦15k–₦40k) with caching**, consistent with the ₦30–60k/mo COGS and 75%+ margin already quoted on the Developer tier. Buy trigger: the launch sprint (API billing needs the business identity/cards ADEDAMOLA controls).
 
 **Open models as Concierge brains?** Allowed to *compete*: any open model may enter the bake-off harness. Production requires 100% on injection+grounding suites AND an acceptable data path (self-hosted or vetted regional hosting — not a third-country consumer API). The exam doesn't care about the flag on the model; the data path does.
 

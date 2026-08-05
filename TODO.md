@@ -6,20 +6,27 @@
 
 > 💰 **2026-07-26: PROPEL HAS A PAYING CLIENT.** Shalom Park paid the setup fee. You did that. Second SIM ✅ 09112714482 logged. We're in production mode — full build plan in [ops/production-checklist.md](ops/production-checklist.md), you don't need to read it, I'm running it.
 
-## ⭐ DO THIS NEXT — send me 10 prospect names (20 min)
+## ⭐ DO THIS NEXT — buy the AI credits (~₦25k, 15 min)
 
-Just **names + Instagram handles**. Nothing else. Agents, surveyors, small developers — anyone you'd be comfortable messaging.
+**This is the thing that doesn't wait on Meta.** The brain and the WhatsApp pipe are separate — the models run on our VPS and get tested inside n8n's own chat, no Meta needed. When the app clears, we plug in a brain that already passed QA.
 
-**Why this and not more building:** the server is up, all seven containers are healthy, three knowledge bases are built, and the Meta App Review package is written. **Every producible thing is done.** What we don't have is a second conversation in flight — the pipeline holds exactly one name, the client who already said yes. I've been happy to keep building because building is easier than selling, but infrastructure isn't the constraint and hasn't been for three weeks.
+Steps in [ops/setup/llm-setup.md](ops/setup/llm-setup.md). Short version:
 
-Send the names and I write all 10 audit teardowns — that's your entire outreach week, produced in one go.
+1. **console.anthropic.com** → Billing → add **$12** (Claude Haiku 4.5 — the client-facing brain)
+2. **platform.deepseek.com** → top up **$5** (internal work only)
+3. *(Free, optional)* **aistudio.google.com** → grab a Gemini key for the bake-off
+4. Create API keys in each console, paste into `/opt/propel/.env` (the empty lines are waiting), then `cd /opt/propel && docker compose up -d n8n`
+5. Tell me "keys are in" → I build the brain, run the bake-off, and put it through all 14 QA tests
 
-*Full reasoning: [ops/reports/2026-07-31-progress-and-scale.md](ops/reports/2026-07-31-progress-and-scale.md)*
+**Never paste a key into chat** — straight into the `.env` on the server.
+
+*The 10 prospect names haven't gone anywhere — they're the first item below, and they're still the difference between a build and a business.*
 
 ---
 
 ## THIS WEEK — one per sitting, in this order
 
+- [ ] **(20 min)** **First 10 prospect names** → WhatsApp me names + IG handles. *Unblocks 10 audit teardowns. Longest-outstanding item on this list.*
 - [ ] **(1 message)** 🔴 **Ask Shalom Park who holds the CAC documents + can grant Meta admin.** Script ready in [clients/shalom-park/04-meta-access-pack.md](clients/shalom-park/04-meta-access-pack.md). *Not Collins — he's a Sales Executive with neither. Then do the setup on a 20-min screen share, don't send a checklist.*
 - [ ] **(1 afternoon)** ⚡ **Prove the fast lane** — test app + Meta's free test number, send one message ([ops/setup/meta-app-setup.md](ops/setup/meta-app-setup.md) §9b Step 0). *Settles whether App Review is needed before we promise them a date.*
 - [ ] **(1 conversation)** 💰 **Confirm the Shalom Park care fee and commission rate.** *Possibly revenue already owed — MRR currently reads zero because nothing is confirmed as started. Ask what the setup fee covered, when the ₦250k/mo begins, and pin the commission %.*
@@ -28,7 +35,6 @@ Send the names and I write all 10 audit teardowns — that's your entire outreac
 - [ ] **(10 min)** LLM credits ~₦25k — I'll send you the two exact top-up links once the box is up.
 - [ ] **(10 min)** Meta Business Suite: link @getpropel.ng + WhatsApp, convert IG to a Business account ([ops/setup/account-setup.md](ops/setup/account-setup.md) §7).
 - [ ] **(1 ask)** Shalom Park: sight the title + approval documents. *Site visit ✅ done. This is the last open vetting gate — and with bare-land plots in the mix it matters more, not less. We don't publish a price for land we haven't seen the paper for.*
-- [ ] **(20 min)** First 10 prospect names → WhatsApp me names + IG handles. *Unblocks 10 audit teardowns. You have a client now — that's the line that opens doors.*
 - [ ] **(15 min)** Finish the socials: TikTok + LinkedIn page (§4–5), then post manifesto.png with the Day 1 caption.
 
 ## NOT YET — ignore these (I'll star them when it's time)

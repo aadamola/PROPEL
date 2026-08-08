@@ -3,9 +3,10 @@
     "purpose": "Client registry. Adding client #2 is a row here, not a new workflow.",
     "rule": "Every workflow reads this. Nothing about a client is hardcoded in a node.",
     "defaults": {
-      "model": "gemini-flash-latest",
+      "model": "gemini-3.6-flash",
       "api_version": "v1beta",
-      "_note": "Model ID lives here, not in a node URL. Confirm against your key with: curl -s \"https://generativelanguage.googleapis.com/v1beta/models?key=$KEY\" | grep '\"name\"'"
+      "fallback_model": "gemini-3.5-flash",
+      "_rule": "PIN an explicit version. Never '-latest' (Google can swap the model under a QA-passed system) and never '-preview' (can be withdrawn without notice). Confirm availability with: curl -s 'https://generativelanguage.googleapis.com/v1beta/models?key=$KEY' | grep '\"name\"'"
     }
   },
   "clients": {

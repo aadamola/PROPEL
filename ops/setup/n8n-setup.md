@@ -79,6 +79,8 @@ curl -s "https://generativelanguage.googleapis.com/v1beta/models?key=$(grep '^GE
 
 Send me the output. The model id lives in one place — the `Build prompt` node's `MODEL` constant — so correcting it is a one-line edit, not a re-import.
 
+**Confirmed 6 Aug: the workflows are pinned to `gemini-3.6-flash`.** If you ever change it, use an explicit version — never a `-latest` alias or a `-preview` build, and re-run the QA suite after.
+
 ---
 
 ## Step 3 — Attack it (20 min) — this is the real work

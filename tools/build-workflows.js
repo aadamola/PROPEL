@@ -88,7 +88,7 @@ return [{ json: { ...env, duplicate: false } }];
 
 const buildPrompt = `
 // Model id is configuration, not a hardcoded URL.
-const MODEL = 'gemini-flash-latest';
+const MODEL = 'gemini-3.6-flash';
 const API_VERSION = 'v1beta';
 const MODEL_URL = \`https://generativelanguage.googleapis.com/\${API_VERSION}/models/\${MODEL}:generateContent\`;
 

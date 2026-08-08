@@ -48,6 +48,20 @@
 
 **The envelope is the contract.** Adapters know channels; the core knows conversation; neither knows the other. That separation is what makes the next channel cheap.
 
+## Model pinning — a QA rule, not a preference
+
+**Production runs `gemini-3.6-flash`. Fallback `gemini-3.5-flash`. Never a `-latest` alias, never a `-preview` model.**
+
+- **`-latest` silently changes the model underneath us.** We sell "it passes 14 tests before it speaks to a buyer." If Google repoints the alias the week after we test, that sentence stops being true and nobody gets an alert. A QA guarantee over a moving target is not a guarantee.
+- **`-preview` models can be withdrawn without notice.** A client's assistant going dark because Google retired a preview build is an outage we chose.
+- Model id lives in configuration (`clients.json` `defaults.model`, mirrored in the `Build prompt` node), so upgrading is a one-line change followed by a **re-run of the QA suite** — never a swap in production without re-testing.
+
+Check what a key actually offers before pinning:
+
+```bash
+curl -s "https://generativelanguage.googleapis.com/v1beta/models?key=$KEY" | grep '"name"'
+```
+
 ## Channel notes
 
 | Channel | Inbound | Reply | Constraint that shapes the design |

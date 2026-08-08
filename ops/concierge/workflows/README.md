@@ -19,7 +19,17 @@ Faster than file import, and it's the method to use:
 |---|---|
 | `00-webhook-verification.json` | Generic handshake for Propel's own WhatsApp + Instagram webhooks |
 | `01-shalom-park-wa-ingest.json` | **Shalom Park:** verify handshake + signature-checked message intake on `/webhook/shalom-park-wa` |
-| `02-concierge-brain-gemini.json` | **The brain.** Chat Trigger → KB → prompt → Gemini 3 Flash → guardrails. Testable in n8n's chat panel with no Meta connection |
+| `02-concierge-brain-gemini.json` | **Chat-panel brain** — standalone, for the ear test. No Meta needed |
+| `03-concierge-core.json` | **THE CORE.** Sub-workflow every channel calls: registry → KB → dedup → prompt → Gemini → guardrails → envelope |
+| `04-channel-email.json` | **Email channel** — IMAP in, SMTP out, with auto-reply/bounce/newsletter filtering |
+
+Architecture and the reasoning behind it: [`../architecture.md`](../architecture.md).
+
+## Import order (matters)
+
+**Import `03-concierge-core.json` first**, save it, then copy its workflow ID from the browser URL and paste it into the `Concierge CORE` node of every channel workflow (it ships as `REPLACE_WITH_CORE_WORKFLOW_ID`). A channel workflow pointing at a core that doesn't exist yet fails in a way that reads like a code bug.
+
+Channel workflows also need credentials configured in n8n's UI: **IMAP** and **SMTP** for email.
 
 ---
 

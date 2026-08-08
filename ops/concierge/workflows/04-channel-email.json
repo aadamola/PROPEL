@@ -1,0 +1,187 @@
+{
+  "name": "Propel Concierge — Email channel",
+  "nodes": [
+    {
+      "parameters": {
+        "postProcessAction": "read",
+        "options": {
+          "allowUnauthorizedCerts": false,
+          "forceReconnect": 60
+        }
+      },
+      "type": "n8n-nodes-base.emailReadImap",
+      "typeVersion": 2,
+      "position": [
+        -260,
+        0
+      ],
+      "id": "imap",
+      "name": "Inbox (IMAP)"
+    },
+    {
+      "parameters": {
+        "jsCode": "\n/**\n * Channel normaliser — the single source of truth.\n *\n * Every inbound channel collapses to ONE envelope shape so the brain,\n * the ledger and the dispatcher never learn what a channel is. Adding a\n * channel means adding a case here; it means changing nothing downstream.\n *\n * This file is unit-tested (tools/test-normalizer.js) and its source is\n * embedded verbatim into the workflow JSON at build time, so what ships\n * is exactly what was tested.\n */\n\n\nconst crypto = require('crypto');\n\nconst sha256 = s => crypto.createHash('sha256').update(String(s)).digest('hex');\n\n/** Envelope: the only shape anything downstream ever sees. */\nfunction envelope(o) {\n  return {\n    client_id:           o.client_id || '',\n    channel:             o.channel,            // whatsapp | instagram_dm | instagram_comment | email\n    provider_message_id: o.provider_message_id || '',\n    contact_id:          o.contact_id || '',   // channel-native id, used for replying\n    contact_e164:        o.contact_e164 || '',\n    contact_email:       o.contact_email || '',\n    contact_handle:      o.contact_handle || '',\n    contact_hash:        o.contact_hash || sha256(o.contact_id || o.contact_e164 || o.contact_email || ''),\n    display_name:        o.display_name || '',\n    text:                (o.text || '').trim(),\n    media_type:          o.media_type || 'text',\n    occurred_at:         o.occurred_at || new Date().toISOString(),\n    thread_ref:          o.thread_ref || '',   // what a reply must quote (IG comment id, email Message-ID)\n    subject:             o.subject || '',\n    is_actionable:       o.is_actionable !== false,\n    skip_reason:         o.skip_reason || ''\n  };\n}\n\nconst skip = (channel, reason) => envelope({ channel, is_actionable: false, skip_reason: reason });\n\n/** WhatsApp Cloud API webhook body. */\nfunction fromWhatsApp(body, client_id) {\n  const value = body?.entry?.[0]?.changes?.[0]?.value;\n  if (value?.statuses) return skip('whatsapp', 'status_callback');\n  const m = value?.messages?.[0];\n  if (!m) return skip('whatsapp', 'no_message');\n\n  const contact = value?.contacts?.[0];\n  const type = m.type || 'text';\n  let text = '';\n  if (type === 'text')                      text = m.text?.body || '';\n  else if (type === 'button')               text = m.button?.text || '';\n  else if (type === 'interactive')          text = m.interactive?.button_reply?.title || m.interactive?.list_reply?.title || '';\n  else if (['image','video','document'].includes(type)) text = m[type]?.caption || '';\n\n  return envelope({\n    client_id, channel: 'whatsapp',\n    provider_message_id: m.id,\n    contact_id: m.from, contact_e164: m.from,\n    display_name: contact?.profile?.name || '',\n    text, media_type: type,\n    occurred_at: m.timestamp ? new Date(Number(m.timestamp) * 1000).toISOString() : new Date().toISOString()\n  });\n}\n\n/** Instagram messaging + comment webhooks. */\nfunction fromInstagram(body, client_id) {\n  const entry = body?.entry?.[0];\n\n  // Comment on a post/reel\n  const change = entry?.changes?.[0];\n  if (change?.field === 'comments') {\n    const v = change.value || {};\n    // Never reply to the business replying to itself.\n    if (v.from?.id && entry?.id && v.from.id === entry.id) return skip('instagram_comment', 'own_comment');\n    return envelope({\n      client_id, channel: 'instagram_comment',\n      provider_message_id: v.id,\n      contact_id: v.from?.id, contact_handle: v.from?.username || '',\n      display_name: v.from?.username || '',\n      text: v.text || '',\n      thread_ref: v.id,          // one private reply is allowed against this comment id\n      occurred_at: new Date().toISOString()\n    });\n  }\n\n  // Direct message\n  const msg = entry?.messaging?.[0];\n  if (msg) {\n    if (msg.message?.is_echo) return skip('instagram_dm', 'echo');\n    if (msg.read || msg.delivery) return skip('instagram_dm', 'read_or_delivery_receipt');\n    return envelope({\n      client_id, channel: 'instagram_dm',\n      provider_message_id: msg.message?.mid,\n      contact_id: msg.sender?.id,\n      text: msg.message?.text || '',\n      media_type: msg.message?.attachments?.[0]?.type || 'text',\n      occurred_at: msg.timestamp ? new Date(Number(msg.timestamp)).toISOString() : new Date().toISOString()\n    });\n  }\n  return skip('instagram_dm', 'unrecognised_payload');\n}\n\n/** IMAP Email Trigger output. */\nfunction fromEmail(mail, client_id) {\n  const from = mail?.from?.value?.[0] || {};\n  const address = (from.address || mail?.from?.text || '').toLowerCase();\n\n  // Never answer machines. An auto-reply loop between two robots is\n  // the classic way an email bot embarrasses a client.\n  const headers = mail?.headers || {};\n  const h = k => String(headers[k] ?? headers[k?.toLowerCase()] ?? '');\n  if (h('auto-submitted') && !/^no$/i.test(h('auto-submitted'))) return skip('email', 'auto_submitted');\n  if (h('x-autoreply') || h('x-autorespond') || h('precedence').match(/bulk|junk|list/i)) return skip('email', 'auto_responder');\n  if (h('list-unsubscribe')) return skip('email', 'bulk_mail');\n  if (/^(mailer-daemon|postmaster|no-?reply|do-?not-?reply|bounce)/i.test(address)) return skip('email', 'noreply_sender');\n\n  const subject = mail?.subject || '';\n  if (/^(out of office|automatic reply|auto:|undeliverable)/i.test(subject)) return skip('email', 'out_of_office');\n\n  // Strip quoted history so the model reads the new message, not the whole thread.\n  const raw = mail?.textPlain || mail?.text || '';\n  const text = String(raw)\n    .split(/^\\s*(On .+ wrote:|-{2,}\\s*Original Message|_{5,}|From:\\s)/m)[0]\n    .split(/\\n>{1,}/)[0]\n    .trim();\n\n  return envelope({\n    client_id, channel: 'email',\n    provider_message_id: mail?.messageId || '',\n    contact_id: address, contact_email: address,\n    display_name: from.name || '',\n    text, subject,\n    thread_ref: mail?.messageId || '',\n    occurred_at: mail?.date ? new Date(mail.date).toISOString() : new Date().toISOString()\n  });\n}\n\nfunction normalize(channel, payload, client_id) {\n  switch (channel) {\n    case 'whatsapp':  return fromWhatsApp(payload, client_id);\n    case 'instagram': return fromInstagram(payload, client_id);\n    case 'email':     return fromEmail(payload, client_id);\n    default:          return skip(channel || 'unknown', 'unsupported_channel');\n  }\n}\n\n\n// IMAP Trigger emits one item per message.\nconst mail = $input.first().json;\nconst env = normalize('email', mail, 'shalom-park');\nreturn [{ json: env }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -40,
+        0
+      ],
+      "id": "normalize-email",
+      "name": "Normalise"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "actionable",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              },
+              "leftValue": "={{ $json.is_actionable }}",
+              "rightValue": ""
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        180,
+        0
+      ],
+      "id": "if-actionable",
+      "name": "Worth answering?"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "REPLACE_WITH_CORE_WORKFLOW_ID",
+          "mode": "id"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "client_id": "={{ $json.client_id }}",
+            "channel": "={{ $json.channel }}",
+            "provider_message_id": "={{ $json.provider_message_id }}",
+            "contact_id": "={{ $json.contact_id }}",
+            "contact_email": "={{ $json.contact_email }}",
+            "contact_hash": "={{ $json.contact_hash }}",
+            "display_name": "={{ $json.display_name }}",
+            "text": "={{ $json.text }}",
+            "thread_ref": "={{ $json.thread_ref }}",
+            "subject": "={{ $json.subject }}"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        400,
+        -100
+      ],
+      "id": "call-core",
+      "name": "Concierge CORE"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.contact_id }}",
+        "subject": "={{ $json.subject }}",
+        "emailFormat": "text",
+        "message": "={{ $json.reply }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        620,
+        -100
+      ],
+      "id": "send-email",
+      "name": "Reply by email"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Auto-replies, bounces and newsletters land here. Logged, never answered.\nreturn [{ json: { ignored: true, reason: $json.skip_reason, from: $json.contact_email } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        400,
+        120
+      ],
+      "id": "log-skip",
+      "name": "Log ignored mail"
+    }
+  ],
+  "connections": {
+    "Inbox (IMAP)": {
+      "main": [
+        [
+          {
+            "node": "Normalise",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalise": {
+      "main": [
+        [
+          {
+            "node": "Worth answering?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Worth answering?": {
+      "main": [
+        [
+          {
+            "node": "Concierge CORE",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Log ignored mail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Concierge CORE": {
+      "main": [
+        [
+          {
+            "node": "Reply by email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {}
+}

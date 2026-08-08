@@ -38,6 +38,19 @@ Open **https://engine.getpropel.tech**
 
 ---
 
+## Step 1b — Create the Gemini credential (2 min) 🔑
+
+The workflows get the API key from **n8n's own credential store**, not from environment variables. It's encrypted at rest with your `N8N_ENCRYPTION_KEY`, and it means no workflow depends on relaxing n8n's security settings to work.
+
+1. n8n → **Credentials → Add credential**
+2. Search for and choose **Query Auth**
+3. Fill in exactly:
+   - **Name** (the parameter): `key`
+   - **Value**: your Gemini API key from aistudio.google.com
+4. Name the credential **`Gemini API Key`** → **Save**
+
+✅ **Expected:** it appears under Credentials. You do this once; every Gemini node reuses it.
+
 ## Step 2 — Import the brain and prove Gemini works (10 min)
 
 Start here rather than with the plumbing — this is the fastest way to prove the model, the key and the server are all working together.
@@ -45,15 +58,18 @@ Start here rather than with the plumbing — this is the fastest way to prove th
 1. In n8n: **Workflows → Create Workflow**
 2. Open [`ops/concierge/workflows/02-concierge-brain-gemini.json`](../concierge/workflows/02-concierge-brain-gemini.json) on GitHub → **Copy raw file**
 3. Click anywhere on the n8n canvas → **Ctrl+V** (Cmd+V on Mac)
-4. **Save** (top right), then toggle **Inactive → Active** 🟢
+4. **Open the `Gemini 3 Flash` node** → in **Credential for Query Auth**, select **`Gemini API Key`** → back to canvas
+5. **Save** (top right), then toggle **Inactive → Active** 🟢
 
 ✅ **Expected:** five nodes appear — *Chat Trigger → Load KB → Build prompt → Gemini 3 Flash → Guardrails*
+
+> **`access to env vars denied`** means the node is still on the old version. Re-copy the workflow JSON from GitHub (it was changed on 6 Aug to use the credential) and select the credential in step 4.
 
 5. Click **Chat** at the bottom of the canvas. Send: **"How much is the 4 bedroom?"**
 
 ✅ **Expected:** it answers **₦185,000,000, 3 units available** — straight from Collins' signed facts sheet.
 
-**If you get an error instead**, open the red node and send me the message. Most likely causes, in order: `GEMINI_API_KEY` is empty in `/opt/propel/.env`, or Step 0 wasn't run.
+**If you get an error instead**, open the red node and send me the message. Most likely: the credential wasn't selected on the Gemini node, or the key value has a stray space.
 
 ---
 
@@ -80,7 +96,8 @@ Still in that chat panel. Try to make it say something it shouldn't:
 
 1. **Workflows → Create Workflow**
 2. Paste [`03-concierge-core.json`](../concierge/workflows/03-concierge-core.json)
-3. **Save.** Leave it **Inactive** — sub-workflows don't need activating.
+3. **Open its `Gemini 3 Flash` node → select the same `Gemini API Key` credential.**
+4. **Save.** Leave it **Inactive** — sub-workflows don't need activating.
 4. **Copy the workflow ID from the browser URL:** `.../workflow/`**`AbCdEf123456`** ← that part
 5. Send me that ID
 

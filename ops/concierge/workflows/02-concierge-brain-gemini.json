@@ -45,13 +45,15 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "=https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash:generateContent?key={{ $env.GEMINI_API_KEY }}",
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash:generateContent",
         "sendBody": true,
         "specifyBody": "json",
         "jsonBody": "={{ JSON.stringify({ system_instruction: { parts: [{ text: $json.system }] }, contents: [{ role: 'user', parts: [{ text: $json.user_message }] }], generationConfig: { temperature: 0.2, maxOutputTokens: 800, responseMimeType: 'application/json' } }) }}",
         "options": {
           "timeout": 20000
-        }
+        },
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpQueryAuth"
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,

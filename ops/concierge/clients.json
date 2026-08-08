@@ -1,7 +1,12 @@
 {
   "_meta": {
     "purpose": "Client registry. Adding client #2 is a row here, not a new workflow.",
-    "rule": "Every workflow reads this. Nothing about a client is hardcoded in a node."
+    "rule": "Every workflow reads this. Nothing about a client is hardcoded in a node.",
+    "defaults": {
+      "model": "gemini-flash-latest",
+      "api_version": "v1beta",
+      "_note": "Model ID lives here, not in a node URL. Confirm against your key with: curl -s \"https://generativelanguage.googleapis.com/v1beta/models?key=$KEY\" | grep '\"name\"'"
+    }
   },
   "clients": {
     "shalom-park": {
@@ -10,14 +15,42 @@
       "status": "active",
       "kb_file": "clients/shalom-park/kb.json",
       "channels": {
-        "whatsapp": { "enabled": true,  "webhook_path": "shalom-park-wa", "token_env": "SHALOM_PARK_WABA_TOKEN", "phone_id_env": "SHALOM_PARK_WABA_PHONE_ID", "verify_env": "META_VERIFY_TOKEN_SHALOM_PARK", "secret_env": "SHALOM_PARK_APP_SECRET" },
-        "instagram": { "enabled": false, "webhook_path": "shalom-park-ig", "token_env": "SHALOM_PARK_IG_TOKEN", "secret_env": "SHALOM_PARK_APP_SECRET" },
-        "email":     { "enabled": true,  "address": "sales@shalomparknigeria.com", "mailbox_env": "SHALOM_PARK_IMAP" }
+        "whatsapp": {
+          "enabled": true,
+          "webhook_path": "shalom-park-wa",
+          "token_env": "SHALOM_PARK_WABA_TOKEN",
+          "phone_id_env": "SHALOM_PARK_WABA_PHONE_ID",
+          "verify_env": "META_VERIFY_TOKEN_SHALOM_PARK",
+          "secret_env": "SHALOM_PARK_APP_SECRET"
+        },
+        "instagram": {
+          "enabled": false,
+          "webhook_path": "shalom-park-ig",
+          "token_env": "SHALOM_PARK_IG_TOKEN",
+          "secret_env": "SHALOM_PARK_APP_SECRET"
+        },
+        "email": {
+          "enabled": true,
+          "address": "sales@shalomparknigeria.com",
+          "mailbox_env": "SHALOM_PARK_IMAP"
+        }
       },
       "escalation": {
-        "primary":    { "name": "Collins", "whatsapp": "2348064834680", "hours": "Mon-Fri 08:00-20:00" },
-        "secondary":  { "name": "Mercy",   "whatsapp": "2349035508012", "hours": "Weekends / evenings" },
-        "supervisor": { "name": "Tobi",    "whatsapp": "2347035461661", "hours": "Overrides" },
+        "primary": {
+          "name": "Collins",
+          "whatsapp": "2348064834680",
+          "hours": "Mon-Fri 08:00-20:00"
+        },
+        "secondary": {
+          "name": "Mercy",
+          "whatsapp": "2349035508012",
+          "hours": "Weekends / evenings"
+        },
+        "supervisor": {
+          "name": "Tobi",
+          "whatsapp": "2347035461661",
+          "hours": "Overrides"
+        },
         "unclaimed_alert_minutes": 15
       },
       "capabilities": {
@@ -40,19 +73,45 @@
       "status": "active",
       "kb_file": "ops/concierge/propel-kb.json",
       "channels": {
-        "whatsapp": { "enabled": true,  "webhook_path": "propel-wa", "token_env": "PROPEL_WABA_TOKEN", "phone_id_env": "PROPEL_WABA_PHONE_ID", "verify_env": "META_VERIFY_TOKEN_PROPEL", "secret_env": "PROPEL_APP_SECRET" },
-        "instagram": { "enabled": true,  "webhook_path": "propel-ig", "token_env": "PROPEL_IG_TOKEN", "secret_env": "PROPEL_APP_SECRET" },
-        "email":     { "enabled": true,  "address": "hello@getpropel.tech", "mailbox_env": "PROPEL_IMAP" }
+        "whatsapp": {
+          "enabled": true,
+          "webhook_path": "propel-wa",
+          "token_env": "PROPEL_WABA_TOKEN",
+          "phone_id_env": "PROPEL_WABA_PHONE_ID",
+          "verify_env": "META_VERIFY_TOKEN_PROPEL",
+          "secret_env": "PROPEL_APP_SECRET"
+        },
+        "instagram": {
+          "enabled": true,
+          "webhook_path": "propel-ig",
+          "token_env": "PROPEL_IG_TOKEN",
+          "secret_env": "PROPEL_APP_SECRET"
+        },
+        "email": {
+          "enabled": true,
+          "address": "hello@getpropel.tech",
+          "mailbox_env": "PROPEL_IMAP"
+        }
       },
       "escalation": {
-        "primary": { "name": "Adedamola", "whatsapp": "2349019120968", "hours": "Business hours" },
+        "primary": {
+          "name": "Adedamola",
+          "whatsapp": "2349019120968",
+          "hours": "Business hours"
+        },
         "unclaimed_alert_minutes": 30
       },
       "capabilities": {
-        "voice_notes": false, "booking": false, "document_vault": false,
-        "lead_scoring": false, "followup_sequences": false, "multilingual": false
+        "voice_notes": false,
+        "booking": false,
+        "document_vault": false,
+        "lead_scoring": false,
+        "followup_sequences": false,
+        "multilingual": false
       },
-      "policy": { "attribution_window_months": 12 }
+      "policy": {
+        "attribution_window_months": 12
+      }
     }
   }
 }

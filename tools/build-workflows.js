@@ -87,6 +87,11 @@ return [{ json: { ...env, duplicate: false } }];
 `;
 
 const buildPrompt = `
+// Model id is configuration, not a hardcoded URL.
+const MODEL = 'gemini-flash-latest';
+const API_VERSION = 'v1beta';
+const MODEL_URL = \`https://generativelanguage.googleapis.com/\${API_VERSION}/models/\${MODEL}:generateContent\`;
+
 const env = $input.first().json;
 if (env.fatal || env.duplicate) return [{ json: env }];
 
@@ -102,7 +107,7 @@ const CHANNEL_HINT = {
   email:              'Channel: Email. You may use a short greeting, two or three brief paragraphs, and a sign-off. Still never state a fact absent from the knowledge base.'
 }[env.channel] || '';
 
-return [{ json: { ...env, system: SYSTEM + '\\n\\n' + CHANNEL_HINT, user_message: env.text } }];
+return [{ json: { ...env, model_url: MODEL_URL, system: SYSTEM + '\\n\\n' + CHANNEL_HINT, user_message: env.text } }];
 `;
 
 const finalise = `
@@ -169,7 +174,7 @@ const core = {
         // Key lives in an n8n credential, not $env: encrypted at rest with
         // N8N_ENCRYPTION_KEY, and it does not require relaxing n8n's
         // env-access policy just to make one HTTP call work.
-        url: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash:generateContent',
+        url: '={{ $json.model_url }}',
         authentication: 'genericCredentialType', genericAuthType: 'httpQueryAuth',
         sendBody: true, specifyBody: 'json',
         jsonBody: "={{ $json.fatal || $json.duplicate ? '{}' : JSON.stringify({ system_instruction: { parts: [{ text: $json.system }] }, contents: [{ role: 'user', parts: [{ text: $json.user_message }] }], generationConfig: { temperature: 0.2, maxOutputTokens: 800, responseMimeType: 'application/json' } }) }}",

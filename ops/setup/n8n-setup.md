@@ -69,7 +69,15 @@ Start here rather than with the plumbing — this is the fastest way to prove th
 
 ✅ **Expected:** it answers **₦185,000,000, 3 units available** — straight from Collins' signed facts sheet.
 
-**If you get an error instead**, open the red node and send me the message. Most likely: the credential wasn't selected on the Gemini node, or the key value has a stray space.
+**If you get an error instead**, open the red node and send me the message.
+
+**`models/... is not found for API version v1beta`** means the model name doesn't exist on your key. Ask your key what it actually has — this prints the list without ever showing the key:
+
+```
+curl -s "https://generativelanguage.googleapis.com/v1beta/models?key=$(grep '^GEMINI_API_KEY=' /opt/propel/.env | cut -d= -f2-)" | grep '"name"'
+```
+
+Send me the output. The model id lives in one place — the `Build prompt` node's `MODEL` constant — so correcting it is a one-line edit, not a re-import.
 
 ---
 

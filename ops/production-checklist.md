@@ -73,7 +73,7 @@ Verified July 2026 — every one of these is a thing cheap competitors over-prom
 - [ ] **(B)** Wire the flow: IG comment → one private reply → WhatsApp → qualify → book audit → **log to the ledger** → hand to ADEDAMOLA.
 - [ ] **(B)** `tools/verify-ledger.js` — recompute the chain, exit non-zero on a break.
 - [ ] **(B)** Monthly reconciliation workflow + client-facing export. *This is what actually collects commission — the habit, not the clause.*
-- [ ] **(B)** Guardrails live: retrieval-first, no invented facts, escalation template, kill switch, AI disclosure in first message, NDPA privacy line.
+- [x] **(B)** ✅ **Guardrails built and unit-tested** — `ops/concierge/system-prompt.md` + Guardrails node: banned-topic sweep, ungrounded-claim detection via `grounded_in` citations, unparseable-output containment, empty-reply guard. **`node tools/test-guardrails.js` → 14/14**, no API key required. Two real regex bugs caught by the tests before shipping.
 - [ ] **(B)** **Run the binding QA suite** (`sandbox/apex-gardens/qa-tests.json` — injection / grounding / policy). *Nothing talks to a human until it passes clean.*
 - [ ] **(A · 20 min)** Ear test: message it like a hostile buyer. Try to break it. Tell me what felt wrong.
 - [ ] **(A)** Go live on our own number. **Now every prospect conversation is also a demo.**

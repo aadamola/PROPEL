@@ -32,6 +32,7 @@
 - [ ] **(10 min)** Meta Business Suite: link @getpropel.ng + WhatsApp, convert IG to a Business account ([ops/setup/account-setup.md](ops/setup/account-setup.md) §7).
 - [ ] **(1 ask)** Shalom Park: sight the title + approval documents. *Site visit ✅ done. This is the last open vetting gate — and with bare-land plots in the mix it matters more, not less. We don't publish a price for land we haven't seen the paper for.*
 - [ ] **(15 min)** Finish the socials: TikTok + LinkedIn page (§4–5), then post manifesto.png with the Day 1 caption.
+- [ ] **(5 min, before 29 Aug)** ⏰ **VPS renewal decision** — you're on a monthly term with auto-renewal on. Check the renewal quote in Hostinger; if 12 months prepaid beats it, switch. Renewal is where their 2–3× jump lands.
 
 ## NOT YET — ignore these (I'll star them when it's time)
 

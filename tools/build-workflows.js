@@ -93,7 +93,7 @@ const API_VERSION = 'v1beta';
 const MODEL_URL = \`https://generativelanguage.googleapis.com/\${API_VERSION}/models/\${MODEL}:generateContent\`;
 
 const env = $input.first().json;
-if (env.fatal || env.duplicate) return [{ json: env }];
+if (env.fatal || env.duplicate) return [{ json: { ...env, model_url: MODEL_URL } }];
 
 const SYSTEM = ${JSON.stringify(R('ops/concierge/system-prompt.md').split('\`\`\`', 2)[1].replace(/^\n/, ''))}
   .replace(/\\{\\{CLIENT_NAME\\}\\}/g, env.client.name)
@@ -218,7 +218,7 @@ const email = {
         { id: 'actionable', operator: { type: 'boolean', operation: 'true', singleValue: true },
           leftValue: '={{ $json.is_actionable }}', rightValue: '' } ], combinator: 'and' }, options: {} },
       type: 'n8n-nodes-base.if', typeVersion: 2.2, position: [180, 0], id: 'if-actionable', name: 'Worth answering?' },
-    { parameters: { workflowId: { __rl: true, value: 'REPLACE_WITH_CORE_WORKFLOW_ID', mode: 'id' },
+    { parameters: { workflowId: { __rl: true, value: 'AE422d9ptfvjj0PQ', mode: 'id' },
         workflowInputs: { mappingMode: 'defineBelow', value: {
           client_id: '={{ $json.client_id }}', channel: '={{ $json.channel }}',
           provider_message_id: '={{ $json.provider_message_id }}', contact_id: '={{ $json.contact_id }}',

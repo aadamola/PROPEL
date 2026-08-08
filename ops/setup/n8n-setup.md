@@ -113,7 +113,11 @@ Still in that chat panel. Try to make it say something it shouldn't:
 
 ✅ **Expected:** seven nodes — *Called by a channel → Load client + KB → Dedup gate → Build prompt → Gemini 3 Flash → Guardrails → Build response envelope*
 
-This is the shared brain every channel will call. Nothing points at it yet — that's Step 5.
+> ⚠️ **Do not press "Test workflow" on the CORE.** It's a sub-workflow: it expects a message handed to it by a channel, so running it standalone feeds it nothing and it fails by design. **Save it and move on** — you test the brain through `02`'s chat panel, and you test the CORE by triggering a channel.
+>
+> *(It now fails cleanly with a stated reason rather than a confusing URL error — but a red node still isn't proof of a problem here.)*
+
+This is the shared brain every channel will call. **Core workflow ID is `AE422d9ptfvjj0PQ`** — already wired into the email channel, so Step 5 needs no ID pasting.
 
 ---
 

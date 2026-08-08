@@ -7,6 +7,10 @@
       "api_version": "v1beta",
       "fallback_model": "gemini-3.5-flash",
       "_rule": "PIN an explicit version. Never '-latest' (Google can swap the model under a QA-passed system) and never '-preview' (can be withdrawn without notice). Confirm availability with: curl -s 'https://generativelanguage.googleapis.com/v1beta/models?key=$KEY' | grep '\"name\"'"
+    },
+    "n8n": {
+      "core_workflow_id": "AE422d9ptfvjj0PQ",
+      "instance": "https://engine.getpropel.tech"
     }
   },
   "clients": {

@@ -90,6 +90,14 @@ const cases = [
                  return run('Build response envelope', { ...c, duplicate: false, reply: 'x', escalate: false }); },
     ok: r => r.addons.booking === false && r.addons.doc_vault === false && r.addons.voice_note === false },
 
+  { n: 'CORE-17 empty input (manual run) still yields a usable model_url',
+    run: () => { const c = run('Load client + KB', {}); const d = run('Dedup gate', c); return run('Build prompt', d); },
+    ok: r => r.fatal === true && typeof r.model_url === 'string' && r.model_url.includes('gemini-3.6-flash') },
+
+  { n: 'CORE-18 duplicate path also carries model_url',
+    run: () => run('Build prompt', { ...base, duplicate: true }),
+    ok: r => typeof r.model_url === 'string' && r.model_url.length > 0 },
+
   { n: 'CORE-16 enabling a capability arms its hook on intent',
     run: () => { const c = run('Load client + KB', { ...base, text: 'I want to book an inspection' });
                  c.capabilities = { ...c.capabilities, booking: true };

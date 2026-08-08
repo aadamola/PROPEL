@@ -67,8 +67,9 @@
       "parameters": {
         "workflowId": {
           "__rl": true,
-          "value": "REPLACE_WITH_CORE_WORKFLOW_ID",
-          "mode": "id"
+          "value": "AE422d9ptfvjj0PQ",
+          "mode": "id",
+          "cachedResultName": "Propel Concierge — CORE (shared by every channel)"
         },
         "workflowInputs": {
           "mappingMode": "defineBelow",

@@ -6,24 +6,23 @@
 
 > 💰 **2026-07-26: PROPEL HAS A PAYING CLIENT.** Shalom Park paid the setup fee. You did that. Second SIM ✅ 09112714482 logged. We're in production mode — full build plan in [ops/production-checklist.md](ops/production-checklist.md), you don't need to read it, I'm running it.
 
-## ⭐ DO THIS NEXT — set up n8n, step by step (~40 min total)
+## ⭐ DO THIS NEXT — the Shalom Park Business Suite session
 
-**Full guide with expected results at every step: [ops/setup/n8n-setup.md](ops/setup/n8n-setup.md).** Follow it in order; if a step doesn't give the expected result, stop and send me a screenshot.
+**Full script: [clients/shalom-park/05-business-suite-session.md](clients/shalom-park/05-business-suite-session.md)** — 15 min prep alone, then a 25-min call you read off while sharing your screen.
 
-**Step 0 (3 min) — re-run the bootstrap.** One setting is missing that lets workflows read your Gemini key. Don't hand-edit the compose file; the bootstrap regenerates it.
+**Before you book it, two things must be true:**
+
+1. **The right person is on the call** — someone with **admin** on IFT Realty's Meta account *and* access to the CAC certificate. **Not Collins**; he's a Sales Executive and almost certainly has neither. Message 1 in [04-meta-access-pack.md](clients/shalom-park/04-meta-access-pack.md) finds them.
+2. **They have a NEW, unused SIM** with the phone in the room. 🔴 **Never Collins' 08064834680 or any line their team sells on** — registering a number to Cloud API deletes WhatsApp on that handset and the history doesn't transfer.
+
+**Your 15-minute prep** (do it alone, before the call):
 ```
-cd ~
-curl -fsSL -o bootstrap.sh https://raw.githubusercontent.com/aadamola/PROPEL/main/ops/setup/vps-bootstrap.sh
-bash bootstrap.sh
+cd /opt/propel
+bash ops/setup/apply-client-ledger.sh shalom-park
 ```
+then import `01-shalom-park-wa-ingest.json` into n8n and **Activate** it — Meta tests the webhook the second you click Verify, and an inactive workflow returns a 404 that looks like a server fault.
 
-**Step 1 (5 min)** — open `https://engine.getpropel.tech`. If it asks you to create an owner account, that's normal — **save those details in your password manager.**
-
-**Step 2 (10 min)** — paste in `02-concierge-brain-gemini.json`, Save, Activate, click **Chat**, ask *"How much is the 4 bedroom?"* → should answer **₦185,000,000, 3 available**.
-
-**Step 3 (20 min) — attack it.** Eight test questions in the guide. Tell me anything that feels wrong. *This is the step that decides whether we keep Gemini or flip to the Haiku fallback.*
-
-**Step 4 (5 min)** — paste in `03-concierge-core.json`, Save, and **send me the workflow ID from the URL.**
+*Still outstanding from the last session: a successful chat with `02` (Step 2 of the n8n runbook). Worth doing first — it takes five minutes and proves the brain works before you put anything in front of a client.*
 
 ---
 

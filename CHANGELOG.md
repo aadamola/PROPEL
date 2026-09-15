@@ -2,6 +2,15 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-09-15 (correction 2) — My script reported success on an empty database
+
+- **`lead` and `lead_event` were not created, and `vps-tools.sh schema` said it worked.** Two defects, both mine.
+- **🔴 Defect 1 — no `ON_ERROR_STOP`.** `psql` prints an error, carries on through an aborted transaction, rolls the whole script back at `COMMIT`, and **still exits 0**. So the wrapper saw success and printed success. **A tool that cannot fail is worse than no tool** — it converts a visible error into a silent one, and this one would have been found at go-live with a client watching. Set now, plus an explicit `✅ schema applied` / `✖ schema FAILED` on the way out.
+- **🔴 Defect 2 — the schema opened with `CREATE EXTENSION pgcrypto` inside the transaction.** That is a privileged operation, and a privilege failure there aborts every statement after it, so `COMMIT` rolls back the lot. Silent, total, and indistinguishable from nothing having run. **Removed the dependency entirely: `gen_random_uuid()` is built in from PostgreSQL 13 and `sha256(bytea)` from 11, so it was never actually needed.** Hashes are byte-identical to the old `digest()` form, so any existing rows still verify — no migration.
+- **Added a version guard** that raises a readable error on PostgreSQL < 13 instead of failing three statements later, and a `SELECT` at the end of the schema so the script proves its own work rather than asserting it.
+- **New `vps-tools.sh doctor`** — containers, Postgres version, whether the role is superuser, whether the ledger tables exist, which commit the repo is on. One command, everything I need to diagnose from here, since I have no route to the box.
+- **The lesson worth keeping: I did not verify the failure mode of my own wrapper.** Both defects are the same shape as the one preflight caught earlier in the day — *a green result that means nothing*. That is now a thing I check for by default, not a thing I notice.
+
 ## 2026-09-15 (correction) — I sent ADEDAMOLA a command the server cannot run
 
 - **My error, corrected: I told him to run `node tools/preflight-workflows.js` on the VPS. There is no Node on that box, and the repo is not on it either.** He got `Command 'node' not found`. Owning it plainly because the fix matters more than the slip.

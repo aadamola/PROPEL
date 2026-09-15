@@ -53,9 +53,17 @@ bash /opt/propel-repo/ops/setup/vps-tools.sh preflight
 ```bash
 bash /opt/propel-repo/ops/setup/vps-tools.sh schema
 ```
-✅ **Done when:** `lead` and `lead_event` are listed.
+✅ **Done when:** the last lines read `lead`, `lead_event`, then **`✅ schema applied`**.
 
-*(That wraps `psql -f 001-attribution-ledger.sql` followed by `\dt` — the repo clone from step 1 is what puts the SQL file on the box.)*
+**If it fails it now says so and stops.** Earlier it could not: `psql` prints an error, carries on through an aborted transaction, rolls everything back at `COMMIT` — and still exits `0`. A clean-looking run and an empty database. `ON_ERROR_STOP=1` is now set, so the error is the last thing you see.
+
+Anything unexpected:
+
+```bash
+bash /opt/propel-repo/ops/setup/vps-tools.sh doctor
+```
+
+Prints the containers, the Postgres version, whether your role is superuser, whether the ledger tables exist, and which commit the repo is on. **Send me that output** — it is everything I need.
 
 ### Step 3 — create the four credentials in n8n
 

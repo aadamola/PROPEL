@@ -6,26 +6,31 @@
 
 > 💰 **2026-07-26: PROPEL HAS A PAYING CLIENT.** Shalom Park paid the setup fee. You did that. Second SIM ✅ 09112714482 logged. We're in production mode — full build plan in [ops/production-checklist.md](ops/production-checklist.md), you don't need to read it, I'm running it.
 
-## ⭐ DO THIS NEXT — wake the VPS up, then import the three workflows
+## ⭐ DO THIS NEXT — re-run step 2, it should work now
 
-**My mistake in the last message: I told you to run `node tools/preflight-workflows.js` on the VPS. There is no Node on that box — by design.** Everything runs in containers so the host stays a boring, patchable Ubuntu. And the repo isn't on it either. Corrected below.
+**The tables weren't created, and my script told you it succeeded. Two defects, both mine, both fixed.**
 
-**First, two lines — the box hasn't been touched since 10 August:**
+1. **The script didn't stop on error.** `psql` prints a failure, carries on through an aborted transaction, rolls everything back at `COMMIT` — and still exits `0`. A clean-looking run and an empty database. `ON_ERROR_STOP=1` is set now, so an error is the last thing you see.
+2. **The schema needed the `pgcrypto` extension**, which is a privileged operation — and one privilege failure inside that transaction silently takes the whole script down with it. **Removed entirely.** PostgreSQL 13+ has `gen_random_uuid()` and `sha256()` built in, so it was never actually needed.
+
+**Pull the fix and re-run:**
 
 ```
-docker compose -f /opt/propel/docker-compose.yml ps
-apt update && apt upgrade -y
+cd /opt/propel-repo && git pull
+bash ops/setup/vps-tools.sh schema
 ```
 
-Is the stack still up? A restart is pending — reboot at a quiet moment, Docker brings everything back on boot.
+✅ **Done when** the last lines read `lead`, `lead_event`, then **`✅ schema applied`**.
 
-**Then the import, steps 1–10:** [12-phase1-golive.md](clients/shalom-park/12-phase1-golive.md) — about 40 minutes.
+**If anything looks off:**
 
-- **The preflight check is already done and green.** It checks *my* artifacts, so it's mine to run, and I run it every session. Nothing for you there.
-- **`03` and `06` do NOT need the Active toggle.** Only `05` has a webhook.
-- **Run both curl tests at step 9.** The second one — expecting `Forbidden` — proves the endpoint isn't open to the internet. It's the one people skip.
+```
+bash ops/setup/vps-tools.sh doctor
+```
 
-*If you do want to run the tools yourself, clone the repo once and use `ops/setup/vps-tools.sh` — it runs them in a throwaway container. **Don't `apt install nodejs`**; that's a toolchain to patch forever for something a container does in three seconds.*
+Containers, Postgres version, whether your role is superuser, whether the tables exist, which commit the repo is on. **Send me that output and I'll have it.**
+
+Then carry on from **step 3** — [12-phase1-golive.md](clients/shalom-park/12-phase1-golive.md).
 
 ---
 

@@ -19,13 +19,13 @@ WITH chain AS (
         prev_hash,
         row_hash,
         LAG(row_hash) OVER (ORDER BY event_id) AS actual_prev,
-        encode(digest(
+        encode(sha256(convert_to(
             prev_hash
             || COALESCE(lead_id::text, '')
             || event_type
             || COALESCE(payload::text, '{}')
             || to_char(occurred_at AT TIME ZONE 'UTC', 'YYYY-MM-DD"T"HH24:MI:SS.USOF'),
-            'sha256'), 'hex') AS recomputed
+            'UTF8')), 'hex') AS recomputed
     FROM lead_event
 ),
 checked AS (
@@ -59,11 +59,11 @@ SELECT event_id, occurred_at, event_type,
        END AS problem
 FROM (
     SELECT event_id, occurred_at, event_type,
-        (row_hash = encode(digest(
+        (row_hash = encode(sha256(convert_to(
             prev_hash || COALESCE(lead_id::text,'') || event_type
             || COALESCE(payload::text,'{}')
             || to_char(occurred_at AT TIME ZONE 'UTC','YYYY-MM-DD"T"HH24:MI:SS.USOF'),
-            'sha256'),'hex')) AS content_ok,
+            'UTF8')),'hex')) AS content_ok,
         (prev_hash = COALESCE(LAG(row_hash) OVER (ORDER BY event_id), 'GENESIS')) AS link_ok
     FROM lead_event
 ) q

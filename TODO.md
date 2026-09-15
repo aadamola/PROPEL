@@ -6,22 +6,29 @@
 
 > 💰 **2026-07-26: PROPEL HAS A PAYING CLIENT.** Shalom Park paid the setup fee. You did that. Second SIM ✅ 09112714482 logged. We're in production mode — full build plan in [ops/production-checklist.md](ops/production-checklist.md), you don't need to read it, I'm running it.
 
-## ⭐ DO THIS NEXT — pull and re-run step 2. Found it, fixed it, tested it.
+## ⭐ DO THIS NEXT — step 3, the credentials (about 15 min)
 
-**The real error was `generation expression is not immutable` — line 53.** Nothing to do with permissions; your `doctor` output showed `superuser: true`, so my pgcrypto theory was wrong.
+**Step 2 is done** ✅ — `lead` and `lead_event` exist, the script proved it. Those `NOTICE ... skipping` lines are normal: `DROP TRIGGER IF EXISTS` on a fresh database.
 
-`attribution_expires_at` was a generated column computing `first_contact_at + INTERVAL '12 months'`. PostgreSQL requires a generation expression to be **immutable**, and adding *months* to a `timestamptz` isn't — it depends on the session timezone. **Replaced with a trigger**, which has no such requirement and keeps the 12-month window guaranteed rather than defaulted.
+**Three credentials now, one later.** n8n → **Credentials → Add credential**.
 
+**a · `Gemini`** — Query Auth · name `key` · value = your Gemini API key
+
+**b · `Propel Postgres`** — Postgres. Get the password first:
 ```
-cd /opt/propel-repo && git pull
-bash ops/setup/vps-tools.sh schema
+grep -E '^POSTGRES_PASSWORD=' /opt/propel/.env
 ```
+Host **`postgres`** · Database `n8n` · User `propel` · Port `5432` · SSL off.
 
-✅ **Done when** you see `lead`, `lead_event`, then **`✅ schema applied`**.
+> 🔴 **Host is `postgres`, not `localhost`.** n8n and the database are containers on the same network, so n8n reaches it by service name. `localhost` there means the n8n container itself, and the error reads "connection refused" — which looks like the database is down when it's fine.
 
-**This time I actually ran it.** There's a PostgreSQL 16 on my side — I reproduced your exact error, fixed it, and built `tools/test-ledger-sql.sh`: it stands up a throwaway Postgres, applies the schema, runs the real workflow queries, checks the 12-month window, proves one buyer commenting *and* DMing is one lead, walks the hash chain, confirms UPDATE and DELETE are refused, then **forges a row and confirms the verifier catches it.** 10/10, and it runs in `test-all` from now on.
+**Click Test on both.** Green before moving on.
 
-Then carry on from **step 3** — [12-phase1-golive.md](clients/shalom-park/12-phase1-golive.md).
+**c · `Propel SMTP`** — there's no mail server on the box, so use Gmail: `smtp.gmail.com` port `465`, user `justin@koratori.com`, password = a Google **app password** (needs 2-step verification enabled first). Free, ~500/day, and an alert from a name Collins recognises beats a no-reply address.
+
+**d · `Shalom Park IG`** ⏸️ — **can't be done yet.** The token doesn't exist until the Meta app is created. Skip it; you can import and wire everything else without it.
+
+Then **steps 4–6**: import `03`, import `06`, import `05` and paste the two ids in — [12-phase1-golive.md](clients/shalom-park/12-phase1-golive.md).
 
 ---
 
@@ -55,6 +62,7 @@ Testing the bot · the automated pilot · voice notes · first audit calls. Noth
 
 ## ✅ DONE (look how far this has come)
 
+- [x] 🗄️ **Ledger tables live on the VPS — `lead` + `lead_event` created** (2026-09-15)
 - [x] 🛠️ **Import preflight tool built — checks the whole workflow bundle before it touches n8n** (2026-09-15)
 - [x] 🔐 **Phase 1 built: escalation alerts, attribution ledger wired, privacy + data-deletion pages, go-live runbook** (2026-09-15)
 - [x] 🚀 **Phase 0 production pack shipped** — 27 saved replies, 10 captions, shot list, daily runbook, tracking log (2026-09-15)

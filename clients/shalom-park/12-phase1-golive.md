@@ -65,16 +65,62 @@ bash /opt/propel-repo/ops/setup/vps-tools.sh doctor
 
 Prints the containers, the Postgres version, whether your role is superuser, whether the ledger tables exist, and which commit the repo is on. **Send me that output** — it is everything I need.
 
-### Step 3 — create the four credentials in n8n
+### Step 3 — create the credentials in n8n
 
-**Credentials → Add credential.** Do these before importing; a workflow with a missing credential shows a red node and it is not obvious why.
+**Credentials → Add credential.** Do these before importing; a workflow with a missing credential shows a red node and the reason is not obvious.
 
-| Credential | Type | Value |
-|---|---|---|
-| `Gemini` | Query Auth | Name `key`, value = the Gemini API key |
-| `Shalom Park IG` | Header Auth | Name `Authorization`, value `Bearer <IG token>` |
-| `Propel Postgres` | Postgres | host `postgres`, db `n8n`, user `propel`, password from `.env` |
-| `Propel SMTP` | SMTP | your mail host, from `hello@getpropel.tech` |
+> ⚠️ **Only three of the four can be made today.** The Instagram token does not exist until the Meta app is created, which is the *client session*, not this runbook. Do 3a–3c now; they are what unblock steps 4–6. 3d waits.
+
+#### 3a · `Gemini` — Query Auth
+| Field | Value |
+|---|---|
+| Name | `key` |
+| Value | your Gemini API key |
+
+#### 3b · `Propel Postgres` — Postgres
+Read the password first:
+```bash
+grep -E '^POSTGRES_PASSWORD=' /opt/propel/.env
+```
+
+| Field | Value |
+|---|---|
+| Host | **`postgres`** |
+| Database | `n8n` |
+| User | `propel` |
+| Password | from the command above |
+| Port | `5432` |
+| SSL | disabled |
+
+> 🔴 **Host is `postgres`, not `localhost` and not the server's IP.** n8n runs in a container on the same Docker network as the database, so it reaches it by service name. `localhost` inside that container means the n8n container itself, and the error you get says "connection refused" — which reads like the database is down when it is running perfectly.
+
+**Click Test.** Green before you move on.
+
+#### 3c · `Propel SMTP` — SMTP
+
+**The stack has no mail server** — `vps-bootstrap.sh` never installed one, and running your own on a fresh VPS is the fastest way to land in a spam folder.
+
+**Recommendation: use Gmail with an app password**, on the account you already have.
+
+| Field | Value |
+|---|---|
+| User | `justin@koratori.com` |
+| Password | a Google **app password** (needs 2-step verification on first) |
+| Host | `smtp.gmail.com` |
+| Port | `465` |
+| SSL/TLS | on |
+
+Zero cost, nothing new to sign up for, ~500 messages a day — far past 20 leads. And for an internal alert landing in a client's sales inbox, **coming from a name Collins recognises beats a no-reply address**: it is less likely to be filtered and more likely to be acted on.
+
+*If you would rather it came from `hello@getpropel.tech`, that needs a mailbox on the domain — Hostinger sells one cheaply. Not worth blocking on today.*
+
+#### 3d · `Shalom Park IG` — Header Auth ⏸️ *later*
+| Field | Value |
+|---|---|
+| Name | `Authorization` |
+| Value | `Bearer <IG token>` |
+
+**Create it when the Meta app exists.** You can import and wire everything else first — the credential just gets attached to the three HTTP nodes in step 6 once you have the token.
 
 ### Step 4 — import `03-concierge-core.json`
 
@@ -97,10 +143,10 @@ Paste it, then:
 
 1. Open the **`Concierge CORE`** node → confirm the id matches step 4
 2. Open the **`Ledger + escalation`** node → replace `REPLACE_WITH_LEDGER_WORKFLOW_ID` with the id from step 5
-3. Attach **Shalom Park IG** (Header Auth) to all three HTTP nodes: `Private reply to comment`, `Public comment reply`, `Send IG DM`
+3. Attach **Shalom Park IG** (Header Auth) to all three HTTP nodes: `Private reply to comment`, `Public comment reply`, `Send IG DM` — *or leave these until the token exists; they only matter at send time*
 4. **Save**
 
-✅ **Done when:** no node shows a red triangle and no `REPLACE_WITH_` text remains anywhere on the canvas.
+✅ **Done when:** the two sub-workflow ids are real and no `REPLACE_WITH_` text remains anywhere on the canvas. *(The three HTTP nodes may still show a credential warning until 3d — that is expected and does not block the import.)*
 
 ### Step 7 — secrets on the server, never in chat 🔒
 

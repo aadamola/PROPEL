@@ -2,6 +2,13 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-09-15 (step 2 ✅) — Ledger tables live on the VPS; step 3 detailed
+
+- **`lead` and `lead_event` exist on the server.** `COMMIT`, both tables listed, `✅ schema applied`. The trigger fix was right and the script proved its own work rather than asserting it.
+- **Step 3 rewritten with exact values pulled from `vps-bootstrap.sh` rather than guessed:** Postgres user `propel`, database `n8n`, **host `postgres`** — the Docker service name. 🔴 **The gotcha flagged before he hits it:** `localhost` inside the n8n container means the n8n container, and the resulting "connection refused" reads like the database is down when it is running perfectly.
+- **🟡 Caught a sequencing problem: only three of the four credentials can be made today.** The Instagram token does not exist until the Meta app is created, which belongs to the *client session*, not this runbook. Marked 3d as ⏸️ and confirmed the import can proceed without it — the credential attaches to the three HTTP nodes whenever the token arrives. Better to know that now than to stall at step 3 wondering what is missing.
+- **🟡 And a real gap: the stack has no mail server.** `vps-bootstrap.sh` never installed one, and self-hosting mail on a fresh VPS is the fastest route to a spam folder. **Recommended Gmail with an app password on the account he already has** — zero cost, nothing to sign up for, ~500/day against 20 leads. **And for an internal alert landing in a client's sales inbox, coming from a name Collins recognises beats a no-reply address:** less likely to be filtered, more likely to be acted on.
+
 ## 2026-09-15 (correction 3) — Found the real bug by finally running the SQL
 
 - **The error was `generation expression is not immutable`, line 53 — and my pgcrypto theory was wrong.** ADEDAMOLA's `doctor` output showed **`superuser: true`** on PostgreSQL 16.14, so `CREATE EXTENSION` would have worked fine. Guessing at a cause from a symptom, twice, is what this entry is really about.

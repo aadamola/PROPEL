@@ -24,7 +24,11 @@ Host **`postgres`** · Database `n8n` · User `propel` · Port `5432` · SSL off
 
 **Click Test on both.** Green before moving on.
 
-**c · `Propel SMTP`** — no mail server on the box, so use Gmail: `smtp.gmail.com` port `465`, user `justin@koratori.com`, password = a Google **app password** (needs 2-step verification on first). Free, ~500/day. *Later: `alerts@getpropel.tech` on Hostinger — one-field change.* 🔴 **Not a `@shalomparknigeria.com` address** — every alert is a Propel receipt in their inbox, and a client-domain sender erases us from the value chain 20 times a day.
+**c · `Propel SMTP`** — **do this first, it needs DNS time.** Create **`alerts@getpropel.tech`** in your Hostinger panel (the domain is already there), then take host/port/SSL from the screen Hostinger shows you. Do 3a and 3b while MX propagates.
+
+> 🔴 Not `@shalomparknigeria.com` and not `@koratori.com` — both erase Propel from the from-line. Every alert is a receipt landing in their inbox 20 times a day; that's the commission drumbeat. And set it before go-live: changing a sender once alerts are flowing means the first ones can hit spam, which is the one failure this layer exists to prevent.
+>
+> *Stopgap only if MX hasn't resolved by import time: Gmail app password on `justin@koratori.com`.*
 
 **d · `Shalom Park IG`** ⏸️ — **can't be done yet.** The token doesn't exist until the Meta app is created. Skip it; you can import and wire everything else without it.
 

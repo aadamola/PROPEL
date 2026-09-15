@@ -2,6 +2,14 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-09-15 (self-correction) — I argued for Propel in the from-line, then recommended a non-Propel address
+
+- **ADEDAMOLA pushed back on "Gmail tonight, `alerts@getpropel.tech` later." He was right and I had contradicted myself.** I refused `@shalomparknigeria.com` because it erases Propel from the from-line, then recommended `@koratori.com` — which erases Propel just as completely. **Koratori is not even the brand.**
+- **The "ship fast" logic did not hold either.** Gmail needs 2FA plus an app password plus the n8n credential; the mailbox needs creating plus the n8n credential. **Same effort.** And the domain is already in his Hostinger panel — this was never procurement, it is a few clicks in an account he has open.
+- **The decisive argument is sequencing risk, and it runs the other way from what I said.** Changing a sender *after* go-live means the first alerts from the new address can land in spam — and **a missed lead alert is the precise failure this entire escalation layer exists to prevent.** Doing it before is strictly safer.
+- **Ruling updated: `alerts@getpropel.tech` is the sender, set up before go-live.** Gmail on `justin@koratori.com` is demoted to a stopgap for one case only — MX records not yet resolved at import time.
+- **Deliberately did not state Hostinger's SMTP host and port.** They come from the screen shown when the mailbox is created; a wrong port presents as an authentication failure and sends you hunting the wrong problem. **Better to say "read it off the panel" than to guess and be confidently wrong** — which is the same failure that produced the pgcrypto theory earlier today.
+
 ## 2026-09-15 (ruling) — Alerts send from a Propel address, never the client's domain
 
 - **ADEDAMOLA asked whether the SMTP sender could be `damola@shalomparknigeria.com`. Recommended against, and the reason is commercial before it is technical.**

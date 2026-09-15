@@ -98,28 +98,24 @@ grep -E '^POSTGRES_PASSWORD=' /opt/propel/.env
 
 #### 3c · `Propel SMTP` — SMTP
 
-**The stack has no mail server** — `vps-bootstrap.sh` never installed one, and running your own on a fresh VPS is the fastest way to land in a spam folder.
+**The stack has no mail server** — `vps-bootstrap.sh` never installed one, and running your own on a fresh VPS is the fastest way into a spam folder. So use a real mailbox.
 
-**Recommendation: use Gmail with an app password**, on the account you already have.
+**Create `alerts@getpropel.tech` in Hostinger**, where the domain already lives. Then take the SMTP host, port and encryption **from the screen Hostinger shows you when the mailbox is created** — not from this document. A wrong port here presents as an authentication failure, which sends you looking for the wrong problem.
 
 | Field | Value |
 |---|---|
-| User | `justin@koratori.com` |
-| Password | a Google **app password** (needs 2-step verification on first) |
-| Host | `smtp.gmail.com` |
-| Port | `465` |
-| SSL/TLS | on |
+| User | `alerts@getpropel.tech` |
+| Password | the mailbox password |
+| Host / Port / SSL | exactly as Hostinger's panel states |
 
-Zero cost, nothing new to sign up for, ~500 messages a day — far past 20 leads. And for an internal alert landing in a client's sales inbox, **coming from a name Collins recognises beats a no-reply address**: it is less likely to be filtered and more likely to be acted on.
+> 🔴 **Not the client's domain** (`…@shalomparknigeria.com`) and **not a personal address** (`…@koratori.com`). Both erase Propel from the from-line, which is the whole point:
+> 1. **Every alert is a Propel receipt.** Twenty a day landing in their sales inbox saying *your assistant found you a buyer* is the drumbeat the commission conversation rests on.
+> 2. **Their mailbox is infrastructure they can revoke** — renting the pipe that proves our own worth. Same objection as the attribution ledger.
+> 3. **SPF/DKIM rejects sending as their domain** without their credentials.
 
-**Target state: `alerts@getpropel.tech`** — a mailbox on our own domain, on Hostinger where the domain already lives. Cheap, and it puts Propel in the from-line of every lead alert. Swapping is a one-field change; don't block step 3 on buying it.
+> ⏱️ **Do this before go-live, not after.** Once alerts are flowing to Collins, changing the sender means the first ones from the new address can land in spam — and a missed lead alert is the exact failure this layer exists to prevent.
 
-> 🔴 **Never send from a mailbox on the client's domain** (`…@shalomparknigeria.com`). Three reasons, heaviest first:
-> 1. **Every alert is a Propel receipt.** Twenty a day landing in their sales inbox saying *your assistant found you a buyer* is the drumbeat the commission conversation rests on. A client-domain sender erases us from the value chain at the exact moment value is delivered.
-> 2. **It is infrastructure they can revoke** — we would be renting the pipe that proves our own worth. Same objection as the attribution ledger.
-> 3. **SPF/DKIM will reject it** unless they provision the mailbox and hand over credentials, which adds moving parts owned by someone else.
->
-> The one real upside — deliverability to their own inbox — is solved by them whitelisting us once. And we are CC'd on every alert regardless of sender.
+**MX records take minutes, sometimes a few hours.** Create the mailbox first, then do 3a and 3b while it settles. If it still hasn't resolved when you reach the import, a Gmail app password on `justin@koratori.com` works as a stopgap — **contingency, not plan.**
 
 #### 3d · `Shalom Park IG` — Header Auth ⏸️ *later*
 | Field | Value |

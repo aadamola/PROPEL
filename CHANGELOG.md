@@ -2,6 +2,16 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-09-15 (correction) — I sent ADEDAMOLA a command the server cannot run
+
+- **My error, corrected: I told him to run `node tools/preflight-workflows.js` on the VPS. There is no Node on that box, and the repo is not on it either.** He got `Command 'node' not found`. Owning it plainly because the fix matters more than the slip.
+- **The right ruling, and it stands: do NOT `apt install nodejs` on the VPS.** The host deliberately carries Docker and nothing else, so it stays a boring patchable Ubuntu with no language toolchains to maintain. Installing Node to run a three-second check would trade a permanent maintenance surface for a momentary convenience.
+- **`ops/setup/vps-tools.sh` — runs the Node tools in a throwaway container**, no install, no host pollution: `preflight` · `test` · `keywords` · `schema` · `ledger`. It fails with a useful message if Docker is missing or the repo has not been cloned, rather than a bare `not found`.
+- **Deeper correction: the preflight step was never his to run.** It validates *my* artifacts, which puts it on my side of the division rule. I run it every session and it is green. Removed from his runbook; replaced with a one-line statement of the result and an optional path if he ever wants to check my work himself.
+- **The SQL, though, genuinely does need to be on the box** — so the runbook now clones the repo once to `/opt/propel-repo` and `vps-tools.sh schema` applies the ledger schema and lists the tables.
+- **⏰ Two things the screenshot surfaced that nobody asked about.** Last login was **10 August** — five weeks — and the box reports **a pending restart**, so security updates have been sitting unapplied. Added `docker compose ps` + `apt upgrade` as the first move, before any import. **And the VPS renewal question is still open:** the monthly term ran to 29 August with auto-renewal on, and he last logged in on the 10th, so nobody has seen what Hostinger charged. Promoted into this week's list with a date.
+- **Fixed a naming collision I created:** "Step 0" meant both the first import step and the Meta dev-mode test. The import one is now "Before you start".
+
 ## 2026-09-15 (phase 1 recheck) — Audited my own bundle before it ships, and found two real defects
 
 - **ADEDAMOLA asked for a recheck before importing. Built `tools/preflight-workflows.js` to do it properly rather than by eye** — it validates every code node parses, every `$('Node')` reference resolves, every SQL parameter has a matching value, no node is orphaned, no caller sends a field the callee silently drops, and nothing on the evidence path swallows its own errors. **Wired into `test-all`. 135 tests.**

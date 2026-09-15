@@ -6,28 +6,32 @@
 
 > 💰 **2026-07-26: PROPEL HAS A PAYING CLIENT.** Shalom Park paid the setup fee. You did that. Second SIM ✅ 09112714482 logged. We're in production mode — full build plan in [ops/production-checklist.md](ops/production-checklist.md), you don't need to read it, I'm running it.
 
-## ⭐ DO THIS NEXT — import the three workflows, in order
+## ⭐ DO THIS NEXT — wake the VPS up, then import the three workflows
 
-**Steps 1–10 are written out for you: [12-phase1-golive.md](clients/shalom-park/12-phase1-golive.md).** About 40 minutes at the laptop.
+**My mistake in the last message: I told you to run `node tools/preflight-workflows.js` on the VPS. There is no Node on that box — by design.** Everything runs in containers so the host stays a boring, patchable Ubuntu. And the repo isn't on it either. Corrected below.
 
-Start with one command on the VPS — it checks the whole bundle before you paste anything:
+**First, two lines — the box hasn't been touched since 10 August:**
 
 ```
-cd /opt/propel && node tools/preflight-workflows.js
+docker compose -f /opt/propel/docker-compose.yml ps
+apt update && apt upgrade -y
 ```
 
-Expect **`✅ preflight clean`**. Then: ledger tables → four credentials → import `03` → import `06` → import `05` and paste the two ids in → secrets → **activate `05` only**.
+Is the stack still up? A restart is pending — reboot at a quiet moment, Docker brings everything back on boot.
 
-**Two things that catch everyone:**
-- **`03` and `06` do NOT need the Active toggle.** A workflow called by another workflow runs either way. Only `05` has a webhook, so only `05` gets activated.
-- **Run both curl tests at step 9.** The second one — the one expecting `Forbidden` — is what proves the endpoint isn't open to the whole internet, and it's the one people skip because the first already looked like success.
+**Then the import, steps 1–10:** [12-phase1-golive.md](clients/shalom-park/12-phase1-golive.md) — about 40 minutes.
 
-*Still open and still worth doing first if you have 45 spare minutes: the Step 0 test (can a dev-mode app DM an outside account?). It decides whether you can book the client session or whether verification is the gate.*
+- **The preflight check is already done and green.** It checks *my* artifacts, so it's mine to run, and I run it every session. Nothing for you there.
+- **`03` and `06` do NOT need the Active toggle.** Only `05` has a webhook.
+- **Run both curl tests at step 9.** The second one — expecting `Forbidden` — proves the endpoint isn't open to the internet. It's the one people skip.
+
+*If you do want to run the tools yourself, clone the repo once and use `ops/setup/vps-tools.sh` — it runs them in a throwaway container. **Don't `apt install nodejs`**; that's a toolchain to patch forever for something a container does in three seconds.*
 
 ---
 
 ## THIS WEEK — one per sitting, in this order
 
+- [ ] **(5 min, before 29 Sep)** ⏰ **VPS: check what Hostinger charged on renewal.** *Your monthly term ran to 29 Aug, auto-renewal was on, and you last logged in on 10 Aug — so this hasn't been looked at. Renewal is where their 2–3× jump lands.*
 - [ ] **(5 min)** 🎬 **Book the shoot day with Collins** — one site visit, about 3 hours, and it produces all 14 days of content. Shot list is written: [10-phase0-content-pack.md](clients/shalom-park/10-phase0-content-pack.md). *Collins and Mercy go on camera, not you.*
 - [ ] **(1 message)** 🔴 **Ask Shalom Park who can grant Meta admin.** Script in [04-meta-access-pack.md](clients/shalom-park/04-meta-access-pack.md). *Not Collins — he's a Sales Executive. The session is now 15 minutes and needs no SIM.*
 - [ ] **(5 min)** **Send Collins the follow-up** — [03-followup-questions.md](clients/shalom-park/03-followup-questions.md). *Seven fields still open. The ₦95m condo price is settled; the rest aren't.*

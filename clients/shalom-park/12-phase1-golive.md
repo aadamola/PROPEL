@@ -20,21 +20,42 @@ So the switch is a moment, announced, not a drift.
 
 **Order matters for one reason:** a channel workflow pointing at a sub-workflow that doesn't exist yet fails with a message that reads like a code bug.
 
-### Step 1 — check the bundle before you paste anything
+### Before you start — wake the box up (it has been five weeks)
 
-```
-cd /opt/propel && node tools/preflight-workflows.js
+> *Not to be confused with the **Step 0 test** — that is the Meta dev-mode question, and it is separate.*
+
+```bash
+docker compose -f /opt/propel/docker-compose.yml ps    # is the stack still up?
+apt update && apt upgrade -y                            # a restart is pending
 ```
 
-Expect **`✅ preflight clean — safe to import`**, plus one expected note about `REPLACE_WITH_LEDGER_WORKFLOW_ID` — you fix that at step 6. This checks every code node parses, every `$('Node')` reference resolves, every SQL parameter has a value, no node is orphaned, and nothing on the evidence path silently swallows errors.
+Reboot at a quiet moment. Docker restarts the stack on boot.
+
+### Step 1 — the bundle is already checked ✅
+
+**I run `preflight-workflows.js` every session and it is green.** Nothing for you to do here — it is a check on *my* artifacts, and it belongs on my side of the line.
+
+If you ever want to run it yourself, the VPS has **Docker and deliberately nothing else** — no Node, no language toolchains, so the box stays a boring patchable Ubuntu. So the tools run in a throwaway container:
+
+```bash
+# once — the repo is not on the VPS yet
+cd /opt && git clone -b claude/propel-realestate-marketing-plan-wxjj3x \
+  https://github.com/aadamola/PROPEL.git propel-repo
+
+# then, any time
+bash /opt/propel-repo/ops/setup/vps-tools.sh preflight
+```
+
+`vps-tools.sh` also takes `test`, `keywords`, `schema` and `ledger`. **Do not `apt install nodejs`** — it adds a toolchain to patch forever for something a container does in three seconds.
 
 ### Step 2 — create the ledger tables
 
-```
-docker compose exec -T postgres psql -U propel -d n8n -f - < ops/concierge/sql/001-attribution-ledger.sql
-docker compose exec -T postgres psql -U propel -d n8n -c '\dt'
+```bash
+bash /opt/propel-repo/ops/setup/vps-tools.sh schema
 ```
 ✅ **Done when:** `lead` and `lead_event` are listed.
+
+*(That wraps `psql -f 001-attribution-ledger.sql` followed by `\dt` — the repo clone from step 1 is what puts the SQL file on the box.)*
 
 ### Step 3 — create the four credentials in n8n
 
@@ -105,7 +126,7 @@ Fields: **`comments`** and **`messages`**. Callback URL as above, verify token f
 |---|---|
 | `getpropel.tech/privacy.html` loads | Meta app → Basic Settings → Privacy Policy URL |
 | `getpropel.tech/data-deletion.html` loads | Meta app → Basic Settings → Data Deletion URL |
-| `node tools/test-all.js` → **135 passing** | before any of the above |
+| Test suite **135 passing** | I run it; it is green |
 
 ## The cutover, in order
 
@@ -170,7 +191,7 @@ Roll back first, diagnose second. It costs nothing and the inbox is still covere
 **Weekly, on the ledger:**
 
 ```bash
-docker compose exec -T postgres psql -U propel -d n8n -f - < ops/concierge/sql/002-verify-ledger.sql
+bash /opt/propel-repo/ops/setup/vps-tools.sh ledger
 ```
 
 Expect `VERDICT | INTACT — every event verifies`. This is the thing that makes a commission claim evidence rather than an assertion — and it is written in plain SQL specifically so **the client's own auditor can run it too.** A chain only we can check is not proof.

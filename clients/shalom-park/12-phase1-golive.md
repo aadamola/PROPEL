@@ -16,37 +16,96 @@ So the switch is a moment, announced, not a drift.
 
 ---
 
-## Pre-flight — all of it green before you activate
+## Import sequence — do it in this order
 
-| # | Check | How you know |
-|---|---|---|
-| 1 | **Step 0 test passed** — a dev-mode app in a portfolio can DM an outside account | You sent one and it arrived |
-| 2 | Privacy policy live at `getpropel.tech/privacy.html` | Loads in a browser |
-| 3 | Data-deletion page live at `getpropel.tech/data-deletion.html` | Loads in a browser |
-| 4 | Both URLs pasted into the Meta app's Basic Settings | Saved without error |
-| 5 | Ledger tables exist | `\dt` shows `lead` and `lead_event` |
-| 6 | `03` CORE imported, saved, **id copied** | Id in the URL |
-| 7 | `06` ledger + escalation imported, saved, **id copied** | Id in the URL |
-| 8 | Both ids pasted into `05`'s sub-workflow nodes | No `REPLACE_WITH_…` left anywhere |
-| 9 | n8n credentials set: **Postgres**, **SMTP**, **Header Auth** (`Authorization: Bearer <IG token>`), **Query Auth** (Gemini) | Each shows a green test |
-| 10 | `SHALOM_PARK_APP_SECRET` + `META_VERIFY_TOKEN_SHALOM_PARK` in `/opt/propel/.env` | `docker compose up -d n8n` ran clean |
-| 11 | `node tools/test-all.js` | **133 passing** |
+**Order matters for one reason:** a channel workflow pointing at a sub-workflow that doesn't exist yet fails with a message that reads like a code bug.
 
-```bash
-cd /opt/propel
-docker compose exec -T postgres psql -U propel -d n8n -f - < ops/concierge/sql/001-attribution-ledger.sql
+### Step 1 — check the bundle before you paste anything
+
+```
+cd /opt/propel && node tools/preflight-workflows.js
 ```
 
-**Two tests on the webhook, and do the second one — it is the one people skip:**
+Expect **`✅ preflight clean — safe to import`**, plus one expected note about `REPLACE_WITH_LEDGER_WORKFLOW_ID` — you fix that at step 6. This checks every code node parses, every `$('Node')` reference resolves, every SQL parameter has a value, no node is orphaned, and nothing on the evidence path silently swallows errors.
+
+### Step 2 — create the ledger tables
+
+```
+docker compose exec -T postgres psql -U propel -d n8n -f - < ops/concierge/sql/001-attribution-ledger.sql
+docker compose exec -T postgres psql -U propel -d n8n -c '\dt'
+```
+✅ **Done when:** `lead` and `lead_event` are listed.
+
+### Step 3 — create the four credentials in n8n
+
+**Credentials → Add credential.** Do these before importing; a workflow with a missing credential shows a red node and it is not obvious why.
+
+| Credential | Type | Value |
+|---|---|---|
+| `Gemini` | Query Auth | Name `key`, value = the Gemini API key |
+| `Shalom Park IG` | Header Auth | Name `Authorization`, value `Bearer <IG token>` |
+| `Propel Postgres` | Postgres | host `postgres`, db `n8n`, user `propel`, password from `.env` |
+| `Propel SMTP` | SMTP | your mail host, from `hello@getpropel.tech` |
+
+### Step 4 — import `03-concierge-core.json`
+
+Build → empty canvas → click canvas → paste the JSON → **Save**.
+Attach the **Gemini** credential to the `Gemini 3 Flash` node.
+
+> **It does not need to be Active.** A workflow called by another workflow runs whether or not it is active — Active only matters for triggers. This trips people up constantly. Only `05` needs the toggle.
+
+📋 **Copy its id from the URL** — the part after `/workflow/`.
+
+### Step 5 — import `06-ledger-and-escalation.json`
+
+Same paste. Attach **Propel Postgres** to both Postgres nodes and **Propel SMTP** to `Alert the sales team`. **Save.** Again — no Active toggle.
+
+📋 **Copy its id from the URL.**
+
+### Step 6 — import `05-channel-instagram.json` and wire the two ids
+
+Paste it, then:
+
+1. Open the **`Concierge CORE`** node → confirm the id matches step 4
+2. Open the **`Ledger + escalation`** node → replace `REPLACE_WITH_LEDGER_WORKFLOW_ID` with the id from step 5
+3. Attach **Shalom Park IG** (Header Auth) to all three HTTP nodes: `Private reply to comment`, `Public comment reply`, `Send IG DM`
+4. **Save**
+
+✅ **Done when:** no node shows a red triangle and no `REPLACE_WITH_` text remains anywhere on the canvas.
+
+### Step 7 — secrets on the server, never in chat 🔒
+
+```
+nano /opt/propel/.env     # SHALOM_PARK_APP_SECRET, META_VERIFY_TOKEN_SHALOM_PARK
+docker compose up -d n8n
+```
+
+### Step 8 — activate `05` only 🟢
+
+**This is the one toggle.** Meta tests the webhook the second you click Verify, and an inactive workflow returns a 404 that looks exactly like a server fault.
+
+### Step 9 — prove the endpoint, both ways
 
 ```bash
 curl "https://engine.getpropel.tech/webhook/shalom-park-ig?hub.mode=subscribe&hub.verify_token=REAL&hub.challenge=hello123"   # expect: hello123
 curl "https://engine.getpropel.tech/webhook/shalom-park-ig?hub.mode=subscribe&hub.verify_token=wrong&hub.challenge=hello123" # expect: Forbidden
 ```
 
-The first proves it works. **The second proves it isn't open to the entire internet** — without the token check, anyone can point their own Meta app at our endpoint and write fabricated buyers into the commission ledger.
+The first proves it works. **The second proves it isn't open to the entire internet** — without the token check, anyone can point their own Meta app at our endpoint and write fabricated buyers into the commission ledger. Run both. The second is the one people skip, because the first already looked like success.
+
+### Step 10 — subscribe the webhook in the Meta app
+
+Fields: **`comments`** and **`messages`**. Callback URL as above, verify token from `.env`.
 
 ---
+
+## Also required before the Meta app will save
+
+| Check | Where |
+|---|---|
+| `getpropel.tech/privacy.html` loads | Meta app → Basic Settings → Privacy Policy URL |
+| `getpropel.tech/data-deletion.html` loads | Meta app → Basic Settings → Data Deletion URL |
+| `node tools/test-all.js` → **135 passing** | before any of the above |
 
 ## The cutover, in order
 
@@ -54,10 +113,9 @@ The first proves it works. **The second proves it isn't open to the entire inter
 
 1. **Tell the team.** One message: *"The Instagram assistant goes live at 10am. From then on it answers first — please don't reply to comments or DMs unless I hand one to you."*
 2. **Clear the decks.** Answer anything already waiting, so nothing half-handled is in the inbox when the bot wakes up.
-3. **Activate `06`** (ledger + escalation) — it must be live before anything calls it.
-4. **Activate `05`** (Instagram channel). 🟢
-5. **Subscribe the webhook** in the Meta app: `comments` and `messages`.
-6. **Send the first message yourself**, from your own Instagram, to the business account: `price`.
+3. **Activate `05`** (Instagram channel) — the only workflow that needs it. 🟢
+4. **Subscribe the webhook** in the Meta app: `comments` and `messages`.
+5. **Send the first message yourself**, from your own Instagram, to the business account: `price`.
 
 ### What good looks like within about 10 seconds
 
@@ -141,3 +199,4 @@ Expect `VERDICT | INTACT — every event verifies`. This is the thing that makes
 | **No 15-minute unclaimed sweep yet** | A lead nobody picks up stays unpicked; the roster escalates to Tobi only when asked | Scheduled workflow, next build |
 | **Dedup lives in workflow memory** | An n8n restart clears the "already replied" set, so one comment could get a second private reply after a restart | The `provider_message_id` unique index already catches the duplicate in the ledger. Move the gate to Postgres when volume justifies it |
 | **Graph API version pinned at `v21.0`, unverified** | If that version is retired, calls fail | Confirm during the Step 0 test and update `clients.json` `_meta.meta_graph` — one place, never in a node |
+| **A commenter's id and a DM sender's id may not be the same id** | Meta uses different id spaces for comment authors and messaging (IGSID). If they differ, the same person commenting *and* DMing creates **two lead rows instead of one** — which inflates lead counts and weakens an attribution claim | **Check it during the Step 0 test**: comment from an account, then DM from the same account, and compare `contact_id` on the two ledger rows. If they differ, we reconcile on `contact_handle` — which the comment webhook gives us — and I add a merge step |

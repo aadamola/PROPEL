@@ -2,6 +2,17 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-09-15 (phase 1 recheck) — Audited my own bundle before it ships, and found two real defects
+
+- **ADEDAMOLA asked for a recheck before importing. Built `tools/preflight-workflows.js` to do it properly rather than by eye** — it validates every code node parses, every `$('Node')` reference resolves, every SQL parameter has a matching value, no node is orphaned, no caller sends a field the callee silently drops, and nothing on the evidence path swallows its own errors. **Wired into `test-all`. 135 tests.**
+- **🔴 Defect 1 — the alert node swallowed its own errors.** `Alert the sales team` was set to `continueRegularOutput`, so an SMTP failure would have produced a **green execution, a recorded lead, and nobody told** — while the buyer had just been promised a human. That is the exact failure this whole escalation layer exists to prevent, and I built it in.
+- **Fixed by reordering, not by a flag: the human is now alerted BEFORE the ledger is written.** The alert is time-critical; the ledger is durable. If Postgres is down, the buyer has still been picked up and the red execution tells us to replay the write. Both branches converge on the ledger, so an unescalated lead is still recorded. Locked with a structural test (`IGE-11`) so it cannot be quietly reverted, plus `IGE-12`: **no node on the evidence path may swallow errors.**
+- **🔴 Defect 2 — silent failure on the evidence path generally.** All three Postgres/SMTP nodes had error-swallowing on. Removed. A green run with no evidence behind it is the one failure mode we cannot detect after the fact; red is the correct outcome.
+- **Also fixed: my own checker had a false positive and a wrong heuristic.** It treated the IMAP trigger as an orphan (root detection now derives from the connection graph, not from type names), and counted node references instead of array elements when checking SQL parameter arity. **Fixed the checker, not the workflows.**
+- **📋 `12-phase1-golive.md` rewritten as a true ordered sequence, steps 1–10** — preflight, ledger tables, the four credentials, `03`, `06`, `05` with the two ids pasted in, secrets, activation, both curl tests, webhook subscription.
+- **Correction carried into the docs: `03` and `06` do NOT need the Active toggle.** A workflow called by another workflow runs whether or not it is active — Active only governs triggers. Previous notes implied otherwise. **Only `05` gets activated.**
+- **🟡 New known gap, named before it bites: a commenter's id and a DM sender's id may be different id spaces.** If they are, the same person commenting *and* DMing creates **two lead rows instead of one** — inflating lead counts and weakening an attribution claim. **Checkable in five minutes during the Step 0 test**: comment then DM from the same account and compare `contact_id`. If they differ we reconcile on `contact_handle`, which the comment webhook supplies.
+
 ## 2026-09-15 (phase 1) — The gaps nobody would have found until a lead was lost
 
 - **Phase 0 is running, so Phase 1 production is about what does not exist yet, not more copy.** Audited what was actually missing and shipped four things. **Tests 121 → 133.**

@@ -600,10 +600,13 @@ return [{ json: {
 }}];
 `;
 
+// No onError swallowing on this path. If the ledger write fails, the
+// execution goes red and we see it. A green run with no evidence behind it
+// is the one failure mode we cannot detect later.
 const pg = (id, name, pos, query, replacement) => ({
   parameters: { operation: 'executeQuery', query, options: { queryReplacement: replacement } },
   type: 'n8n-nodes-base.postgres', typeVersion: 2.5, position: pos, id, name,
-  alwaysOutputData: true, onError: 'continueRegularOutput'
+  alwaysOutputData: true
 });
 
 const UPSERT_LEAD = `INSERT INTO lead
@@ -631,14 +634,17 @@ const ledger = {
       ] } }, type: 'n8n-nodes-base.executeWorkflowTrigger', typeVersion: 1.1,
       position: [-260, 0], id: 'led-trigger', name: 'Called by a channel' },
     code('led-compose', 'Resolve on-duty + compose', [-40, 0], composeAlert),
-    pg('led-lead', 'Record the lead', [180, 0], UPSERT_LEAD,
-       "={{ [$json.client_id, $json.channel, $json.link_code, $json.provider_message_id, $json.contact_id, $json.contact_hash, $json.unit_interest, $json.assigned_sales_rep] }}"),
-    pg('led-event', 'Append the event', [400, 0], INSERT_EVENT,
-       "={{ [$json.lead_id, $('Resolve on-duty + compose').first().json.event_type, $('Resolve on-duty + compose').first().json.payload_json] }}"),
+    // Both branches converge here, so every field is read from the compose
+    // node by name rather than from $json -- which would be the email node's
+    // output on one path and the IF's on the other.
+    pg('led-lead', 'Record the lead', [840, 0], UPSERT_LEAD,
+       "={{ (c => [c.client_id, c.channel, c.link_code, c.provider_message_id, c.contact_id, c.contact_hash, c.unit_interest, c.assigned_sales_rep])($('Resolve on-duty + compose').first().json) }}"),
+    pg('led-event', 'Append the event', [1060, 0], INSERT_EVENT,
+       "={{ [$('Record the lead').first().json.lead_id, $('Resolve on-duty + compose').first().json.event_type, $('Resolve on-duty + compose').first().json.payload_json] }}"),
     { parameters: { conditions: { options: { caseSensitive: true, version: 2 }, conditions: [
         { id: 'notify', operator: { type: 'boolean', operation: 'true', singleValue: true },
           leftValue: "={{ $('Resolve on-duty + compose').first().json.notify }}", rightValue: '' } ], combinator: 'and' }, options: {} },
-      type: 'n8n-nodes-base.if', typeVersion: 2.2, position: [620, 0], id: 'led-notify', name: 'Tell a human?' },
+      type: 'n8n-nodes-base.if', typeVersion: 2.2, position: [180, 0], id: 'led-notify', name: 'Tell a human?' },
     { parameters: {
         fromEmail: spAlerts.from,
         toEmail: spAlerts.email_to.join(','),
@@ -647,19 +653,23 @@ const ledger = {
         emailFormat: 'text',
         message: "={{ $('Resolve on-duty + compose').first().json.alert_body }}",
         options: {} },
-      type: 'n8n-nodes-base.emailSend', typeVersion: 2.1, position: [840, -80],
-      id: 'led-email', name: 'Alert the sales team', onError: 'continueRegularOutput' },
-    code('led-quiet', 'No human needed', [840, 120],
-      "// Answered in full from the knowledge base. Recorded, nobody disturbed.\nreturn [{ json: { logged: true, lead_id: $json.lead_id || '', rule_id: $json.rule_id || '' } }];")
+      type: 'n8n-nodes-base.emailSend', typeVersion: 2.1, position: [400, -120],
+      id: 'led-email', name: 'Alert the sales team' },
+    code('led-quiet', 'No human needed', [400, 120],
+      "// Answered in full from the knowledge base. Nobody disturbed -- but it\n// still gets recorded, because an unescalated lead is still a lead.\nreturn [{ json: { notified: false } }];")
   ],
   connections: {
     'Called by a channel':        { main: [[{ node: 'Resolve on-duty + compose', type: 'main', index: 0 }]] },
-    'Resolve on-duty + compose':  { main: [[{ node: 'Record the lead', type: 'main', index: 0 }]] },
-    'Record the lead':            { main: [[{ node: 'Append the event', type: 'main', index: 0 }]] },
-    'Append the event':           { main: [[{ node: 'Tell a human?', type: 'main', index: 0 }]] },
+    // Order matters: tell the human FIRST, then write the record. The alert
+    // is time-critical and the ledger is durable -- if the write fails, the
+    // buyer has still been picked up and the red execution tells us to replay.
+    'Resolve on-duty + compose':  { main: [[{ node: 'Tell a human?', type: 'main', index: 0 }]] },
     'Tell a human?':              { main: [
       [{ node: 'Alert the sales team', type: 'main', index: 0 }],
-      [{ node: 'No human needed', type: 'main', index: 0 }] ] }
+      [{ node: 'No human needed', type: 'main', index: 0 }] ] },
+    'Alert the sales team':       { main: [[{ node: 'Record the lead', type: 'main', index: 0 }]] },
+    'No human needed':            { main: [[{ node: 'Record the lead', type: 'main', index: 0 }]] },
+    'Record the lead':            { main: [[{ node: 'Append the event', type: 'main', index: 0 }]] }
   },
   settings: { executionOrder: 'v1' }, pinData: {}
 };

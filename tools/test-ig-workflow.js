@@ -122,6 +122,27 @@ const cases = [
       return held;
     } },
 
+  { name: 'IGE-11 ★ the human is alerted BEFORE the ledger is written',
+    run: () => {
+      // Deliberate ordering. The alert is time-critical; the ledger is
+      // durable. If Postgres is down, the buyer has still been picked up and
+      // the red execution tells us to replay the write.
+      const led = JSON.parse(fs.readFileSync(path.join(__dirname, '../ops/concierge/workflows/06-ledger-and-escalation.json'), 'utf8'));
+      const c = led.connections;
+      const after = n => (c[n]?.main || []).flat().map(x => x.node);
+      return after('Resolve on-duty + compose').includes('Tell a human?') &&
+             after('Alert the sales team').includes('Record the lead') &&
+             after('No human needed').includes('Record the lead') &&
+             after('Record the lead').includes('Append the event');
+    } },
+
+  { name: 'IGE-12 ★ no node on the evidence path swallows its own errors',
+    run: () => {
+      const led = JSON.parse(fs.readFileSync(path.join(__dirname, '../ops/concierge/workflows/06-ledger-and-escalation.json'), 'utf8'));
+      return led.nodes.filter(n => /postgres|emailSend/.test(n.type))
+                      .every(n => n.onError !== 'continueRegularOutput');
+    } },
+
   { name: 'IGE-10 the ledger row carries the keyword that produced the lead',
     run: () => {
       const r = pipeline(comment('C_600', '4 bedroom price'));

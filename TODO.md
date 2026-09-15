@@ -6,21 +6,23 @@
 
 > 💰 **2026-07-26: PROPEL HAS A PAYING CLIENT.** Shalom Park paid the setup fee. You did that. Second SIM ✅ 09112714482 logged. We're in production mode — full build plan in [ops/production-checklist.md](ops/production-checklist.md), you don't need to read it, I'm running it.
 
-## ⭐ DO THIS NEXT — the 45-minute test that unblocks everything
+## ⭐ DO THIS NEXT — import the three workflows, in order
 
-**Phase 0 is running. This is the single thing standing between it and the automation.**
+**Steps 1–10 are written out for you: [12-phase1-golive.md](clients/shalom-park/12-phase1-golive.md).** About 40 minutes at the laptop.
 
-Create a Meta app inside a business portfolio, give it Instagram permissions, and **send one DM to an account that has no role on the app.** That's it. You're answering one question: *will a dev-mode app message a real buyer?*
+Start with one command on the VPS — it checks the whole bundle before you paste anything:
 
-| What you see | What it means |
-|---|---|
-| The DM arrives | 🟢 No verification, no App Review. Book the client session |
-| Only reaches accounts with a role on the app | 🟡 Business Verification is the gate — days, not weeks |
-| Permissions error either way | 🔴 App Review needed. We fall back to Propel's own filing |
+```
+cd /opt/propel && node tools/preflight-workflows.js
+```
 
-Steps: [08-instagram-launch-plan.md](clients/shalom-park/08-instagram-launch-plan.md) · **Don't give Shalom Park a go-live date until you've seen which one it is.**
+Expect **`✅ preflight clean`**. Then: ledger tables → four credentials → import `03` → import `06` → import `05` and paste the two ids in → secrets → **activate `05` only**.
 
-*Everything else for Phase 1 is built and waiting: the workflow, the ledger, the escalation alerts, the privacy pages, and a go-live runbook with a five-second rollback — [12-phase1-golive.md](clients/shalom-park/12-phase1-golive.md).*
+**Two things that catch everyone:**
+- **`03` and `06` do NOT need the Active toggle.** A workflow called by another workflow runs either way. Only `05` has a webhook, so only `05` gets activated.
+- **Run both curl tests at step 9.** The second one — the one expecting `Forbidden` — is what proves the endpoint isn't open to the whole internet, and it's the one people skip because the first already looked like success.
+
+*Still open and still worth doing first if you have 45 spare minutes: the Step 0 test (can a dev-mode app DM an outside account?). It decides whether you can book the client session or whether verification is the gate.*
 
 ---
 
@@ -53,6 +55,7 @@ Testing the bot · the automated pilot · voice notes · first audit calls. Noth
 
 ## ✅ DONE (look how far this has come)
 
+- [x] 🛠️ **Import preflight tool built — checks the whole workflow bundle before it touches n8n** (2026-09-15)
 - [x] 🔐 **Phase 1 built: escalation alerts, attribution ledger wired, privacy + data-deletion pages, go-live runbook** (2026-09-15)
 - [x] 🚀 **Phase 0 production pack shipped** — 27 saved replies, 10 captions, shot list, daily runbook, tracking log (2026-09-15)
 - [x] 📵 **WhatsApp stripped — Shalom Park is Instagram-only** (2026-09-15)

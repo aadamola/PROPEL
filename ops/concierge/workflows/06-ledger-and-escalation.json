@@ -88,38 +88,36 @@
         "operation": "executeQuery",
         "query": "INSERT INTO lead\n  (client_id, channel, source_ref, provider_message_id, contact_e164, contact_hash, qualified_unit_type, assigned_sales_rep)\nVALUES ($1, $2, NULLIF($3,''), NULLIF($4,''), NULLIF($5,''), $6, NULLIF($7,''), NULLIF($8,''))\nON CONFLICT (client_id, contact_hash) DO UPDATE\n  SET qualified_unit_type = COALESCE(EXCLUDED.qualified_unit_type, lead.qualified_unit_type),\n      assigned_sales_rep  = COALESCE(EXCLUDED.assigned_sales_rep,  lead.assigned_sales_rep)\nRETURNING lead_id, first_contact_at, attribution_expires_at;",
         "options": {
-          "queryReplacement": "={{ [$json.client_id, $json.channel, $json.link_code, $json.provider_message_id, $json.contact_id, $json.contact_hash, $json.unit_interest, $json.assigned_sales_rep] }}"
+          "queryReplacement": "={{ (c => [c.client_id, c.channel, c.link_code, c.provider_message_id, c.contact_id, c.contact_hash, c.unit_interest, c.assigned_sales_rep])($('Resolve on-duty + compose').first().json) }}"
         }
       },
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.5,
       "position": [
-        180,
+        840,
         0
       ],
       "id": "led-lead",
       "name": "Record the lead",
-      "alwaysOutputData": true,
-      "onError": "continueRegularOutput"
+      "alwaysOutputData": true
     },
     {
       "parameters": {
         "operation": "executeQuery",
         "query": "INSERT INTO lead_event (lead_id, event_type, payload)\nVALUES ($1::uuid, $2, $3::jsonb)\nRETURNING event_id, row_hash;",
         "options": {
-          "queryReplacement": "={{ [$json.lead_id, $('Resolve on-duty + compose').first().json.event_type, $('Resolve on-duty + compose').first().json.payload_json] }}"
+          "queryReplacement": "={{ [$('Record the lead').first().json.lead_id, $('Resolve on-duty + compose').first().json.event_type, $('Resolve on-duty + compose').first().json.payload_json] }}"
         }
       },
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.5,
       "position": [
-        400,
+        1060,
         0
       ],
       "id": "led-event",
       "name": "Append the event",
-      "alwaysOutputData": true,
-      "onError": "continueRegularOutput"
+      "alwaysOutputData": true
     },
     {
       "parameters": {
@@ -147,7 +145,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        620,
+        180,
         0
       ],
       "id": "led-notify",
@@ -166,21 +164,20 @@
       "type": "n8n-nodes-base.emailSend",
       "typeVersion": 2.1,
       "position": [
-        840,
-        -80
+        400,
+        -120
       ],
       "id": "led-email",
-      "name": "Alert the sales team",
-      "onError": "continueRegularOutput"
+      "name": "Alert the sales team"
     },
     {
       "parameters": {
-        "jsCode": "// Answered in full from the knowledge base. Recorded, nobody disturbed.\nreturn [{ json: { logged: true, lead_id: $json.lead_id || '', rule_id: $json.rule_id || '' } }];"
+        "jsCode": "// Answered in full from the knowledge base. Nobody disturbed -- but it\n// still gets recorded, because an unescalated lead is still a lead.\nreturn [{ json: { notified: false } }];"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        840,
+        400,
         120
       ],
       "id": "led-quiet",
@@ -203,28 +200,6 @@
       "main": [
         [
           {
-            "node": "Record the lead",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Record the lead": {
-      "main": [
-        [
-          {
-            "node": "Append the event",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Append the event": {
-      "main": [
-        [
-          {
             "node": "Tell a human?",
             "type": "main",
             "index": 0
@@ -244,6 +219,39 @@
         [
           {
             "node": "No human needed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Alert the sales team": {
+      "main": [
+        [
+          {
+            "node": "Record the lead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "No human needed": {
+      "main": [
+        [
+          {
+            "node": "Record the lead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Record the lead": {
+      "main": [
+        [
+          {
+            "node": "Append the event",
             "type": "main",
             "index": 0
           }

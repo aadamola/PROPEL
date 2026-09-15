@@ -5,6 +5,9 @@
 **Read the rules:** [`keywords.md`](keywords.md) — generated table, renders on a phone in GitHub.
 **Edit the rules:** [`keywords.csv`](keywords.csv) — the source of truth.
 **Campaign audit:** [`07-campaign-brief-audit.md`](07-campaign-brief-audit.md) — what is blocked and why.
+**Launch plan:** [`08-instagram-launch-plan.md`](08-instagram-launch-plan.md) — content calendar, the client session, and the Phase 0 that earns before the API exists.
+
+> **Channel scope (2026-09-15):** Shalom Park is **Instagram-only**. WhatsApp and email are stripped from this client — their adapters, normalisers and tests are all still built and green, and re-enabling either is one boolean in `clients.json`.
 
 ---
 

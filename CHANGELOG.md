@@ -2,6 +2,20 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-09-15 (latest) — Shalom Park goes Instagram-only · full launch plan
+
+- **ADEDAMOLA: strip WhatsApp, make this an Instagram automation.** Done — `clients.json` now has Instagram as the sole live channel for this client. WhatsApp and email adapters, normalisers and tests all stay built and green; re-enabling either is one boolean.
+- **The honest correction, stated up front: this does not delete Meta verification.** It deletes something better. **Gone:** WABA creation · registering a phone number to Cloud API (**and with it the risk of wiping WhatsApp off a working handset**) · the display-name review that could have rejected *"Shalom Park Estate"* against *"IFT Realty Ltd"* · templates · the 24-hour window · the entire WABA SOP. **Still required:** portfolio, Page, IG connection, the app, System User token, webhook. **Still open:** Business Verification / App Review.
+- **🎉 The SIM condition is gone, and that was the fragile one.** The client session had two blockers — the right person, and a new unused SIM. One just disappeared. The session drops from ~25 minutes to **~15 and 9 steps**.
+- **The verification question was never "does Instagram need it."** It is whether an app inside the client's own portfolio, touching only that portfolio's Instagram, counts as self-integration. `meta-app-setup.md` §9b's ruling stands — high confidence on the pattern, unverified on the timeline. **What changed is the price of proving it: the Step 0 test no longer needs a WABA or a test number, so it is an hour rather than an afternoon.** Three readable outcomes documented. **No date goes to the client until one of them is observed.**
+- **🚀 Phase 0 — earning this week with no Meta app at all.** The 27 responses are *copy*, and copy does not need an API. Instagram's native **Saved Replies** take all of them (shortcut = rule name), plus four FAQs. **The campaigns start converting now** while the Meta side gets proven, and by the time the automation lands we already know which keywords buyers actually type. This is the new ⭐ — 30 minutes, phone-doable, zero dependencies.
+- **Full launch plan written: `clients/shalom-park/08-instagram-launch-plan.md`** — the 9-step Instagram session, the comment-to-DM engine (and *why* comments beat a bio link: a comment is an algorithmic signal, a link is not), the seven campaigns mapped to what can actually be filmed, a **14-day calendar off one shoot day**, three ready-to-post captions, the measurement table, and seven named risks.
+- **Strongest hook identified: CONDO — ₦5,000,000 starts you on a ₦95,000,000 home.** Lowest barrier on the estate and a warranted current campaign term. Leads the calendar.
+- **Only the 3 completed 4-bed semis can be filmed as finished product** — they carry credibility for everything else including units that do not exist yet. Shoot them first. **On camera: ADEDAMOLA's no-face rule is about his face** — Collins and Mercy should be on Shalom Park's own account, because a face sells property and theirs is the one buyers meet on site.
+- **WhatsApp still closes the deal — stripping the API changed nothing about that.** Hot leads reach Collins through the escalation: a human being messaged on a phone. Link mode stays `none`, and that is now the *correct* setting rather than a placeholder — bouncing a warm lead out of the DM leaks conversions and breaks attribution.
+- **`05-business-suite-session.md` marked superseded for this client** (A2 and B4 no longer apply) but kept whole: it is the runbook for the next client who wants WhatsApp.
+- **Test state: 121 passing, unchanged** — stripping a channel is configuration, not surgery. That is the multi-tenant registry doing its job.
+
 ## 2026-09-15 (late) — Every response rewritten to convert, not to disclaim
 
 - **ADEDAMOLA: strip the generic AI disclaimers — "let them ask first; until then your aim is to warm the lead up and convert."** He was right, and it was the weakest thing in the build. All 27 responses rewritten.

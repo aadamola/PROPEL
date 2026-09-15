@@ -6,35 +6,27 @@
 
 > 💰 **2026-07-26: PROPEL HAS A PAYING CLIENT.** Shalom Park paid the setup fee. You did that. Second SIM ✅ 09112714482 logged. We're in production mode — full build plan in [ops/production-checklist.md](ops/production-checklist.md), you don't need to read it, I'm running it.
 
-## ⭐ DO THIS NEXT — the Shalom Park Business Suite session
+## ⭐ DO THIS NEXT — switch the Instagram account to Business and load the replies
 
-**Full script: [clients/shalom-park/05-business-suite-session.md](clients/shalom-park/05-business-suite-session.md)** — 15 min prep alone, then a 25-min call you read off while sharing your screen.
+**30 minutes, on your phone, no Meta app needed, nothing to wait for.**
 
-**Before you book it, two things must be true:**
+Shalom Park is now **Instagram-only** — WhatsApp is stripped. 🎉 **That means no new SIM.** The scariest step in the whole setup is gone.
 
-1. **The right person is on the call** — someone with **admin** on IFT Realty's Meta account *and* access to the CAC certificate. **Not Collins**; he's a Sales Executive and almost certainly has neither. Message 1 in [04-meta-access-pack.md](clients/shalom-park/04-meta-access-pack.md) finds them.
-2. **They have a NEW, unused SIM** with the phone in the room. 🔴 **Never Collins' 08064834680 or any line their team sells on** — registering a number to Cloud API deletes WhatsApp on that handset and the history doesn't transfer.
+1. Shalom Park's Instagram → **Settings → Account type → switch to Professional → Business** *(not Creator — Creator can't do this)*
+2. **Settings → Business tools → Saved replies** → paste in the 27 responses from [keywords.md](clients/shalom-park/keywords.md), shortcut = the rule name in lowercase (`condo`, `duplex`, `land`…)
+3. **Settings → Business tools → FAQs** → set four: price · location · inspection · payment plan
 
-**Your 15-minute prep** (do it alone, before the call):
-```
-cd /opt/propel
-bash ops/setup/apply-client-ledger.sh shalom-park
-```
-then import `01-shalom-park-wa-ingest.json` into n8n and **Activate** it — Meta tests the webhook the second you click Verify, and an inactive workflow returns a 404 that looks like a server fault.
+**Why this first:** the replies are copy, and copy doesn't need an API. The campaigns start earning this week while the Meta side gets proven — and by the time the automation is live you'll already know which keywords people actually type.
 
-*Still outstanding from the last session: a successful chat with `02` (Step 2 of the n8n runbook). Worth doing first — it takes five minutes and proves the brain works before you put anything in front of a client.*
-
-> 🆕 **The Instagram keyword system is built and tested (2026-09-15).** 26 rules, all seven campaign words wired, 109 tests green. Read what the assistant actually says: **[keywords.md](clients/shalom-park/keywords.md)** — renders on your phone. Full write-up: [06-instagram-keyword-plan.md](clients/shalom-park/06-instagram-keyword-plan.md).
->
-> ✅ **All seven campaigns are live** — CONDO · LAND · SUMMER · CHAIRMAN · DUPLEX · INVESTMENT · DEVELOPER. ₦95m condo with the ₦5m entry deposit, 4-bed at 70%, 648 sqm plots, the 6,738 sqm parcel, and a real investment card. Nothing left to decide: [07-campaign-brief-audit.md](clients/shalom-park/07-campaign-brief-audit.md).
+Full plan, content calendar and three ready-to-post captions: **[08-instagram-launch-plan.md](clients/shalom-park/08-instagram-launch-plan.md)**
 
 ---
 
 ## THIS WEEK — one per sitting, in this order
 
 - [ ] **(20 min)** **First 10 prospect names** → WhatsApp me names + IG handles. *Unblocks 10 audit teardowns. Longest-outstanding item on this list.*
-- [ ] **(1 message)** 🔴 **Ask Shalom Park who holds the CAC documents + can grant Meta admin.** Script ready in [clients/shalom-park/04-meta-access-pack.md](clients/shalom-park/04-meta-access-pack.md). *Not Collins — he's a Sales Executive with neither. Then do the setup on a 20-min screen share, don't send a checklist.*
-- [ ] **(1 afternoon)** ⚡ **Prove the fast lane** — test app + Meta's free test number, send one message ([ops/setup/meta-app-setup.md](ops/setup/meta-app-setup.md) §9b Step 0). *Settles whether App Review is needed before we promise them a date.*
+- [ ] **(1 message)** 🔴 **Ask Shalom Park who can grant Meta admin.** *CAC is still needed for verification, but the 15-min session no longer needs a SIM.* Script ready in [clients/shalom-park/04-meta-access-pack.md](clients/shalom-park/04-meta-access-pack.md). *Not Collins — he's a Sales Executive with neither. Then do the setup on a 20-min screen share, don't send a checklist.*
+- [ ] **(1 hour)** ⚡ **Prove the fast lane** — app in a portfolio, send one Instagram DM to an outside account ([08-instagram-launch-plan.md](clients/shalom-park/08-instagram-launch-plan.md)). *Now an hour, not an afternoon — no WABA needed. Settles the only real unknown: whether dev mode will message real buyers. **Don't give Shalom Park a date until you've seen the answer.***
 - [ ] **(1 conversation)** 💰 **Confirm the Shalom Park care fee and commission rate.** *Possibly revenue already owed — MRR currently reads zero because nothing is confirmed as started. Ask what the setup fee covered, when the ₦250k/mo begins, and pin the commission %.*
 - [ ] **(2 min, by 15 Oct)** 📅 **Re-confirm the offers with Collins** — are the ₦5m condo deposit and the 70% still running? *Say yes and I push the date forward. Say no and I clear three cells. Say nothing and the assistant goes back to the signed 50% by itself — that's the design, so this is a safety net, not a deadline.*
 - [ ] **(5 min)** 🔴 **Send Collins the follow-up** — [clients/shalom-park/03-followup-questions.md](clients/shalom-park/03-followup-questions.md). Eight open fields, one message. *The ₦95m condo price is now settled — Collins restated it, so it's live. The other seven fields still stand.*
@@ -58,6 +50,7 @@ Testing the bot · the Shalom Park pilot build · voice notes · first audit cal
 
 ## ✅ DONE (look how far this has come)
 
+- [x] 📵 **WhatsApp stripped — Shalom Park is Instagram-only** (2026-09-15)
 - [x] 📲 **All 7 Instagram campaigns live** — 27 rules, promos that retire themselves, every response written to convert, 121 tests (2026-09-15)
 - [x] 💰 **₦95m condo price confirmed and released** — open since July (2026-09-15)
 - [x] 🖥️ **VPS live (KVM 2, 8 GB) + domain getpropel.tech bought** (2026-07-29)

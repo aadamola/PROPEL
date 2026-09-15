@@ -25,24 +25,27 @@
       "kb_file": "clients/shalom-park/kb.json",
       "channels": {
         "whatsapp": {
-          "enabled": true,
+          "enabled": false,
           "webhook_path": "shalom-park-wa",
           "token_env": "SHALOM_PARK_WABA_TOKEN",
           "phone_id_env": "SHALOM_PARK_WABA_PHONE_ID",
           "verify_env": "META_VERIFY_TOKEN_SHALOM_PARK",
-          "secret_env": "SHALOM_PARK_APP_SECRET"
+          "secret_env": "SHALOM_PARK_APP_SECRET",
+          "_status": "STRIPPED 2026-09-15 on ADEDAMOLA's instruction. Shalom Park ships as an INSTAGRAM-ONLY automation. This removes WABA creation, phone-number registration (and with it the risk of wiping a working handset), WhatsApp display-name review, message templates and the 24-hour window. Re-enable by flipping this boolean — the adapter, the normaliser and the tests are all still here and still green."
         },
         "instagram": {
-          "enabled": false,
+          "enabled": true,
           "webhook_path": "shalom-park-ig",
           "token_env": "SHALOM_PARK_IG_TOKEN",
           "secret_env": "SHALOM_PARK_APP_SECRET",
-          "keyword_automation": true
+          "keyword_automation": true,
+          "_primary": "THE channel for this client. Comments and DMs, keyword fast lane in front of the brain."
         },
         "email": {
-          "enabled": true,
+          "enabled": false,
           "address": "sales@shalomparknigeria.com",
-          "mailbox_env": "SHALOM_PARK_IMAP"
+          "mailbox_env": "SHALOM_PARK_IMAP",
+          "_status": "Parked with WhatsApp — Instagram-only launch. Adapter (04) is built and tested; flip the boolean when wanted."
         }
       },
       "escalation": {
@@ -87,7 +90,8 @@
           "wa_e164": null,
           "website": "https://shalomparknigeria.com",
           "whatsapp_template": "https://wa.me/{{WA_E164}}?text=Hi%20Shalom%20Park%2C%20I%20saw%20your%20Instagram.%20Ref%3A%20{{CODE}}",
-          "_attribution": "The Ref code lands in the buyer's first WhatsApp message, so the ledger can tie a closed sale back to the exact Instagram keyword that produced it."
+          "_attribution": "The Ref code lands in the buyer's first WhatsApp message, so the ledger can tie a closed sale back to the exact Instagram keyword that produced it.",
+          "_mode_ruling": "mode stays \"none\" and that is now the CORRECT setting, not a placeholder. On an Instagram-only build the conversation converts inside the DM; bouncing a warm lead to a wa.me link leaks conversions and breaks attribution. Hot leads reach Collins through the ESCALATION (a human being messaged), which needs no WhatsApp API at all."
         },
         "instagram": {
           "public_reply_enabled": true,

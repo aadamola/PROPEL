@@ -1,5 +1,9 @@
 # Shalom Park — Business Suite session script
 
+> ⚠️ **SUPERSEDED 2026-09-15 for this client.** Shalom Park now ships **Instagram-only** — WhatsApp is stripped, so **A2 (the SIM) and B4 (WhatsApp account + number) no longer apply.** Use the 9-step Instagram session in **[08-instagram-launch-plan.md](08-instagram-launch-plan.md)** instead: ~15 minutes, no SIM, no display-name review.
+>
+> This file stays as the **full two-channel runbook** — it is the script for the next client who wants WhatsApp, and for Shalom Park if they add it later. Nothing here is wrong; it is just wider than this client now needs.
+
 *The live call script. Doctrine and reasoning live in `ops/setup/SOP-01-client-waba-onboarding.md`; this is the thing you read off while sharing a screen.*
 
 **Two parts: 15 minutes alone beforehand, then ~25 minutes with them.** Doing the prep matters — half of these steps stall if you improvise them in front of a client.

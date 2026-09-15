@@ -2,6 +2,14 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-09-15 (ruling) — Alerts send from a Propel address, never the client's domain
+
+- **ADEDAMOLA asked whether the SMTP sender could be `damola@shalomparknigeria.com`. Recommended against, and the reason is commercial before it is technical.**
+- **Every alert is a Propel receipt.** Twenty a day land in Shalom Park's sales inbox saying *here is a buyer, here is what they asked, here is who should call them*. That is the drumbeat the commission conversation rests on. **A client-domain sender erases Propel from the value chain at the exact moment value is delivered** — it reads as an internal note from a colleague.
+- **Second: it is infrastructure they can revoke.** Same objection as the attribution ledger — we would be renting the pipe that proves our own worth. Third: **SPF/DKIM rejects sending *as* their domain** unless they provision the mailbox and hand over credentials, which adds moving parts owned by someone else. It also quietly presents ADEDAMOLA as their staff rather than their agency, which weakens a commission claim.
+- **The one genuine upside — deliverability into their own inbox — is solved by a single whitelist**, and Propel is CC'd on every alert regardless of sender.
+- **Ruling recorded in `clients.json` as `alerts._from_ruling`.** Interim sender `justin@koratori.com` via a Gmail app password (free, ships tonight); target `alerts@getpropel.tech` on Hostinger, where the domain already lives. **Swapping is a one-field change — don't block step 3 on buying a mailbox.**
+
 ## 2026-09-15 (step 2 ✅) — Ledger tables live on the VPS; step 3 detailed
 
 - **`lead` and `lead_event` exist on the server.** `COMMIT`, both tables listed, `✅ schema applied`. The trigger fix was right and the script proved its own work rather than asserting it.

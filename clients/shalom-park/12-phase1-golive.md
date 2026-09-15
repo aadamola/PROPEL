@@ -112,7 +112,14 @@ grep -E '^POSTGRES_PASSWORD=' /opt/propel/.env
 
 Zero cost, nothing new to sign up for, ~500 messages a day — far past 20 leads. And for an internal alert landing in a client's sales inbox, **coming from a name Collins recognises beats a no-reply address**: it is less likely to be filtered and more likely to be acted on.
 
-*If you would rather it came from `hello@getpropel.tech`, that needs a mailbox on the domain — Hostinger sells one cheaply. Not worth blocking on today.*
+**Target state: `alerts@getpropel.tech`** — a mailbox on our own domain, on Hostinger where the domain already lives. Cheap, and it puts Propel in the from-line of every lead alert. Swapping is a one-field change; don't block step 3 on buying it.
+
+> 🔴 **Never send from a mailbox on the client's domain** (`…@shalomparknigeria.com`). Three reasons, heaviest first:
+> 1. **Every alert is a Propel receipt.** Twenty a day landing in their sales inbox saying *your assistant found you a buyer* is the drumbeat the commission conversation rests on. A client-domain sender erases us from the value chain at the exact moment value is delivered.
+> 2. **It is infrastructure they can revoke** — we would be renting the pipe that proves our own worth. Same objection as the attribution ledger.
+> 3. **SPF/DKIM will reject it** unless they provision the mailbox and hand over credentials, which adds moving parts owned by someone else.
+>
+> The one real upside — deliverability to their own inbox — is solved by them whitelisting us once. And we are CC'd on every alert regardless of sender.
 
 #### 3d · `Shalom Park IG` — Header Auth ⏸️ *later*
 | Field | Value |

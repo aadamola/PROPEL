@@ -113,9 +113,11 @@
         "email_cc": [
           "justin@koratori.com"
         ],
-        "from": "hello@getpropel.tech",
+        "from": "justin@koratori.com",
         "sms_provider": null,
-        "_ruling": "Email is the interim alert channel. It is HONESTLY WEAKER than a WhatsApp ping — a sales inbox gets checked, a phone buzzes. Stripping the WhatsApp API is what removed the strong option, and that is a real cost of the Instagram-only decision, not a detail. Upgrade path: a Nigerian SMS gateway (Termii / Africa's Talking) at roughly ₦4 a message — at 20 leads a day that is about ₦2,400/month, far inside the docs/07 tooling gate. Set sms_provider and the notifier sends hot leads by SMS and the rest by email."
+        "_ruling": "Email is the interim alert channel. It is HONESTLY WEAKER than a WhatsApp ping — a sales inbox gets checked, a phone buzzes. Stripping the WhatsApp API is what removed the strong option, and that is a real cost of the Instagram-only decision, not a detail. Upgrade path: a Nigerian SMS gateway (Termii / Africa's Talking) at roughly ₦4 a message — at 20 leads a day that is about ₦2,400/month, far inside the docs/07 tooling gate. Set sms_provider and the notifier sends hot leads by SMS and the rest by email.",
+        "from_target": "alerts@getpropel.tech",
+        "_from_ruling": "Alerts send from a PROPEL-owned address, never from the client's domain. Three reasons, in order of weight: (1) every alert is a Propel receipt — 20 a day landing in their sales inbox saying 'your assistant found you a buyer' is the drumbeat the commission conversation rests on, and a client-domain sender erases us from the value chain at the exact moment value is delivered; (2) their mailbox is infrastructure they can revoke, and we would be renting the pipe that proves our own worth; (3) sending AS their domain fails SPF/DKIM unless they provision it and hand over credentials. Interim: justin@koratori.com via Gmail app password — free, works today. Target: alerts@getpropel.tech on Hostinger. Swapping is a one-field change. Deliverability to their inbox is solved by a single whitelist, and we are CC'd either way."
       },
       "_ledger": {
         "enabled": true,

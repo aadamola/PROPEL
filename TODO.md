@@ -6,26 +6,27 @@
 
 > 💰 **2026-07-26: PROPEL HAS A PAYING CLIENT.** Shalom Park paid the setup fee. You did that. Second SIM ✅ 09112714482 logged. We're in production mode — full build plan in [ops/production-checklist.md](ops/production-checklist.md), you don't need to read it, I'm running it.
 
-## ⭐ DO THIS NEXT — switch the Instagram account to Business and load the replies
+## ⭐ DO THIS NEXT — the 45-minute test that unblocks everything
 
-**30 minutes, on your phone, no Meta app needed, nothing to wait for.**
+**Phase 0 is running. This is the single thing standing between it and the automation.**
 
-Shalom Park is now **Instagram-only** — WhatsApp is stripped. 🎉 **That means no new SIM.** The scariest step in the whole setup is gone.
+Create a Meta app inside a business portfolio, give it Instagram permissions, and **send one DM to an account that has no role on the app.** That's it. You're answering one question: *will a dev-mode app message a real buyer?*
 
-1. Shalom Park's Instagram → **Settings → Account type → switch to Professional → Business** *(not Creator — Creator can't do this)*
-2. **Settings → Business tools → Saved replies** → work down **[09-phase0-saved-replies.md](clients/shalom-park/09-phase0-saved-replies.md)**. Shortcut and message are both written out — copy, paste, next. **Do the first 12 only.** The other 15 are for another day and you are not behind without them.
-3. **Settings → Business tools → FAQs** → the four are written at the bottom of the same file
+| What you see | What it means |
+|---|---|
+| The DM arrives | 🟢 No verification, no App Review. Book the client session |
+| Only reaches accounts with a role on the app | 🟡 Business Verification is the gate — days, not weeks |
+| Permissions error either way | 🔴 App Review needed. We fall back to Propel's own filing |
 
-**Why this first:** the replies are copy, and copy doesn't need an API. The campaigns start earning this week while the Meta side gets proven — and by the time the automation is live you'll already know which keywords people actually type.
+Steps: [08-instagram-launch-plan.md](clients/shalom-park/08-instagram-launch-plan.md) · **Don't give Shalom Park a go-live date until you've seen which one it is.**
 
-Then you are in production. The daily loop is 20 minutes and it is written out for you: **[11-phase0-runbook.md](clients/shalom-park/11-phase0-runbook.md)**
+*Everything else for Phase 1 is built and waiting: the workflow, the ledger, the escalation alerts, the privacy pages, and a go-live runbook with a five-second rollback — [12-phase1-golive.md](clients/shalom-park/12-phase1-golive.md).*
 
 ---
 
 ## THIS WEEK — one per sitting, in this order
 
 - [ ] **(5 min)** 🎬 **Book the shoot day with Collins** — one site visit, about 3 hours, and it produces all 14 days of content. Shot list is written: [10-phase0-content-pack.md](clients/shalom-park/10-phase0-content-pack.md). *Collins and Mercy go on camera, not you.*
-- [ ] **(45 min)** ⚡ **Prove the fast lane** — app in a portfolio, send one Instagram DM to an outside account ([08-instagram-launch-plan.md](clients/shalom-park/08-instagram-launch-plan.md)). *Settles the only real unknown: whether dev mode will message real buyers. **No delivery date goes to Shalom Park until you have seen the answer.***
 - [ ] **(1 message)** 🔴 **Ask Shalom Park who can grant Meta admin.** Script in [04-meta-access-pack.md](clients/shalom-park/04-meta-access-pack.md). *Not Collins — he's a Sales Executive. The session is now 15 minutes and needs no SIM.*
 - [ ] **(5 min)** **Send Collins the follow-up** — [03-followup-questions.md](clients/shalom-park/03-followup-questions.md). *Seven fields still open. The ₦95m condo price is settled; the rest aren't.*
 - [ ] **(20 min)** **First 10 prospect names** → WhatsApp me names + IG handles. *Unblocks 10 audit teardowns. Longest-outstanding item on this list — and Shalom Park is still a pipeline of one.*
@@ -52,6 +53,7 @@ Testing the bot · the automated pilot · voice notes · first audit calls. Noth
 
 ## ✅ DONE (look how far this has come)
 
+- [x] 🔐 **Phase 1 built: escalation alerts, attribution ledger wired, privacy + data-deletion pages, go-live runbook** (2026-09-15)
 - [x] 🚀 **Phase 0 production pack shipped** — 27 saved replies, 10 captions, shot list, daily runbook, tracking log (2026-09-15)
 - [x] 📵 **WhatsApp stripped — Shalom Park is Instagram-only** (2026-09-15)
 - [x] 📲 **All 7 Instagram campaigns live** — 27 rules, promos that retire themselves, every response written to convert, 121 tests (2026-09-15)

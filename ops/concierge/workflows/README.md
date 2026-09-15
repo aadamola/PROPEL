@@ -22,13 +22,14 @@ Faster than file import, and it's the method to use:
 | `02-concierge-brain-gemini.json` | **Chat-panel brain** — standalone, for the ear test. No Meta needed |
 | `03-concierge-core.json` | **THE CORE.** Sub-workflow every channel calls: registry → KB → dedup → prompt → Gemini → guardrails → envelope |
 | `04-channel-email.json` | **Email channel** — IMAP in, SMTP out, with auto-reply/bounce/newsletter filtering |
+| `06-ledger-and-escalation.json` | **Ledger + escalation.** Called for EVERY answered message: writes the lead and an append-only event, then emails the sales team when a human is needed. On-duty routing is Lagos-time aware. Needs **Postgres** and **SMTP** credentials |
 | `05-channel-instagram.json` | **Instagram channel** — comments + DMs, with the 24-rule keyword fast lane in front of the brain. Needs an n8n **Header Auth** credential holding `Authorization: Bearer <SHALOM_PARK_IG_TOKEN>`. See [`../../../clients/shalom-park/06-instagram-keyword-plan.md`](../../../clients/shalom-park/06-instagram-keyword-plan.md) |
 
 Architecture and the reasoning behind it: [`../architecture.md`](../architecture.md).
 
 ## Import order (matters)
 
-**Import `03-concierge-core.json` first**, save it, then copy its workflow ID from the browser URL and paste it into the `Concierge CORE` node of every channel workflow (it ships as `REPLACE_WITH_CORE_WORKFLOW_ID`). A channel workflow pointing at a core that doesn't exist yet fails in a way that reads like a code bug.
+**Import `03-concierge-core.json` and `06-ledger-and-escalation.json` first**, save each, then copy their workflow IDs from the browser URL and paste them into the `Concierge CORE` and `Ledger + escalation` nodes of the channel workflows (06 ships as `REPLACE_WITH_LEDGER_WORKFLOW_ID`). A channel workflow pointing at a core that doesn't exist yet fails in a way that reads like a code bug.
 
 Channel workflows also need credentials configured in n8n's UI: **IMAP** and **SMTP** for email.
 

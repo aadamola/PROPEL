@@ -8,6 +8,7 @@ const suites = [
   ['Guardrails (model output)', 'tools/test-guardrails.js'],
   ['Keyword fast lane (rules + safety class)', 'tools/test-keywords.js'],
   ['Instagram workflow (end-to-end)', 'tools/test-ig-workflow.js'],
+  ['On-call routing (who gets the lead)', 'tools/test-oncall.js'],
   ['Concierge baseline (sandbox)', 'sandbox/apex-gardens/concierge-prototype.js', '--test']
 ];
 let failed = 0;

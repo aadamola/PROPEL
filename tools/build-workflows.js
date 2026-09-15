@@ -317,7 +317,7 @@ if (!hit.matched) {
 // Shaped exactly like a model response so it flows through the SAME
 // guardrail node the brain's output does. A human edit to the sheet gets
 // policed at runtime, not only at build time.
-return [{ json: { ...env, lane: 'keyword', rule_id: hit.rule_id, matched_phrase: hit.matched_phrase,
+return [{ json: { ...env, lane: 'keyword', rule_id: hit.rule_id, intent: hit.intent, matched_phrase: hit.matched_phrase,
   public_comment_reply: hit.public_comment_reply, link_code: hit.link_code,
   text: JSON.stringify({ reply: hit.reply, escalate: hit.escalate, escalation_reason: hit.escalation_reason,
                          unit_interest: hit.unit_interest, grounded_in: hit.grounded_in }) } }];
@@ -336,7 +336,9 @@ return [{ json: {
   send: !!reply,
   lane: lane.lane,
   rule_id: lane.rule_id || '',
+  intent: lane.intent || '',
   matched_phrase: lane.matched_phrase || '',
+  text: env.text,
   client_id: 'shalom-park',
   channel: env.channel,
   contact_id: env.contact_id,
@@ -481,6 +483,20 @@ const instagram = {
         options: { timeout: 15000, response: { response: { neverError: true } } } },
       type: 'n8n-nodes-base.httpRequest', typeVersion: 4.2, position: [1720, 180],
       id: 'ig-dm', name: 'Send IG DM' },
+    { parameters: { workflowId: { __rl: true, value: registry._meta.n8n.ledger_workflow_id || 'REPLACE_WITH_LEDGER_WORKFLOW_ID', mode: 'id' },
+        workflowInputs: { mappingMode: 'defineBelow', value: {
+          client_id: '={{ $json.client_id }}', channel: '={{ $json.channel }}',
+          provider_message_id: '={{ $json.ledger.provider_message_id }}',
+          contact_id: '={{ $json.contact_id }}', contact_handle: '={{ $json.contact_handle }}',
+          contact_hash: '={{ $json.ledger.contact_hash }}',
+          text: '={{ $json.text }}', reply: '={{ $json.reply }}',
+          rule_id: '={{ $json.rule_id }}', intent: '={{ $json.intent }}',
+          link_code: '={{ $json.ledger.link_code }}', unit_interest: '={{ $json.ledger.unit_interest }}',
+          escalation_reason: '={{ $json.escalation_reason }}', guard_triggered: '={{ $json.guard_triggered }}',
+          reason: '={{ $json.reason }}',
+          escalate: '={{ $json.escalate }}', send: '={{ $json.send }}' } }, options: {} },
+      type: 'n8n-nodes-base.executeWorkflow', typeVersion: 1.2, position: [1500, 340],
+      id: 'ig-ledger', name: 'Ledger + escalation' },
     code('ig-held', 'Held for a human', [1720, 400],
       "// Nothing sent: cap reached, reply already used, or an empty reply.\n" +
       "// This is the escalation queue until the notifier workflow ships.\n" +
@@ -503,7 +519,11 @@ const instagram = {
     'Guardrails':           { main: [[{ node: 'Prepare send', type: 'main', index: 0 }]] },
     'Concierge CORE':       { main: [[{ node: 'Prepare send', type: 'main', index: 0 }]] },
     'Prepare send':         { main: [[{ node: 'Send gate (Meta limits)', type: 'main', index: 0 }]] },
-    'Send gate (Meta limits)': { main: [[{ node: 'Comment or DM?', type: 'main', index: 0 }]] },
+    // Fan-out: the durable record and the human alert do not wait on the
+    // send succeeding. A reply that fails to deliver is still a lead.
+    'Send gate (Meta limits)': { main: [[
+      { node: 'Comment or DM?', type: 'main', index: 0 },
+      { node: 'Ledger + escalation', type: 'main', index: 0 } ]] },
     'Comment or DM?':       { main: [
       [{ node: 'Private reply to comment', type: 'main', index: 0 }],
       [{ node: 'Send IG DM', type: 'main', index: 0 }],
@@ -515,3 +535,134 @@ const instagram = {
 W('ops/concierge/workflows/05-channel-instagram.json', instagram);
 
 console.log('built: 05-channel-instagram.json');
+
+// =========================================================================
+// 06 — LEDGER + ESCALATION (called for EVERY answered message)
+// =========================================================================
+// Two jobs that must not be separated: write the durable record, then tell a
+// human if one is needed. The write is not best-effort -- commission on a
+// single unit is ₦5.5-6m and evidence that only exists inside infrastructure
+// the client can revoke is not evidence.
+const oncallSrc = R('ops/concierge/lib/oncall.js')
+  .replace(/^'use strict';$/m, '')
+  .replace(/^module\.exports[\s\S]*$/m, '');
+
+const spAlerts = registry.clients['shalom-park'].alerts;
+
+const composeAlert = `
+${oncallSrc}
+
+const REGISTRY = ${JSON.stringify({ clients: Object.fromEntries(Object.entries(registry.clients).map(([k, v]) => [k, { name: v.name, escalation: v.escalation, alerts: v.alerts || null }])) })};
+
+const inp = $input.first().json;
+const client = REGISTRY.clients[inp.client_id] || {};
+const esc = client.escalation || {};
+const who = onDuty(esc, Date.now(), { unclaimed: false });
+
+const notify = inp.escalate === true || inp.send === false;
+const hot = isHot({ rule_id: inp.rule_id, escalate: inp.escalate });
+
+const payload = {
+  rule_id:      inp.rule_id || '',
+  matched:      inp.matched_phrase || '',
+  intent:       inp.intent || '',
+  channel:      inp.channel,
+  handle:       inp.contact_handle || '',
+  text:         String(inp.text || '').slice(0, 500),
+  reply_sent:   String(inp.reply || '').slice(0, 500),
+  escalate:     inp.escalate === true,
+  hot,
+  held_reason:  inp.reason || '',
+  guard:        inp.guard_triggered || '',
+  grounded_in:  inp.grounded_in || [],
+  link_code:    inp.link_code || '',
+  assigned_to:  who.name || '',
+  lagos_time:   who.lagos_time
+};
+
+const alert = buildAlert({
+  client_id: inp.client_id, client_name: client.name,
+  contact_handle: inp.contact_handle, contact_id: inp.contact_id,
+  channel: inp.channel, text: inp.text, rule_id: inp.rule_id, intent: inp.intent,
+  escalation_reason: inp.escalation_reason, reply: inp.reply,
+  on_duty: who, alert_minutes: esc.unclaimed_alert_minutes || 15, escalate: inp.escalate
+});
+
+return [{ json: {
+  ...inp,
+  notify, hot,
+  event_type: inp.escalate === true ? 'escalation' : 'qualified',
+  assigned_sales_rep: who.name || '',
+  on_duty: who,
+  payload_json: JSON.stringify(payload),
+  alert_subject: (hot ? '[HOT] ' : '') + 'Instagram lead — ' + (client.name || inp.client_id) + ' — @' + (inp.contact_handle || inp.contact_id || ''),
+  alert_body: alert
+}}];
+`;
+
+const pg = (id, name, pos, query, replacement) => ({
+  parameters: { operation: 'executeQuery', query, options: { queryReplacement: replacement } },
+  type: 'n8n-nodes-base.postgres', typeVersion: 2.5, position: pos, id, name,
+  alwaysOutputData: true, onError: 'continueRegularOutput'
+});
+
+const UPSERT_LEAD = `INSERT INTO lead
+  (client_id, channel, source_ref, provider_message_id, contact_e164, contact_hash, qualified_unit_type, assigned_sales_rep)
+VALUES ($1, $2, NULLIF($3,''), NULLIF($4,''), NULLIF($5,''), $6, NULLIF($7,''), NULLIF($8,''))
+ON CONFLICT (client_id, contact_hash) DO UPDATE
+  SET qualified_unit_type = COALESCE(EXCLUDED.qualified_unit_type, lead.qualified_unit_type),
+      assigned_sales_rep  = COALESCE(EXCLUDED.assigned_sales_rep,  lead.assigned_sales_rep)
+RETURNING lead_id, first_contact_at, attribution_expires_at;`;
+
+const INSERT_EVENT = `INSERT INTO lead_event (lead_id, event_type, payload)
+VALUES ($1::uuid, $2, $3::jsonb)
+RETURNING event_id, row_hash;`;
+
+const ledger = {
+  name: 'Propel Concierge — Ledger + escalation',
+  nodes: [
+    { parameters: { workflowInputs: { values: [
+        { name: 'client_id' }, { name: 'channel' }, { name: 'provider_message_id' },
+        { name: 'contact_id' }, { name: 'contact_handle' }, { name: 'contact_hash' },
+        { name: 'text' }, { name: 'reply' }, { name: 'rule_id' }, { name: 'intent' },
+        { name: 'link_code' }, { name: 'unit_interest' }, { name: 'escalation_reason' },
+        { name: 'guard_triggered' }, { name: 'reason' },
+        { name: 'escalate', type: 'boolean' }, { name: 'send', type: 'boolean' }
+      ] } }, type: 'n8n-nodes-base.executeWorkflowTrigger', typeVersion: 1.1,
+      position: [-260, 0], id: 'led-trigger', name: 'Called by a channel' },
+    code('led-compose', 'Resolve on-duty + compose', [-40, 0], composeAlert),
+    pg('led-lead', 'Record the lead', [180, 0], UPSERT_LEAD,
+       "={{ [$json.client_id, $json.channel, $json.link_code, $json.provider_message_id, $json.contact_id, $json.contact_hash, $json.unit_interest, $json.assigned_sales_rep] }}"),
+    pg('led-event', 'Append the event', [400, 0], INSERT_EVENT,
+       "={{ [$json.lead_id, $('Resolve on-duty + compose').first().json.event_type, $('Resolve on-duty + compose').first().json.payload_json] }}"),
+    { parameters: { conditions: { options: { caseSensitive: true, version: 2 }, conditions: [
+        { id: 'notify', operator: { type: 'boolean', operation: 'true', singleValue: true },
+          leftValue: "={{ $('Resolve on-duty + compose').first().json.notify }}", rightValue: '' } ], combinator: 'and' }, options: {} },
+      type: 'n8n-nodes-base.if', typeVersion: 2.2, position: [620, 0], id: 'led-notify', name: 'Tell a human?' },
+    { parameters: {
+        fromEmail: spAlerts.from,
+        toEmail: spAlerts.email_to.join(','),
+        ccEmail: spAlerts.email_cc.join(','),
+        subject: "={{ $('Resolve on-duty + compose').first().json.alert_subject }}",
+        emailFormat: 'text',
+        message: "={{ $('Resolve on-duty + compose').first().json.alert_body }}",
+        options: {} },
+      type: 'n8n-nodes-base.emailSend', typeVersion: 2.1, position: [840, -80],
+      id: 'led-email', name: 'Alert the sales team', onError: 'continueRegularOutput' },
+    code('led-quiet', 'No human needed', [840, 120],
+      "// Answered in full from the knowledge base. Recorded, nobody disturbed.\nreturn [{ json: { logged: true, lead_id: $json.lead_id || '', rule_id: $json.rule_id || '' } }];")
+  ],
+  connections: {
+    'Called by a channel':        { main: [[{ node: 'Resolve on-duty + compose', type: 'main', index: 0 }]] },
+    'Resolve on-duty + compose':  { main: [[{ node: 'Record the lead', type: 'main', index: 0 }]] },
+    'Record the lead':            { main: [[{ node: 'Append the event', type: 'main', index: 0 }]] },
+    'Append the event':           { main: [[{ node: 'Tell a human?', type: 'main', index: 0 }]] },
+    'Tell a human?':              { main: [
+      [{ node: 'Alert the sales team', type: 'main', index: 0 }],
+      [{ node: 'No human needed', type: 'main', index: 0 }] ] }
+  },
+  settings: { executionOrder: 'v1' }, pinData: {}
+};
+W('ops/concierge/workflows/06-ledger-and-escalation.json', ledger);
+
+console.log('built: 06-ledger-and-escalation.json');

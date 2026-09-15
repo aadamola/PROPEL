@@ -10,7 +10,9 @@
     },
     "n8n": {
       "core_workflow_id": "AE422d9ptfvjj0PQ",
-      "instance": "https://engine.getpropel.tech"
+      "instance": "https://engine.getpropel.tech",
+      "ledger_workflow_id": null,
+      "_import_order": "Import 03 (CORE) then 06 (ledger + escalation), then paste each id into the matching node of 05 (Instagram). A channel pointing at a sub-workflow that does not exist fails in a way that reads like a code bug."
     },
     "meta_graph": {
       "version": "v21.0",
@@ -103,6 +105,21 @@
         "readable_view": "clients/shalom-park/keywords.md",
         "_surface": "IN-HOUSE ONLY. The CSV is the editable source of truth; keywords.md is the generated read-only view. No third-party spreadsheet holds client facts.",
         "_copy_rule": "Sell, do not disclaim. No response volunteers what the assistant cannot do — nobody asked. Where a fact is not held, it becomes an offer (\"I will get you the breakdown in writing\"), never a confession. Every response closes on one question that moves the lead forward. Escalation still fires; the copy just stops announcing it."
+      },
+      "alerts": {
+        "email_to": [
+          "sales@shalomparknigeria.com"
+        ],
+        "email_cc": [
+          "justin@koratori.com"
+        ],
+        "from": "hello@getpropel.tech",
+        "sms_provider": null,
+        "_ruling": "Email is the interim alert channel. It is HONESTLY WEAKER than a WhatsApp ping — a sales inbox gets checked, a phone buzzes. Stripping the WhatsApp API is what removed the strong option, and that is a real cost of the Instagram-only decision, not a detail. Upgrade path: a Nigerian SMS gateway (Termii / Africa's Talking) at roughly ₦4 a message — at 20 leads a day that is about ₦2,400/month, far inside the docs/07 tooling gate. Set sms_provider and the notifier sends hot leads by SMS and the rest by email."
+      },
+      "_ledger": {
+        "enabled": true,
+        "note": "Every answered message writes a lead row and an append-only event. Commission on one unit is ₦5.5–6m; evidence that lives only in the client's infrastructure is not evidence."
       }
     },
     "propel": {

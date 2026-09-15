@@ -247,3 +247,271 @@ const email = {
 W('ops/concierge/workflows/04-channel-email.json', email);
 
 console.log('built: 03-concierge-core.json, 04-channel-email.json');
+
+// =========================================================================
+// 05 — INSTAGRAM CHANNEL (keyword fast lane in front of the brain)
+// =========================================================================
+const keywordsSrc = R('ops/concierge/lib/keywords.js')
+  .replace(/^'use strict';$/m, '')
+  .replace(/^module\.exports[\s\S]*$/m, '');
+
+const kwTable = JSON.parse(R('clients/shalom-park/keywords.json'));
+const spKw = registry.clients['shalom-park'].keywords;
+const GRAPH = registry._meta.meta_graph.version;
+
+const igHandshake = `
+// Constant-time compare: the verify token is the only thing standing
+// between this public URL and anyone subscribing their own Meta app to it.
+const crypto = require('crypto');
+const q = $input.first().json.query || {};
+const expected = String($env.META_VERIFY_TOKEN_SHALOM_PARK || '');
+const got = String(q['hub.verify_token'] || '');
+const ok = expected.length > 0 && got.length === expected.length &&
+  crypto.timingSafeEqual(Buffer.from(got), Buffer.from(expected));
+if (q['hub.mode'] === 'subscribe' && ok) {
+  return [{ json: { status: 200, body: String(q['hub.challenge'] || '') } }];
+}
+return [{ json: { status: 403, body: 'Forbidden' } }];
+`;
+
+const igVerifySig = `
+// Meta signs every POST with an HMAC over the RAW bytes. Without this check
+// anyone who learns the URL can post fabricated buyer messages straight into
+// the attribution ledger our commission claims rest on.
+const crypto = require('crypto');
+const item = $input.first();
+const secret = String($env.SHALOM_PARK_APP_SECRET || '');
+const header = String(item.json.headers?.['x-hub-signature-256'] || '');
+const raw = item.binary?.data ? Buffer.from(item.binary.data.data, 'base64') : Buffer.from(JSON.stringify(item.json.body || {}));
+const expected = 'sha256=' + crypto.createHmac('sha256', secret).update(raw).digest('hex');
+const ok = secret && header.length === expected.length &&
+  crypto.timingSafeEqual(Buffer.from(header), Buffer.from(expected));
+return [{ json: { ok, body: item.json.body, status: ok ? 200 : 403 } }];
+`;
+
+const igNormalize = `
+${normalizeSrc}
+const payload = $input.first().json;
+if (!payload.ok) return [{ json: envelope({ channel: 'instagram_dm', is_actionable: false, skip_reason: 'bad_signature' }) }];
+return [{ json: normalize('instagram', payload.body, 'shalom-park') }];
+`;
+
+const igFastLane = `
+${keywordsSrc}
+
+// The keyword table, compiled from clients/shalom-park/keywords.csv.
+// Rebuild with: node tools/build-keywords.js && node tools/build-workflows.js
+const TABLE = ${JSON.stringify(kwTable)};
+const CFG = ${JSON.stringify({ assistant_signature: spKw.assistant_signature, links: spKw.links })};
+const RULES = compile(TABLE.rules);
+
+const env = $input.first().json;
+const hit = match(RULES, env.text, CFG);
+
+if (!hit.matched) {
+  // No rule owns this question. The brain gets it, with the KB and the
+  // guardrails — a miss is a fall-through, never a dead end.
+  return [{ json: { ...env, lane: 'brain', keyword_miss_reason: hit.reason } }];
+}
+
+// Shaped exactly like a model response so it flows through the SAME
+// guardrail node the brain's output does. A human edit to the sheet gets
+// policed at runtime, not only at build time.
+return [{ json: { ...env, lane: 'keyword', rule_id: hit.rule_id, matched_phrase: hit.matched_phrase,
+  public_comment_reply: hit.public_comment_reply, link_code: hit.link_code,
+  text: JSON.stringify({ reply: hit.reply, escalate: hit.escalate, escalation_reason: hit.escalation_reason,
+                         unit_interest: hit.unit_interest, grounded_in: hit.grounded_in }) } }];
+`;
+
+const igPrepare = `
+// Merge whichever lane answered back onto the original envelope.
+const env = $('Normalise').first().json;
+const src = $input.first().json;
+const lane = $('Keyword fast lane').first().json;
+
+const reply = String(src.reply || '');
+const isComment = env.channel === 'instagram_comment';
+
+return [{ json: {
+  send: !!reply,
+  lane: lane.lane,
+  rule_id: lane.rule_id || '',
+  matched_phrase: lane.matched_phrase || '',
+  client_id: 'shalom-park',
+  channel: env.channel,
+  contact_id: env.contact_id,
+  contact_handle: env.contact_handle,
+  thread_ref: env.thread_ref,
+  comment_id: isComment ? env.thread_ref : '',
+  reply,
+  public_comment_reply: isComment ? String(lane.public_comment_reply || '') : '',
+  escalate: src.escalate === true,
+  escalation_reason: src.escalation_reason || '',
+  guard_triggered: src.guard_triggered || '',
+  ledger: {
+    provider_message_id: env.provider_message_id,
+    contact_hash: env.contact_hash,
+    contact_e164: env.contact_id,
+    channel: env.channel,
+    unit_interest: src.unit_interest || '',
+    grounded_in: src.grounded_in || [],
+    keyword_rule: lane.rule_id || '',
+    link_code: lane.link_code || '',
+    guard_triggered: src.guard_triggered || ''
+  }
+}}];
+`;
+
+const igSendGate = `
+// Meta's two hard limits, enforced before we spend them:
+//   1. ONE private reply per comment, inside a 7-day window
+//   2. ~200 automated DMs an hour
+// Overflow is queued to a human, never dropped. A buyer who gets no answer
+// is a lost lead; a buyer who gets a late human answer is still a lead.
+const LIMITS = ${JSON.stringify(spKw.instagram)};
+const item = $input.first().json;
+if (!item.send) return [{ json: { ...item, send: false, reason: 'empty_reply' } }];
+
+const store = $getWorkflowStaticData('global');
+store.repliedComments = store.repliedComments || {};
+store.hourly = store.hourly || { windowStart: 0, count: 0 };
+
+const now = Date.now();
+const WINDOW = LIMITS.private_reply_window_days * 24 * 60 * 60 * 1000;
+for (const k of Object.keys(store.repliedComments)) {
+  if (now - store.repliedComments[k] > WINDOW) delete store.repliedComments[k];
+}
+
+if (item.comment_id) {
+  if (store.repliedComments[item.comment_id]) {
+    return [{ json: { ...item, send: false, reason: 'private_reply_already_used_for_this_comment' } }];
+  }
+  store.repliedComments[item.comment_id] = now;
+}
+
+if (now - store.hourly.windowStart > 60 * 60 * 1000) store.hourly = { windowStart: now, count: 0 };
+if (store.hourly.count >= LIMITS.max_automated_dms_per_hour) {
+  return [{ json: { ...item, send: false, reason: 'hourly_cap_reached', escalate: true,
+                    escalation_reason: 'automation hourly cap reached — needs a human' } }];
+}
+store.hourly.count++;
+
+return [{ json: { ...item, send: true } }];
+`;
+
+const GRAPH_BASE = 'https://graph.facebook.com/' + GRAPH;
+
+const instagram = {
+  name: 'Propel Concierge — Instagram channel (keyword fast lane + brain)',
+  nodes: [
+    { parameters: { httpMethod: 'GET', path: 'shalom-park-ig', responseMode: 'responseNode', options: {} },
+      type: 'n8n-nodes-base.webhook', typeVersion: 2, position: [-700, -180],
+      id: 'ig-verify', name: 'IG webhook (verify)', webhookId: 'shalom-park-ig-verify' },
+    code('ig-handshake', 'Handshake', [-480, -180], igHandshake),
+    { parameters: { respondWith: 'text', responseBody: '={{ $json.body }}',
+        options: { responseCode: '={{ $json.status }}' } },
+      type: 'n8n-nodes-base.respondToWebhook', typeVersion: 1.1, position: [-260, -180],
+      id: 'ig-respond-challenge', name: 'Respond challenge' },
+
+    { parameters: { httpMethod: 'POST', path: 'shalom-park-ig', responseMode: 'responseNode',
+        options: { rawBody: true } },
+      type: 'n8n-nodes-base.webhook', typeVersion: 2, position: [-700, 60],
+      id: 'ig-events', name: 'IG webhook (events)', webhookId: 'shalom-park-ig-events' },
+    code('ig-sig', 'Verify signature', [-480, 60], igVerifySig),
+    { parameters: { respondWith: 'text', responseBody: '={{ $json.ok ? "EVENT_RECEIVED" : "Forbidden" }}',
+        options: { responseCode: '={{ $json.status }}' } },
+      type: 'n8n-nodes-base.respondToWebhook', typeVersion: 1.1, position: [-260, 60],
+      id: 'ig-ack', name: 'ACK Meta' },
+
+    code('ig-normalize', 'Normalise', [-40, 60], igNormalize),
+    { parameters: { conditions: { options: { caseSensitive: true, version: 2 }, conditions: [
+        { id: 'actionable', operator: { type: 'boolean', operation: 'true', singleValue: true },
+          leftValue: '={{ $json.is_actionable }}', rightValue: '' } ], combinator: 'and' }, options: {} },
+      type: 'n8n-nodes-base.if', typeVersion: 2.2, position: [180, 60],
+      id: 'ig-actionable', name: 'Worth answering?' },
+    code('ig-skip', 'Log ignored event', [180, 300],
+      "// Echoes, read receipts and our own comments land here. Logged, never answered.\nreturn [{ json: { ignored: true, reason: $json.skip_reason, channel: $json.channel } }];"),
+
+    code('ig-keywords', 'Keyword fast lane', [400, 60], igFastLane),
+    { parameters: { conditions: { options: { caseSensitive: true, version: 2 }, conditions: [
+        { id: 'is-keyword', operator: { type: 'string', operation: 'equals' },
+          leftValue: '={{ $json.lane }}', rightValue: 'keyword' } ], combinator: 'and' }, options: {} },
+      type: 'n8n-nodes-base.if', typeVersion: 2.2, position: [620, 60],
+      id: 'ig-matched', name: 'Keyword matched?' },
+
+    code('ig-guard', 'Guardrails', [840, -60], guardSrc),
+    { parameters: { workflowId: { __rl: true, value: registry._meta.n8n.core_workflow_id, mode: 'id' },
+        workflowInputs: { mappingMode: 'defineBelow', value: {
+          client_id: '=shalom-park', channel: '={{ $json.channel }}',
+          provider_message_id: '={{ $json.provider_message_id }}', contact_id: '={{ $json.contact_id }}',
+          contact_hash: '={{ $json.contact_hash }}', display_name: '={{ $json.display_name }}',
+          text: '={{ $json.text }}', thread_ref: '={{ $json.thread_ref }}' } }, options: {} },
+      type: 'n8n-nodes-base.executeWorkflow', typeVersion: 1.2, position: [840, 200],
+      id: 'ig-core', name: 'Concierge CORE' },
+
+    code('ig-prepare', 'Prepare send', [1060, 60], igPrepare),
+    code('ig-gate', 'Send gate (Meta limits)', [1280, 60], igSendGate),
+    { parameters: { rules: { values: [
+        { conditions: { options: { caseSensitive: true, version: 2 }, conditions: [
+            { operator: { type: 'string', operation: 'equals' }, leftValue: '={{ $json.channel }}', rightValue: 'instagram_comment' } ], combinator: 'and' }, outputKey: 'comment' },
+        { conditions: { options: { caseSensitive: true, version: 2 }, conditions: [
+            { operator: { type: 'string', operation: 'equals' }, leftValue: '={{ $json.channel }}', rightValue: 'instagram_dm' } ], combinator: 'and' }, outputKey: 'dm' }
+      ] }, options: { fallbackOutput: 'extra' } },
+      type: 'n8n-nodes-base.switch', typeVersion: 3.2, position: [1500, 60],
+      id: 'ig-route', name: 'Comment or DM?' },
+
+    { parameters: { method: 'POST', url: `${GRAPH_BASE}/me/messages`,
+        authentication: 'genericCredentialType', genericAuthType: 'httpHeaderAuth',
+        sendBody: true, specifyBody: 'json',
+        jsonBody: "={{ JSON.stringify({ recipient: { comment_id: $json.comment_id }, message: { text: $json.reply } }) }}",
+        options: { timeout: 15000, response: { response: { neverError: true } } } },
+      type: 'n8n-nodes-base.httpRequest', typeVersion: 4.2, position: [1720, -60],
+      id: 'ig-private-reply', name: 'Private reply to comment' },
+    { parameters: { method: 'POST', url: `=${GRAPH_BASE}/{{ $('Send gate (Meta limits)').first().json.comment_id }}/replies`,
+        authentication: 'genericCredentialType', genericAuthType: 'httpHeaderAuth',
+        sendBody: true, specifyBody: 'json',
+        jsonBody: "={{ JSON.stringify({ message: $('Send gate (Meta limits)').first().json.public_comment_reply }) }}",
+        options: { timeout: 15000, response: { response: { neverError: true } } } },
+      type: 'n8n-nodes-base.httpRequest', typeVersion: 4.2, position: [1940, -60],
+      id: 'ig-public-reply', name: 'Public comment reply' },
+    { parameters: { method: 'POST', url: `${GRAPH_BASE}/me/messages`,
+        authentication: 'genericCredentialType', genericAuthType: 'httpHeaderAuth',
+        sendBody: true, specifyBody: 'json',
+        jsonBody: "={{ JSON.stringify({ recipient: { id: $json.contact_id }, message: { text: $json.reply } }) }}",
+        options: { timeout: 15000, response: { response: { neverError: true } } } },
+      type: 'n8n-nodes-base.httpRequest', typeVersion: 4.2, position: [1720, 180],
+      id: 'ig-dm', name: 'Send IG DM' },
+    code('ig-held', 'Held for a human', [1720, 400],
+      "// Nothing sent: cap reached, reply already used, or an empty reply.\n" +
+      "// This is the escalation queue until the notifier workflow ships.\n" +
+      "return [{ json: { held: true, reason: $json.reason, rule_id: $json.rule_id, handle: $json.contact_handle, channel: $json.channel } }];")
+  ],
+  connections: {
+    'IG webhook (verify)':  { main: [[{ node: 'Handshake', type: 'main', index: 0 }]] },
+    'Handshake':            { main: [[{ node: 'Respond challenge', type: 'main', index: 0 }]] },
+    'IG webhook (events)':  { main: [[{ node: 'Verify signature', type: 'main', index: 0 }]] },
+    'Verify signature':     { main: [[{ node: 'ACK Meta', type: 'main', index: 0 }]] },
+    'ACK Meta':             { main: [[{ node: 'Normalise', type: 'main', index: 0 }]] },
+    'Normalise':            { main: [[{ node: 'Worth answering?', type: 'main', index: 0 }]] },
+    'Worth answering?':     { main: [
+      [{ node: 'Keyword fast lane', type: 'main', index: 0 }],
+      [{ node: 'Log ignored event', type: 'main', index: 0 }] ] },
+    'Keyword fast lane':    { main: [[{ node: 'Keyword matched?', type: 'main', index: 0 }]] },
+    'Keyword matched?':     { main: [
+      [{ node: 'Guardrails', type: 'main', index: 0 }],
+      [{ node: 'Concierge CORE', type: 'main', index: 0 }] ] },
+    'Guardrails':           { main: [[{ node: 'Prepare send', type: 'main', index: 0 }]] },
+    'Concierge CORE':       { main: [[{ node: 'Prepare send', type: 'main', index: 0 }]] },
+    'Prepare send':         { main: [[{ node: 'Send gate (Meta limits)', type: 'main', index: 0 }]] },
+    'Send gate (Meta limits)': { main: [[{ node: 'Comment or DM?', type: 'main', index: 0 }]] },
+    'Comment or DM?':       { main: [
+      [{ node: 'Private reply to comment', type: 'main', index: 0 }],
+      [{ node: 'Send IG DM', type: 'main', index: 0 }],
+      [{ node: 'Held for a human', type: 'main', index: 0 }] ] },
+    'Private reply to comment': { main: [[{ node: 'Public comment reply', type: 'main', index: 0 }]] }
+  },
+  settings: { executionOrder: 'v1' }, pinData: {}
+};
+W('ops/concierge/workflows/05-channel-instagram.json', instagram);
+
+console.log('built: 05-channel-instagram.json');

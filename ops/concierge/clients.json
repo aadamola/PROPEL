@@ -11,6 +11,10 @@
     "n8n": {
       "core_workflow_id": "AE422d9ptfvjj0PQ",
       "instance": "https://engine.getpropel.tech"
+    },
+    "meta_graph": {
+      "version": "v21.0",
+      "_rule": "Pinned like the model. Confirm the version the client's app actually exposes during the Business Suite session and update here only — never in a node."
     }
   },
   "clients": {
@@ -32,7 +36,8 @@
           "enabled": false,
           "webhook_path": "shalom-park-ig",
           "token_env": "SHALOM_PARK_IG_TOKEN",
-          "secret_env": "SHALOM_PARK_APP_SECRET"
+          "secret_env": "SHALOM_PARK_APP_SECRET",
+          "keyword_automation": true
         },
         "email": {
           "enabled": true,
@@ -70,6 +75,28 @@
         "may_autosend_layout_map": false,
         "may_autosend_title_pages": false,
         "attribution_window_months": 12
+      },
+      "keywords": {
+        "enabled": true,
+        "rules_file": "clients/shalom-park/keywords.json",
+        "source_csv": "clients/shalom-park/keywords.csv",
+        "sheet_url": "https://docs.google.com/spreadsheets/d/1iJ4KJRwfQcGlDs_n0jhVlmLZQQesDAMJ7bBDoTSny-I/edit",
+        "assistant_signature": "— Shalom Park Estate assistant · a human is one message away",
+        "links": {
+          "mode": "none",
+          "_mode_options": "none = ship no link (default, safe) | human_line = point buyers at the sales WhatsApp in escalation.primary | concierge = point at Shalom Park's own Cloud API number once it is live",
+          "wa_e164": null,
+          "website": "https://shalomparknigeria.com",
+          "whatsapp_template": "https://wa.me/{{WA_E164}}?text=Hi%20Shalom%20Park%2C%20I%20saw%20your%20Instagram.%20Ref%3A%20{{CODE}}",
+          "_attribution": "The Ref code lands in the buyer's first WhatsApp message, so the ledger can tie a closed sale back to the exact Instagram keyword that produced it."
+        },
+        "instagram": {
+          "public_reply_enabled": true,
+          "private_replies_per_comment": 1,
+          "private_reply_window_days": 7,
+          "max_automated_dms_per_hour": 180,
+          "_limits": "Meta allows ONE private reply per comment inside a 7-day window and roughly 200 automated DMs an hour. 180 leaves headroom; overflow queues to a human instead of being dropped."
+        }
       }
     },
     "propel": {

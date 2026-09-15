@@ -22,6 +22,7 @@ Faster than file import, and it's the method to use:
 | `02-concierge-brain-gemini.json` | **Chat-panel brain** — standalone, for the ear test. No Meta needed |
 | `03-concierge-core.json` | **THE CORE.** Sub-workflow every channel calls: registry → KB → dedup → prompt → Gemini → guardrails → envelope |
 | `04-channel-email.json` | **Email channel** — IMAP in, SMTP out, with auto-reply/bounce/newsletter filtering |
+| `05-channel-instagram.json` | **Instagram channel** — comments + DMs, with the 24-rule keyword fast lane in front of the brain. Needs an n8n **Header Auth** credential holding `Authorization: Bearer <SHALOM_PARK_IG_TOKEN>`. See [`../../../clients/shalom-park/06-instagram-keyword-plan.md`](../../../clients/shalom-park/06-instagram-keyword-plan.md) |
 
 Architecture and the reasoning behind it: [`../architecture.md`](../architecture.md).
 

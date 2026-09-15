@@ -24,6 +24,8 @@ then import `01-shalom-park-wa-ingest.json` into n8n and **Activate** it — Met
 
 *Still outstanding from the last session: a successful chat with `02` (Step 2 of the n8n runbook). Worth doing first — it takes five minutes and proves the brain works before you put anything in front of a client.*
 
+> 🆕 **The Instagram keyword system is built and tested (2026-09-15).** 24 rules, 40 new tests, waiting on exactly this session and nothing else. **Nothing for you to do on it right now** — but the rule table is a Google Sheet you can read on your phone: **[Shalom Park — Instagram Keyword Automation](https://docs.google.com/spreadsheets/d/1iJ4KJRwfQcGlDs_n0jhVlmLZQQesDAMJ7bBDoTSny-I/edit)**. Skim it before the call if you want to show them exactly what their assistant will say. Full write-up: [06-instagram-keyword-plan.md](clients/shalom-park/06-instagram-keyword-plan.md).
+
 ---
 
 ## THIS WEEK — one per sitting, in this order
@@ -32,7 +34,7 @@ then import `01-shalom-park-wa-ingest.json` into n8n and **Activate** it — Met
 - [ ] **(1 message)** 🔴 **Ask Shalom Park who holds the CAC documents + can grant Meta admin.** Script ready in [clients/shalom-park/04-meta-access-pack.md](clients/shalom-park/04-meta-access-pack.md). *Not Collins — he's a Sales Executive with neither. Then do the setup on a 20-min screen share, don't send a checklist.*
 - [ ] **(1 afternoon)** ⚡ **Prove the fast lane** — test app + Meta's free test number, send one message ([ops/setup/meta-app-setup.md](ops/setup/meta-app-setup.md) §9b Step 0). *Settles whether App Review is needed before we promise them a date.*
 - [ ] **(1 conversation)** 💰 **Confirm the Shalom Park care fee and commission rate.** *Possibly revenue already owed — MRR currently reads zero because nothing is confirmed as started. Ask what the setup fee covered, when the ₦250k/mo begins, and pin the commission %.*
-- [ ] **(5 min)** 🔴 **Send Collins the follow-up** — [clients/shalom-park/03-followup-questions.md](clients/shalom-park/03-followup-questions.md). Eight open fields, one message. **Lead with the ₦95m condo price** — if that's a typo and we advertise it, we've published a false price under our own quality charter.
+- [ ] **(5 min)** 🔴 **Send Collins the follow-up** — [clients/shalom-park/03-followup-questions.md](clients/shalom-park/03-followup-questions.md). Eight open fields, one message. **Lead with the ₦95m condo price** — if that's a typo and we advertise it, we've published a false price under our own quality charter. *This is now a revenue blocker: the Instagram assistant withholds the condo price until you confirm it, so every condo enquiry goes to a human instead of converting.*
 - [ ] **(15 min)** 🔴 **Start CAC filing** — "Propel Digital" (fallbacks: Propel Media, Propel Digital Marketing), cac.gov.ng or an accredited agent. *This is no longer admin. Meta won't let us run automation on a **client's** account until our business is verified with registered documents — so this now blocks something Shalom Park has paid for. ~2 weeks of clock. Start it, then forget it.*
 - [ ] **(10 min)** Meta Business Suite: link @getpropel.ng + WhatsApp, convert IG to a Business account ([ops/setup/account-setup.md](ops/setup/account-setup.md) §7).
 - [ ] **(1 ask)** Shalom Park: sight the title + approval documents. *Site visit ✅ done. This is the last open vetting gate — and with bare-land plots in the mix it matters more, not less. We don't publish a price for land we haven't seen the paper for.*
@@ -49,9 +51,11 @@ Testing the bot · the Shalom Park pilot build · voice notes · first audit cal
 - Live Concierge build on the new SIM → starts the moment you send it + VPS exists
 - Meta app + App Review submission → starts after CAC + Business Suite link
 - 10 audit teardowns → starts the moment you send names
+- ✅ Instagram keyword automation built (24 rules, 103 tests green) → goes live the moment the Business Suite session lands
 
 ## ✅ DONE (look how far this has come)
 
+- [x] 📲 **Instagram keyword automation built for Shalom Park** — 24 rules, safety class, Google Sheet, 103 tests (2026-09-15)
 - [x] 🖥️ **VPS live (KVM 2, 8 GB) + domain getpropel.tech bought** (2026-07-29)
 - [x] 📋 **Shalom Park facts sheet returned SIGNED — their AI's knowledge base is built** (2026-07-27)
 - [x] **Site visit done** — four-stage inventory counted (2026-07-26)

@@ -6,6 +6,8 @@ const suites = [
   ['Normaliser (channels)', 'tools/test-normalizer.js'],
   ['Core (routing, dedup, envelope)', 'tools/test-core.js'],
   ['Guardrails (model output)', 'tools/test-guardrails.js'],
+  ['Keyword fast lane (rules + safety class)', 'tools/test-keywords.js'],
+  ['Instagram workflow (end-to-end)', 'tools/test-ig-workflow.js'],
   ['Concierge baseline (sandbox)', 'sandbox/apex-gardens/concierge-prototype.js', '--test']
 ];
 let failed = 0;

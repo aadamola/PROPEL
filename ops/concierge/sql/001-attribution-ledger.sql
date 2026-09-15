@@ -47,10 +47,27 @@ CREATE TABLE IF NOT EXISTS lead (
     conversion_status      TEXT        NOT NULL DEFAULT 'qualified'
         CHECK (conversion_status IN ('new','qualified','handed_off','closed_won','closed_lost','expired')),
     first_contact_at       TIMESTAMPTZ NOT NULL DEFAULT now(),
-    attribution_expires_at TIMESTAMPTZ NOT NULL
-        GENERATED ALWAYS AS (first_contact_at + INTERVAL '12 months') STORED,
+    -- Set by trigger, not GENERATED ALWAYS. PostgreSQL requires a generation
+    -- expression to be IMMUTABLE, and `timestamptz + interval '12 months'` is
+    -- only STABLE: adding months to a timestamptz depends on the session
+    -- TimeZone, so the same inputs can give different answers. A trigger has
+    -- no such requirement and the window stays guaranteed rather than merely
+    -- defaulted.
+    attribution_expires_at TIMESTAMPTZ NOT NULL DEFAULT (now() + INTERVAL '12 months'),
     UNIQUE (client_id, contact_hash)
 );
+
+CREATE OR REPLACE FUNCTION lead_set_expiry() RETURNS TRIGGER AS $$
+BEGIN
+    NEW.attribution_expires_at := NEW.first_contact_at + INTERVAL '12 months';
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+DROP TRIGGER IF EXISTS lead_expiry_trg ON lead;
+CREATE TRIGGER lead_expiry_trg
+    BEFORE INSERT OR UPDATE OF first_contact_at ON lead
+    FOR EACH ROW EXECUTE FUNCTION lead_set_expiry();
 
 CREATE INDEX IF NOT EXISTS lead_client_idx  ON lead (client_id, first_contact_at DESC);
 CREATE INDEX IF NOT EXISTS lead_expiry_idx  ON lead (attribution_expires_at);

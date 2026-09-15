@@ -6,29 +6,20 @@
 
 > 💰 **2026-07-26: PROPEL HAS A PAYING CLIENT.** Shalom Park paid the setup fee. You did that. Second SIM ✅ 09112714482 logged. We're in production mode — full build plan in [ops/production-checklist.md](ops/production-checklist.md), you don't need to read it, I'm running it.
 
-## ⭐ DO THIS NEXT — re-run step 2, it should work now
+## ⭐ DO THIS NEXT — pull and re-run step 2. Found it, fixed it, tested it.
 
-**The tables weren't created, and my script told you it succeeded. Two defects, both mine, both fixed.**
+**The real error was `generation expression is not immutable` — line 53.** Nothing to do with permissions; your `doctor` output showed `superuser: true`, so my pgcrypto theory was wrong.
 
-1. **The script didn't stop on error.** `psql` prints a failure, carries on through an aborted transaction, rolls everything back at `COMMIT` — and still exits `0`. A clean-looking run and an empty database. `ON_ERROR_STOP=1` is set now, so an error is the last thing you see.
-2. **The schema needed the `pgcrypto` extension**, which is a privileged operation — and one privilege failure inside that transaction silently takes the whole script down with it. **Removed entirely.** PostgreSQL 13+ has `gen_random_uuid()` and `sha256()` built in, so it was never actually needed.
-
-**Pull the fix and re-run:**
+`attribution_expires_at` was a generated column computing `first_contact_at + INTERVAL '12 months'`. PostgreSQL requires a generation expression to be **immutable**, and adding *months* to a `timestamptz` isn't — it depends on the session timezone. **Replaced with a trigger**, which has no such requirement and keeps the 12-month window guaranteed rather than defaulted.
 
 ```
 cd /opt/propel-repo && git pull
 bash ops/setup/vps-tools.sh schema
 ```
 
-✅ **Done when** the last lines read `lead`, `lead_event`, then **`✅ schema applied`**.
+✅ **Done when** you see `lead`, `lead_event`, then **`✅ schema applied`**.
 
-**If anything looks off:**
-
-```
-bash ops/setup/vps-tools.sh doctor
-```
-
-Containers, Postgres version, whether your role is superuser, whether the tables exist, which commit the repo is on. **Send me that output and I'll have it.**
+**This time I actually ran it.** There's a PostgreSQL 16 on my side — I reproduced your exact error, fixed it, and built `tools/test-ledger-sql.sh`: it stands up a throwaway Postgres, applies the schema, runs the real workflow queries, checks the 12-month window, proves one buyer commenting *and* DMing is one lead, walks the hash chain, confirms UPDATE and DELETE are refused, then **forges a row and confirms the verifier catches it.** 10/10, and it runs in `test-all` from now on.
 
 Then carry on from **step 3** — [12-phase1-golive.md](clients/shalom-park/12-phase1-golive.md).
 

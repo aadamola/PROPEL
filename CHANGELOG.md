@@ -2,6 +2,16 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-09-15 (correction 3) — Found the real bug by finally running the SQL
+
+- **The error was `generation expression is not immutable`, line 53 — and my pgcrypto theory was wrong.** ADEDAMOLA's `doctor` output showed **`superuser: true`** on PostgreSQL 16.14, so `CREATE EXTENSION` would have worked fine. Guessing at a cause from a symptom, twice, is what this entry is really about.
+- **The actual defect:** `attribution_expires_at` was `GENERATED ALWAYS AS (first_contact_at + INTERVAL '12 months') STORED`. PostgreSQL requires a generation expression to be **IMMUTABLE**, and `timestamptz + interval '12 months'` is only **STABLE** — adding *months* to a timestamptz depends on the session TimeZone, so the same inputs can give different answers. **Replaced with a `BEFORE INSERT OR UPDATE` trigger**, which carries no immutability requirement and makes the 12-month window guaranteed rather than defaulted.
+- **🔬 The process fix that matters more than the bug: there is a PostgreSQL 16 on my own machine and I had never used it.** I shipped a schema twice without executing it, and both times it failed on the client's server instead of mine. **SQL that has not been run is not code, it is a guess.**
+- **`tools/test-ledger-sql.sh` — the ledger against real PostgreSQL, now in `test-all`.** Stands up a throwaway cluster, applies `001` with `ON_ERROR_STOP`, runs **the exact upsert the workflow runs**, checks the window is exactly 12 months, proves **the same buyer commenting then DMing is one lead and not two**, walks the hash chain from GENESIS, confirms UPDATE and DELETE are both refused on the append-only table, runs `002` for `INTACT` — then **forges a row and confirms the verifier catches it and names it.** 10/10. Skips cleanly with exit 0 where no PostgreSQL exists.
+- **Caught a false pass while building it.** The first version passed SQL through a shell string, so parentheses and quotes were mangled — and `LSQL-07`/`LSQL-08` "passed" because the command errored for the wrong reason. **A test that passes for the wrong reason is worse than no test.** SQL now goes through files.
+- **Retained from the wrong theory, because it stands on its own:** `pgcrypto` stays removed. `gen_random_uuid()` and `sha256()` are built in, and one fewer privileged operation on the install path is one fewer way for a silent rollback to happen. It just wasn't the cause.
+- **Test state: 145 passing** (was 135).
+
 ## 2026-09-15 (correction 2) — My script reported success on an empty database
 
 - **`lead` and `lead_event` were not created, and `vps-tools.sh schema` said it worked.** Two defects, both mine.

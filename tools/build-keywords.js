@@ -133,6 +133,19 @@ for (const r of rules) {
     errors.push(`${at}: has a promo window but no promo_response — nothing to say when it is live`);
   }
 
+  // Copy discipline, enforced. Volunteering a limitation nobody asked about
+  // is negative selling: it reads as a machine apologising, and it kills the
+  // conversation before a human ever sees the lead. The hand-off still
+  // happens — the copy just stops announcing it.
+  const DISCLAIMER = /\bI (do not|don't) deal\b|\bI will not quote\b|\bI am not going to (give|quote)\b|not something I should\b|\bI (do not|don't) have the exact\b|\bI cannot confirm\b|\bI would rather not quote\b|\bI (do not|don't) want to quote\b|would be a guess\b|\bI am not certain\b|\bI (do not|don't) have (a|the) confirmed\b/i;
+  // Every card earns its next message. A response with no question is a
+  // dead end, and a dead end on Instagram is a lost buyer.
+  for (const [field, text] of [['dm_response', r.dm_response], ['promo_response', r.promo_response]]) {
+    if (!text.trim() || r.status !== 'live') continue;
+    if (DISCLAIMER.test(text)) errors.push(`${at}: ${field} volunteers a limitation nobody asked about — turn it into an offer, not a confession`);
+    if (!text.includes('?'))   errors.push(`${at}: ${field} closes without a question — every card must move the lead forward`);
+  }
+
   // Ambiguity is a silent failure: two rules owning one phrase means the
   // answer depends on sort order, not on intent.
   for (const p of r.trigger_phrases) {

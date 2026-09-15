@@ -80,7 +80,7 @@
         "enabled": true,
         "rules_file": "clients/shalom-park/keywords.json",
         "source_csv": "clients/shalom-park/keywords.csv",
-        "assistant_signature": "— Shalom Park Estate assistant · a human is one message away",
+        "assistant_signature": "— Shalom Park Estate assistant",
         "links": {
           "mode": "none",
           "_mode_options": "none = ship no link (default, safe) | human_line = point buyers at the sales WhatsApp in escalation.primary | concierge = point at Shalom Park's own Cloud API number once it is live",
@@ -97,7 +97,8 @@
           "_limits": "Meta allows ONE private reply per comment inside a 7-day window and roughly 200 automated DMs an hour. 180 leaves headroom; overflow queues to a human instead of being dropped."
         },
         "readable_view": "clients/shalom-park/keywords.md",
-        "_surface": "IN-HOUSE ONLY. The CSV is the editable source of truth; keywords.md is the generated read-only view. No third-party spreadsheet holds client facts."
+        "_surface": "IN-HOUSE ONLY. The CSV is the editable source of truth; keywords.md is the generated read-only view. No third-party spreadsheet holds client facts.",
+        "_copy_rule": "Sell, do not disclaim. No response volunteers what the assistant cannot do — nobody asked. Where a fact is not held, it becomes an offer (\"I will get you the breakdown in writing\"), never a confession. Every response closes on one question that moves the lead forward. Escalation still fires; the copy just stops announcing it."
       }
     },
     "propel": {

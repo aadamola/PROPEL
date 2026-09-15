@@ -58,7 +58,7 @@ Testing the bot · the Shalom Park pilot build · voice notes · first audit cal
 
 ## ✅ DONE (look how far this has come)
 
-- [x] 📲 **All 7 Instagram campaigns live** — 27 rules, promos that retire themselves, investment card shipped, 117 tests (2026-09-15)
+- [x] 📲 **All 7 Instagram campaigns live** — 27 rules, promos that retire themselves, every response written to convert, 121 tests (2026-09-15)
 - [x] 💰 **₦95m condo price confirmed and released** — open since July (2026-09-15)
 - [x] 🖥️ **VPS live (KVM 2, 8 GB) + domain getpropel.tech bought** (2026-07-29)
 - [x] 📋 **Shalom Park facts sheet returned SIGNED — their AI's knowledge base is built** (2026-07-27)

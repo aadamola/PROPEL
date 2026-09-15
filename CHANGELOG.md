@@ -2,6 +2,19 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-09-15 (late) — Every response rewritten to convert, not to disclaim
+
+- **ADEDAMOLA: strip the generic AI disclaimers — "let them ask first; until then your aim is to warm the lead up and convert."** He was right, and it was the weakest thing in the build. All 27 responses rewritten.
+- **What went:** *"I don't deal in projections or figures"* · *"I will not quote you a figure for the instalment balance myself"* · *"that is not something I should be reading out in a chat"* · *"I do not have the exact amounts in writing"* · *"I do not want to quote you a price I am not certain is current"*. **Volunteering a limitation nobody asked about is negative selling** — it reads as a machine apologising and it ends the conversation before a human ever sees the lead.
+- **The reframe: a gap becomes an offer, never a confession.** Not *"I don't have the exact amounts"* but *"I will get you the full cost breakdown in writing."* Same fact, opposite effect on a buyer.
+- **The hand-off still fires — the copy just stopped announcing it.** Every escalating rule still pings a human; the buyer now sees a question instead of a shrug. Tested (`KW-47`).
+- **A "no" is now a "here's what I can do."** The discount card leads with *"Prices are fixed — what moves is how you pay"* and names the live ₦5m condo campaign. The mortgage card leads with the in-house plan. Both convert instead of closing the door.
+- **Every card closes on one question** — which unit, when to inspect, what number to call, varied so a buyer hitting three rules doesn't get the same close three times. `SP-INFO` now opens with a qualifier: *"What brings you to us — are you looking for somewhere to live, or to buy?"*
+- **Enforced in the compiler, not by good intentions.** `build-keywords.js` now rejects any response containing disclaimer language, and any response with no question in it. Two new lint rules, two new tests (`KW-45`, `KW-46`).
+- **Dropped the appended "Reply here and the team will pick it up"** — with every card lint-guaranteed to close on a question, the fallback was diluting the close. Signature tightened to **"— Shalom Park Estate assistant"**; the AI disclosure stays (it is an ethics line, and `KW-48` guards it), the passive *"a human is one message away"* goes, replaced by active offers where they belong.
+- **Held, because these are trust assets and only fire when the buyer raises them:** the 25% forfeiture quoted in full, and *"I will not put bank information in a chat window, because that is exactly how people get defrauded."*
+- **Test state: 121 passing** (was 117). One of my own assertions was stricter than the lint — it demanded a card *end* on a question when *"Which unit are you looking at? I will get the team to structure it with you"* is better copy. Test corrected, not the copy.
+
 ## 2026-09-15 (night) — All seven campaigns live · open-ended promos · investment card shipped
 
 - **ADEDAMOLA closed all three open items in one message. Everything is live.** CONDO · LAND · SUMMER · CHAIRMAN · DUPLEX · INVESTMENT · DEVELOPER — seven campaigns, 27 rules, 117 tests green.

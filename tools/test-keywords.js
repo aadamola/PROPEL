@@ -84,9 +84,11 @@ const cases = [
     run: () => m('').matched === false && m('   \n  ').matched === false },
 
   // --- safety class ----------------------------------------------------
-  { name: 'KW-13 discount ask escalates and never invents an offer',
+  { name: 'KW-13 a discount ask becomes the payment structure, not a flat no',
     run: () => { const r = m('bros give me discount on the 5 bedroom');
-                 return r.rule_id === 'SP-ESC-DISC' && r.escalate === true && !/200/.test(r.reply); } },
+                 const rule = table.rules.find(x => x.rule_id === 'SP-ESC-DISC');
+                 return r.rule_id === 'SP-ESC-DISC' && r.escalate === true && !/200/.test(r.reply) &&
+                        /fixed/.test(r.reply) && rule.promo_response.includes('?'); } },
 
   { name: 'KW-14 payment-details ask returns no digits at all',
     run: () => { const r = m('I want to pay, send me the account number');
@@ -130,9 +132,10 @@ const cases = [
                         !/consent/i.test(r.public_comment_reply); } },
 
   // --- links -----------------------------------------------------------
-  { name: 'KW-23 ★ with no number configured, no broken link ships',
+  { name: 'KW-23 ★ with no number configured, no broken link and no apology ships',
     run: () => { const r = m('4 bedroom', CFG_NO_LINK);
-                 return r.link === '' && !/wa\.me|http/.test(r.reply) && /Reply here/.test(r.reply); } },
+                 return r.link === '' && !/wa\.me|http/.test(r.reply) && !/Reply here/.test(r.reply) &&
+                        /\?/.test(r.reply); } },
 
   { name: 'KW-24 with a number configured, the link carries the ref code',
     run: () => { const r = m('4 bedroom', CFG_LIVE);
@@ -267,6 +270,29 @@ const cases = [
     run: () => ['what roi will I get', 'will it appreciate', 'capital growth on this investment',
                 'rental yield please'].every(q => m(q).rule_id === 'SP-ESC-ROI'),
   },
+
+  // --- copy discipline: sell, do not disclaim --------------------------
+  { name: 'KW-45 ★ no response volunteers a limitation nobody asked about',
+    run: () => {
+      const disclaimer = /\bI (do not|don't) deal\b|\bI will not quote\b|\bI am not going to (give|quote)\b|not something I should\b|\bI (do not|don't) have the exact\b|\bI cannot confirm\b|\bI would rather not quote\b|\bI (do not|don't) want to quote\b|would be a guess\b|\bI am not certain\b/i;
+      return table.rules.every(r => !disclaimer.test(r.dm_response) && !disclaimer.test(r.promo_response || ''));
+    } },
+
+  { name: 'KW-46 ★ every live card closes on a question',
+    run: () => table.rules.filter(r => r.status === 'live').every(r =>
+      r.dm_response.includes('?') && (!r.promo_response || r.promo_response.includes('?'))) },
+
+  { name: 'KW-47 ★ the hand-off still fires — the copy just stopped announcing it',
+    run: () => {
+      // Removing the disclaimer must not remove the escalation. A human is
+      // still pinged on every one of these; the buyer just sees a question.
+      return ['what roi will I get', 'what title does it have', 'is this a good investment',
+              'can I get a mortgage', 'when will it be completed']
+        .every(q => { const r = m(q); return r.matched && r.escalate === true; });
+    } },
+
+  { name: 'KW-48 the assistant still identifies itself on first contact',
+    run: () => /assistant/i.test(m('hello').reply) },
 
   { name: 'KW-30 no trigger phrase is claimed by two rules',
     run: () => {

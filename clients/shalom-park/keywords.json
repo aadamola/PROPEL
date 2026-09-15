@@ -35,7 +35,7 @@
         "what will it be worth",
         "how much will it be worth"
       ],
-      "dm_response": "That is a question about returns, and it is not one I will answer with an estimate - anything I said would be a guess dressed up as a number.\n\nLet me put you with someone from the team who can talk it through with you properly.",
+      "dm_response": "Good question - and that is one worth having with a person rather than a chat window.\n\nLet me get someone from the team onto it with you. What number is best to reach you on?",
       "public_comment_reply": "Sent you a DM - the team will pick this up with you",
       "link_code": "SP-ESC-ROI",
       "link_kind": "none",
@@ -69,7 +69,7 @@
         "change my mind",
         "money back"
       ],
-      "dm_response": "I will give you this one straight, because it matters. On cancellation for any reason, the purchaser forfeits 25% of the agreed purchase price as a cancellation penalty. Refunds are made only after the property is resold to a third party, and the developer has up to 180 days from the date of resale to make any net refund.\n\nThat is the written policy. Let me get someone from the team to take you through it before you decide anything.",
+      "dm_response": "Straight answer, because it matters. On cancellation for any reason, the purchaser forfeits 25% of the agreed purchase price as a cancellation penalty. Refunds are made only after the property is resold to a third party, and the developer has up to 180 days from the date of resale to make any net refund.\n\nThat is the written policy. Let me get someone from the team to take you through it - what number works for you?",
       "public_comment_reply": "Sent you a DM - the team will pick this up with you",
       "link_code": "SP-ESC-REFUND",
       "link_kind": "none",
@@ -103,7 +103,7 @@
         "ready to pay",
         "how do i pay"
       ],
-      "dm_response": "I do not share bank or payment information in a chat window - that is how people get defrauded, and I am not going to be the weak link in that.\n\nPayments go to IFT Realty Ltd, and a member of the team will confirm the details with you directly. Let me get them now.",
+      "dm_response": "Payments go to IFT Realty Ltd - and I will not put bank information in a chat window, because that is exactly how people get defrauded.\n\nLet me get someone from the team to confirm everything with you directly. What number should they call?",
       "public_comment_reply": "Sent you a DM - the team will pick this up with you",
       "link_code": "SP-ESC-PAYTO",
       "link_kind": "none",
@@ -138,7 +138,7 @@
         "make me a price",
         "bring down the price"
       ],
-      "dm_response": "Prices at Shalom Park are not negotiable, so I would rather tell you that now than have you find out at the end.\n\nIf you would like to talk through the payment plan instead - 50% down, balance over 3, 6 or 12 months - let me get the team on it.",
+      "dm_response": "Prices at Shalom Park are fixed - what moves is how you pay.\n\nYou can start from a 50% deposit and spread the balance over 3, 6 or 12 months.\n\nWhich unit are you looking at? I will get the team to structure it with you.",
       "public_comment_reply": "Sent you a DM - the team will pick this up with you",
       "link_code": "SP-ESC-DISC",
       "link_kind": "none",
@@ -152,8 +152,8 @@
       "notes": "Negotiability is warranted. No discount authority exists.",
       "promo_from": "",
       "promo_until": "",
-      "promo_review_by": "",
-      "promo_response": ""
+      "promo_review_by": "2026-10-15",
+      "promo_response": "Prices at Shalom Park are fixed - what moves is how you pay, and there is a campaign running right now.\n\nThe 2-bedroom condominium opens at a 5,000,000 naira initial deposit with the balance over 12 months.\n\nWhich unit are you looking at? I will get the team to structure it with you."
     },
     {
       "rule_id": "SP-ESC-LEGAL",
@@ -176,7 +176,7 @@
         "any problem with the land",
         "encumbrance"
       ],
-      "dm_response": "IFT Realty has warranted in writing that there is no litigation, acquisition or dispute on the land, and that the estate is held under Governors Consent with confirmed layout approval.\n\nBeyond that, this deserves a person and not a chat window - let me get the team to speak with you and show you the documents.",
+      "dm_response": "IFT Realty has warranted in writing that there is no litigation, acquisition or dispute on the land, and the estate is held under Governors Consent with confirmed layout approval.\n\nThe documents are there to be seen. Let me arrange for the team to take you through them - would you rather do that on a call, or at the site?",
       "public_comment_reply": "Sent you a DM - the team will pick this up with you",
       "link_code": "SP-ESC-LEGAL",
       "link_kind": "none",
@@ -207,7 +207,7 @@
         "finish date",
         "estimated completion"
       ],
-      "dm_response": "The estate is about 30% developed overall. I do not have a confirmed completion date in writing, and I am not going to give you one that is not - let me get the team to confirm it for you.",
+      "dm_response": "The estate is about 30% developed overall, and each product has its own timeline - land is allocated instantly, and off-plan handover is set out when you buy.\n\nWhich one are you looking at? I will get you the timeline for it.",
       "public_comment_reply": "Sent you a DM - the team will pick this up with you",
       "link_code": "SP-ESC-COMPLETE",
       "link_kind": "none",
@@ -242,7 +242,7 @@
         "service charge",
         "association fee"
       ],
-      "dm_response": "The price covers the purchase only. Legal fees, utility connection (electricity and water) and the homeowners association fee are charged separately.\n\nI do not have the exact amounts in writing, so let me get the team to send them rather than quote you a figure I would have to correct later.",
+      "dm_response": "The price covers the purchase itself. Legal fees, utility connection for electricity and water, and the homeowners association fee are charged separately.\n\nWhich unit are you looking at? I will get you the full cost breakdown in writing.",
       "public_comment_reply": "Sent you a DM - the team will pick this up with you",
       "link_code": "SP-ESC-FEES",
       "link_kind": "none",
@@ -277,7 +277,7 @@
         "referral fee",
         "do you have agents"
       ],
-      "dm_response": "Thanks - partnership, agency and commission enquiries go to a person rather than through me. Let me pass you on.",
+      "dm_response": "Let me put you with the team on that one. What is the best number to reach you on?",
       "public_comment_reply": "Sent you a DM - the team will pick this up with you",
       "link_code": "SP-ESC-AGENT",
       "link_kind": "none",
@@ -308,7 +308,7 @@
         "can i get a loan",
         "loan"
       ],
-      "dm_response": "Financing is not something I can speak to - the only plan I have in writing is 50% down with the balance over 3, 6 or 12 months.\n\nLet me get the team to tell you what is actually possible on your side.",
+      "dm_response": "Shalom Park runs its own payment plan - a deposit with the balance spread over 3, 6 or 12 months.\n\nIf you are looking at bank financing, let me get the team onto it with you. What number works best?",
       "public_comment_reply": "Sent you a DM - the team will pick this up with you",
       "link_code": "SP-ESC-MORTGAGE",
       "link_kind": "none",
@@ -346,7 +346,7 @@
         "2 bedroom apartment",
         "luxury apartment"
       ],
-      "dm_response": "The 2-bedroom condominium is 95,000,000 naira. It is under development, finished spec, and 5 of the 16 units are available as at our last stock check.\n\nDeposit and payment plans vary by product and by what is running at the time, so let me have the team confirm the exact terms that apply to you today rather than quote you something that has moved.",
+      "dm_response": "The 2-bedroom condominium is 95,000,000 naira - finished spec, under development, and 5 of the 16 units are available as at our last stock check.\n\nPayment starts from a 50% deposit with the balance over 3, 6 or 12 months.\n\nWant to see it? Inspections run any day of the week, weekends included.",
       "public_comment_reply": "Just sent you a DM",
       "link_code": "SP-2B",
       "link_kind": "whatsapp",
@@ -362,7 +362,7 @@
       "promo_from": "",
       "promo_until": "",
       "promo_review_by": "2026-10-15",
-      "promo_response": "The 2-bedroom condominium is 95,000,000 naira - under development, finished spec, and 5 of the 16 units are available as at our last stock check.\n\nThere is an offer running: you can secure a unit with a 5,000,000 naira initial deposit and spread the balance over 12 months. It runs until the units are sold rather than to a fixed date.\n\nLet me get the team to confirm the terms in writing before you pay anything."
+      "promo_response": "The 2-bedroom condominium is 95,000,000 naira - finished spec, under development, and 5 of the 16 units are available as at our last stock check.\n\nRight now you can secure one with a 5,000,000 naira initial deposit and spread the balance over 12 months. The campaign runs until the units are sold.\n\nWant to see it? Inspections run any day of the week, weekends included."
     },
     {
       "rule_id": "SP-4B",
@@ -385,7 +385,7 @@
         "semi detached duplex",
         "luxury duplex"
       ],
-      "dm_response": "The 4-bedroom semi-detached is 185,000,000 naira. It is completed and finished, and 3 units are available as at our last stock check.\n\nThe price covers the purchase only - legal fees, utility connection and the homeowners association fee are separate. Payment starts from a 50% deposit with the balance over 3, 6 or 12 months, and the team will confirm which plan applies to this unit today.\n\nWant to see it? Inspections run any day of the week, weekends included.",
+      "dm_response": "The 4-bedroom semi-detached is 185,000,000 naira - completed, finished, and 3 units are available as at our last stock check.\n\nPayment starts from a 50% deposit with the balance over 3, 6 or 12 months. The price covers the purchase itself; legal, utility connection and the association fee come separately.\n\nWhen would you like to see it? Representatives are on site every day, weekends included.",
       "public_comment_reply": "Just sent you a DM",
       "link_code": "SP-4B",
       "link_kind": "whatsapp",
@@ -402,7 +402,7 @@
       "promo_from": "",
       "promo_until": "",
       "promo_review_by": "2026-10-15",
-      "promo_response": "The 4-bedroom semi-detached is 185,000,000 naira - completed, finished, and 3 units are available as at our last stock check.\n\nOn the current campaign it is a 70% initial deposit with the balance spread over 12 months. The price covers the purchase only; legal fees, utility connection and the homeowners association fee are separate.\n\nWant to see it? Inspections run any day of the week, weekends included."
+      "promo_response": "The 4-bedroom semi-detached is 185,000,000 naira - completed, finished, and 3 units are available as at our last stock check.\n\nOn the campaign running now it is a 70% initial deposit with the balance spread over 12 months. The price covers the purchase itself; legal, utility connection and the association fee come separately.\n\nWhen would you like to see it? Representatives are on site every day, weekends included."
     },
     {
       "rule_id": "SP-5B",
@@ -427,7 +427,7 @@
         "pre construction",
         "preconstruction"
       ],
-      "dm_response": "The 5-bedroom semi-detached is 200,000,000 naira, sold off-plan, with 4 units available as at our last stock check. Finishing is included.\n\nPayment is 50% down with the balance over 3, 6 or 12 months. Handover timelines for off-plan are confirmed at the point of purchase - let me have the team give you the exact date for this unit.",
+      "dm_response": "The 5-bedroom semi-detached is 200,000,000 naira, sold off-plan, with 4 units available as at our last stock check. Finishing is included.\n\nPayment is 50% down with the balance over 3, 6 or 12 months, and your handover timeline is set out when you buy.\n\nThis one sells on plan and drawings - shall I set up a call with the team to take you through it?",
       "public_comment_reply": "Just sent you a DM",
       "link_code": "SP-5B",
       "link_kind": "whatsapp",
@@ -471,7 +471,7 @@
         "size of plot",
         "how big is the plot"
       ],
-      "dm_response": "Residential plots at Shalom Park measure 648 sqm and are priced at 125,000 naira per square metre, inside the gated estate.\n\nAvailability moves, and larger parcels are priced separately, so let me get the team to confirm what is open right now before you plan around it.",
+      "dm_response": "Residential plots at Shalom Park are 648 sqm, priced at 125,000 naira per square metre, inside the gated estate.\n\nLand is allocated instantly on purchase, and you receive your receipt, contract of sale, legal documentation and survey.\n\nHow many plots are you looking at? I will come back to you with what is currently open.",
       "public_comment_reply": "Just sent you a DM",
       "link_code": "SP-LAND",
       "link_kind": "whatsapp",
@@ -510,7 +510,7 @@
         "send price",
         "price please"
       ],
-      "dm_response": "Here is what is currently at Shalom Park Estate, Abijo:\n\n- 4-bedroom semi-detached (completed) - 185,000,000 naira\n- 5-bedroom semi-detached (off-plan) - 200,000,000 naira\n- Serviced plots - 125,000 naira per square metre\n- 2-bedroom condominium (under development) - 95,000,000 naira\n\nPrices cover the purchase only; legal fees, utility connection and the homeowners association fee are separate.\n\nWhich one should I send details on?",
+      "dm_response": "Here is what is available at Shalom Park Estate, Abijo:\n\n- 4-bedroom semi-detached, completed - 185,000,000 naira\n- 5-bedroom semi-detached, off-plan - 200,000,000 naira\n- 2-bedroom condominium - 95,000,000 naira\n- Serviced plots, 648 sqm - 125,000 naira per square metre\n\nPrices are for the purchase itself; legal, utility connection and the association fee come separately.\n\nWhich one are you looking at? I will send you the full details and get you booked in to see it.",
       "public_comment_reply": "Just sent you a DM",
       "link_code": "SP-PRICE-GEN",
       "link_kind": "whatsapp",
@@ -545,7 +545,7 @@
         "any left",
         "sold out"
       ],
-      "dm_response": "As at our last stock check:\n\n- 4-bedroom semi-detached (completed) - 3 available\n- 2-bedroom condominium (under development) - 5 of 16 available\n- 5-bedroom semi-detached (off-plan) - 4 available\n- Serviced plots (648 sqm) - the team will confirm current availability\n\nStock is re-checked monthly, so let me confirm anything you are serious about before you decide.",
+      "dm_response": "As at our last stock check:\n\n- 4-bedroom semi-detached, completed - 3 available\n- 2-bedroom condominium, under development - 5 of 16 available\n- 5-bedroom semi-detached, off-plan - 4 available\n- Serviced plots, 648 sqm\n\nStock is re-checked monthly. Which one are you interested in? I will confirm it is still open for you.",
       "public_comment_reply": "Just sent you a DM",
       "link_code": "SP-AVAIL",
       "link_kind": "whatsapp",
@@ -584,7 +584,7 @@
         "which area",
         "located"
       ],
-      "dm_response": "Shalom Park Estate is at Abijo, opposite GRA Second Gate, Ibeju-Lekki 105101, Lagos.\n\nIt is under 5 minutes from the Lekki-Epe Expressway, about 7 to 10 minutes from Novare Lekki Mall (Shoprite Sangotedo), and roughly 5 minutes from Caleb British International School.\n\nWant to come and see it? Representatives are on site any day of the week.",
+      "dm_response": "Shalom Park Estate is at Abijo, opposite GRA Second Gate, Ibeju-Lekki 105101, Lagos.\n\nIt is under 5 minutes from the Lekki-Epe Expressway, about 7 to 10 minutes from Novare Lekki Mall at Sangotedo, and roughly 5 minutes from Caleb British International School.\n\nWant to come and see it? Representatives are on site every day of the week.",
       "public_comment_reply": "Just sent you a DM",
       "link_code": "SP-LOC",
       "link_kind": "whatsapp",
@@ -620,7 +620,7 @@
         "schedule",
         "can i see it"
       ],
-      "dm_response": "Inspections run any day of the week, including weekends - representatives are on site and on standby, so you are never shown around by someone who does not know the estate.\n\nIf you would rather not travel, we also do virtual inspections over Zoom, FaceTime or WhatsApp video.\n\nWhat day works for you?",
+      "dm_response": "Inspections run any day of the week, including weekends - representatives are on site and on standby, so you are never shown around by someone who does not know the estate.\n\nIf you would rather not travel, we do virtual inspections over Zoom, FaceTime or WhatsApp video.\n\nWhat day works for you?",
       "public_comment_reply": "Just sent you a DM",
       "link_code": "SP-INSPECT",
       "link_kind": "whatsapp",
@@ -658,7 +658,7 @@
         "based in canada",
         "i live abroad"
       ],
-      "dm_response": "Yes - virtual inspections run over Zoom, FaceTime or WhatsApp video, and you are welcome to send a representative to inspect on your behalf.\n\nTell me your time zone and let me have the team set a time that works for you.",
+      "dm_response": "Yes - virtual inspections run over Zoom, FaceTime or WhatsApp video, and you are welcome to send a representative to inspect on your behalf.\n\nWhat time zone are you in? I will set it up for you.",
       "public_comment_reply": "Just sent you a DM",
       "link_code": "SP-VIRTUAL",
       "link_kind": "whatsapp",
@@ -694,7 +694,7 @@
         "part payment",
         "can i pay in bits"
       ],
-      "dm_response": "Payment is a 50% initial deposit, with the balance spread over 3, 6 or 12 months.\n\nThe price covers the purchase only - legal fees, utility connection and the homeowners association fee are separate.\n\nI will not quote you a figure for the instalment balance myself; let me get the team to put the exact breakdown in writing for you.",
+      "dm_response": "Payment starts with a 50% deposit, and the balance spreads over 3, 6 or 12 months.\n\nThe price covers the purchase itself; legal, utility connection and the association fee come separately.\n\nWhich unit are you looking at? I will get you the exact breakdown in writing.",
       "public_comment_reply": "Just sent you a DM",
       "link_code": "SP-PAY",
       "link_kind": "whatsapp",
@@ -708,8 +708,8 @@
       "notes": "interest_or_markup is null. Any instalment arithmetic is an escalation until that field is filled.",
       "promo_from": "",
       "promo_until": "",
-      "promo_review_by": "",
-      "promo_response": ""
+      "promo_review_by": "2026-10-15",
+      "promo_response": "Payment starts with a 50% deposit and the balance over 3, 6 or 12 months - and there are campaigns running that open it up further.\n\nThe 2-bedroom condominium is currently 5,000,000 naira to start, with the balance over 12 months.\n\nWhich unit are you looking at? I will get you the exact breakdown in writing."
     },
     {
       "rule_id": "SP-DOCS",
@@ -732,7 +732,7 @@
         "what title",
         "is the title good"
       ],
-      "dm_response": "Shalom Park Estate is held under Governors Consent, with confirmed layout approval, and IFT Realty has warranted that there is no litigation, acquisition or dispute on the land.\n\nOn purchase you receive a receipt, contract of sale, legal documentation and survey.\n\nFor the document references themselves, let me put you with the team - that is not something I should be reading out in a chat.",
+      "dm_response": "Shalom Park Estate is held under Governors Consent with confirmed layout approval, and IFT Realty has warranted that there is no litigation, acquisition or dispute on the land.\n\nOn purchase you receive your receipt, contract of sale, legal documentation and survey.\n\nWant to go through the documents? I will arrange for the team to take you through them.",
       "public_comment_reply": "Sent you a DM - the team will pick this up with you",
       "link_code": "SP-DOCS",
       "link_kind": "whatsapp",
@@ -773,7 +773,7 @@
         "estate features",
         "solar"
       ],
-      "dm_response": "Delivered at Shalom Park: gated access with CCTV and patrols, diesel generator power supply with the developments solar-compatible, water treatment and drainage, plus roads and street lighting.\n\nAnything specific you want to know about?",
+      "dm_response": "Already delivered at Shalom Park: gated access with CCTV and patrols, diesel generator power with the developments solar-compatible, water treatment and drainage, and roads with street lighting.\n\nWhich of those matters most to you? I can show you on an inspection any day of the week.",
       "public_comment_reply": "Just sent you a DM",
       "link_code": "SP-AMEN",
       "link_kind": "whatsapp",
@@ -805,7 +805,7 @@
         "restrictions",
         "construction"
       ],
-      "dm_response": "On serviced plots you are free to build, with one restriction: nothing beyond 4 storeys.\n\nFor anything else on building approvals or specifications, let me get the team on it.",
+      "dm_response": "On serviced plots you are free to build, with one restriction: nothing beyond 4 storeys.\n\nWhat are you planning to put up? I will get you the specifications and the approval process.",
       "public_comment_reply": "Just sent you a DM",
       "link_code": "SP-BUILD",
       "link_kind": "whatsapp",
@@ -835,7 +835,7 @@
         "what documents do i get",
         "after payment"
       ],
-      "dm_response": "Land is allocated instantly on purchase. For off-plan properties, a handover timeline is given at the point of purchase.\n\nOn purchase you receive a receipt, contract of sale, legal documentation and survey.\n\nLet me have the team confirm the exact handover date for the unit you are looking at.",
+      "dm_response": "Land is allocated instantly on purchase. On off-plan properties your handover timeline is set out when you buy.\n\nEither way you receive your receipt, contract of sale, legal documentation and survey.\n\nWhich one are you looking at? I will get you the timeline for it.",
       "public_comment_reply": "Just sent you a DM",
       "link_code": "SP-DELIV",
       "link_kind": "whatsapp",
@@ -878,7 +878,7 @@
         "good afternoon",
         "good evening"
       ],
-      "dm_response": "Hi - you are through to Shalom Park Estates assistant, and a member of the team is one message away whenever you want them.\n\nShalom Park is at Abijo, opposite GRA Second Gate, Ibeju-Lekki, on 10.37 hectares. There are 4-bedroom and 5-bedroom semi-detached homes, 2-bedroom condominiums and serviced plots.\n\nWhat would you like - prices, location, or an inspection?",
+      "dm_response": "Hi - welcome to Shalom Park Estate. You are chatting with our assistant, and I can get a member of the team to you any time.\n\nWe are at Abijo, opposite GRA Second Gate, Ibeju-Lekki, on 10.37 hectares - 4 and 5-bedroom semi-detached homes, 2-bedroom condominiums and serviced plots.\n\nWhat brings you to us - are you looking for somewhere to live, or to buy?",
       "public_comment_reply": "Just sent you a DM",
       "link_code": "SP-INFO",
       "link_kind": "whatsapp",
@@ -917,7 +917,7 @@
         "entry rate",
         "discounted entry"
       ],
-      "dm_response": "There are offers running at Shalom Park, and the terms change - so rather than quote you something that may have moved, let me get the team to tell you exactly what is open to you today and how long it stands.",
+      "dm_response": "Let me get the team to tell you exactly what is open to you today. Which unit are you interested in?",
       "public_comment_reply": "Sent you a DM - the team will pick this up with you",
       "link_code": "SP-ESC-PROMO",
       "link_kind": "none",
@@ -930,7 +930,7 @@
       "promo_from": "",
       "promo_until": "",
       "promo_review_by": "2026-10-15",
-      "promo_response": "Yes - there are offers running at Shalom Park right now, including a 5,000,000 naira entry deposit on the 2-bedroom condominium with the balance over 12 months.\n\nThey run until the units are sold rather than to a fixed date, so let me get the team to confirm exactly what is open to you today."
+      "promo_response": "Yes - there is a campaign running. The 2-bedroom condominium opens at a 5,000,000 naira initial deposit with the balance over 12 months, and it runs until the units are sold.\n\nWhich one are you looking at? I will get the team to confirm your terms."
     },
     {
       "rule_id": "SP-DEVPLOT",
@@ -954,7 +954,7 @@
         "bulk land",
         "block of plots"
       ],
-      "dm_response": "Shalom Park Estate is developed by IFT Realty Ltd, and there is a large parcel of about 6,738 sqm available for multi-unit or townhome development.\n\nBulk parcels are priced and structured separately from single plots, so let me put you straight with the team.",
+      "dm_response": "Shalom Park Estate is developed by IFT Realty Ltd, and there is a large parcel of about 6,738 sqm available for multi-unit or townhome development.\n\nBulk parcels are structured separately from single plots. What scale are you looking at? I will put you straight with the team.",
       "public_comment_reply": "Sent you a DM - the team will pick this up with you",
       "link_code": "SP-DEVPLOT",
       "link_kind": "none",
@@ -985,7 +985,7 @@
         "is it a good buy",
         "why buy here"
       ],
-      "dm_response": "The 5-bedroom semi-detached is the off-plan position at Shalom Park - 200,000,000 naira, 4 units available, finishing included.\n\nWhat is already on the ground rather than promised: Governors Consent and confirmed layout approval, gated access with CCTV and patrols, generator power with the developments solar-compatible, water treatment and drainage, and roads with street lighting. The estate is 10.37 hectares, about 30% developed, and sits under 5 minutes from the Lekki-Epe Expressway.\n\nI do not deal in projections or figures - for that conversation let me put you with the team.",
+      "dm_response": "The 5-bedroom semi-detached is the off-plan position at Shalom Park - 200,000,000 naira, 4 units available, finishing included.\n\nWhat is already on the ground rather than promised: Governors Consent and confirmed layout approval, gated access with CCTV and patrols, generator power with the developments solar-compatible, water treatment and drainage, and roads with street lighting. The estate is 10.37 hectares, about 30% developed, and sits under 5 minutes from the Lekki-Epe Expressway.\n\nWhat size of position are you looking at? I will set up a call with the team.",
       "public_comment_reply": "Just sent you a DM",
       "link_code": "SP-INVEST",
       "link_kind": "whatsapp",

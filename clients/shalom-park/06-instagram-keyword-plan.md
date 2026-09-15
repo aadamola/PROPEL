@@ -1,6 +1,6 @@
 # Shalom Park — Instagram Keyword Automation
 
-*Built 2026-09-15. 27 rules, 356 trigger phrases, 54 tests. Everything lives in this repo — no third-party spreadsheet holds client facts.*
+*Built 2026-09-15. 27 rules, 356 trigger phrases, 58 tests. Everything lives in this repo — no third-party spreadsheet holds client facts.*
 
 **Read the rules:** [`keywords.md`](keywords.md) — generated table, renders on a phone in GitHub.
 **Edit the rules:** [`keywords.csv`](keywords.csv) — the source of truth.
@@ -52,6 +52,18 @@ Without it, *"what rental yield does the 4 bedroom give"* fires the ₦185m pric
 | `SP-ESC-FEES` | Excluded *items* are warranted; excluded *amounts* are not |
 | `SP-ESC-AGENT` | Commercial terms are not the assistant's business |
 | `SP-ESC-MORTGAGE` | No financing arrangement exists in the facts sheet |
+
+## Copy discipline: sell, don't disclaim
+
+Every response was rewritten on 2026-09-15 and the rules are now enforced by the compiler, not by good intentions:
+
+- **No response volunteers a limitation nobody asked about.** *"I don't deal in projections"*, *"I won't quote you a figure"*, *"that's not something I should read out in a chat"* — all gone. Volunteering what the assistant can't do is negative selling; it reads as a machine apologising and it ends the conversation before a human ever sees the lead.
+- **A gap becomes an offer, never a confession.** Not *"I don't have the exact amounts"* but *"I will get you the full cost breakdown in writing."* Same fact, opposite effect.
+- **The hand-off still fires — the copy just stopped announcing it.** Every escalating rule still pings a human. The buyer sees a question, not a shrug.
+- **A "no" becomes a "here's what I can do."** A discount ask returns the payment structure and a live campaign. A financing ask returns the in-house plan.
+- **Every card closes on one question.** The build fails without it — a card with no question is a dead end, and a dead end on Instagram is a lost buyer.
+
+Two things stay: the **25% forfeiture quoted in full**, and **no bank details in a chat window** — both are trust assets, and both only appear when the buyer raised them.
 
 ## Promotions expire themselves
 
@@ -127,7 +139,7 @@ Everything is in the repo. One file is edited by hand; the rest is generated:
 Edit clients/shalom-park/keywords.csv
 node tools/build-keywords.js      # lint + compile -> keywords.json + keywords.md
 node tools/build-workflows.js     # embed into 05-channel-instagram.json
-node tools/test-all.js            # 117 tests
+node tools/test-all.js            # 121 tests
   ↓  re-paste the workflow into n8n
 ```
 
@@ -146,10 +158,10 @@ node tools/test-all.js            # 117 tests
 | `clients/shalom-park/keywords.csv` | The rule table — **the source of truth, edit this** |
 | `clients/shalom-park/keywords.md` | Readable view. Generated; do not hand-edit |
 | `clients/shalom-park/keywords.json` | Compiled. Generated; do not hand-edit |
-| `ops/concierge/lib/keywords.js` | The matcher — tokenised, emoji-safe, pidgin-aware |
+| `ops/concierge/lib/keywords.js` | The matcher — tokenised, emoji-safe, pidgin-aware, promo-aware |
 | `ops/concierge/workflows/05-channel-instagram.json` | The adapter: verify → normalise → fast lane → guardrail → send |
 | `tools/build-keywords.js` | Compiler + linter |
-| `tools/test-keywords.js` | 44 rule tests |
+| `tools/test-keywords.js` | 48 rule tests |
 | `tools/test-ig-workflow.js` | 10 end-to-end tests against the shipped workflow |
 
 ## Why the matcher is token-based

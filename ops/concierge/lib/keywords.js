@@ -165,12 +165,12 @@ function isPromoLive(rule, now) {
  * than pointing a buyer at nothing.
  */
 function buildBody(rule, cfg, bodyText) {
+  // Every card is lint-guaranteed to close on a question, so an unresolved
+  // link needs no apology bolted on the end -- the question already invites
+  // the reply. Silence beats "reply here and the team will pick it up".
   const link = resolveLink(rule, cfg && cfg.links);
   const parts = [bodyText || rule.dm_response];
   if (link) parts.push(link);
-  else if (rule.link_kind && rule.link_kind !== 'none') {
-    parts.push('Reply here and the team will pick it up with you.');
-  }
   if (cfg && cfg.assistant_signature) parts.push(cfg.assistant_signature);
   return parts.join('\n\n');
 }

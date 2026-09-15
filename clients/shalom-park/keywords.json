@@ -14,6 +14,7 @@
       "priority": 10,
       "class": "escalate_only",
       "intent": "Returns / yield / appreciation",
+      "shortcut": "roi",
       "trigger_phrases": [
         "roi",
         "r o i",
@@ -56,6 +57,7 @@
       "priority": 10,
       "class": "escalate_only",
       "intent": "Refund / cancellation",
+      "shortcut": "refund",
       "trigger_phrases": [
         "refund",
         "refunds",
@@ -89,6 +91,7 @@
       "priority": 10,
       "class": "escalate_only",
       "intent": "Account details / ready to pay",
+      "shortcut": "bank",
       "trigger_phrases": [
         "account number",
         "account details",
@@ -124,6 +127,7 @@
       "priority": 10,
       "class": "escalate_only",
       "intent": "Discount / negotiation",
+      "shortcut": "disc",
       "trigger_phrases": [
         "discount",
         "negotiate",
@@ -160,6 +164,7 @@
       "priority": 10,
       "class": "escalate_only",
       "intent": "Litigation / genuineness",
+      "shortcut": "legal",
       "trigger_phrases": [
         "litigation",
         "court",
@@ -197,6 +202,7 @@
       "priority": 10,
       "class": "escalate_only",
       "intent": "Completion date",
+      "shortcut": "done",
       "trigger_phrases": [
         "completion",
         "completion date",
@@ -228,6 +234,7 @@
       "priority": 10,
       "class": "escalate_only",
       "intent": "Other charges / total cost",
+      "shortcut": "fees",
       "trigger_phrases": [
         "legal fee",
         "legal fees",
@@ -264,6 +271,7 @@
       "priority": 10,
       "class": "escalate_only",
       "intent": "Agency / partnership / commission",
+      "shortcut": "agent",
       "trigger_phrases": [
         "commission",
         "as an agent",
@@ -297,6 +305,7 @@
       "priority": 10,
       "class": "escalate_only",
       "intent": "Mortgage / financing",
+      "shortcut": "loan",
       "trigger_phrases": [
         "mortgage",
         "bank loan",
@@ -329,6 +338,7 @@
       "priority": 20,
       "class": "fast_lane",
       "intent": "2-bedroom condominium",
+      "shortcut": "condo",
       "trigger_phrases": [
         "2 bedroom",
         "2 bed",
@@ -369,6 +379,7 @@
       "priority": 20,
       "class": "fast_lane",
       "intent": "4-bedroom semi-detached",
+      "shortcut": "duplex",
       "trigger_phrases": [
         "4 bedroom",
         "4 bed",
@@ -409,6 +420,7 @@
       "priority": 20,
       "class": "fast_lane",
       "intent": "5-bedroom off-plan",
+      "shortcut": "chairman",
       "trigger_phrases": [
         "5 bedroom",
         "5 bed",
@@ -450,6 +462,7 @@
       "priority": 20,
       "class": "fast_lane",
       "intent": "Serviced plots / bare land",
+      "shortcut": "land",
       "trigger_phrases": [
         "land",
         "plot",
@@ -492,6 +505,7 @@
       "priority": 30,
       "class": "fast_lane",
       "intent": "General price enquiry",
+      "shortcut": "price",
       "trigger_phrases": [
         "price",
         "prices",
@@ -534,6 +548,7 @@
       "priority": 30,
       "class": "fast_lane",
       "intent": "Availability / stock",
+      "shortcut": "avail",
       "trigger_phrases": [
         "available",
         "availability",
@@ -569,6 +584,7 @@
       "priority": 30,
       "class": "fast_lane",
       "intent": "Location / directions",
+      "shortcut": "loc",
       "trigger_phrases": [
         "location",
         "where",
@@ -605,6 +621,7 @@
       "priority": 30,
       "class": "fast_lane",
       "intent": "Inspection booking",
+      "shortcut": "inspect",
       "trigger_phrases": [
         "inspection",
         "inspect",
@@ -642,6 +659,7 @@
       "priority": 20,
       "class": "fast_lane",
       "intent": "Diaspora / virtual inspection",
+      "shortcut": "virtual",
       "trigger_phrases": [
         "virtual",
         "virtual tour",
@@ -679,6 +697,7 @@
       "priority": 20,
       "class": "fast_lane",
       "intent": "Payment plan",
+      "shortcut": "pay",
       "trigger_phrases": [
         "payment plan",
         "payment",
@@ -716,6 +735,7 @@
       "priority": 20,
       "class": "fast_lane",
       "intent": "Title and documents",
+      "shortcut": "docs",
       "trigger_phrases": [
         "title",
         "title document",
@@ -754,6 +774,7 @@
       "priority": 30,
       "class": "fast_lane",
       "intent": "Amenities and facilities",
+      "shortcut": "amen",
       "trigger_phrases": [
         "amenities",
         "amenity",
@@ -793,6 +814,7 @@
       "priority": 20,
       "class": "fast_lane",
       "intent": "Building restrictions",
+      "shortcut": "build",
       "trigger_phrases": [
         "can i build",
         "build",
@@ -825,6 +847,7 @@
       "priority": 30,
       "class": "fast_lane",
       "intent": "Allocation and handover",
+      "shortcut": "deliv",
       "trigger_phrases": [
         "allocation",
         "allocate",
@@ -857,6 +880,7 @@
       "priority": 90,
       "class": "fast_lane",
       "intent": "Generic interest",
+      "shortcut": "info",
       "trigger_phrases": [
         "info",
         "information",
@@ -900,6 +924,7 @@
       "priority": 10,
       "class": "escalate_only",
       "intent": "Promotion / campaign pricing",
+      "shortcut": "promo",
       "trigger_phrases": [
         "summer",
         "promo",
@@ -937,6 +962,7 @@
       "priority": 10,
       "class": "escalate_only",
       "intent": "Developer / bulk land",
+      "shortcut": "dev",
       "trigger_phrases": [
         "developer",
         "developer plot",
@@ -975,6 +1001,7 @@
       "priority": 20,
       "class": "fast_lane",
       "intent": "Investment case (facts, not forecasts)",
+      "shortcut": "invest",
       "trigger_phrases": [
         "investment",
         "strategic asset",

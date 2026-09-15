@@ -13,32 +13,34 @@
 Shalom Park is now **Instagram-only** — WhatsApp is stripped. 🎉 **That means no new SIM.** The scariest step in the whole setup is gone.
 
 1. Shalom Park's Instagram → **Settings → Account type → switch to Professional → Business** *(not Creator — Creator can't do this)*
-2. **Settings → Business tools → Saved replies** → paste in the 27 responses from [keywords.md](clients/shalom-park/keywords.md), shortcut = the rule name in lowercase (`condo`, `duplex`, `land`…)
-3. **Settings → Business tools → FAQs** → set four: price · location · inspection · payment plan
+2. **Settings → Business tools → Saved replies** → work down **[09-phase0-saved-replies.md](clients/shalom-park/09-phase0-saved-replies.md)**. Shortcut and message are both written out — copy, paste, next. **Do the first 12 only.** The other 15 are for another day and you are not behind without them.
+3. **Settings → Business tools → FAQs** → the four are written at the bottom of the same file
 
 **Why this first:** the replies are copy, and copy doesn't need an API. The campaigns start earning this week while the Meta side gets proven — and by the time the automation is live you'll already know which keywords people actually type.
 
-Full plan, content calendar and three ready-to-post captions: **[08-instagram-launch-plan.md](clients/shalom-park/08-instagram-launch-plan.md)**
+Then you are in production. The daily loop is 20 minutes and it is written out for you: **[11-phase0-runbook.md](clients/shalom-park/11-phase0-runbook.md)**
 
 ---
 
 ## THIS WEEK — one per sitting, in this order
 
-- [ ] **(20 min)** **First 10 prospect names** → WhatsApp me names + IG handles. *Unblocks 10 audit teardowns. Longest-outstanding item on this list.*
-- [ ] **(1 message)** 🔴 **Ask Shalom Park who can grant Meta admin.** *CAC is still needed for verification, but the 15-min session no longer needs a SIM.* Script ready in [clients/shalom-park/04-meta-access-pack.md](clients/shalom-park/04-meta-access-pack.md). *Not Collins — he's a Sales Executive with neither. Then do the setup on a 20-min screen share, don't send a checklist.*
-- [ ] **(1 hour)** ⚡ **Prove the fast lane** — app in a portfolio, send one Instagram DM to an outside account ([08-instagram-launch-plan.md](clients/shalom-park/08-instagram-launch-plan.md)). *Now an hour, not an afternoon — no WABA needed. Settles the only real unknown: whether dev mode will message real buyers. **Don't give Shalom Park a date until you've seen the answer.***
-- [ ] **(1 conversation)** 💰 **Confirm the Shalom Park care fee and commission rate.** *Possibly revenue already owed — MRR currently reads zero because nothing is confirmed as started. Ask what the setup fee covered, when the ₦250k/mo begins, and pin the commission %.*
-- [ ] **(2 min, by 15 Oct)** 📅 **Re-confirm the offers with Collins** — are the ₦5m condo deposit and the 70% still running? *Say yes and I push the date forward. Say no and I clear three cells. Say nothing and the assistant goes back to the signed 50% by itself — that's the design, so this is a safety net, not a deadline.*
-- [ ] **(5 min)** 🔴 **Send Collins the follow-up** — [clients/shalom-park/03-followup-questions.md](clients/shalom-park/03-followup-questions.md). Eight open fields, one message. *The ₦95m condo price is now settled — Collins restated it, so it's live. The other seven fields still stand.*
-- [ ] **(15 min)** 🔴 **Start CAC filing** — "Propel Digital" (fallbacks: Propel Media, Propel Digital Marketing), cac.gov.ng or an accredited agent. *This is no longer admin. Meta won't let us run automation on a **client's** account until our business is verified with registered documents — so this now blocks something Shalom Park has paid for. ~2 weeks of clock. Start it, then forget it.*
-- [ ] **(10 min)** Meta Business Suite: link @getpropel.ng + WhatsApp, convert IG to a Business account ([ops/setup/account-setup.md](ops/setup/account-setup.md) §7).
-- [ ] **(1 ask)** Shalom Park: sight the title + approval documents. *Site visit ✅ done. This is the last open vetting gate — and with bare-land plots in the mix it matters more, not less. We don't publish a price for land we haven't seen the paper for.*
-- [ ] **(15 min)** Finish the socials: TikTok + LinkedIn page (§4–5), then post manifesto.png with the Day 1 caption.
-- [ ] **(5 min, before 29 Aug)** ⏰ **VPS renewal decision** — you're on a monthly term with auto-renewal on. Check the renewal quote in Hostinger; if 12 months prepaid beats it, switch. Renewal is where their 2–3× jump lands.
+- [ ] **(5 min)** 🎬 **Book the shoot day with Collins** — one site visit, about 3 hours, and it produces all 14 days of content. Shot list is written: [10-phase0-content-pack.md](clients/shalom-park/10-phase0-content-pack.md). *Collins and Mercy go on camera, not you.*
+- [ ] **(45 min)** ⚡ **Prove the fast lane** — app in a portfolio, send one Instagram DM to an outside account ([08-instagram-launch-plan.md](clients/shalom-park/08-instagram-launch-plan.md)). *Settles the only real unknown: whether dev mode will message real buyers. **No delivery date goes to Shalom Park until you have seen the answer.***
+- [ ] **(1 message)** 🔴 **Ask Shalom Park who can grant Meta admin.** Script in [04-meta-access-pack.md](clients/shalom-park/04-meta-access-pack.md). *Not Collins — he's a Sales Executive. The session is now 15 minutes and needs no SIM.*
+- [ ] **(5 min)** **Send Collins the follow-up** — [03-followup-questions.md](clients/shalom-park/03-followup-questions.md). *Seven fields still open. The ₦95m condo price is settled; the rest aren't.*
+- [ ] **(20 min)** **First 10 prospect names** → WhatsApp me names + IG handles. *Unblocks 10 audit teardowns. Longest-outstanding item on this list — and Shalom Park is still a pipeline of one.*
 
-## NOT YET — ignore these (I'll star them when it's time)
+## NOT YET — I'm holding these, don't think about them
 
-Testing the bot · the Shalom Park pilot build · voice notes · first audit calls. Nothing here is actionable until the week's items land. Don't think about them.
+**Parked from "this week" to keep the list at five** (the protocol, not a demotion — I'll star them when their turn comes):
+
+- 💰 Confirm the Shalom Park care fee + commission rate — *MRR reads zero because nothing is confirmed as started*
+- 🔴 CAC filing for Propel — *less urgent for THIS client since we use IFT Realty's portfolio and their RC number; still needed for invoicing, banking and every client after this one*
+- Sight the title + approval documents — *last open vetting gate*
+- TikTok + LinkedIn pages
+- ⏰ **VPS: your monthly term ran to 29 Aug and auto-renewal was on — check what Hostinger actually charged you.** *Not urgent, but renewal is where their 2–3× jump lands, and that date has passed.*
+
+Testing the bot · the automated pilot · voice notes · first audit calls. Nothing here is actionable until the week's items land.
 
 ## WAITING ON ME (AI partner) — nothing for you to do here
 
@@ -50,6 +52,7 @@ Testing the bot · the Shalom Park pilot build · voice notes · first audit cal
 
 ## ✅ DONE (look how far this has come)
 
+- [x] 🚀 **Phase 0 production pack shipped** — 27 saved replies, 10 captions, shot list, daily runbook, tracking log (2026-09-15)
 - [x] 📵 **WhatsApp stripped — Shalom Park is Instagram-only** (2026-09-15)
 - [x] 📲 **All 7 Instagram campaigns live** — 27 rules, promos that retire themselves, every response written to convert, 121 tests (2026-09-15)
 - [x] 💰 **₦95m condo price confirmed and released** — open since July (2026-09-15)

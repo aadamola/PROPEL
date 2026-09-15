@@ -2,6 +2,20 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-09-15 (final) — PHASE 0 IN PRODUCTION: Shalom Park's Instagram goes live by hand
+
+- **ADEDAMOLA: "enter full production mode for phase 0."** Done. Phase 0 is the automation run by a human, so production mode means four things delivered: **the exact texts, the exact posts, the exact process, the exact measurement.** All four shipped. **Nothing in this phase needs a Meta app.**
+- **📋 The texts — `09-phase0-saved-replies.md`, GENERATED from the same table the bot runs on.** Not hand-copied: `build-keywords.js` now emits it alongside the JSON and the readable view, so the manual phase and the automated phase say identical things, and a promo change updates both at once. Added a `shortcut` column to the rule table (lint-checked for uniqueness and for being typeable on a phone: 2–12 lowercase characters). **Longest reply is 569 characters** — comfortably inside Instagram's limits, checked rather than assumed.
+- **Tiered for ADHD, deliberately: "do these 12 first, the other 15 are for another day, you are not behind without them."** The 12 cover all seven campaign keywords plus the four questions everyone asks. Plus the four native Instagram FAQs, written tight.
+- **🎬 The posts — `10-phase0-content-pack.md`.** A 3-hour shot list in six blocks off **one site visit** (*do not go back to site for individual posts — that is how a content plan dies*), **all ten captions written**, a hashtag bank in three sets so no two posts look alike, and 15 story prompts. Plus a "never appears in a caption" table: no projected returns, no completion date, no fake scarcity, no account numbers, no title reference numbers, no price outside the signed pack.
+- **On camera: Collins and Mercy, not ADEDAMOLA.** His no-face rule is about *his* face — this is Shalom Park's account, a face sells property, and theirs is the one buyers meet on site.
+- **⚙️ The process — `11-phase0-runbook.md`.** A 20-minute daily loop: 10 minutes of comments and DMs in the morning, 5 minutes logging at night. A full **"they say X → send shortcut Y"** triage table covering all 27 rules, the escalation template for Collins, the 15-minute hand-off standard (the client's own, from the facts sheet), the escalation ladder, and **seven hard rules** ending in the one that matters most: **when in doubt, send `info` and tell Collins — nobody was ever hurt by an extra hand-off.**
+- **📊 The measurement — `phase0-log.csv`.** One row per conversation. **Without it there is no scorecard and no commission evidence.** Weekly Friday report to the client: four numbers. **Week 1 sets the baseline; we do not publish a target we have not earned** — the client's own stated volume is 1–2 enquiries a day, so that is the number to beat.
+- **What this phase buys that the automation cannot:** we learn **which words buyers actually type.** Anything said that isn't on the shortcut list is a missing trigger, and it goes into the table.
+- **TODO.md pulled back to the protocol — exactly 5 items in "this week", each time-boxed.** It had drifted to ten. The other five are parked under NOT YET with a note that they are held, not dropped. **⏰ Surfaced honestly while pruning: the VPS monthly term ran to 29 Aug with auto-renewal on, and that date has passed — check what Hostinger actually charged.**
+- **Pipeline updated same day** per rule 7: next action is the shoot day, notes carry the Instagram-only pivot.
+- **Test state: 121 passing.** Two new lint rules (shortcut format, shortcut uniqueness); the generated pack cannot drift from the rules by construction.
+
 ## 2026-09-15 (latest) — Shalom Park goes Instagram-only · full launch plan
 
 - **ADEDAMOLA: strip WhatsApp, make this an Instagram automation.** Done — `clients.json` now has Instagram as the sole live channel for this client. WhatsApp and email adapters, normalisers and tests all stay built and green; re-enabling either is one boolean.

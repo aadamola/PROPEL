@@ -1,112 +1,92 @@
-# Campaign brief vs. signed facts sheet — audit + addendum request
+# Campaign brief — audit and open items
 
-*2026-09-15. Seven campaign definitions supplied by ADEDAMOLA, audited line by line against the warranted facts sheet signed by Nanameme Collins on 2026-07-27 (`docs/facts-sheet-SIGNED-2026-07-27.pdf`).*
+*2026-09-15. Seven campaign definitions from **Nanameme Collins** — the same person who signed the warranted facts sheet on 2026-07-27 — relayed by ADEDAMOLA, who confirms the new figures are **ongoing promotions**.*
 
-**Verdict: the campaign structure is adopted. Five of the seven carry figures that contradict or exceed the signed sheet, and those figures are not in the system.** Nine items need a signed addendum before they can be published.
+**Verdict: adopted.** The source is the warrantor and the promo framing reconciles most of what looked like contradiction. The ₦95m condo price is released, plot sizes are in, all seven campaigns are wired. **Three items remain open — down from nine.**
 
 ---
 
-## What went live immediately
+## What changed on Collins' word
 
-The seven campaign words now each resolve to exactly one rule — the standard comment-to-DM play:
-
-| Comment | Routes to | What happens |
+| | Before | Now |
 |---|---|---|
-| **CONDO** | `SP-2B` | Product + availability, price to a human |
-| **LAND** | `SP-LAND` | ₦125,000/sqm, size + availability to a human |
-| **SUMMER** | `SP-ESC-PROMO` 🆕 | Neither confirms nor denies a promo — human |
-| **CHAIRMAN** | `SP-5B` | ₦200m off-plan, handover date to a human |
-| **DUPLEX** | `SP-4B` | ₦185m, completed, 3 available |
-| **INVESTMENT** | `SP-ESC-ROI` | Straight to a human, no figure |
-| **DEVELOPER** | `SP-DEVPLOT` 🆕 | Names IFT Realty, parcel terms to a human |
+| 2-bed price | withheld — Propel price query open since July | ✅ **₦95,000,000 live.** He restated the figure he signed; the query is answered |
+| Residential plot size | blank in the signed sheet | ✅ **648 sqm live**, alongside the warranted ₦125,000/sqm |
+| Development parcel | didn't exist in our records | ✅ **~6,738 sqm live** as a product — **deliberately unpriced** |
+| Promotions | "no active discounts" per the signed sheet | ✅ acknowledged as running — terms still come from a human |
 
-Also added as triggers: *The Chairman's Choice*, *flagship*, *pre-construction*, *duplex*, *luxury duplex*, *apartment*, *strategic asset*, *plot size*, *648*, *townhome*, *bulk purchase*, *joint venture*, *flash sale*.
+### Why the parcel ships without a price
 
-## What did not go live, and why
+6,738 sqm × ₦125,000 = **₦842,297,500**. Bulk parcels are normally priced differently from single plots, and at that size the gap between the two rates is hundreds of millions. The card names the developer and the parcel, then hands over. Same logic on land: the assistant states **648 sqm** and **₦125,000/sqm** and never does the multiplication in front of a buyer.
 
-### 🔴 1. Deposit terms — three different numbers now exist
+---
 
-| Source | 4-bedroom | 2-bedroom |
-|---|---|---|
-| **Signed facts sheet** | **50% down**, balance over 3/6/12 months | **50% down** |
-| Campaign brief | **70% initial deposit**, 12-month spread | **₦5,000,000 initial deposit**, 12-month plan |
+## The structural fix: promotions now expire themselves
 
-These cannot all be true at once.
+An ongoing promotion is the most dangerous thing you can put in an automation, because *ongoing* has no end and the robot never gets the memo. The failure mode is specific and expensive: **a ₦5,000,000 entry deposit still being quoted in November for an offer that closed in September, and a buyer arriving with ₦5m for a ₦95m unit.**
 
-- On the ₦185m 4-bed: 50% is ₦92,500,000; 70% is ₦129,500,000. **A ₦37,000,000 difference in what a buyer is told to bring.**
-- On the ₦95m condo: 50% is ₦47,500,000. The brief says ₦5,000,000. **A ₦42,500,000 difference — and a 5% deposit is a fundamentally different product from a 50% one.**
+So the rule table now carries a promotion lifecycle:
 
-Getting this wrong in an automated DM isn't an embarrassment, it's a buyer arriving with the wrong money. The assistant currently states the **signed 50%**, because that is the only version anyone has put their name to.
-
-### 🔴 2. "Summer Flash Sales" contradicts two signed fields — and it is September
-
-The facts sheet records, in Collins' own submission:
-
-- `pricing_terms.negotiable` → **false**. *"Prices are not negotiable. No discount authority stated."*
-- `active_discounts_or_incentives` → **false**
-
-A "Summer Flash Sales promotion offering discounted entry rates" is the direct opposite of both. Two further problems:
-
-- **It is 15 September.** A summer flash sale running now is either expired or it is permanent urgency dressed as a deadline. We don't run the second kind — CLAUDE.md rule 2, and it is the single fastest way to lose the trust position we sell.
-- **"Discounted entry rates" implies a reference price that was higher.** If the ₦185m/₦200m figures are already the discounted ones, our price cards are wrong. If they aren't, the discount is against a number nobody has stated.
-
-`SP-ESC-PROMO` therefore does something deliberately narrow: it neither confirms nor denies a promotion, and hands the buyer to a person. If a real, dated, signed promotion exists, it becomes a fast-lane card in ten minutes.
-
-### 🔴 3. "Emphasizing capital growth" — this one I won't build
-
-`capital growth` is on the banned list in the signed sheet's own `must_not_say`, and it is hard-blocked by the guardrail every response passes through. An INVESTMENT campaign whose promise is capital growth is the exact claim the whole architecture exists to prevent — and it is the claim that attracts regulatory attention and, in a bad year, a buyer's lawyer.
-
-**The campaign keeps its name and its traffic.** INVESTMENT routes to a human, immediately, with no figure attached. A serious investor talking to a person within minutes converts better than one reading a projection from a bot anyway.
-
-The honest version of this campaign, which I can build the day it's approved: *location, title type, delivered infrastructure, stage of development, payment terms* — every one of them warranted, none of them a forecast.
-
-### 🟡 4. Plot sizes — new, and they imply large numbers
-
-Neither figure is in the signed sheet, which left plot size blank and flagged it for escalation.
-
-| Brief | Implied at ₦125,000/sqm |
+| Column | What it does |
 |---|---|
-| 648 SQM residential plot | **₦81,000,000 per plot** |
-| 6,738.38 SQM development parcel | **₦842,297,500** |
+| `promo_from` / `promo_until` | The window, as dates |
+| `promo_response` | What the buyer is sent **while it runs** |
+| `dm_response` | The signed standard terms — what they get **the day after it ends** |
 
-The second is 6.5% of the entire 10.37-hectare estate. Before either is published I need to know whether the per-sqm rate even applies at that scale, or whether bulk parcels are priced differently — because ₦842m stated wrongly by an automated DM is not a correctable error.
+**A promotion with no end date cannot be compiled.** `build-keywords.js` rejects the table outright. Every build prints which promotions are live and which have lapsed. Tested both directions (`KW-37`, `KW-38`, `KW-39`).
 
-### 🟡 5. "Finished luxury" on the condo
-
-The brief calls the 2-bedroom *"finished luxury apartments."* The signed sheet records the condo stage as **"Under development"** with finishing spec *"Finished."* Those are compatible on paper — finished *spec*, not finished *building* — but "finished luxury apartments" reads to a buyer as ready to move in. The assistant says **"under development, finished spec"**, which is what was signed.
-
----
-
-## The addendum — nine items, one signature
-
-Everything above unblocks with one document. This is an **addendum to the warranted facts sheet**, not a replacement: same signature, same warranty, dated.
-
-| # | Field | Question |
-|---|---|---|
-| 1 | 4-bed deposit | 50% or 70%? |
-| 2 | 2-bed deposit | 50%, or ₦5,000,000 flat? |
-| 3 | 2-bed price | Confirm ₦95,000,000 — **outstanding since July** |
-| 4 | Instalment markup | Does the 12-month balance carry interest or markup? Still blank. |
-| 5 | Promotion | Is one running? Exact terms, exact start and end dates, and what the discount is measured against. |
-| 6 | Residential plot size | Is 648 SQM standard? What sizes exist and how many are available? |
-| 7 | Development parcel | Is the 6,738.38 SQM parcel real and for sale? Priced at ₦125,000/sqm or otherwise? |
-| 8 | 5-bed pricing | Is there a pre-construction price distinct from ₦200,000,000? |
-| 9 | Condo readiness | Expected completion for the 2-bedroom block. |
-
-### Message to send
-
-> Hi [name] — we're building the Instagram automation for Shalom Park and it's nearly ready. Before it talks to a single buyer I need nine things confirmed in writing, because the campaign copy and the facts sheet Collins signed in July disagree on some numbers.
->
-> The big three: is the 4-bedroom deposit 50% or 70%? Is the 2-bedroom deposit 50% or ₦5m? And is the 2-bedroom ₦95m?
->
-> I'm not being difficult — the assistant sends the same answer to everyone who asks, so a wrong deposit figure means buyers turning up with the wrong money. I'd rather it says "let me get the team" than say something we'd have to walk back.
->
-> I'll send a one-page addendum to sign — same format as the facts sheet. Once it's back, all seven campaigns go live the same day.
-
-**One-page addendum to sign: `ops/templates/warranted-facts-sheet.md` Sections D and E, re-issued with these nine fields.**
+This is why the promo terms are not live yet. Not doubt about Collins — **I just need the dates.**
 
 ---
 
-## Standing position
+## The three open items
 
-The campaign brief is almost certainly Shalom Park's own marketing material, and it may well be more current than a July facts sheet. That doesn't change the process: **a warranted facts sheet is superseded by a signed addendum, not by a paste.** The value we sell is that every number the assistant states has someone's name against it. That is worth a two-day delay and it is not worth ₦37m of buyer confusion.
+### 1. 🔴 Promotion dates — the only thing blocking the promo cards
+
+Start and end date for each offer. Once they land it is a **two-cell edit** per rule and the cards go live, retiring themselves automatically on the closing date.
+
+**Already drafted, ready to paste the moment dates arrive** (`SP-2B` → `promo_response`):
+
+> The 2-bedroom condominium is 95,000,000 naira, under development and finished spec.
+>
+> There is an offer running: you can secure a unit with a 5,000,000 naira initial deposit and spread the balance over 12 months. It closes on [DATE], and the team will confirm everything in writing before you pay anything.
+
+### 2. 🟡 The 70% deposit — this one genuinely doesn't read as a promotion
+
+The signed standard is **50% down, balance over 3, 6 or 12 months**. The brief puts the 4-bedroom at **70% down with a 12-month spread**. That's **₦129.5m upfront instead of ₦92.5m — ₦37,000,000 more.**
+
+A promotion that asks the buyer for ₦37m *more* is either not a promotion, or it's the payment condition attached to a discount nobody has stated. The condo moves the opposite way — ₦5m instead of ₦47.5m, which is obviously a promotion.
+
+Both can be true. But I'm not putting the harder-than-signed number in front of buyers on an assumption. One question: **is the 70% a condition attached to a price reduction on the completed 4-beds, or has the standard deposit on completed stock always been higher than the sheet says?**
+
+Until then `SP-4B` quotes the signed 50% and adds *"the team will confirm which plan applies to this unit today."*
+
+### 3. 🔴 "Capital growth" — holding this one, and it isn't an addendum item
+
+This does not move on Collins' say-so, and I want to be straight about why rather than quietly ignoring it.
+
+`must_not_say` → *"Resale or appreciation estimates"* is on the facts sheet **Collins himself signed**. He has now told us two contradictory things, and the signed one wins — that is the entire point of having him sign it. It's also hard-blocked by the guardrail every response passes through, so a rule promising capital growth cannot physically ship without me disabling a safety control.
+
+Beyond our own rules: a projected return on an off-plan property is the claim that draws regulatory attention in Nigeria and the claim a buyer's lawyer quotes back in a bad year. It's the one category where being the vendor who *didn't* say it is worth real money.
+
+**The INVESTMENT campaign keeps its name and all its traffic.** It routes to a person within seconds, no figure attached — and a serious investor talking to Collins converts better than one reading a forecast from a bot.
+
+**The honest version, ready to build on your word:** location and access, Governor's Consent, delivered infrastructure, stage of development, payment terms, instant allocation. Every one warranted. None of them a forecast. That's a strong investment card — it just promises facts instead of futures.
+
+---
+
+## Message to send Collins
+
+> Collins — thanks for the campaign details, that's exactly what I needed. Three quick things before the Instagram assistant goes live with them:
+>
+> 1. **Dates.** What are the start and end dates for the current offers? The system needs them so an offer switches itself off when it closes — I don't want it still quoting a ₦5m deposit a month after the promo ends.
+> 2. **The 4-bedroom at 70%.** Just checking I've got this right — 70% is higher than the 50% on the facts sheet, so is that tied to a reduced price on the completed units, or is the standard deposit on finished stock simply higher?
+> 3. **On the investment angle** — I can't have the assistant talk about capital growth or projected returns; it's the one thing that creates a real problem later, and it's on the sheet you signed. What I can do is make the case on the facts: Governor's Consent, delivered infrastructure, the stage of the build, instant allocation. Happy to show you the wording.
+>
+> Everything else is live — the ₦95m condo price, the 648 sqm plots, the 6,738 sqm development parcel, and all seven campaign keywords.
+
+---
+
+## Provenance, recorded
+
+The relayed terms are logged in `kb.json` under `_pending_addendum` with what was signed alongside what was relayed. The signed PDF is untouched. When the dates come back, get them in a message or an email — not because Collins' word is in doubt, but because in twelve months' time *"Collins said so in September"* is not evidence and a message is.

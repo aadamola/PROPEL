@@ -113,11 +113,14 @@ const cases = [
                           .every(r => r.escalate === true && r.link_kind === 'none') },
 
   // --- withheld facts --------------------------------------------------
-  { name: 'KW-20 ★ the unconfirmed ₦95m condo price appears nowhere',
+  { name: 'KW-20 ★ the condo price is released; its deposit terms still escalate',
     run: () => {
-      const leaked = table.rules.some(r => /95[,.]?000[,.]?000|\b95m\b|\bN95\b/i.test(r.dm_response));
+      // Collins restated ₦95m on 2026-09-15, corroborating what he signed in
+      // July — so the price ships. The ₦5m entry deposit is an UNDATED promo,
+      // so terms still go to a human.
       const r = m('2 bedroom condo price');
-      return !leaked && r.rule_id === 'SP-2B' && r.escalate === true && !/95/.test(r.reply);
+      return r.rule_id === 'SP-2B' && /95,000,000/.test(r.reply) &&
+             r.escalate === true && !/5,000,000 naira deposit|50% deposit/.test(r.reply);
     } },
 
   { name: 'KW-21 ★ no public comment reply publishes a figure or a title claim',
@@ -186,14 +189,54 @@ const cases = [
     run: () => {
       // 70% deposit, ₦5m deposit, 648 SQM, 6,738.38 SQM — none are in the
       // signed facts sheet, so none may appear in a response.
+      // 648 sqm and the 6,738 sqm parcel are now Collins-sourced and shipped.
+      // What must NOT appear is any UNDATED promotional deposit term.
       // Anchored: 185,000,000 legitimately contains "5,000,000".
-      const banned = /\b70\s?%|(?<![\d,])5,000,000\b|(?<![\d,])648\b|6,?738/;
-      return table.rules.every(r => !banned.test(r.dm_response));
+      const banned = /\b70\s?%|(?<![\d,])5,000,000\b/;
+      return table.rules.every(r => !banned.test(r.dm_response) && !banned.test(r.promo_response || ''));
     } },
 
-  { name: 'KW-36 the DEVELOPER campaign names the developer but quotes no parcel',
+  { name: 'KW-36 ★ the DEVELOPER card states the parcel size but never prices it',
     run: () => { const r = m('developer');
-                 return /IFT Realty Ltd/.test(r.reply) && !/sqm|SQM|\d{3}/.test(r.reply) && r.escalate === true; } },
+                 // 6,738 sqm at ₦125,000 would be ₦842m. Bulk rates may differ,
+                 // and at that size the difference is hundreds of millions.
+                 return /IFT Realty Ltd/.test(r.reply) && /6,738/.test(r.reply) &&
+                        !/125,000|842|naira/.test(r.reply) && r.escalate === true; } },
+
+  // --- promotion lifecycle ---------------------------------------------
+  { name: 'KW-37 a promotion in force replaces the standard terms',
+    run: () => {
+      const rules = K.compile([{ rule_id: 'T-PROMO', priority: 20, class: 'fast_lane', intent: 'test',
+        trigger_phrases: ['widget'], dm_response: 'Standard terms apply.', public_comment_reply: 'DM sent',
+        link_code: 'T', link_kind: 'none', escalate: false, grounded_in: ['x'], status: 'live', notes: '',
+        promo_from: '2026-09-01', promo_until: '2026-10-31', promo_response: 'Promo terms apply.' }]);
+      const r = K.match(rules, 'widget', { ...CFG_NO_LINK, now: Date.parse('2026-09-15T12:00:00Z') });
+      return r.promo_active === true && /Promo terms/.test(r.reply) && r.promo_until === '2026-10-31';
+    } },
+
+  { name: 'KW-38 ★ an expired promotion reverts to the signed standard terms by itself',
+    run: () => {
+      const rules = K.compile([{ rule_id: 'T-PROMO', priority: 20, class: 'fast_lane', intent: 'test',
+        trigger_phrases: ['widget'], dm_response: 'Standard terms apply.', public_comment_reply: 'DM sent',
+        link_code: 'T', link_kind: 'none', escalate: false, grounded_in: ['x'], status: 'live', notes: '',
+        promo_from: '2026-06-01', promo_until: '2026-08-31', promo_response: 'Summer flash sale!' }]);
+      const after  = K.match(rules, 'widget', { ...CFG_NO_LINK, now: Date.parse('2026-09-15T12:00:00Z') });
+      const before = K.match(rules, 'widget', { ...CFG_NO_LINK, now: Date.parse('2026-05-01T12:00:00Z') });
+      return after.promo_active === false && /Standard terms/.test(after.reply) && !/flash sale/i.test(after.reply)
+             && before.promo_active === false;
+    } },
+
+  { name: 'KW-39 ★ an undated promotion never goes live — it fails safe',
+    run: () => {
+      const undated = { rule_id: 'X', promo_response: 'Half price this week!', promo_until: '' };
+      return K.isPromoLive(undated, Date.now()) === false &&
+             table.rules.every(r => !(r.promo_response || '').trim() || (r.promo_until || '').trim());
+    } },
+
+  { name: 'KW-40 the plot size Collins supplied ships; the multiplication does not',
+    run: () => { const r = m('plot size');
+                 return r.rule_id === 'SP-LAND' && /648/.test(r.reply) && /125,000/.test(r.reply) &&
+                        !/81,000,000/.test(r.reply) && r.escalate === true; } },
 
   { name: 'KW-30 no trigger phrase is claimed by two rules',
     run: () => {

@@ -125,13 +125,34 @@ function resolveLink(rule, links) {
 }
 
 /**
+ * Is this rule's promotional text in force right now?
+ *
+ * A promotion is time-bound by definition. The failure mode we are designing
+ * out is an automation still quoting a N5,000,000 entry deposit in November
+ * for an offer that ended in September -- and a buyer turning up with the
+ * wrong money because a robot never got the memo. A promo with no end date
+ * cannot be compiled (tools/build-keywords.js enforces it), and an expired
+ * one falls back to the standard warranted terms on its own.
+ */
+function isPromoLive(rule, now) {
+  if (!rule.promo_response || !rule.promo_until) return false;
+  const end = Date.parse(rule.promo_until + 'T23:59:59Z');
+  if (!Number.isFinite(end) || now > end) return false;
+  if (rule.promo_from) {
+    const start = Date.parse(rule.promo_from + 'T00:00:00Z');
+    if (Number.isFinite(start) && now < start) return false;
+  }
+  return true;
+}
+
+/**
  * Build the outbound message body for a matched rule.
  * When no link resolves, the call to action degrades to "reply here" rather
  * than pointing a buyer at nothing.
  */
-function buildBody(rule, cfg) {
+function buildBody(rule, cfg, bodyText) {
   const link = resolveLink(rule, cfg && cfg.links);
-  const parts = [rule.dm_response];
+  const parts = [bodyText || rule.dm_response];
   if (link) parts.push(link);
   else if (rule.link_kind && rule.link_kind !== 'none') {
     parts.push('Reply here and the team will pick it up with you.');
@@ -165,6 +186,8 @@ function match(rules, text, cfg) {
   if (!winner) return { matched: false, reason: 'no_rule_matched' };
 
   const r = winner.rule;
+  const now = (cfg && cfg.now) || Date.now();
+  const promoLive = isPromoLive(r, now);
   return {
     matched: true,
     rule_id: r.rule_id,
@@ -172,7 +195,9 @@ function match(rules, text, cfg) {
     rule_class: r.class,
     matched_phrase: winner.phrase,
     score: winner.score,
-    reply: buildBody(r, cfg),
+    promo_active: promoLive,
+    promo_until: promoLive ? r.promo_until : '',
+    reply: buildBody(r, cfg, promoLive ? r.promo_response : r.dm_response),
     public_comment_reply: r.public_comment_reply || '',
     link: resolveLink(r, cfg && cfg.links),
     link_code: r.link_code || r.rule_id,
@@ -183,4 +208,4 @@ function match(rules, text, cfg) {
   };
 }
 
-module.exports = { normalizeText, tokenize, containsPhrase, compile, compileRule, match, resolveLink, buildBody, scoreRule, pickBest };
+module.exports = { normalizeText, tokenize, containsPhrase, compile, compileRule, match, resolveLink, buildBody, scoreRule, pickBest, isPromoLive };

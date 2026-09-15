@@ -12,19 +12,19 @@
     "publication_gate": "DOCUMENTS NOT YET SIGHTED — see _blocked_until_sighted. Title claims must not publish until Gate 2 closes.",
     "hard_rule": "The assistant answers ONLY from this file. Anything not present here is an escalation, never an inference."
   },
-
   "_blocked_until_sighted": {
     "note": "Client warrants these; Propel has NOT yet sighted the documents (CLAUDE.md rule 2 + production checklist Gate 2). Do not publish in ads, posts or landing pages until sighted. The assistant may state title TYPE conversationally because it is warranted, but must route all documentation detail to a human.",
-    "items": ["Governor's Consent", "Approved layout"]
+    "items": [
+      "Governor's Consent",
+      "Approved layout"
+    ]
   },
-
   "developer": {
     "legal_name": "IFT Realty Ltd",
     "rc_number": "640603",
     "registered_address": "No 1, Shalom Park Estate",
     "cac_verified_by_propel": false
   },
-
   "location": {
     "address": "Shalom Park Estate, Abijo, opposite GRA Second Gate, Ibeju-Lekki 105101, Lagos, Nigeria",
     "lga": "Ibeju-Lekki",
@@ -36,11 +36,27 @@
       "Caleb British International School — about 5 minutes, within Abijo",
       "Chois Gardens & Fidiso Estate — neighbouring residential zones, 2–5 minutes"
     ],
-    "schools_nearby": ["Satrop Schools", "Chalcedony Schools", "Corona Schools Lekki", "Kayron International Schools", "Villac International"],
-    "hospitals_nearby": ["First Graceland Hospitals", "Griggs Specialist Hospitals", "Tranquil and Quest Specialist Hospitals", "Vigor Hospitals", "Dales Healthcare"],
-    "access_roads": ["Victoria Island", "Lekki-Epe Expressway", "Eleko Junction", "Lekki Deep Sea Port"]
+    "schools_nearby": [
+      "Satrop Schools",
+      "Chalcedony Schools",
+      "Corona Schools Lekki",
+      "Kayron International Schools",
+      "Villac International"
+    ],
+    "hospitals_nearby": [
+      "First Graceland Hospitals",
+      "Griggs Specialist Hospitals",
+      "Tranquil and Quest Specialist Hospitals",
+      "Vigor Hospitals",
+      "Dales Healthcare"
+    ],
+    "access_roads": [
+      "Victoria Island",
+      "Lekki-Epe Expressway",
+      "Eleko Junction",
+      "Lekki Deep Sea Port"
+    ]
   },
-
   "development": {
     "total_land_size": "10.37 hectares",
     "total_inventory": "27 units and 89 plots",
@@ -48,19 +64,20 @@
     "estimated_completion_date": null,
     "development_type": null
   },
-
   "documentation": {
     "title_status": "Governor's Consent",
     "layout_approval": "Confirmed layout approval",
     "litigation_acquisition_or_dispute": "None — warranted 'NO' by IFT Realty on 2026-07-27",
-    "docs_available_for_review": ["Governor's Consent", "Approved layout"],
+    "docs_available_for_review": [
+      "Governor's Consent",
+      "Approved layout"
+    ],
     "title_reference_number": null,
     "registered_in_name_of": null,
     "survey_plan_number": null,
     "approving_authority": null,
     "lasrera_registration": null
   },
-
   "units": [
     {
       "id": "4B-SEMI",
@@ -84,8 +101,7 @@
       "available": 5,
       "finishing": "Finished",
       "price_ngn": 95000000,
-      "price_status": null,
-      "_propel_flag": "PRICE QUERY — unusual ratio to the 4-bed semi. Confirmed with client before any publication."
+      "price_status": "CONFIRMED 2026-09-15 — Collins restated ₦95,000,000 in the campaign brief, corroborating the figure he signed on 2026-07-27."
     },
     {
       "id": "5B-SEMI",
@@ -107,21 +123,38 @@
       "available": null,
       "price_ngn_per_sqm": 125000,
       "price_status": null,
-      "_propel_flag": "Plot sizes and availability not supplied — assistant must escalate on both."
+      "_propel_flag": "Plot availability still not supplied — assistant must escalate on it. Bulk/development parcels are priced separately.",
+      "plot_size_sqm": 648,
+      "plot_size_source": "Collins, campaign brief relayed 2026-09-15 — fills a blank the signed sheet left. Availability still escalates."
+    },
+    {
+      "id": "DEV-PARCEL",
+      "type": "Development parcel — multi-unit / townhome",
+      "stage": "Bare land",
+      "size_sqm": 6738.38,
+      "price_ngn": null,
+      "price_status": "NOT SUPPLIED — bulk parcels are priced separately from single plots. Never quote the per-sqm rate at this scale.",
+      "source": "Collins, campaign brief relayed 2026-09-15 — not in the signed facts sheet."
     }
   ],
-
   "pricing_terms": {
     "included_in_price": "Purchase price only",
-    "excluded_from_price": ["Legal fees", "Utility connection (electricity and water)", "Homeowners association fee"],
+    "excluded_from_price": [
+      "Legal fees",
+      "Utility connection (electricity and water)",
+      "Homeowners association fee"
+    ],
     "excluded_amounts_supplied": false,
     "negotiable": false,
     "negotiation_note": "Prices are not negotiable. No discount authority stated."
   },
-
   "payment": {
     "initial_deposit": "50% down payment",
-    "plan_durations": ["3 months", "6 months", "12 months"],
+    "plan_durations": [
+      "3 months",
+      "6 months",
+      "12 months"
+    ],
     "interest_or_markup": null,
     "account_name": "IFT REALTY LTD",
     "account_number_policy": "NEVER state account numbers in chat. Always hand to a human.",
@@ -130,15 +163,18 @@
       "assistant_handling": "STATE PLAINLY AND ALWAYS HAND TO A HUMAN. Never soften, summarise away, or omit the 25% forfeiture or the resale condition. A buyer who discovers this after paying is a dispute; a buyer who is told upfront is an informed buyer."
     }
   },
-
   "delivery": {
     "allocation": "Instant allocation",
-    "documents_buyer_receives": ["Receipt", "Contract of sale", "Legal documentation", "Survey"],
+    "documents_buyer_receives": [
+      "Receipt",
+      "Contract of sale",
+      "Legal documentation",
+      "Survey"
+    ],
     "handover_timeline": "Varies by product: land is allocated instantly; off-plan properties are given a handover timeline at purchase.",
     "handover_dates_supplied": false,
     "building_restrictions": "No building beyond 4 storeys."
   },
-
   "amenities": {
     "delivered": {
       "security": "Gated access, CCTV and patrols — delivered",
@@ -149,7 +185,6 @@
     "planned": {},
     "recreation": "Not applicable / none stated"
   },
-
   "inspection": {
     "physical": "Any day of the week, including weekends. Representatives are on site.",
     "meeting_point": "On site — representatives are on standby.",
@@ -157,25 +192,52 @@
     "diaspora_representative_allowed": true,
     "walkthrough_video_url": null
   },
-
   "escalation_contacts": {
-    "primary": { "name": "Collins", "whatsapp": "08064834680", "hours": "Mon–Fri, 8am–8pm" },
-    "secondary": { "name": "Mercy", "whatsapp": "09035508012", "hours": "Weekends / evening cover" },
-    "supervisor": { "name": "Tobi", "whatsapp": "07035461661", "hours": "Emergency overrides" },
+    "primary": {
+      "name": "Collins",
+      "whatsapp": "08064834680",
+      "hours": "Mon–Fri, 8am–8pm"
+    },
+    "secondary": {
+      "name": "Mercy",
+      "whatsapp": "09035508012",
+      "hours": "Weekends / evening cover"
+    },
+    "supervisor": {
+      "name": "Tobi",
+      "whatsapp": "07035461661",
+      "hours": "Emergency overrides"
+    },
     "unclaimed_hot_lead_sms_alert_minutes": 15,
     "may_autosend_layout_map": false,
     "may_autosend_title_pages": false
   },
-
   "must_not_say": [
-    { "topic": "Rental-yield or short-let income projections", "instead": "State only contractually fixed facts; hand the buyer to a human for anything about returns." },
-    { "topic": "Resale or appreciation estimates", "instead": "No projected values; route the buyer to a human." },
-    { "topic": "Comparisons with other estates", "instead": "Describe Shalom Park's own facts only." },
-    { "topic": "Timelines that are not contractually fixed", "instead": "Give only dates confirmed in writing; otherwise 'the team will confirm'." },
-    { "topic": "Bank account numbers", "instead": "Hand every payment-ready buyer to a human." },
-    { "topic": "Artificial scarcity", "instead": "State availability only as recorded here, re-verified weekly." }
+    {
+      "topic": "Rental-yield or short-let income projections",
+      "instead": "State only contractually fixed facts; hand the buyer to a human for anything about returns."
+    },
+    {
+      "topic": "Resale or appreciation estimates",
+      "instead": "No projected values; route the buyer to a human."
+    },
+    {
+      "topic": "Comparisons with other estates",
+      "instead": "Describe Shalom Park's own facts only."
+    },
+    {
+      "topic": "Timelines that are not contractually fixed",
+      "instead": "Give only dates confirmed in writing; otherwise 'the team will confirm'."
+    },
+    {
+      "topic": "Bank account numbers",
+      "instead": "Hand every payment-ready buyer to a human."
+    },
+    {
+      "topic": "Artificial scarcity",
+      "instead": "State availability only as recorded here, re-verified weekly."
+    }
   ],
-
   "escalate_always": [
     "Estate completion date",
     "Off-plan handover dates",
@@ -188,20 +250,51 @@
     "Refund and cancellation questions (state the policy, then hand to a human)",
     "Anything at all not written in this file"
   ],
-
   "fact_maintenance": {
     "notifier": "Emmanuel Osijo",
-    "channels": ["WhatsApp", "Email"],
+    "channels": [
+      "WhatsApp",
+      "Email"
+    ],
     "max_notification_delay": "1 week",
     "unit_count_update_frequency": "Monthly",
     "scheduled_review_frequency": "Monthly",
     "next_review": "2026-08-27"
   },
-
   "context_for_propel_only": {
     "current_inbound_volume_per_day": "1-2",
     "claimed_after_hours_response": "30 minutes",
     "active_paid_campaigns": false,
     "active_discounts_or_incentives": false
+  },
+  "_pending_addendum": {
+    "note": "Terms relayed by Collins on 2026-09-15 that are NOT in the signed facts sheet. Recorded for provenance; NOT publishable until a signed addendum returns. See clients/shalom-park/07-campaign-brief-audit.md.",
+    "source": "Collins (the warrantor of the signed sheet), relayed by ADEDAMOLA",
+    "items": [
+      {
+        "field": "2-bed deposit",
+        "relayed": "₦5,000,000 initial deposit with a 12-month plan",
+        "signed": "50% down payment",
+        "blocker": "No start or end date supplied. A promotion without an end date cannot be compiled."
+      },
+      {
+        "field": "4-bed deposit",
+        "relayed": "70% initial deposit with a 12-month balance spread",
+        "signed": "50% down payment",
+        "blocker": "70% is HARDER than the signed 50% — unusual for a promotion. Anomaly unresolved."
+      },
+      {
+        "field": "Active promotions",
+        "relayed": "Summer Flash Sales — discounted entry rates, flexible payment",
+        "signed": "active_discounts_or_incentives: false; prices not negotiable",
+        "blocker": "No dates. Campaign is named for a season that ended."
+      },
+      {
+        "field": "Capital growth framing",
+        "relayed": "5-bed off-plan \"emphasizing capital growth\"",
+        "signed": "must_not_say: resale or appreciation estimates",
+        "blocker": "DECLINED — banned by the sheet Collins signed and hard-blocked by the guardrail. Not an addendum item."
+      }
+    ]
   }
 }

@@ -5,7 +5,8 @@
     "generated_by": "tools/build-keywords.js",
     "generated_at_note": "Regenerate after every CSV or Sheet edit, then run node tools/test-all.js",
     "rule_count": 26,
-    "doctrine": "A match answers from pre-approved text with no model call. A miss falls through to the Concierge CORE. escalate_only always outranks fast_lane."
+    "doctrine": "A match answers from pre-approved text with no model call. A miss falls through to the Concierge CORE. escalate_only always outranks fast_lane.",
+    "promo_rule": "A rule with promo_response + promo_until sends the promo text while it is in force and reverts to dm_response (the signed standard terms) the day after it expires. No promotion may be compiled without an end date."
   },
   "rules": [
     {
@@ -47,7 +48,10 @@
         "must_not_say[1]"
       ],
       "status": "live",
-      "notes": "NEVER give a figure. Zero facts in this response by design."
+      "notes": "NEVER give a figure. Zero facts in this response by design.",
+      "promo_from": "",
+      "promo_until": "",
+      "promo_response": ""
     },
     {
       "rule_id": "SP-ESC-REFUND",
@@ -76,7 +80,10 @@
         "payment.refund_policy.summary"
       ],
       "status": "live",
-      "notes": "Verbatim per kb assistant_handling. Never soften or omit the 25% or the resale condition."
+      "notes": "Verbatim per kb assistant_handling. Never soften or omit the 25% or the resale condition.",
+      "promo_from": "",
+      "promo_until": "",
+      "promo_response": ""
     },
     {
       "rule_id": "SP-ESC-PAYTO",
@@ -107,7 +114,10 @@
         "payment.account_number_policy"
       ],
       "status": "live",
-      "notes": "States the account NAME (warranted) and never a number. Highest-trust moment in the whole flow."
+      "notes": "States the account NAME (warranted) and never a number. Highest-trust moment in the whole flow.",
+      "promo_from": "",
+      "promo_until": "",
+      "promo_response": ""
     },
     {
       "rule_id": "SP-ESC-DISC",
@@ -139,7 +149,10 @@
         "payment.plan_durations"
       ],
       "status": "live",
-      "notes": "Negotiability is warranted. No discount authority exists."
+      "notes": "Negotiability is warranted. No discount authority exists.",
+      "promo_from": "",
+      "promo_until": "",
+      "promo_response": ""
     },
     {
       "rule_id": "SP-ESC-LEGAL",
@@ -172,7 +185,10 @@
         "documentation.title_status"
       ],
       "status": "live",
-      "notes": "Conversational statement of a warranted fact is permitted. Documents not yet sighted by Propel - Gate 2."
+      "notes": "Conversational statement of a warranted fact is permitted. Documents not yet sighted by Propel - Gate 2.",
+      "promo_from": "",
+      "promo_until": "",
+      "promo_response": ""
     },
     {
       "rule_id": "SP-ESC-COMPLETE",
@@ -199,7 +215,10 @@
         "escalate_always[0]"
       ],
       "status": "live",
-      "notes": "estimated_completion_date is null in the KB. Escalation is the only correct answer."
+      "notes": "estimated_completion_date is null in the KB. Escalation is the only correct answer.",
+      "promo_from": "",
+      "promo_until": "",
+      "promo_response": ""
     },
     {
       "rule_id": "SP-ESC-FEES",
@@ -231,7 +250,10 @@
         "pricing_terms.excluded_amounts_supplied"
       ],
       "status": "live",
-      "notes": "Excluded ITEMS are warranted. Excluded AMOUNTS are not supplied - never estimate them."
+      "notes": "Excluded ITEMS are warranted. Excluded AMOUNTS are not supplied - never estimate them.",
+      "promo_from": "",
+      "promo_until": "",
+      "promo_response": ""
     },
     {
       "rule_id": "SP-ESC-AGENT",
@@ -260,7 +282,10 @@
         "escalate_always[9]"
       ],
       "status": "live",
-      "notes": "Commercial terms are never the assistants business."
+      "notes": "Commercial terms are never the assistants business.",
+      "promo_from": "",
+      "promo_until": "",
+      "promo_response": ""
     },
     {
       "rule_id": "SP-ESC-MORTGAGE",
@@ -288,7 +313,10 @@
         "payment.plan_durations"
       ],
       "status": "live",
-      "notes": "No mortgage or financing arrangement exists anywhere in the facts sheet."
+      "notes": "No mortgage or financing arrangement exists anywhere in the facts sheet.",
+      "promo_from": "",
+      "promo_until": "",
+      "promo_response": ""
     },
     {
       "rule_id": "SP-2B",
@@ -312,18 +340,22 @@
         "2 bedroom apartment",
         "luxury apartment"
       ],
-      "dm_response": "The 2-bedroom condominium is under development, finished spec, and 5 of the 16 units are available as at our last stock check.\n\nI do not want to quote you a price I am not certain is current - let me get the sales team to confirm it for you directly.",
+      "dm_response": "The 2-bedroom condominium is 95,000,000 naira. It is under development, finished spec, and 5 of the 16 units are available as at our last stock check.\n\nDeposit and payment plans vary by product and by what is running at the time, so let me have the team confirm the exact terms that apply to you today rather than quote you something that has moved.",
       "public_comment_reply": "Just sent you a DM",
       "link_code": "SP-2B",
       "link_kind": "whatsapp",
       "escalate": true,
       "grounded_in": [
+        "units[1].price_ngn",
         "units[1].stage",
         "units[1].available",
         "units[1].total_units"
       ],
       "status": "live",
-      "notes": "PRICE WITHHELD. The 95m figure carries a Propel price query and must not publish until Collins confirms it. Do not add the price to this row without that confirmation."
+      "notes": "PRICE RELEASED 2026-09-15 - Collins restated 95,000,000 in the campaign brief, corroborating the figure he signed on 2026-07-27. Deposit terms deliberately escalate: the brief's 5,000,000 entry deposit is a promotion with no end date supplied, and an undated promotion cannot be published.",
+      "promo_from": "",
+      "promo_until": "",
+      "promo_response": ""
     },
     {
       "rule_id": "SP-4B",
@@ -346,11 +378,11 @@
         "semi detached duplex",
         "luxury duplex"
       ],
-      "dm_response": "The 4-bedroom semi-detached is 185,000,000 naira. It is completed and finished, and 3 units are available as at our last stock check.\n\nThe price covers the purchase only - legal fees, utility connection and the homeowners association fee are separate. Payment is 50% down, with the balance over 3, 6 or 12 months.\n\nWant to see it? Inspections run any day of the week, weekends included.",
+      "dm_response": "The 4-bedroom semi-detached is 185,000,000 naira. It is completed and finished, and 3 units are available as at our last stock check.\n\nThe price covers the purchase only - legal fees, utility connection and the homeowners association fee are separate. Payment starts from a 50% deposit with the balance over 3, 6 or 12 months, and the team will confirm which plan applies to this unit today.\n\nWant to see it? Inspections run any day of the week, weekends included.",
       "public_comment_reply": "Just sent you a DM",
       "link_code": "SP-4B",
       "link_kind": "whatsapp",
-      "escalate": false,
+      "escalate": true,
       "grounded_in": [
         "units[0].price_ngn",
         "units[0].available",
@@ -359,7 +391,10 @@
         "payment.initial_deposit"
       ],
       "status": "live",
-      "notes": "The only completed product. This is the content engine and the strongest fast-lane card."
+      "notes": "The only completed product and the strongest card. Escalates on terms only: the brief quotes a 70% deposit, which is HARDER than the signed 50% - that anomaly is unresolved, so the assistant states the signed figure and hands the plan to a human.",
+      "promo_from": "",
+      "promo_until": "",
+      "promo_response": ""
     },
     {
       "rule_id": "SP-5B",
@@ -396,7 +431,10 @@
         "payment.plan_durations"
       ],
       "status": "live",
-      "notes": "Escalates because handover_dates_supplied is false. Longest sales cycle - this is where the Concierge earns its fee."
+      "notes": "Escalates because handover_dates_supplied is false. Longest sales cycle - this is where the Concierge earns its fee.",
+      "promo_from": "",
+      "promo_until": "",
+      "promo_response": ""
     },
     {
       "rule_id": "SP-LAND",
@@ -424,16 +462,20 @@
         "size of plot",
         "how big is the plot"
       ],
-      "dm_response": "Serviced plots at Shalom Park are 125,000 naira per square metre.\n\nPlot sizes and current availability change, so let me get the team to send you the exact sizes and what is available rather than guess.",
+      "dm_response": "Residential plots at Shalom Park measure 648 sqm and are priced at 125,000 naira per square metre, inside the gated estate.\n\nAvailability moves, and larger parcels are priced separately, so let me get the team to confirm what is open right now before you plan around it.",
       "public_comment_reply": "Just sent you a DM",
       "link_code": "SP-LAND",
       "link_kind": "whatsapp",
       "escalate": true,
       "grounded_in": [
-        "units[3].price_ngn_per_sqm"
+        "units[3].price_ngn_per_sqm",
+        "escalate_always[6]"
       ],
       "status": "live",
-      "notes": "Plot sizes and availability are not supplied in the facts sheet - the KB requires escalation on both."
+      "notes": "Plot size 648 sqm supplied by Collins 2026-09-15, filling a blank the signed sheet left. At the warranted rate that implies about 81,000,000 naira a plot - the assistant states size and rate, never the multiplication, and never availability.",
+      "promo_from": "",
+      "promo_until": "",
+      "promo_response": ""
     },
     {
       "rule_id": "SP-PRICE-GEN",
@@ -458,19 +500,23 @@
         "send price",
         "price please"
       ],
-      "dm_response": "Here is what is currently at Shalom Park Estate, Abijo:\n\n- 4-bedroom semi-detached (completed) - 185,000,000 naira\n- 5-bedroom semi-detached (off-plan) - 200,000,000 naira\n- Serviced plots - 125,000 naira per square metre\n- 2-bedroom condominium (under development) - the team will confirm the current price\n\nPrices cover the purchase only; legal fees, utility connection and the homeowners association fee are separate.\n\nWhich one should I send details on?",
+      "dm_response": "Here is what is currently at Shalom Park Estate, Abijo:\n\n- 4-bedroom semi-detached (completed) - 185,000,000 naira\n- 5-bedroom semi-detached (off-plan) - 200,000,000 naira\n- Serviced plots - 125,000 naira per square metre\n- 2-bedroom condominium (under development) - 95,000,000 naira\n\nPrices cover the purchase only; legal fees, utility connection and the homeowners association fee are separate.\n\nWhich one should I send details on?",
       "public_comment_reply": "Just sent you a DM",
       "link_code": "SP-PRICE-GEN",
       "link_kind": "whatsapp",
       "escalate": false,
       "grounded_in": [
         "units[0].price_ngn",
+        "units[1].price_ngn",
         "units[2].price_ngn",
         "units[3].price_ngn_per_sqm",
         "pricing_terms.excluded_from_price"
       ],
       "status": "live",
-      "notes": "The 2-bed line is deliberately priceless. Restore it the day the 95m figure is confirmed."
+      "notes": "All four products now carry a price. The 2-bed figure was released 2026-09-15 once Collins restated it.",
+      "promo_from": "",
+      "promo_until": "",
+      "promo_response": ""
     },
     {
       "rule_id": "SP-AVAIL",
@@ -488,7 +534,7 @@
         "any left",
         "sold out"
       ],
-      "dm_response": "As at our last stock check:\n\n- 4-bedroom semi-detached (completed) - 3 available\n- 2-bedroom condominium (under development) - 5 of 16 available\n- 5-bedroom semi-detached (off-plan) - 4 available\n- Serviced plots - the team will confirm current availability\n\nStock is re-checked monthly, so let me confirm anything you are serious about before you decide.",
+      "dm_response": "As at our last stock check:\n\n- 4-bedroom semi-detached (completed) - 3 available\n- 2-bedroom condominium (under development) - 5 of 16 available\n- 5-bedroom semi-detached (off-plan) - 4 available\n- Serviced plots (648 sqm) - the team will confirm current availability\n\nStock is re-checked monthly, so let me confirm anything you are serious about before you decide.",
       "public_comment_reply": "Just sent you a DM",
       "link_code": "SP-AVAIL",
       "link_kind": "whatsapp",
@@ -501,7 +547,10 @@
         "fact_maintenance.unit_count_update_frequency"
       ],
       "status": "live",
-      "notes": "Counts stated plainly with the re-check cadence. No scarcity language - CLAUDE.md rule 2."
+      "notes": "Counts stated plainly with the re-check cadence. No scarcity language - CLAUDE.md rule 2.",
+      "promo_from": "",
+      "promo_until": "",
+      "promo_response": ""
     },
     {
       "rule_id": "SP-LOC",
@@ -533,7 +582,10 @@
         "location.landmarks"
       ],
       "status": "live",
-      "notes": "Safest card in the set - no price no title. Good default for cold traffic."
+      "notes": "Safest card in the set - no price no title. Good default for cold traffic.",
+      "promo_from": "",
+      "promo_until": "",
+      "promo_response": ""
     },
     {
       "rule_id": "SP-INSPECT",
@@ -566,7 +618,10 @@
         "inspection.virtual"
       ],
       "status": "live",
-      "notes": "Escalates because capabilities.booking is false - no calendar is wired yet. Turn escalate off when booking ships."
+      "notes": "Escalates because capabilities.booking is false - no calendar is wired yet. Turn escalate off when booking ships.",
+      "promo_from": "",
+      "promo_until": "",
+      "promo_response": ""
     },
     {
       "rule_id": "SP-VIRTUAL",
@@ -599,7 +654,10 @@
         "inspection.diaspora_representative_allowed"
       ],
       "status": "live",
-      "notes": "Diaspora buyers are the highest-value segment and the most time-zone-hostile - this card exists for them."
+      "notes": "Diaspora buyers are the highest-value segment and the most time-zone-hostile - this card exists for them.",
+      "promo_from": "",
+      "promo_until": "",
+      "promo_response": ""
     },
     {
       "rule_id": "SP-PAY",
@@ -632,7 +690,10 @@
         "payment.interest_or_markup"
       ],
       "status": "live",
-      "notes": "interest_or_markup is null. Any instalment arithmetic is an escalation until that field is filled."
+      "notes": "interest_or_markup is null. Any instalment arithmetic is an escalation until that field is filled.",
+      "promo_from": "",
+      "promo_until": "",
+      "promo_response": ""
     },
     {
       "rule_id": "SP-DOCS",
@@ -666,7 +727,10 @@
         "delivery.documents_buyer_receives"
       ],
       "status": "live",
-      "notes": "PRIVATE REPLY ONLY. Title type may be stated conversationally but must never appear in a public comment - documents not yet sighted (Gate 2)."
+      "notes": "PRIVATE REPLY ONLY. Title type may be stated conversationally but must never appear in a public comment - documents not yet sighted (Gate 2).",
+      "promo_from": "",
+      "promo_until": "",
+      "promo_response": ""
     },
     {
       "rule_id": "SP-AMEN",
@@ -701,7 +765,10 @@
         "amenities.delivered"
       ],
       "status": "live",
-      "notes": "Everything listed is warranted as DELIVERED not planned. Never move an item from planned to delivered without a signed update."
+      "notes": "Everything listed is warranted as DELIVERED not planned. Never move an item from planned to delivered without a signed update.",
+      "promo_from": "",
+      "promo_until": "",
+      "promo_response": ""
     },
     {
       "rule_id": "SP-BUILD",
@@ -729,7 +796,10 @@
         "delivery.building_restrictions"
       ],
       "status": "live",
-      "notes": "The 4-storey cap is the only building fact in the sheet. Everything else escalates."
+      "notes": "The 4-storey cap is the only building fact in the sheet. Everything else escalates.",
+      "promo_from": "",
+      "promo_until": "",
+      "promo_response": ""
     },
     {
       "rule_id": "SP-DELIV",
@@ -757,7 +827,10 @@
         "delivery.handover_dates_supplied"
       ],
       "status": "live",
-      "notes": "handover_dates_supplied is false - always escalate the date."
+      "notes": "handover_dates_supplied is false - always escalate the date.",
+      "promo_from": "",
+      "promo_until": "",
+      "promo_response": ""
     },
     {
       "rule_id": "SP-INFO",
@@ -796,7 +869,10 @@
         "units"
       ],
       "status": "live",
-      "notes": "Lowest priority - the catch-all. Opens with AI disclosure because it is usually the first touch."
+      "notes": "Lowest priority - the catch-all. Opens with AI disclosure because it is usually the first touch.",
+      "promo_from": "",
+      "promo_until": "",
+      "promo_response": ""
     },
     {
       "rule_id": "SP-ESC-PROMO",
@@ -820,7 +896,7 @@
         "entry rate",
         "discounted entry"
       ],
-      "dm_response": "I would rather not quote you a promotion I cannot confirm is still running - campaign terms change, and an out-of-date offer helps nobody.\n\nLet me get the team to tell you exactly what is available to you today.",
+      "dm_response": "There are offers running at Shalom Park, and the terms change - so rather than quote you something that may have moved, let me get the team to tell you exactly what is open to you today and how long it stands.",
       "public_comment_reply": "Sent you a DM - the team will pick this up with you",
       "link_code": "SP-ESC-PROMO",
       "link_kind": "none",
@@ -829,7 +905,10 @@
         "escalate_always[7]"
       ],
       "status": "live",
-      "notes": "The signed facts sheet records prices as NOT negotiable and NO active discounts or incentives. This rule neither confirms nor denies a promotion - it routes to a human. Do not write a promo into this table without a signed addendum."
+      "notes": "Collins confirmed 2026-09-15 that promotions are running, but supplied no end dates. An undated promotion cannot be compiled (build-keywords.js enforces it). The moment dates arrive, fill promo_from, promo_until and promo_response on this row and it becomes a fast-lane card that retires itself on the closing date.",
+      "promo_from": "",
+      "promo_until": "",
+      "promo_response": ""
     },
     {
       "rule_id": "SP-DEVPLOT",
@@ -853,7 +932,7 @@
         "bulk land",
         "block of plots"
       ],
-      "dm_response": "Shalom Park Estate is developed by IFT Realty Ltd.\n\nFor larger parcels, bulk purchases or development plots, the sizes and terms vary too much for me to quote - let me put you with the team directly.",
+      "dm_response": "Shalom Park Estate is developed by IFT Realty Ltd, and there is a large parcel of about 6,738 sqm available for multi-unit or townhome development.\n\nBulk parcels are priced and structured separately from single plots, so let me put you straight with the team.",
       "public_comment_reply": "Sent you a DM - the team will pick this up with you",
       "link_code": "SP-DEVPLOT",
       "link_kind": "none",
@@ -863,7 +942,10 @@
         "escalate_always[6]"
       ],
       "status": "live",
-      "notes": "Names the developer (warranted) and escalates everything else. The 6738.38 SQM parcel is NOT in the signed facts sheet - no size or price may be stated until it is."
+      "notes": "Parcel size supplied by Collins 2026-09-15. Deliberately NOT priced: bulk rates may differ from 125,000/sqm, and at this size the difference is hundreds of millions.",
+      "promo_from": "",
+      "promo_until": "",
+      "promo_response": ""
     }
   ]
 }

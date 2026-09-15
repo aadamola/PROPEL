@@ -26,7 +26,7 @@ then import `01-shalom-park-wa-ingest.json` into n8n and **Activate** it — Met
 
 > 🆕 **The Instagram keyword system is built and tested (2026-09-15).** 26 rules, all seven campaign words wired, 109 tests green. Read what the assistant actually says: **[keywords.md](clients/shalom-park/keywords.md)** — renders on your phone. Full write-up: [06-instagram-keyword-plan.md](clients/shalom-park/06-instagram-keyword-plan.md).
 >
-> 🔴 **Your campaign brief and the signed facts sheet disagree on the deposits** — 50% (signed) vs 70% on the 4-bed vs ₦5m on the condo. That's a ₦37m gap on one and ₦42.5m on the other. **Nine items need a signed addendum before those campaigns can quote a figure** — audit and a ready-to-send message: [07-campaign-brief-audit.md](clients/shalom-park/07-campaign-brief-audit.md). Fold it into the same conversation as the ₦95m condo price; it's one ask, not two.
+> ✅ **Collins' brief adopted.** The ₦95m condo price is live, 648 sqm plots are live, the 6,738 sqm development parcel is live. **Three things left** — promo dates, the 70% question, and the investment wording. Message drafted and ready to send: [07-campaign-brief-audit.md](clients/shalom-park/07-campaign-brief-audit.md).
 
 ---
 
@@ -36,8 +36,8 @@ then import `01-shalom-park-wa-ingest.json` into n8n and **Activate** it — Met
 - [ ] **(1 message)** 🔴 **Ask Shalom Park who holds the CAC documents + can grant Meta admin.** Script ready in [clients/shalom-park/04-meta-access-pack.md](clients/shalom-park/04-meta-access-pack.md). *Not Collins — he's a Sales Executive with neither. Then do the setup on a 20-min screen share, don't send a checklist.*
 - [ ] **(1 afternoon)** ⚡ **Prove the fast lane** — test app + Meta's free test number, send one message ([ops/setup/meta-app-setup.md](ops/setup/meta-app-setup.md) §9b Step 0). *Settles whether App Review is needed before we promise them a date.*
 - [ ] **(1 conversation)** 💰 **Confirm the Shalom Park care fee and commission rate.** *Possibly revenue already owed — MRR currently reads zero because nothing is confirmed as started. Ask what the setup fee covered, when the ₦250k/mo begins, and pin the commission %.*
-- [ ] **(10 min)** 🔴 **Get the nine-item addendum signed** — [07-campaign-brief-audit.md](clients/shalom-park/07-campaign-brief-audit.md) has the table and the message. *Blocks four of the seven Instagram campaigns from quoting any figure. Deposits, the promo, plot sizes, the ₦95m condo — one signature clears all of it.*
-- [ ] **(5 min)** 🔴 **Send Collins the follow-up** — [clients/shalom-park/03-followup-questions.md](clients/shalom-park/03-followup-questions.md). Eight open fields, one message. **Lead with the ₦95m condo price** — if that's a typo and we advertise it, we've published a false price under our own quality charter. *This is now a revenue blocker: the Instagram assistant withholds the condo price until you confirm it, so every condo enquiry goes to a human instead of converting.*
+- [ ] **(3 min)** 🔴 **Ask Collins three things** — promo start/end dates · why the 4-bed deposit is 70% when the sheet says 50% · agree the investment wording. Message written for you in [07-campaign-brief-audit.md](clients/shalom-park/07-campaign-brief-audit.md). *The dates are the only thing stopping the promo cards going live — it's a two-cell edit once you have them.*
+- [ ] **(5 min)** 🔴 **Send Collins the follow-up** — [clients/shalom-park/03-followup-questions.md](clients/shalom-park/03-followup-questions.md). Eight open fields, one message. *The ₦95m condo price is now settled — Collins restated it, so it's live. The other seven fields still stand.*
 - [ ] **(15 min)** 🔴 **Start CAC filing** — "Propel Digital" (fallbacks: Propel Media, Propel Digital Marketing), cac.gov.ng or an accredited agent. *This is no longer admin. Meta won't let us run automation on a **client's** account until our business is verified with registered documents — so this now blocks something Shalom Park has paid for. ~2 weeks of clock. Start it, then forget it.*
 - [ ] **(10 min)** Meta Business Suite: link @getpropel.ng + WhatsApp, convert IG to a Business account ([ops/setup/account-setup.md](ops/setup/account-setup.md) §7).
 - [ ] **(1 ask)** Shalom Park: sight the title + approval documents. *Site visit ✅ done. This is the last open vetting gate — and with bare-land plots in the mix it matters more, not less. We don't publish a price for land we haven't seen the paper for.*
@@ -58,7 +58,8 @@ Testing the bot · the Shalom Park pilot build · voice notes · first audit cal
 
 ## ✅ DONE (look how far this has come)
 
-- [x] 📲 **Instagram keyword automation built for Shalom Park** — 26 rules, all 7 campaign words wired, 109 tests (2026-09-15)
+- [x] 📲 **Instagram keyword automation built** — 26 rules, all 7 campaign words wired, promos that expire themselves, 113 tests (2026-09-15)
+- [x] 💰 **₦95m condo price confirmed and released** — open since July (2026-09-15)
 - [x] 🖥️ **VPS live (KVM 2, 8 GB) + domain getpropel.tech bought** (2026-07-29)
 - [x] 📋 **Shalom Park facts sheet returned SIGNED — their AI's knowledge base is built** (2026-07-27)
 - [x] **Site visit done** — four-stage inventory counted (2026-07-26)

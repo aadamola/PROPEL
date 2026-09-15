@@ -1,6 +1,6 @@
 # Shalom Park — Instagram Keyword Automation
 
-*Built 2026-09-15. 26 rules, 351 trigger phrases, 46 tests. Everything lives in this repo — no third-party spreadsheet holds client facts.*
+*Built 2026-09-15. 26 rules, 351 trigger phrases, 50 tests. Everything lives in this repo — no third-party spreadsheet holds client facts.*
 
 **Read the rules:** [`keywords.md`](keywords.md) — generated table, renders on a phone in GitHub.
 **Edit the rules:** [`keywords.csv`](keywords.csv) — the source of truth.
@@ -53,11 +53,23 @@ Without it, *"what rental yield does the 4 bedroom give"* fires the ₦185m pric
 | `SP-ESC-AGENT` | Commercial terms are not the assistant's business |
 | `SP-ESC-MORTGAGE` | No financing arrangement exists in the facts sheet |
 
+## Promotions expire themselves
+
+An ongoing promotion is the most dangerous thing to put in an automation: *ongoing* has no end, and the robot never gets the memo. Each rule can carry a promotion window:
+
+| Column | Role |
+|---|---|
+| `promo_from` / `promo_until` | The window, as dates |
+| `promo_response` | What the buyer is sent **while it runs** |
+| `dm_response` | The signed standard terms — what they get **the day after it ends** |
+
+**A promotion with no end date cannot be compiled.** The build fails. Every build prints which promotions are live and which have lapsed, so a stale offer is loud rather than silent.
+
 ## What is deliberately withheld
 
-🔴 **The ₦95m 2-bedroom condominium price is not in this system.** `SP-2B` describes the product and its availability, then hands the price question to a human. The figure carries a Propel price query — an unusual ratio against the ₦185m 4-bed — and an automation that publishes it would publish a suspected-wrong price to *every* commenter before anyone noticed.
+🔴 **Undated promotional deposit terms.** Collins has confirmed offers are running — a ₦5,000,000 entry deposit on the condo, 70% on the 4-bed — but supplied no dates. Those figures are not in the system, and the compiler physically cannot accept them without an end date. The assistant states the signed 50% and routes the current plan to a human.
 
-Restoring it is a one-line edit to the sheet **the day Collins confirms the figure**. Until then test `KW-20` fails the build if the number appears anywhere in the table.
+*The ₦95m condo price was released on 2026-09-15 once Collins restated the figure he signed in July — that gate is closed.*
 
 🔴 **No public comment reply contains a number or a title claim.** A public reply is publication: permanent, screenshot-able, un-editable. Prices move and the title documents are still unsighted (Gate 2). A DM is conversation and may carry warranted facts; a public comment may not. The linter enforces this — `build-keywords.js` rejects any public reply containing a digit.
 
@@ -96,10 +108,9 @@ Link mode lives in `clients.json` → `keywords.links.mode`:
 | Meta app inside IFT Realty's portfolio + `instagram_manage_messages` | ⬜ **Business Suite session** |
 | `SHALOM_PARK_IG_TOKEN` + `SHALOM_PARK_APP_SECRET` in `/opt/propel/.env` | ⬜ |
 | Graph API version confirmed against the live app | ⬜ — pinned `v21.0` in `clients.json`, **unverified** |
-| 2-bed price confirmed | ⬜ Collins |
-| **Deposit terms reconciled (50% vs 70% vs ₦5m)** | ⬜ **addendum — see 07** |
-| Promotion confirmed in writing, with dates | ⬜ **addendum — see 07** |
-| Plot sizes warranted (648 / 6,738.38 SQM) | ⬜ **addendum — see 07** |
+| 2-bed price confirmed | ✅ **released 2026-09-15** |
+| **Promotion start + end dates** | ⬜ **Collins — see 07** |
+| The 70% deposit anomaly on the 4-bed | ⬜ **Collins — see 07** |
 | Title documents sighted | ⬜ Gate 2 |
 
 **Nothing here changes the critical path.** The Business Suite session is still the unlock. This is the thing that was waiting on it, now built.
@@ -112,7 +123,7 @@ Everything is in the repo. One file is edited by hand; the rest is generated:
 Edit clients/shalom-park/keywords.csv
 node tools/build-keywords.js      # lint + compile -> keywords.json + keywords.md
 node tools/build-workflows.js     # embed into 05-channel-instagram.json
-node tools/test-all.js            # 109 tests
+node tools/test-all.js            # 113 tests
   ↓  re-paste the workflow into n8n
 ```
 
@@ -134,7 +145,7 @@ node tools/test-all.js            # 109 tests
 | `ops/concierge/lib/keywords.js` | The matcher — tokenised, emoji-safe, pidgin-aware |
 | `ops/concierge/workflows/05-channel-instagram.json` | The adapter: verify → normalise → fast lane → guardrail → send |
 | `tools/build-keywords.js` | Compiler + linter |
-| `tools/test-keywords.js` | 36 rule tests |
+| `tools/test-keywords.js` | 40 rule tests |
 | `tools/test-ig-workflow.js` | 10 end-to-end tests against the shipped workflow |
 
 ## Why the matcher is token-based

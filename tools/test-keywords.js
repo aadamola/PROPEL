@@ -113,14 +113,11 @@ const cases = [
                           .every(r => r.escalate === true && r.link_kind === 'none') },
 
   // --- withheld facts --------------------------------------------------
-  { name: 'KW-20 ★ the condo price is released; its deposit terms still escalate',
+  { name: 'KW-20 ★ the condo card carries the released price and the live promo',
     run: () => {
-      // Collins restated ₦95m on 2026-09-15, corroborating what he signed in
-      // July — so the price ships. The ₦5m entry deposit is an UNDATED promo,
-      // so terms still go to a human.
-      const r = m('2 bedroom condo price');
-      return r.rule_id === 'SP-2B' && /95,000,000/.test(r.reply) &&
-             r.escalate === true && !/5,000,000 naira deposit|50% deposit/.test(r.reply);
+      const r = m('2 bedroom condo price', { ...CFG_NO_LINK, now: Date.parse('2026-09-15T12:00:00Z') });
+      return r.rule_id === 'SP-2B' && r.promo_active === true &&
+             /95,000,000/.test(r.reply) && /5,000,000/.test(r.reply) && r.escalate === true;
     } },
 
   { name: 'KW-21 ★ no public comment reply publishes a figure or a title claim',
@@ -167,7 +164,7 @@ const cases = [
   { name: 'KW-31 the seven campaign keywords each resolve to exactly one rule',
     run: () => {
       const want = { condo: 'SP-2B', land: 'SP-LAND', summer: 'SP-ESC-PROMO',
-                     chairman: 'SP-5B', duplex: 'SP-4B', investment: 'SP-ESC-ROI',
+                     chairman: 'SP-5B', duplex: 'SP-4B', investment: 'SP-INVEST',
                      developer: 'SP-DEVPLOT' };
       return Object.entries(want).every(([word, id]) => m(word).rule_id === id);
     } },
@@ -177,10 +174,11 @@ const cases = [
                  return r.rule_id === 'SP-ESC-PROMO' && r.escalate === true &&
                         !/discount|not negotiable|% off/i.test(r.reply); } },
 
-  { name: 'KW-33 ★ INVESTMENT never emphasises capital growth — it escalates',
-    run: () => { const r = m('is this a good investment');
-                 return r.rule_id === 'SP-ESC-ROI' && r.escalate === true &&
-                        !/capital growth|appreciat/i.test(r.reply); } },
+  { name: 'KW-33 ★ no response anywhere in the table forecasts a value',
+    run: () => {
+      const forecast = /capital growth|\broi\b|rental yield|\byields?\b|appreciat|resale value|guarantee|will (rise|increase|double|grow)|expected return/i;
+      return table.rules.every(r => !forecast.test(r.dm_response) && !forecast.test(r.promo_response || ''));
+    } },
 
   { name: 'KW-34 "5 bedroom duplex" beats the bare DUPLEX campaign word',
     run: () => m('5 bedroom duplex').rule_id === 'SP-5B' && m('duplex').rule_id === 'SP-4B' },
@@ -189,11 +187,13 @@ const cases = [
     run: () => {
       // 70% deposit, ₦5m deposit, 648 SQM, 6,738.38 SQM — none are in the
       // signed facts sheet, so none may appear in a response.
-      // 648 sqm and the 6,738 sqm parcel are now Collins-sourced and shipped.
-      // What must NOT appear is any UNDATED promotional deposit term.
+      // Promotional terms are now live, so they belong in promo_response —
+      // and must NOT have leaked into dm_response, which is the signed
+      // standard the assistant falls back to when a promo lapses.
       // Anchored: 185,000,000 legitimately contains "5,000,000".
       const banned = /\b70\s?%|(?<![\d,])5,000,000\b/;
-      return table.rules.every(r => !banned.test(r.dm_response) && !banned.test(r.promo_response || ''));
+      return table.rules.every(r => !banned.test(r.dm_response)) &&
+             /70%/.test(table.rules.find(r => r.rule_id === 'SP-4B').promo_response);
     } },
 
   { name: 'KW-36 ★ the DEVELOPER card states the parcel size but never prices it',
@@ -228,15 +228,45 @@ const cases = [
 
   { name: 'KW-39 ★ an undated promotion never goes live — it fails safe',
     run: () => {
-      const undated = { rule_id: 'X', promo_response: 'Half price this week!', promo_until: '' };
+      const undated = { rule_id: 'X', promo_response: 'Half price this week!', promo_until: '', promo_review_by: '' };
       return K.isPromoLive(undated, Date.now()) === false &&
-             table.rules.every(r => !(r.promo_response || '').trim() || (r.promo_until || '').trim());
+             table.rules.every(r => !(r.promo_response || '').trim() ||
+               (r.promo_until || '').trim() || (r.promo_review_by || '').trim());
     } },
 
   { name: 'KW-40 the plot size Collins supplied ships; the multiplication does not',
     run: () => { const r = m('plot size');
                  return r.rule_id === 'SP-LAND' && /648/.test(r.reply) && /125,000/.test(r.reply) &&
                         !/81,000,000/.test(r.reply) && r.escalate === true; } },
+
+  { name: 'KW-41 an open-ended campaign runs on its review date, not an end date',
+    run: () => {
+      const r = m('4 bedroom', { ...CFG_NO_LINK, now: Date.parse('2026-09-15T12:00:00Z') });
+      return r.promo_active === true && /70%/.test(r.reply) && /185,000,000/.test(r.reply);
+    } },
+
+  { name: 'KW-42 ★ an unreviewed campaign switches itself back to signed terms',
+    run: () => {
+      // Nobody re-confirmed by 2026-10-15. The 70% promo stops on its own and
+      // the assistant goes back to the 50% Collins signed — no one has to
+      // remember to do anything.
+      const r = m('4 bedroom', { ...CFG_NO_LINK, now: Date.parse('2026-11-01T12:00:00Z') });
+      return r.promo_active === false && !/70%/.test(r.reply) && /50% deposit/.test(r.reply);
+    } },
+
+  { name: 'KW-43 ★ INVESTMENT answers with delivered facts and no forecast',
+    run: () => {
+      const r = m('is this a good investment');
+      return r.rule_id === 'SP-INVEST' &&
+             /Governors Consent/.test(r.reply) && /200,000,000/.test(r.reply) &&
+             !/roi|yield|capital growth|appreciat|guarantee|will rise|will increase/i.test(r.reply) &&
+             r.escalate === true;
+    } },
+
+  { name: 'KW-44 ★ a projection ask still outranks the investment card',
+    run: () => ['what roi will I get', 'will it appreciate', 'capital growth on this investment',
+                'rental yield please'].every(q => m(q).rule_id === 'SP-ESC-ROI'),
+  },
 
   { name: 'KW-30 no trigger phrase is claimed by two rules',
     run: () => {

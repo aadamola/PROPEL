@@ -1,6 +1,6 @@
 # Shalom Park — Instagram Keyword Automation
 
-*Built 2026-09-15. 26 rules, 351 trigger phrases, 50 tests. Everything lives in this repo — no third-party spreadsheet holds client facts.*
+*Built 2026-09-15. 27 rules, 356 trigger phrases, 54 tests. Everything lives in this repo — no third-party spreadsheet holds client facts.*
 
 **Read the rules:** [`keywords.md`](keywords.md) — generated table, renders on a phone in GitHub.
 **Edit the rules:** [`keywords.csv`](keywords.csv) — the source of truth.
@@ -59,17 +59,22 @@ An ongoing promotion is the most dangerous thing to put in an automation: *ongoi
 
 | Column | Role |
 |---|---|
-| `promo_from` / `promo_until` | The window, as dates |
+| `promo_from` / `promo_until` | A campaign with a fixed close |
+| `promo_review_by` | A campaign that **runs until sold out** — no end date exists, so the control is a re-confirmation deadline |
 | `promo_response` | What the buyer is sent **while it runs** |
-| `dm_response` | The signed standard terms — what they get **the day after it ends** |
+| `dm_response` | The signed standard terms — what they get **once it lapses** |
 
-**A promotion with no end date cannot be compiled.** The build fails. Every build prints which promotions are live and which have lapsed, so a stale offer is loud rather than silent.
+**A promotion with neither an end date nor a review date cannot be compiled.** The build fails.
+
+Shalom Park's campaigns are open-ended — they run until the units are sold. Pretending they have an end date would be inventing a fact, so they carry `promo_review_by` instead: if nobody re-confirms the offer before that date, the assistant **quietly returns to the signed terms on its own**. Nobody has to remember anything. Every build prints which offers are live and which have lapsed.
+
+**Live now, re-confirm by 2026-10-15:** `SP-2B` (₦5,000,000 entry deposit) · `SP-4B` (70% deposit) · `SP-ESC-PROMO`.
 
 ## What is deliberately withheld
 
-🔴 **Undated promotional deposit terms.** Collins has confirmed offers are running — a ₦5,000,000 entry deposit on the condo, 70% on the 4-bed — but supplied no dates. Those figures are not in the system, and the compiler physically cannot accept them without an end date. The assistant states the signed 50% and routes the current plan to a human.
+🔴 **Forecasts, in any form.** No response in the table — standard or promotional — contains a projected return, a percentage yield, a guarantee, or a claim that value will rise. `SP-INVEST` makes the investment case entirely from **delivered** facts: title, infrastructure on the ground, stage of build, access, instant allocation. `SP-ESC-ROI` outranks it the moment anyone asks what the property will be worth.
 
-*The ₦95m condo price was released on 2026-09-15 once Collins restated the figure he signed in July — that gate is closed.*
+*The ₦95m condo price was released on 2026-09-15 once Collins restated the figure he signed in July, and the promotional deposits went live the same day with a review date.*
 
 🔴 **No public comment reply contains a number or a title claim.** A public reply is publication: permanent, screenshot-able, un-editable. Prices move and the title documents are still unsighted (Gate 2). A DM is conversation and may carry warranted facts; a public comment may not. The linter enforces this — `build-keywords.js` rejects any public reply containing a digit.
 
@@ -109,8 +114,7 @@ Link mode lives in `clients.json` → `keywords.links.mode`:
 | `SHALOM_PARK_IG_TOKEN` + `SHALOM_PARK_APP_SECRET` in `/opt/propel/.env` | ⬜ |
 | Graph API version confirmed against the live app | ⬜ — pinned `v21.0` in `clients.json`, **unverified** |
 | 2-bed price confirmed | ✅ **released 2026-09-15** |
-| **Promotion start + end dates** | ⬜ **Collins — see 07** |
-| The 70% deposit anomaly on the 4-bed | ⬜ **Collins — see 07** |
+| Promotional terms | ✅ **live 2026-09-15**, re-confirm by **2026-10-15** |
 | Title documents sighted | ⬜ Gate 2 |
 
 **Nothing here changes the critical path.** The Business Suite session is still the unlock. This is the thing that was waiting on it, now built.
@@ -123,7 +127,7 @@ Everything is in the repo. One file is edited by hand; the rest is generated:
 Edit clients/shalom-park/keywords.csv
 node tools/build-keywords.js      # lint + compile -> keywords.json + keywords.md
 node tools/build-workflows.js     # embed into 05-channel-instagram.json
-node tools/test-all.js            # 113 tests
+node tools/test-all.js            # 117 tests
   ↓  re-paste the workflow into n8n
 ```
 
@@ -145,7 +149,7 @@ node tools/test-all.js            # 113 tests
 | `ops/concierge/lib/keywords.js` | The matcher — tokenised, emoji-safe, pidgin-aware |
 | `ops/concierge/workflows/05-channel-instagram.json` | The adapter: verify → normalise → fast lane → guardrail → send |
 | `tools/build-keywords.js` | Compiler + linter |
-| `tools/test-keywords.js` | 40 rule tests |
+| `tools/test-keywords.js` | 44 rule tests |
 | `tools/test-ig-workflow.js` | 10 end-to-end tests against the shipped workflow |
 
 ## Why the matcher is token-based

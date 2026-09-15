@@ -268,32 +268,35 @@
     "active_discounts_or_incentives": false
   },
   "_pending_addendum": {
-    "note": "Terms relayed by Collins on 2026-09-15 that are NOT in the signed facts sheet. Recorded for provenance; NOT publishable until a signed addendum returns. See clients/shalom-park/07-campaign-brief-audit.md.",
-    "source": "Collins (the warrantor of the signed sheet), relayed by ADEDAMOLA",
+    "note": "Terms relayed by Collins (the warrantor) on 2026-09-15 and adopted on ADEDAMOLA's instruction. These are NOT in the signed PDF. They are live in the assistant with a review date, and revert to the signed terms automatically if not re-confirmed. See clients/shalom-park/07-campaign-brief-audit.md.",
+    "source": "Collins, relayed by ADEDAMOLA 2026-09-15",
+    "campaign_type": "Open-ended — runs until sold out. No end date exists; the control is a review date, not an expiry.",
+    "review_by": "2026-10-15",
     "items": [
       {
         "field": "2-bed deposit",
-        "relayed": "₦5,000,000 initial deposit with a 12-month plan",
         "signed": "50% down payment",
-        "blocker": "No start or end date supplied. A promotion without an end date cannot be compiled."
+        "live": "₦5,000,000 initial deposit, balance over 12 months",
+        "status": "LIVE on SP-2B until review"
       },
       {
         "field": "4-bed deposit",
-        "relayed": "70% initial deposit with a 12-month balance spread",
         "signed": "50% down payment",
-        "blocker": "70% is HARDER than the signed 50% — unusual for a promotion. Anomaly unresolved."
+        "live": "70% initial deposit, balance over 12 months",
+        "status": "LIVE on SP-4B until review",
+        "propel_note": "70% is HIGHER than the signed 50% — the assistant asks a buyer for more upfront, not less. Raised twice; adopted on ADEDAMOLA's instruction."
       },
       {
         "field": "Active promotions",
-        "relayed": "Summer Flash Sales — discounted entry rates, flexible payment",
         "signed": "active_discounts_or_incentives: false; prices not negotiable",
-        "blocker": "No dates. Campaign is named for a season that ended."
+        "live": "Campaign running until sold out",
+        "status": "LIVE on SP-ESC-PROMO until review"
       },
       {
-        "field": "Capital growth framing",
-        "relayed": "5-bed off-plan \"emphasizing capital growth\"",
+        "field": "Investment framing",
         "signed": "must_not_say: resale or appreciation estimates",
-        "blocker": "DECLINED — banned by the sheet Collins signed and hard-blocked by the guardrail. Not an addendum item."
+        "live": "SP-INVEST — the case made entirely from warranted delivered facts",
+        "status": "LIVE. Carries no projection, percentage, guarantee or claim that value will rise; SP-ESC-ROI still outranks it on any forecast question."
       }
     ]
   }

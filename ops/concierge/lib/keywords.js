@@ -135,12 +135,26 @@ function resolveLink(rule, links) {
  * one falls back to the standard warranted terms on its own.
  */
 function isPromoLive(rule, now) {
-  if (!rule.promo_response || !rule.promo_until) return false;
-  const end = Date.parse(rule.promo_until + 'T23:59:59Z');
-  if (!Number.isFinite(end) || now > end) return false;
+  if (!rule.promo_response) return false;
+
   if (rule.promo_from) {
     const start = Date.parse(rule.promo_from + 'T00:00:00Z');
     if (Number.isFinite(start) && now < start) return false;
+  }
+
+  // A campaign that runs "until we sell out" has no end date, and pretending
+  // otherwise would be inventing a fact. What it must have instead is a
+  // REVIEW date: someone re-confirms it is still running, or the assistant
+  // quietly goes back to the signed standard terms. Same safety property,
+  // fitted to how the client actually sells.
+  if (rule.promo_until) {
+    const end = Date.parse(rule.promo_until + 'T23:59:59Z');
+    if (!Number.isFinite(end) || now > end) return false;
+  } else if (rule.promo_review_by) {
+    const due = Date.parse(rule.promo_review_by + 'T23:59:59Z');
+    if (!Number.isFinite(due) || now > due) return false;
+  } else {
+    return false;   // neither an end nor a review date: fail safe
   }
   return true;
 }

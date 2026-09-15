@@ -4,9 +4,9 @@
     "source_csv": "clients/shalom-park/keywords.csv",
     "generated_by": "tools/build-keywords.js",
     "generated_at_note": "Regenerate after every CSV or Sheet edit, then run node tools/test-all.js",
-    "rule_count": 26,
+    "rule_count": 27,
     "doctrine": "A match answers from pre-approved text with no model call. A miss falls through to the Concierge CORE. escalate_only always outranks fast_lane.",
-    "promo_rule": "A rule with promo_response + promo_until sends the promo text while it is in force and reverts to dm_response (the signed standard terms) the day after it expires. No promotion may be compiled without an end date."
+    "promo_rule": "A rule with promo_response sends the promo text while it is in force and reverts to dm_response (the signed standard terms) once it lapses. A campaign with a fixed close uses promo_until; an open-ended run-until-sold-out campaign uses promo_review_by, which must be re-confirmed with the client before that date or the promo switches itself off. Neither field set means the promo never fires."
   },
   "rules": [
     {
@@ -32,11 +32,8 @@
         "will it appreciate",
         "investment value",
         "passive income",
-        "investment",
-        "strategic asset",
-        "investment opportunity",
-        "good investment",
-        "worth investing"
+        "what will it be worth",
+        "how much will it be worth"
       ],
       "dm_response": "That is a question about returns, and it is not one I will answer with an estimate - anything I said would be a guess dressed up as a number.\n\nLet me put you with someone from the team who can talk it through with you properly.",
       "public_comment_reply": "Sent you a DM - the team will pick this up with you",
@@ -48,9 +45,10 @@
         "must_not_say[1]"
       ],
       "status": "live",
-      "notes": "NEVER give a figure. Zero facts in this response by design.",
+      "notes": "NEVER give a figure. Zero facts by design. Narrowed 2026-09-15: general investment interest now goes to SP-INVEST, which answers with warranted facts. This rule keeps the projection asks - and still outranks SP-INVEST when both match.",
       "promo_from": "",
       "promo_until": "",
+      "promo_review_by": "",
       "promo_response": ""
     },
     {
@@ -83,6 +81,7 @@
       "notes": "Verbatim per kb assistant_handling. Never soften or omit the 25% or the resale condition.",
       "promo_from": "",
       "promo_until": "",
+      "promo_review_by": "",
       "promo_response": ""
     },
     {
@@ -117,6 +116,7 @@
       "notes": "States the account NAME (warranted) and never a number. Highest-trust moment in the whole flow.",
       "promo_from": "",
       "promo_until": "",
+      "promo_review_by": "",
       "promo_response": ""
     },
     {
@@ -152,6 +152,7 @@
       "notes": "Negotiability is warranted. No discount authority exists.",
       "promo_from": "",
       "promo_until": "",
+      "promo_review_by": "",
       "promo_response": ""
     },
     {
@@ -188,6 +189,7 @@
       "notes": "Conversational statement of a warranted fact is permitted. Documents not yet sighted by Propel - Gate 2.",
       "promo_from": "",
       "promo_until": "",
+      "promo_review_by": "",
       "promo_response": ""
     },
     {
@@ -218,6 +220,7 @@
       "notes": "estimated_completion_date is null in the KB. Escalation is the only correct answer.",
       "promo_from": "",
       "promo_until": "",
+      "promo_review_by": "",
       "promo_response": ""
     },
     {
@@ -253,6 +256,7 @@
       "notes": "Excluded ITEMS are warranted. Excluded AMOUNTS are not supplied - never estimate them.",
       "promo_from": "",
       "promo_until": "",
+      "promo_review_by": "",
       "promo_response": ""
     },
     {
@@ -285,6 +289,7 @@
       "notes": "Commercial terms are never the assistants business.",
       "promo_from": "",
       "promo_until": "",
+      "promo_review_by": "",
       "promo_response": ""
     },
     {
@@ -316,6 +321,7 @@
       "notes": "No mortgage or financing arrangement exists anywhere in the facts sheet.",
       "promo_from": "",
       "promo_until": "",
+      "promo_review_by": "",
       "promo_response": ""
     },
     {
@@ -352,10 +358,11 @@
         "units[1].total_units"
       ],
       "status": "live",
-      "notes": "PRICE RELEASED 2026-09-15 - Collins restated 95,000,000 in the campaign brief, corroborating the figure he signed on 2026-07-27. Deposit terms deliberately escalate: the brief's 5,000,000 entry deposit is a promotion with no end date supplied, and an undated promotion cannot be published.",
+      "notes": "PROMO LIVE (open-ended, re-confirm by 2026-10-15). 5,000,000 naira entry deposit per Collins 2026-09-15. Runs until sold out, so it carries a review date instead of an end date - if nobody re-confirms it, the card reverts to the signed 50% terms on its own.",
       "promo_from": "",
       "promo_until": "",
-      "promo_response": ""
+      "promo_review_by": "2026-10-15",
+      "promo_response": "The 2-bedroom condominium is 95,000,000 naira - under development, finished spec, and 5 of the 16 units are available as at our last stock check.\n\nThere is an offer running: you can secure a unit with a 5,000,000 naira initial deposit and spread the balance over 12 months. It runs until the units are sold rather than to a fixed date.\n\nLet me get the team to confirm the terms in writing before you pay anything."
     },
     {
       "rule_id": "SP-4B",
@@ -382,7 +389,7 @@
       "public_comment_reply": "Just sent you a DM",
       "link_code": "SP-4B",
       "link_kind": "whatsapp",
-      "escalate": true,
+      "escalate": false,
       "grounded_in": [
         "units[0].price_ngn",
         "units[0].available",
@@ -391,10 +398,11 @@
         "payment.initial_deposit"
       ],
       "status": "live",
-      "notes": "The only completed product and the strongest card. Escalates on terms only: the brief quotes a 70% deposit, which is HARDER than the signed 50% - that anomaly is unresolved, so the assistant states the signed figure and hands the plan to a human.",
+      "notes": "PROMO LIVE (open-ended, re-confirm by 2026-10-15). 70% deposit per Collins 2026-09-15, adopted on ADEDAMOLA's instruction. Noted for the record: 70% is higher than the signed 50%, so the assistant asks a buyer for more upfront, not less. Reverts to the signed 50% if the promo is not re-confirmed.",
       "promo_from": "",
       "promo_until": "",
-      "promo_response": ""
+      "promo_review_by": "2026-10-15",
+      "promo_response": "The 4-bedroom semi-detached is 185,000,000 naira - completed, finished, and 3 units are available as at our last stock check.\n\nOn the current campaign it is a 70% initial deposit with the balance spread over 12 months. The price covers the purchase only; legal fees, utility connection and the homeowners association fee are separate.\n\nWant to see it? Inspections run any day of the week, weekends included."
     },
     {
       "rule_id": "SP-5B",
@@ -434,6 +442,7 @@
       "notes": "Escalates because handover_dates_supplied is false. Longest sales cycle - this is where the Concierge earns its fee.",
       "promo_from": "",
       "promo_until": "",
+      "promo_review_by": "",
       "promo_response": ""
     },
     {
@@ -475,6 +484,7 @@
       "notes": "Plot size 648 sqm supplied by Collins 2026-09-15, filling a blank the signed sheet left. At the warranted rate that implies about 81,000,000 naira a plot - the assistant states size and rate, never the multiplication, and never availability.",
       "promo_from": "",
       "promo_until": "",
+      "promo_review_by": "",
       "promo_response": ""
     },
     {
@@ -516,6 +526,7 @@
       "notes": "All four products now carry a price. The 2-bed figure was released 2026-09-15 once Collins restated it.",
       "promo_from": "",
       "promo_until": "",
+      "promo_review_by": "",
       "promo_response": ""
     },
     {
@@ -550,6 +561,7 @@
       "notes": "Counts stated plainly with the re-check cadence. No scarcity language - CLAUDE.md rule 2.",
       "promo_from": "",
       "promo_until": "",
+      "promo_review_by": "",
       "promo_response": ""
     },
     {
@@ -585,6 +597,7 @@
       "notes": "Safest card in the set - no price no title. Good default for cold traffic.",
       "promo_from": "",
       "promo_until": "",
+      "promo_review_by": "",
       "promo_response": ""
     },
     {
@@ -621,6 +634,7 @@
       "notes": "Escalates because capabilities.booking is false - no calendar is wired yet. Turn escalate off when booking ships.",
       "promo_from": "",
       "promo_until": "",
+      "promo_review_by": "",
       "promo_response": ""
     },
     {
@@ -657,6 +671,7 @@
       "notes": "Diaspora buyers are the highest-value segment and the most time-zone-hostile - this card exists for them.",
       "promo_from": "",
       "promo_until": "",
+      "promo_review_by": "",
       "promo_response": ""
     },
     {
@@ -693,6 +708,7 @@
       "notes": "interest_or_markup is null. Any instalment arithmetic is an escalation until that field is filled.",
       "promo_from": "",
       "promo_until": "",
+      "promo_review_by": "",
       "promo_response": ""
     },
     {
@@ -730,6 +746,7 @@
       "notes": "PRIVATE REPLY ONLY. Title type may be stated conversationally but must never appear in a public comment - documents not yet sighted (Gate 2).",
       "promo_from": "",
       "promo_until": "",
+      "promo_review_by": "",
       "promo_response": ""
     },
     {
@@ -768,6 +785,7 @@
       "notes": "Everything listed is warranted as DELIVERED not planned. Never move an item from planned to delivered without a signed update.",
       "promo_from": "",
       "promo_until": "",
+      "promo_review_by": "",
       "promo_response": ""
     },
     {
@@ -799,6 +817,7 @@
       "notes": "The 4-storey cap is the only building fact in the sheet. Everything else escalates.",
       "promo_from": "",
       "promo_until": "",
+      "promo_review_by": "",
       "promo_response": ""
     },
     {
@@ -830,6 +849,7 @@
       "notes": "handover_dates_supplied is false - always escalate the date.",
       "promo_from": "",
       "promo_until": "",
+      "promo_review_by": "",
       "promo_response": ""
     },
     {
@@ -872,6 +892,7 @@
       "notes": "Lowest priority - the catch-all. Opens with AI disclosure because it is usually the first touch.",
       "promo_from": "",
       "promo_until": "",
+      "promo_review_by": "",
       "promo_response": ""
     },
     {
@@ -905,10 +926,11 @@
         "escalate_always[7]"
       ],
       "status": "live",
-      "notes": "Collins confirmed 2026-09-15 that promotions are running, but supplied no end dates. An undated promotion cannot be compiled (build-keywords.js enforces it). The moment dates arrive, fill promo_from, promo_until and promo_response on this row and it becomes a fast-lane card that retires itself on the closing date.",
+      "notes": "PROMO LIVE (open-ended, re-confirm by 2026-10-15). Reverts to the neutral \"let me check what is running\" answer if the review lapses.",
       "promo_from": "",
       "promo_until": "",
-      "promo_response": ""
+      "promo_review_by": "2026-10-15",
+      "promo_response": "Yes - there are offers running at Shalom Park right now, including a 5,000,000 naira entry deposit on the 2-bedroom condominium with the balance over 12 months.\n\nThey run until the units are sold rather than to a fixed date, so let me get the team to confirm exactly what is open to you today."
     },
     {
       "rule_id": "SP-DEVPLOT",
@@ -945,6 +967,45 @@
       "notes": "Parcel size supplied by Collins 2026-09-15. Deliberately NOT priced: bulk rates may differ from 125,000/sqm, and at this size the difference is hundreds of millions.",
       "promo_from": "",
       "promo_until": "",
+      "promo_review_by": "",
+      "promo_response": ""
+    },
+    {
+      "rule_id": "SP-INVEST",
+      "priority": 20,
+      "class": "fast_lane",
+      "intent": "Investment case (facts, not forecasts)",
+      "trigger_phrases": [
+        "investment",
+        "strategic asset",
+        "investment opportunity",
+        "good investment",
+        "worth investing",
+        "investor",
+        "is it a good buy",
+        "why buy here"
+      ],
+      "dm_response": "The 5-bedroom semi-detached is the off-plan position at Shalom Park - 200,000,000 naira, 4 units available, finishing included.\n\nWhat is already on the ground rather than promised: Governors Consent and confirmed layout approval, gated access with CCTV and patrols, generator power with the developments solar-compatible, water treatment and drainage, and roads with street lighting. The estate is 10.37 hectares, about 30% developed, and sits under 5 minutes from the Lekki-Epe Expressway.\n\nI do not deal in projections or figures - for that conversation let me put you with the team.",
+      "public_comment_reply": "Just sent you a DM",
+      "link_code": "SP-INVEST",
+      "link_kind": "whatsapp",
+      "escalate": true,
+      "grounded_in": [
+        "units[2].price_ngn",
+        "units[2].available",
+        "units[2].finishing",
+        "documentation.title_status",
+        "documentation.layout_approval",
+        "amenities.delivered",
+        "development.total_land_size",
+        "development.overall_stage_percent",
+        "location.landmarks"
+      ],
+      "status": "live",
+      "notes": "The INVESTMENT campaign, shipped 2026-09-15 on ADEDAMOLA's instruction. Makes the case entirely from warranted, DELIVERED facts - title, infrastructure on the ground, stage, access - and carries no projection, percentage, guarantee or claim that value will rise. Those stay with SP-ESC-ROI, which outranks this rule whenever both match.",
+      "promo_from": "",
+      "promo_until": "",
+      "promo_review_by": "",
       "promo_response": ""
     }
   ]

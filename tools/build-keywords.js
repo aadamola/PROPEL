@@ -52,7 +52,7 @@ const header = rows.shift().map(h => h.trim());
 
 const REQUIRED = ['rule_id','priority','class','intent','trigger_phrases','dm_response',
                   'public_comment_reply','link_code','link_kind','escalate','grounded_in','status','notes',
-                  'promo_from','promo_until','promo_response'];
+                  'promo_from','promo_until','promo_review_by','promo_response'];
 const errors = [];
 for (const col of REQUIRED) if (!header.includes(col)) errors.push(`missing column: ${col}`);
 if (errors.length) { console.error(errors.join('\n')); process.exit(1); }
@@ -77,6 +77,7 @@ const rules = rows.map((r, i) => {
     notes: o.notes,
     promo_from: o.promo_from,
     promo_until: o.promo_until,
+    promo_review_by: o.promo_review_by,
     promo_response: o.promo_response
   };
 });
@@ -119,17 +120,17 @@ for (const r of rules) {
   // permanent claim that nobody will remember to retract. This is what stops
   // a "Summer" offer still running in November.
   const ISO = /^\d{4}-\d{2}-\d{2}$/;
-  if (r.promo_response.trim() && !r.promo_until.trim()) {
-    errors.push(`${at}: has promo_response but no promo_until — a promotion must carry an end date`);
+  if (r.promo_response.trim() && !r.promo_until.trim() && !r.promo_review_by.trim()) {
+    errors.push(`${at}: has promo_response but neither promo_until nor promo_review_by — an open-ended campaign must still carry a review date, or nothing ever switches it off`);
   }
-  for (const [field, val] of [['promo_from', r.promo_from], ['promo_until', r.promo_until]]) {
+  for (const [field, val] of [['promo_from', r.promo_from], ['promo_until', r.promo_until], ['promo_review_by', r.promo_review_by]]) {
     if (val.trim() && !ISO.test(val.trim())) errors.push(`${at}: ${field} must be YYYY-MM-DD, got "${val}"`);
   }
   if (r.promo_from.trim() && r.promo_until.trim() && r.promo_from > r.promo_until) {
     errors.push(`${at}: promo_from is after promo_until`);
   }
-  if (r.promo_until.trim() && !r.promo_response.trim()) {
-    errors.push(`${at}: has promo_until but no promo_response — nothing to say when it is live`);
+  if ((r.promo_until.trim() || r.promo_review_by.trim()) && !r.promo_response.trim()) {
+    errors.push(`${at}: has a promo window but no promo_response — nothing to say when it is live`);
   }
 
   // Ambiguity is a silent failure: two rules owning one phrase means the
@@ -162,7 +163,7 @@ for (const r of rules) {
 
 // Surface lapsed promotions at build time rather than letting them go quiet.
 const today = new Date().toISOString().slice(0, 10);
-const lapsed = rules.filter(r => r.promo_until && r.promo_until < today);
+const lapsed = rules.filter(r => (r.promo_until && r.promo_until < today) || (!r.promo_until && r.promo_review_by && r.promo_review_by < today));
 
 if (errors.length) {
   console.error('✖ keyword table rejected:\n  - ' + errors.join('\n  - '));
@@ -177,7 +178,7 @@ const out = {
     generated_at_note: 'Regenerate after every CSV or Sheet edit, then run node tools/test-all.js',
     rule_count: rules.length,
     doctrine: 'A match answers from pre-approved text with no model call. A miss falls through to the Concierge CORE. escalate_only always outranks fast_lane.',
-    promo_rule: 'A rule with promo_response + promo_until sends the promo text while it is in force and reverts to dm_response (the signed standard terms) the day after it expires. No promotion may be compiled without an end date.'
+    promo_rule: 'A rule with promo_response sends the promo text while it is in force and reverts to dm_response (the signed standard terms) once it lapses. A campaign with a fixed close uses promo_until; an open-ended run-until-sold-out campaign uses promo_review_by, which must be re-confirmed with the client before that date or the promo switches itself off. Neither field set means the promo never fires.'
   },
   rules: rules.map(({ _line, ...r }) => r)
 };
@@ -222,7 +223,7 @@ if (CHECK_ONLY) {
   fs.writeFileSync(OUT, JSON.stringify(out, null, 2) + '\n');
   fs.writeFileSync(MD, md);
   console.log(`✅ built ${path.relative(ROOT, OUT)} + ${path.relative(ROOT, MD)} — ${rules.length} rules, ${seenPhrases.size} trigger phrases`);
-  const live = rules.filter(r => r.promo_until && r.promo_until >= today);
-  if (live.length)   console.log(`   🎟️  promotions live: ${live.map(r => r.rule_id + ' until ' + r.promo_until).join(', ')}`);
-  if (lapsed.length) console.log(`   ⏰ promotions LAPSED (standard terms now apply): ${lapsed.map(r => r.rule_id + ' ended ' + r.promo_until).join(', ')}`);
+  const live = rules.filter(r => r.promo_response && !lapsed.includes(r));
+  if (live.length)   console.log(`   🎟️  promotions live: ${live.map(r => r.rule_id + (r.promo_until ? ' until ' + r.promo_until : ' — open-ended, re-confirm by ' + r.promo_review_by)).join(', ')}`);
+  if (lapsed.length) console.log(`   ⏰ LAPSED — signed standard terms now apply: ${lapsed.map(r => r.rule_id + ' (' + (r.promo_until || 'review was due ' + r.promo_review_by) + ')').join(', ')}`);
 }

@@ -1,8 +1,10 @@
 # Shalom Park — Instagram Keyword Automation
 
-*Built 2026-09-15. 24 rules, 295 trigger phrases, 40 tests. The rule table is the client-editable surface; everything else is generated from it.*
+*Built 2026-09-15. 26 rules, 351 trigger phrases, 46 tests. Everything lives in this repo — no third-party spreadsheet holds client facts.*
 
-**The sheet:** [Shalom Park — Instagram Keyword Automation](https://docs.google.com/spreadsheets/d/1iJ4KJRwfQcGlDs_n0jhVlmLZQQesDAMJ7bBDoTSny-I/edit)
+**Read the rules:** [`keywords.md`](keywords.md) — generated table, renders on a phone in GitHub.
+**Edit the rules:** [`keywords.csv`](keywords.csv) — the source of truth.
+**Campaign audit:** [`07-campaign-brief-audit.md`](07-campaign-brief-audit.md) — what is blocked and why.
 
 ---
 
@@ -95,25 +97,26 @@ Link mode lives in `clients.json` → `keywords.links.mode`:
 | `SHALOM_PARK_IG_TOKEN` + `SHALOM_PARK_APP_SECRET` in `/opt/propel/.env` | ⬜ |
 | Graph API version confirmed against the live app | ⬜ — pinned `v21.0` in `clients.json`, **unverified** |
 | 2-bed price confirmed | ⬜ Collins |
+| **Deposit terms reconciled (50% vs 70% vs ₦5m)** | ⬜ **addendum — see 07** |
+| Promotion confirmed in writing, with dates | ⬜ **addendum — see 07** |
+| Plot sizes warranted (648 / 6,738.38 SQM) | ⬜ **addendum — see 07** |
 | Title documents sighted | ⬜ Gate 2 |
 
 **Nothing here changes the critical path.** The Business Suite session is still the unlock. This is the thing that was waiting on it, now built.
 
 ## The round trip
 
-The Sheet is where edits happen. The repo is the source of truth. Keep them in step:
+Everything is in the repo. One file is edited by hand; the rest is generated:
 
 ```
-Edit the Google Sheet
-  ↓  File → Download → Comma-separated values
-  ↓  replace clients/shalom-park/keywords.csv
-node tools/build-keywords.js      # lint + compile -> keywords.json
+Edit clients/shalom-park/keywords.csv
+node tools/build-keywords.js      # lint + compile -> keywords.json + keywords.md
 node tools/build-workflows.js     # embed into 05-channel-instagram.json
-node tools/test-all.js            # 103 tests
+node tools/test-all.js            # 109 tests
   ↓  re-paste the workflow into n8n
 ```
 
-`build-keywords.js` refuses to compile a table that breaks any of these:
+**Ruling (2026-09-15): in-house only.** The rule table carries a client's warranted prices and payment terms. It stays in the repo, under version control, where every change has an author and a diff — not in a third-party spreadsheet where an edit leaves no trace. `build-keywords.js` refuses to compile a table that breaks any of these:
 
 - a public reply containing a digit, a price or a title claim
 - an `escalate_only` rule carrying a link, or not escalating
@@ -125,12 +128,13 @@ node tools/test-all.js            # 103 tests
 
 | File | What |
 |---|---|
-| `clients/shalom-park/keywords.csv` | The rule table — mirror of the Sheet, source of truth |
+| `clients/shalom-park/keywords.csv` | The rule table — **the source of truth, edit this** |
+| `clients/shalom-park/keywords.md` | Readable view. Generated; do not hand-edit |
 | `clients/shalom-park/keywords.json` | Compiled. Generated; do not hand-edit |
 | `ops/concierge/lib/keywords.js` | The matcher — tokenised, emoji-safe, pidgin-aware |
 | `ops/concierge/workflows/05-channel-instagram.json` | The adapter: verify → normalise → fast lane → guardrail → send |
 | `tools/build-keywords.js` | Compiler + linter |
-| `tools/test-keywords.js` | 30 rule tests |
+| `tools/test-keywords.js` | 36 rule tests |
 | `tools/test-ig-workflow.js` | 10 end-to-end tests against the shipped workflow |
 
 ## Why the matcher is token-based

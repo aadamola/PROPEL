@@ -160,6 +160,41 @@ const cases = [
                  const a = m(q).rule_id, b = m(q).rule_id, c = m(q).rule_id;
                  return a === b && b === c; } },
 
+  // --- campaign keywords (ADEDAMOLA's 7 comment-to-DM campaigns) --------
+  { name: 'KW-31 the seven campaign keywords each resolve to exactly one rule',
+    run: () => {
+      const want = { condo: 'SP-2B', land: 'SP-LAND', summer: 'SP-ESC-PROMO',
+                     chairman: 'SP-5B', duplex: 'SP-4B', investment: 'SP-ESC-ROI',
+                     developer: 'SP-DEVPLOT' };
+      return Object.entries(want).every(([word, id]) => m(word).rule_id === id);
+    } },
+
+  { name: 'KW-32 ★ SUMMER neither confirms nor denies a promotion',
+    run: () => { const r = m('summer flash sales');
+                 return r.rule_id === 'SP-ESC-PROMO' && r.escalate === true &&
+                        !/discount|not negotiable|% off/i.test(r.reply); } },
+
+  { name: 'KW-33 ★ INVESTMENT never emphasises capital growth — it escalates',
+    run: () => { const r = m('is this a good investment');
+                 return r.rule_id === 'SP-ESC-ROI' && r.escalate === true &&
+                        !/capital growth|appreciat/i.test(r.reply); } },
+
+  { name: 'KW-34 "5 bedroom duplex" beats the bare DUPLEX campaign word',
+    run: () => m('5 bedroom duplex').rule_id === 'SP-5B' && m('duplex').rule_id === 'SP-4B' },
+
+  { name: 'KW-35 ★ no unwarranted figure from the campaign briefs reached the table',
+    run: () => {
+      // 70% deposit, ₦5m deposit, 648 SQM, 6,738.38 SQM — none are in the
+      // signed facts sheet, so none may appear in a response.
+      // Anchored: 185,000,000 legitimately contains "5,000,000".
+      const banned = /\b70\s?%|(?<![\d,])5,000,000\b|(?<![\d,])648\b|6,?738/;
+      return table.rules.every(r => !banned.test(r.dm_response));
+    } },
+
+  { name: 'KW-36 the DEVELOPER campaign names the developer but quotes no parcel',
+    run: () => { const r = m('developer');
+                 return /IFT Realty Ltd/.test(r.reply) && !/sqm|SQM|\d{3}/.test(r.reply) && r.escalate === true; } },
+
   { name: 'KW-30 no trigger phrase is claimed by two rules',
     run: () => {
       const seen = new Map();

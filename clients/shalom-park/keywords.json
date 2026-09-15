@@ -4,7 +4,7 @@
     "source_csv": "clients/shalom-park/keywords.csv",
     "generated_by": "tools/build-keywords.js",
     "generated_at_note": "Regenerate after every CSV or Sheet edit, then run node tools/test-all.js",
-    "rule_count": 24,
+    "rule_count": 26,
     "doctrine": "A match answers from pre-approved text with no model call. A miss falls through to the Concierge CORE. escalate_only always outranks fast_lane."
   },
   "rules": [
@@ -30,7 +30,12 @@
         "resale value",
         "will it appreciate",
         "investment value",
-        "passive income"
+        "passive income",
+        "investment",
+        "strategic asset",
+        "investment opportunity",
+        "good investment",
+        "worth investing"
       ],
       "dm_response": "That is a question about returns, and it is not one I will answer with an estimate - anything I said would be a guess dressed up as a number.\n\nLet me put you with someone from the team who can talk it through with you properly.",
       "public_comment_reply": "Sent you a DM - the team will pick this up with you",
@@ -301,7 +306,11 @@
         "condominium",
         "condominiums",
         "the condo",
-        "2 bedroom flat"
+        "2 bedroom flat",
+        "apartment",
+        "apartments",
+        "2 bedroom apartment",
+        "luxury apartment"
       ],
       "dm_response": "The 2-bedroom condominium is under development, finished spec, and 5 of the 16 units are available as at our last stock check.\n\nI do not want to quote you a price I am not certain is current - let me get the sales team to confirm it for you directly.",
       "public_comment_reply": "Just sent you a DM",
@@ -331,7 +340,11 @@
         "semi detached",
         "semi-detached",
         "the 4 bed",
-        "4 bedroom house"
+        "4 bedroom house",
+        "duplex",
+        "4 bedroom duplex",
+        "semi detached duplex",
+        "luxury duplex"
       ],
       "dm_response": "The 4-bedroom semi-detached is 185,000,000 naira. It is completed and finished, and 3 units are available as at our last stock check.\n\nThe price covers the purchase only - legal fees, utility connection and the homeowners association fee are separate. Payment is 50% down, with the balance over 3, 6 or 12 months.\n\nWant to see it? Inspections run any day of the week, weekends included.",
       "public_comment_reply": "Just sent you a DM",
@@ -362,7 +375,14 @@
         "off plan",
         "offplan",
         "off-plan",
-        "5 bedroom semi"
+        "5 bedroom semi",
+        "chairman",
+        "chairmans choice",
+        "the chairmans choice",
+        "flagship",
+        "5 bedroom duplex",
+        "pre construction",
+        "preconstruction"
       ],
       "dm_response": "The 5-bedroom semi-detached is 200,000,000 naira, sold off-plan, with 4 units available as at our last stock check. Finishing is included.\n\nPayment is 50% down with the balance over 3, 6 or 12 months. Handover timelines for off-plan are confirmed at the point of purchase - let me have the team give you the exact date for this unit.",
       "public_comment_reply": "Just sent you a DM",
@@ -396,7 +416,13 @@
         "sqm",
         "square meter",
         "square metre",
-        "landed property"
+        "landed property",
+        "648",
+        "648 sqm",
+        "plot size",
+        "plot sizes",
+        "size of plot",
+        "how big is the plot"
       ],
       "dm_response": "Serviced plots at Shalom Park are 125,000 naira per square metre.\n\nPlot sizes and current availability change, so let me get the team to send you the exact sizes and what is available rather than guess.",
       "public_comment_reply": "Just sent you a DM",
@@ -771,6 +797,73 @@
       ],
       "status": "live",
       "notes": "Lowest priority - the catch-all. Opens with AI disclosure because it is usually the first touch."
+    },
+    {
+      "rule_id": "SP-ESC-PROMO",
+      "priority": 10,
+      "class": "escalate_only",
+      "intent": "Promotion / campaign pricing",
+      "trigger_phrases": [
+        "summer",
+        "promo",
+        "promotion",
+        "promotions",
+        "flash sale",
+        "flash sales",
+        "summer sale",
+        "summer flash sales",
+        "summer promo",
+        "special offer",
+        "current offer",
+        "any promo",
+        "entry price",
+        "entry rate",
+        "discounted entry"
+      ],
+      "dm_response": "I would rather not quote you a promotion I cannot confirm is still running - campaign terms change, and an out-of-date offer helps nobody.\n\nLet me get the team to tell you exactly what is available to you today.",
+      "public_comment_reply": "Sent you a DM - the team will pick this up with you",
+      "link_code": "SP-ESC-PROMO",
+      "link_kind": "none",
+      "escalate": true,
+      "grounded_in": [
+        "escalate_always[7]"
+      ],
+      "status": "live",
+      "notes": "The signed facts sheet records prices as NOT negotiable and NO active discounts or incentives. This rule neither confirms nor denies a promotion - it routes to a human. Do not write a promo into this table without a signed addendum."
+    },
+    {
+      "rule_id": "SP-DEVPLOT",
+      "priority": 10,
+      "class": "escalate_only",
+      "intent": "Developer / bulk land",
+      "trigger_phrases": [
+        "developer",
+        "developer plot",
+        "bulk purchase",
+        "bulk buy",
+        "buy in bulk",
+        "joint venture",
+        "townhome",
+        "townhomes",
+        "townhouse",
+        "townhouses",
+        "multi unit",
+        "multiple plots",
+        "large parcel",
+        "bulk land",
+        "block of plots"
+      ],
+      "dm_response": "Shalom Park Estate is developed by IFT Realty Ltd.\n\nFor larger parcels, bulk purchases or development plots, the sizes and terms vary too much for me to quote - let me put you with the team directly.",
+      "public_comment_reply": "Sent you a DM - the team will pick this up with you",
+      "link_code": "SP-DEVPLOT",
+      "link_kind": "none",
+      "escalate": true,
+      "grounded_in": [
+        "developer.legal_name",
+        "escalate_always[6]"
+      ],
+      "status": "live",
+      "notes": "Names the developer (warranted) and escalates everything else. The 6738.38 SQM parcel is NOT in the signed facts sheet - no size or price may be stated until it is."
     }
   ]
 }

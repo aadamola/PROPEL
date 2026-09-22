@@ -11,6 +11,7 @@
 #   bash ops/setup/vps-tools.sh schema        # create the ledger tables
 #   bash ops/setup/vps-tools.sh ledger        # verify the hash chain
 #   bash ops/setup/vps-tools.sh doctor        # what is actually on this box
+#   bash ops/setup/vps-tools.sh web           # why is engine.getpropel.tech not answering
 #
 set -euo pipefail
 
@@ -65,5 +66,36 @@ case "${1:-preflight}" in
     echo "repo:  $REPO  ($( [ -d "$REPO/.git" ] && git -C "$REPO" rev-parse --short HEAD || echo 'NOT CLONED' ))"
     echo "stack: $STACK"
     ;;
-  *) die "Unknown command '$1'. Use: preflight | test | keywords | schema | ledger | doctor" ;;
+  web)
+    cd "$STACK"
+    HOST="${2:-engine.getpropel.tech}"
+    code(){ curl -sS -o /dev/null -w '%{http_code}' --max-time 10 "$1" 2>/dev/null || echo "---"; }
+
+    echo "── containers ─────────────────────────────"
+    docker compose ps --format 'table {{.Service}}\t{{.Status}}' 2>/dev/null || docker compose ps
+
+    echo; echo "── n8n, from inside the box (skips DNS and Caddy) ──"
+    echo "  localhost:5678/healthz  → $(code http://localhost:5678/healthz)   (200 = n8n is fine)"
+
+    echo; echo "── Caddy, from inside the box ─────────────"
+    echo "  localhost:80            → $(code http://localhost:80)"
+
+    echo; echo "── DNS ────────────────────────────────────"
+    resolved=$(getent hosts "$HOST" | awk '{print $1}' | tr '\n' ' ')
+    mine=$(curl -sS --max-time 10 https://api.ipify.org 2>/dev/null || echo unknown)
+    echo "  $HOST → ${resolved:-NOT RESOLVING}"
+    echo "  this box is        → $mine"
+    if [ -n "$resolved" ] && [ "$mine" != "unknown" ] && ! echo "$resolved" | grep -q "$mine"; then
+      echo "  ⚠️  DNS does NOT point at this box — that is the problem"
+    fi
+
+    echo; echo "── public HTTPS ───────────────────────────"
+    echo "  https://$HOST/                      → $(code "https://$HOST/")   (401 is EXPECTED: n8n editor is behind basic auth)"
+    echo "  https://$HOST/healthz               → $(code "https://$HOST/healthz")   (200 = Caddy→n8n works end to end)"
+    echo "  https://$HOST/webhook/shalom-park-ig → $(code "https://$HOST/webhook/shalom-park-ig")   (404 until workflow 05 is imported AND active)"
+
+    echo; echo "── caddy log, last 15 (TLS problems show here) ──"
+    docker compose logs --tail=15 caddy 2>/dev/null | sed 's/^/  /'
+    ;;
+  *) die "Unknown command '$1'. Use: preflight | test | keywords | schema | ledger | doctor | web" ;;
 esac

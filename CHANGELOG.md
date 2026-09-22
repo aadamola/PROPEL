@@ -2,6 +2,14 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-09-22 — Declined Hostinger's Docker Manager; built a `web` diagnostic
+
+- **ADEDAMOLA asked whether `engine.getpropel.tech` is down. I could not answer from here** — my sandbox's egress gateway returns 403 on CONNECT for that host, which is my policy refusing, not his server answering. **Said so rather than letting a failed curl read as evidence.**
+- **Flagged the likely false alarm first: `https://engine.getpropel.tech/` is n8n's editor behind basic auth**, so a 401, a login prompt or a blank page there is *expected*. And `/webhook/shalom-park-ig` returning **404 is correct for now** — workflow `05` is not imported yet, so nothing is listening on that path.
+- **Built `vps-tools.sh web`** — separates the five causes that all look identical from a browser: n8n down · Caddy down · DNS not pointing at the box · TLS not issued · the expected 401. Checks `localhost:5678/healthz` first (**skipping DNS and Caddy entirely, so a pass localises the fault to in front of n8n**), compares DNS against the box's real public IP, hits the three public paths that matter, and tails the Caddy log where TLS failures actually surface.
+- **🔴 Declined Hostinger's "Docker Manager" panel**, which he was one click from installing. Docker is already installed and running — six containers were up in last week's `doctor` output. **Its own dialog says it cannot be removed**, which is reason enough on a box carrying a paying client's system; and panel-managed Docker wants to own containers and compose projects its own way, which can fight the hand-rolled compose file, the `core`/`dmz` network split and Caddy's port bindings. **It also would not have answered the question he was chasing.** Recorded in CLAUDE.md so it does not resurface.
+- **Named the visibility he already has:** Uptime Kuma at `status.getpropel.tech` is in the stack, plus `doctor` and `web`.
+
 ## 2026-09-15 (self-correction) — I argued for Propel in the from-line, then recommended a non-Propel address
 
 - **ADEDAMOLA pushed back on "Gmail tonight, `alerts@getpropel.tech` later." He was right and I had contradicted myself.** I refused `@shalomparknigeria.com` because it erases Propel from the from-line, then recommended `@koratori.com` — which erases Propel just as completely. **Koratori is not even the brand.**

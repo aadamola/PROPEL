@@ -2,6 +2,16 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-09-23 (step 7) — `doctor` caught the August root cause; fixed with an override, not an edit
+
+- **Step 7 ran cleanly as far as it could:** verify token generated into `.env` and never printed; ledger schema re-applied idempotently (the `already exists, skipping` notices are correct); `lead_rows = 0`.
+- **🔴 The new `doctor` env check fired on its first real run:** `N8N_BLOCK_ENV_ACCESS_IN_NODE is 'unset'` and `META_VERIFY_TOKEN_SHALOM_PARK is in .env but n8n cannot see it`. The server's `docker-compose.yml` is from August and predates these settings. **This is the actual root cause of the "access to env vars denied" error from August** — worked around then by moving Gemini into a credential, never fixed. Also visible: `docker compose up -d n8n` reported *Running*, not *Recreated*, because nothing in its config referenced the new variable. **Step 9 would have returned 403 for the right token every time and looked like a token problem.**
+- **Fixed without touching his compose file.** One wrong space in YAML on a live box stops the whole stack. **New `vps-tools.sh n8n-env` writes `docker-compose.override.yml`, which Docker merges on top automatically.** The original file is never edited; deleting the override undoes it.
+- **Proved before shipping.** Reconstructed his August file from the bootstrap template minus the three lines, and ran `docker compose config` — which resolves the merge without starting anything — before and after. **Before: all three absent. After: all three present, all 24 existing n8n settings and all seven services unchanged.** Then tested the command itself in four states: first run → writes and validates · re-run → idempotent · **someone else's override present → refuses, leaves it untouched** · **broken base file → removes the override and restarts nothing.** The one part untestable here is the restart itself — there is no Docker engine in this sandbox, and I said so rather than implying otherwise.
+- **Security line stated in the file itself:** `N8N_BLOCK_ENV_ACCESS_IN_NODE=false` lets the Instagram workflow read the webhook secrets — and lets *any* workflow read *every* variable n8n is given, including the database password and encryption key. Acceptable while ADEDAMOLA is the only person with n8n editor access, and the reason nobody else should be given it.
+- **`doctor`'s ✗ lines now name the fix command** instead of telling him to edit YAML.
+- **Noticed, not acted on:** the box rebooted ~32 hours earlier and everything came back on its own. **Flowise is again `Up 12 seconds`** while everything else is `Up 32 hours` — it is crash-looping. Not on the critical path, but on a 2-vCPU box a restart loop is a steady CPU tax. Queued, not now.
+
 ## 2026-09-23 (step 6 ✅) — Step 9 rebuilt so the verify token never reaches the screen
 
 - **Step 6 done** — `05` imported with both sub-workflow IDs baked in.

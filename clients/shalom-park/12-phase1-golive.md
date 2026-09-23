@@ -185,7 +185,13 @@ bash /opt/propel-repo/ops/setup/vps-tools.sh doctor
 
 The first writes `META_VERIFY_TOKEN_SHALOM_PARK` into `.env` without ever printing it (and re-applies the ledger schema, which is harmless — it is idempotent). The last confirms **n8n can actually see it**: look for `✓ N8N_BLOCK_ENV_ACCESS_IN_NODE=false` and `✓ META_VERIFY_TOKEN_SHALOM_PARK set`.
 
-> ⚠️ **If `doctor` says a variable is "in .env but n8n cannot see it"**, the compose file on the server predates the one in the repo. Add the missing lines to the `n8n` service's `environment:` block — they are in `ops/setup/vps-bootstrap.sh` — then `docker compose up -d n8n`. This is the same thing that caused *"access to env vars denied"* in August.
+> ⚠️ **If `doctor` shows ✗ on either line** — it did on Shalom Park's server, 2026-09-23 — the compose file there predates these settings. **Do not hand-edit `docker-compose.yml`**: one wrong space and the whole stack refuses to start. Run:
+>
+> ```bash
+> bash /opt/propel-repo/ops/setup/vps-tools.sh n8n-env
+> ```
+>
+> It writes a separate `docker-compose.override.yml` that Docker merges on top, **proves the merged result parses before restarting anything**, rolls itself back if it does not, refuses to overwrite an override it did not write, restarts n8n, and prints the ✓/✗ lines again. Deleting the override undoes it. This is the root cause of *"access to env vars denied"* in August.
 
 **Use the `-ig` webhook address, not `-wa`.** Shalom Park is Instagram-only; the script prints both.
 

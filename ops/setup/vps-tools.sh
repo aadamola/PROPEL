@@ -14,6 +14,7 @@
 #   bash ops/setup/vps-tools.sh web           # why is engine.getpropel.tech not answering
 #   bash ops/setup/vps-tools.sh smtp          # prove a mailbox sends before n8n sees it (asks for what it needs)
 #   bash ops/setup/vps-tools.sh handshake     # step 9: prove the webhook works AND refuses strangers
+#   bash ops/setup/vps-tools.sh n8n-env       # give n8n the settings an older compose file is missing
 #
 set -euo pipefail
 
@@ -80,11 +81,11 @@ case "${1:-preflight}" in
     for V in N8N_BLOCK_ENV_ACCESS_IN_NODE META_VERIFY_TOKEN_SHALOM_PARK SHALOM_PARK_APP_SECRET; do
       val=$(docker compose exec -T n8n printenv "$V" 2>/dev/null || true)
       if [ "$V" = "N8N_BLOCK_ENV_ACCESS_IN_NODE" ]; then
-        [ "$val" = "false" ] && echo "  ✓ $V=false" || echo "  ✗ $V is '${val:-unset}' — must be false, or Code nodes cannot read the secrets below"
+        [ "$val" = "false" ] && echo "  ✓ $V=false" || echo "  ✗ $V is '${val:-unset}' — must be false. Fix with: bash /opt/propel-repo/ops/setup/vps-tools.sh n8n-env"
       elif [ -n "$val" ]; then echo "  ✓ $V set"
       else
         if grep -q "^$V=" "$STACK/.env" 2>/dev/null; then
-          echo "  ✗ $V is in .env but n8n cannot see it — add it to the n8n environment in docker-compose.yml, then: docker compose up -d n8n"
+          echo "  ✗ $V is in .env but n8n cannot see it — fix with: bash /opt/propel-repo/ops/setup/vps-tools.sh n8n-env"
         else
           echo "  – $V not set yet"
         fi
@@ -233,5 +234,53 @@ case "${1:-preflight}" in
       exit 1
     fi
     ;;
-  *) die "Unknown command '$1'. Use: preflight | test | keywords | schema | ledger | doctor | web | smtp | handshake" ;;
+  n8n-env)
+    # Servers built before these settings existed never pass them to n8n.
+    # Rather than hand-edit docker-compose.yml -- where one wrong space stops
+    # the whole stack -- write a separate override that Docker merges on top.
+    # The original file is never touched, and deleting the override undoes it.
+    cd "$STACK"
+    OV="$STACK/docker-compose.override.yml"
+    MARK="PROPEL-MANAGED"
+    if [ -f "$OV" ] && ! grep -q "$MARK" "$OV"; then
+      die "$OV already exists and was not written by this tool. Not overwriting it — send me its contents."
+    fi
+    [ -f "$OV" ] && cp "$OV" "$OV.bak"
+    cat > "$OV" <<'YAML'
+# PROPEL-MANAGED — written by: vps-tools.sh n8n-env
+# Merged by Docker on top of docker-compose.yml. Delete this file to undo.
+#
+# N8N_BLOCK_ENV_ACCESS_IN_NODE=false lets the Instagram workflow read the
+# webhook secrets below. It also lets ANY workflow read EVERY variable n8n
+# is given -- fine while ADEDAMOLA is the only person with n8n editor access,
+# and the reason nobody else should ever be given it.
+services:
+  n8n:
+    environment:
+      N8N_BLOCK_ENV_ACCESS_IN_NODE: "false"
+      META_VERIFY_TOKEN_SHALOM_PARK: ${META_VERIFY_TOKEN_SHALOM_PARK:-}
+      SHALOM_PARK_APP_SECRET: ${SHALOM_PARK_APP_SECRET:-}
+YAML
+
+    # Prove the merged result parses BEFORE anything running is restarted.
+    if ! docker compose config -q 2>/tmp/propel-compose-err; then
+      if [ -f "$OV.bak" ]; then mv "$OV.bak" "$OV"; else rm -f "$OV"; fi
+      cat /tmp/propel-compose-err >&2
+      die "the merged configuration did not parse — override removed, nothing was restarted"
+    fi
+    rm -f "$OV.bak"
+    echo "✓ override written and the merged configuration parses"
+
+    if [ -n "${PROPEL_DRY:-}" ]; then echo "(dry run — not restarting n8n)"; exit 0; fi
+
+    echo "▲ Restarting n8n with the new settings — it will be away for about 30 seconds…"
+    docker compose up -d n8n
+    for i in $(seq 1 30); do
+      [ "$(curl -s -o /dev/null -w '%{http_code}' http://localhost:5678/healthz 2>/dev/null)" = "200" ] && break
+      sleep 3
+    done
+    echo
+    bash "$0" doctor | sed -n '/what n8n can see/,/── repo/p' | sed '$d'
+    ;;
+  *) die "Unknown command '$1'. Use: preflight | test | keywords | schema | ledger | doctor | web | smtp | handshake | n8n-env" ;;
 esac

@@ -6,25 +6,23 @@
 
 > 💰 **2026-07-26: PROPEL HAS A PAYING CLIENT.** Shalom Park paid the setup fee. You did that. Second SIM ✅ 09112714482 logged. We're in production mode — full build plan in [ops/production-checklist.md](ops/production-checklist.md), you don't need to read it, I'm running it.
 
-## ⭐ DO THIS NEXT — step 7: make the verify token (5 min)
+## ⭐ DO THIS NEXT — finish step 7: let n8n see the token (2 min)
+
+The check caught it: your server's setup file is from August and **doesn't pass the token to n8n**. That's also the real cause of "access to env vars denied" back then.
 
 ```
 cd /opt/propel-repo && git pull
-bash /opt/propel-repo/ops/setup/apply-client-ledger.sh shalom-park
-cd /opt/propel && docker compose up -d n8n
-bash /opt/propel-repo/ops/setup/vps-tools.sh doctor
+bash /opt/propel-repo/ops/setup/vps-tools.sh n8n-env
 ```
 
-- **Line 2** creates the token and saves it on the server. **It never shows it to you — that's deliberate.** It also re-applies the ledger tables, which is harmless.
-- **Line 3** restarts n8n so it picks the token up. **n8n will disappear for about 30 seconds** — if the editor disconnects, wait and refresh.
-- **Line 4** checks n8n can actually see it. You want:
-  - `✓ N8N_BLOCK_ENV_ACCESS_IN_NODE=false`
-  - `✓ META_VERIFY_TOKEN_SHALOM_PARK set`
-  - `– SHALOM_PARK_APP_SECRET not set yet` ← **expected**, that comes from the Meta app
+It adds a small separate settings file instead of editing your main one, **checks it's valid before restarting anything**, and undoes itself if not. n8n will be away for about 30 seconds.
 
-**Send me the doctor output.** If any line shows ✖, don't go further — it's the same problem that caused "access to env vars denied" in August, and I'll give you the fix.
+It ends by re-running the check. You want:
+- `✓ N8N_BLOCK_ENV_ACCESS_IN_NODE=false`
+- `✓ META_VERIFY_TOKEN_SHALOM_PARK set`
+- `– SHALOM_PARK_APP_SECRET not set yet` ← still expected
 
-Ignore the webhook address it prints for `-wa` — Shalom Park uses `-ig`.
+**Send me that.** Then it's step 8 (publish `05`) and step 9 (the handshake test).
 
 ---
 
@@ -58,6 +56,7 @@ Testing the bot · the automated pilot · voice notes · first audit calls. Noth
 
 ## ✅ DONE (look how far this has come)
 
+- [x] 🔐 **Step 7 (half) — verify token generated; ledger re-applied cleanly** (2026-09-23)
 - [x] 📲 **Step 6 — Instagram workflow imported with both IDs baked in** (2026-09-23)
 - [x] 📒 **Step 5 — ledger + alerts workflow imported (`oNt2oRixkDbbUa2p`) and wired into 05** (2026-09-23)
 - [x] 🧠 **Step 4 — core workflow imported (`SzWrUVB8WYv3sfE5`) and wired into 05** (2026-09-23)

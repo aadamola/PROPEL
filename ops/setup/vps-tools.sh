@@ -12,7 +12,7 @@
 #   bash ops/setup/vps-tools.sh ledger        # verify the hash chain
 #   bash ops/setup/vps-tools.sh doctor        # what is actually on this box
 #   bash ops/setup/vps-tools.sh web           # why is engine.getpropel.tech not answering
-#   bash ops/setup/vps-tools.sh smtp <user> <host> <port> [to]   # prove a mailbox sends, before n8n sees it
+#   bash ops/setup/vps-tools.sh smtp          # prove a mailbox sends before n8n sees it (asks for what it needs)
 #
 set -euo pipefail
 
@@ -110,22 +110,27 @@ case "${1:-preflight}" in
   smtp)
     # Prove the mailbox works before n8n ever touches it. If this sends, any
     # later failure is n8n's configuration; if it does not, it is the mailbox.
-    # Separating those two saves an hour of looking in the wrong place.
-    U="${2:-}"; H="${3:-}"; P="${4:-465}"; TO="${5:-$U}"
-    if [ -z "$U" ] || [ -z "$H" ]; then
-      die "Usage: vps-tools.sh smtp <user@domain> <smtp-host> [port] [to]
-  e.g. vps-tools.sh smtp alerts@getpropel.tech smtp.hostinger.com 465"
-    fi
+    #
+    # It ASKS for anything not given. An earlier version documented itself
+    # with "<host-from-hostinger>" placeholders, and bash reads "<" as "take
+    # input from a file" -- so a pasted command failed with "No such file or
+    # directory". A command that needs editing before it runs is a trap.
+    ask(){ # ask <prompt> <default> -> echoes answer
+      local a; printf '%s' "$1" >&2; [ -n "$2" ] && printf ' [%s]' "$2" >&2; printf ': ' >&2
+      read -r a; echo "${a:-$2}"
+    }
+    U="${2:-}"; H="${3:-}"; P="${4:-}"; TO="${5:-}"
+    [ -n "$U" ]  || U=$(ask  "Mailbox" "alerts@getpropel.tech")
+    [ -n "$H" ]  || H=$(ask  "SMTP host (copy it from the Hostinger email panel)" "")
+    [ -n "$P" ]  || P=$(ask  "Port" "465")
+    [ -n "$TO" ] || TO=$(ask "Send the test email to" "aadamola@gmail.com")
+    [ -n "$H" ] || die "No SMTP host given — it is shown in Hostinger → Emails → your mailbox → configuration."
 
-    # Read the password without echoing it and without leaving it in history.
     printf 'Password for %s (not shown): ' "$U" >&2
     read -rs PASS; echo >&2
-    [ -z "$PASS" ] && die "no password entered"
+    [ -n "$PASS" ] || die "no password entered"
 
-    case "$P" in
-      465) URL="smtps://$H:$P" ;;   # implicit TLS
-      *)   URL="smtp://$H:$P"  ;;   # STARTTLS, negotiated by --ssl-reqd
-    esac
+    if [ "$P" = "465" ]; then URL="smtps://$H:$P"; TLS=ON; else URL="smtp://$H:$P"; TLS=OFF; fi
 
     TMP=$(mktemp)
     {
@@ -135,22 +140,26 @@ case "${1:-preflight}" in
       echo "Date: $(date -R)"
       echo
       echo "If you are reading this, $U can send mail."
-      echo "Host $H port $P. Use exactly these settings in the n8n SMTP credential."
+      echo "Host $H, port $P. Use exactly these in the n8n SMTP credential."
     } > "$TMP"
 
-    echo "Sending as $U via $URL → $TO"
+    echo; echo "Sending as $U via $URL → $TO"
     if curl -sS --url "$URL" --ssl-reqd --mail-from "$U" --mail-rcpt "$TO" \
          --user "$U:$PASS" --upload-file "$TMP" --max-time 30; then
       rm -f "$TMP"
       echo "✅ accepted by the server — check $TO (and the spam folder)"
-      if [ "$P" = "465" ]; then TLS=ON; else TLS=OFF; fi
-      echo "   Put these in n8n:  host $H · port $P · SSL/TLS $TLS"
+      echo
+      echo "   Put these into the n8n credential 'Propel SMTP':"
+      echo "     User     $U"
+      echo "     Host     $H"
+      echo "     Port     $P"
+      echo "     SSL/TLS  $TLS"
     else
       rm -f "$TMP"
-      echo "✖ rejected. Common causes:" >&2
+      echo "✖ rejected. Usual causes, most likely first:" >&2
       echo "   • wrong port/encryption pair — 465 needs SSL ON, 587 needs SSL OFF (STARTTLS)" >&2
-      echo "   • the mailbox exists but MX/DNS has not propagated yet" >&2
-      echo "   • password typed from a password manager with a trailing space" >&2
+      echo "   • the mailbox exists but MX/DNS has not propagated yet — wait and retry" >&2
+      echo "   • a trailing space pasted in from a password manager" >&2
       exit 1
     fi
     ;;

@@ -108,14 +108,14 @@ grep -E '^POSTGRES_PASSWORD=' /opt/propel/.env
 | Password | the mailbox password |
 | Host / Port / SSL | exactly as Hostinger's panel states |
 
-> 🔴 **Not the client's domain** (`…@shalomparknigeria.com`) and **not a personal address** (`…@koratori.com`). Both erase Propel from the from-line, which is the whole point:
+> 🔴 **Not the client's domain** (`…@shalomparknigeria.com`) and **not a personal address**. Both erase Propel from the from-line, which is the whole point:
 > 1. **Every alert is a Propel receipt.** Twenty a day landing in their sales inbox saying *your assistant found you a buyer* is the drumbeat the commission conversation rests on.
 > 2. **Their mailbox is infrastructure they can revoke** — renting the pipe that proves our own worth. Same objection as the attribution ledger.
 > 3. **SPF/DKIM rejects sending as their domain** without their credentials.
 
 > ⏱️ **Do this before go-live, not after.** Once alerts are flowing to Collins, changing the sender means the first ones from the new address can land in spam — and a missed lead alert is the exact failure this layer exists to prevent.
 
-**MX records take minutes, sometimes a few hours.** Create the mailbox first, then do 3a and 3b while it settles. If it still hasn't resolved when you reach the import, a Gmail app password on `justin@koratori.com` works as a stopgap — **contingency, not plan.**
+**MX records take minutes, sometimes a few hours.** Create the mailbox first, then do 3a and 3b while it settles. If it still hasn't resolved when you reach the import, a Gmail app password on `aadamola@gmail.com` works as a stopgap — **contingency, not plan.**
 
 #### 3d · `Shalom Park IG` — Header Auth ⏸️ *later*
 | Field | Value |

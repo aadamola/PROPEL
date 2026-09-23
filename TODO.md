@@ -6,33 +6,22 @@
 
 > 💰 **2026-07-26: PROPEL HAS A PAYING CLIENT.** Shalom Park paid the setup fee. You did that. Second SIM ✅ 09112714482 logged. We're in production mode — full build plan in [ops/production-checklist.md](ops/production-checklist.md), you don't need to read it, I'm running it.
 
-## ⭐ DO THIS NEXT — step 3, the credentials (about 15 min)
+## ⭐ DO THIS NEXT — test the mailbox, then fill in 3c
 
-**Step 2 is done** ✅ — `lead` and `lead_event` exist, the script proved it. Those `NOTICE ... skipping` lines are normal: `DROP TRIGGER IF EXISTS` on a fresh database.
-
-**Three credentials now, one later.** n8n → **Credentials → Add credential**.
-
-**a · `Gemini`** — Query Auth · name `key` · value = your Gemini API key
-
-**b · `Propel Postgres`** — Postgres. Get the password first:
 ```
-grep -E '^POSTGRES_PASSWORD=' /opt/propel/.env
+cd /opt/propel-repo && git pull
+bash ops/setup/vps-tools.sh smtp
 ```
-Host **`postgres`** · Database `n8n` · User `propel` · Port `5432` · SSL off.
 
-> 🔴 **Host is `postgres`, not `localhost`.** n8n and the database are containers on the same network, so n8n reaches it by service name. `localhost` there means the n8n container itself, and the error reads "connection refused" — which looks like the database is down when it's fine.
+**It asks you for everything** — just press Enter to accept the defaults in brackets. The only thing you type is the **SMTP host** (copy it from Hostinger → Emails → your mailbox) and the **password** (not shown as you type).
 
-**Click Test on both.** Green before moving on.
+It sends a real test email to `aadamola@gmail.com` and then **prints the exact four settings to type into n8n**.
 
-**c · `Propel SMTP`** — **do this first, it needs DNS time.** Create **`alerts@getpropel.tech`** in your Hostinger panel (the domain is already there), then take host/port/SSL from the screen Hostinger shows you. Do 3a and 3b while MX propagates.
+**Why test first:** a wrong mailbox and a wrong n8n setting both show up as "authentication failed". This tells you which one you have.
 
-> 🔴 Not `@shalomparknigeria.com` and not `@koratori.com` — both erase Propel from the from-line. Every alert is a receipt landing in their inbox 20 times a day; that's the commission drumbeat. And set it before go-live: changing a sender once alerts are flowing means the first ones can hit spam, which is the one failure this layer exists to prevent.
->
-> *Stopgap only if MX hasn't resolved by import time: Gmail app password on `justin@koratori.com`.*
+**The rule that trips everyone:** port **465 → SSL/TLS ON** · port **587 → SSL/TLS OFF**. The script tells you which.
 
-**d · `Shalom Park IG`** ⏸️ — **can't be done yet.** The token doesn't exist until the Meta app is created. Skip it; you can import and wire everything else without it.
-
-Then **steps 4–6**: import `03`, import `06`, import `05` and paste the two ids in — [12-phase1-golive.md](clients/shalom-park/12-phase1-golive.md).
+Then **steps 4–6** — [12-phase1-golive.md](clients/shalom-park/12-phase1-golive.md).
 
 ---
 
@@ -66,6 +55,7 @@ Testing the bot · the automated pilot · voice notes · first audit calls. Noth
 
 ## ✅ DONE (look how far this has come)
 
+- [x] 🔑 **Credentials 3a Gemini + 3b Postgres done; engine.getpropel.tech back up** (2026-09-23)
 - [x] 🗄️ **Ledger tables live on the VPS — `lead` + `lead_event` created** (2026-09-15)
 - [x] 🛠️ **Import preflight tool built — checks the whole workflow bundle before it touches n8n** (2026-09-15)
 - [x] 🔐 **Phase 1 built: escalation alerts, attribution ledger wired, privacy + data-deletion pages, go-live runbook** (2026-09-15)

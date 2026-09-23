@@ -2,6 +2,13 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-09-23 — Contact address changed · SMTP test made paste-safe
+
+- **Standing instruction from ADEDAMOLA: stop using `justin@koratori.com`; use `aadamola@gmail.com` wherever an address is needed.** Replaced in every live file — `CLAUDE.md` (the contact line now says so explicitly, with the old address marked retired), `clients.json` alert CC, the rebuilt `03` and `06` workflows that embed the registry, `TODO.md`, and the Gmail stopgap in the go-live runbook. **Historical CHANGELOG entries left as written** — they are a dated record, and rewriting history would make the log lie about what was true when. Scrubbable if he wants the address out of the repo entirely.
+- **🔴 My error: I gave him a command containing `<host-from-hostinger>` as a placeholder.** Bash reads `<` as "take input from a file", so the pasted command failed with `No such file or directory` — before it ever reached the script. **A command that has to be edited before it runs is a trap**, and doubly so for someone copy-pasting between a chat and an SSH window.
+- **Fixed at the root, not in the docs: `vps-tools.sh smtp` now asks for anything not supplied**, with defaults in brackets (mailbox `alerts@getpropel.tech`, port `465`, test recipient `aadamola@gmail.com`). The only things he types are the SMTP host and the password. On success it prints the four exact values for the n8n credential, including whether the SSL toggle is on or off. Verified it fails cleanly on an empty host rather than hanging.
+- **Progress:** credentials 3a (Gemini) and 3b (Postgres) done; `engine.getpropel.tech` confirmed back up. Now on 3c.
+
 ## 2026-09-22 — Declined Hostinger's Docker Manager; built a `web` diagnostic
 
 - **ADEDAMOLA asked whether `engine.getpropel.tech` is down. I could not answer from here** — my sandbox's egress gateway returns 403 on CONNECT for that host, which is my policy refusing, not his server answering. **Said so rather than letting a failed curl read as evidence.**

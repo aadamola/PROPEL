@@ -12,6 +12,7 @@
 #   bash ops/setup/vps-tools.sh ledger        # verify the hash chain
 #   bash ops/setup/vps-tools.sh doctor        # what is actually on this box
 #   bash ops/setup/vps-tools.sh web           # why is engine.getpropel.tech not answering
+#   bash ops/setup/vps-tools.sh smtp <user> <host> <port> [to]   # prove a mailbox sends, before n8n sees it
 #
 set -euo pipefail
 
@@ -22,8 +23,17 @@ NODE_IMAGE="node:20-alpine"
 die(){ echo "✖ $*" >&2; exit 1; }
 
 command -v docker >/dev/null 2>&1 || die "Docker is not installed. Everything here runs in containers."
-[ -d "$REPO" ] || die "No repo at $REPO. Clone it first:
+
+# Only the commands that read repo files need the repo. 'smtp' talks to a mail
+# server and 'doctor'/'web' inspect the running stack -- refusing those for a
+# missing clone sends you fixing the wrong thing.
+need_repo(){
+  [ -d "$REPO" ] || die "No repo at $REPO. Clone it first:
   cd /opt && git clone -b claude/propel-realestate-marketing-plan-wxjj3x https://github.com/aadamola/PROPEL.git propel-repo"
+}
+case "${1:-preflight}" in
+  preflight|test|keywords|schema|ledger) need_repo ;;
+esac
 
 run_node(){ docker run --rm -v "$REPO":/app -w /app "$NODE_IMAGE" node "$@"; }
 
@@ -97,5 +107,52 @@ case "${1:-preflight}" in
     echo; echo "── caddy log, last 15 (TLS problems show here) ──"
     docker compose logs --tail=15 caddy 2>/dev/null | sed 's/^/  /'
     ;;
-  *) die "Unknown command '$1'. Use: preflight | test | keywords | schema | ledger | doctor | web" ;;
+  smtp)
+    # Prove the mailbox works before n8n ever touches it. If this sends, any
+    # later failure is n8n's configuration; if it does not, it is the mailbox.
+    # Separating those two saves an hour of looking in the wrong place.
+    U="${2:-}"; H="${3:-}"; P="${4:-465}"; TO="${5:-$U}"
+    if [ -z "$U" ] || [ -z "$H" ]; then
+      die "Usage: vps-tools.sh smtp <user@domain> <smtp-host> [port] [to]
+  e.g. vps-tools.sh smtp alerts@getpropel.tech smtp.hostinger.com 465"
+    fi
+
+    # Read the password without echoing it and without leaving it in history.
+    printf 'Password for %s (not shown): ' "$U" >&2
+    read -rs PASS; echo >&2
+    [ -z "$PASS" ] && die "no password entered"
+
+    case "$P" in
+      465) URL="smtps://$H:$P" ;;   # implicit TLS
+      *)   URL="smtp://$H:$P"  ;;   # STARTTLS, negotiated by --ssl-reqd
+    esac
+
+    TMP=$(mktemp)
+    {
+      echo "From: Propel Alerts <$U>"
+      echo "To: <$TO>"
+      echo "Subject: Propel SMTP test"
+      echo "Date: $(date -R)"
+      echo
+      echo "If you are reading this, $U can send mail."
+      echo "Host $H port $P. Use exactly these settings in the n8n SMTP credential."
+    } > "$TMP"
+
+    echo "Sending as $U via $URL → $TO"
+    if curl -sS --url "$URL" --ssl-reqd --mail-from "$U" --mail-rcpt "$TO" \
+         --user "$U:$PASS" --upload-file "$TMP" --max-time 30; then
+      rm -f "$TMP"
+      echo "✅ accepted by the server — check $TO (and the spam folder)"
+      if [ "$P" = "465" ]; then TLS=ON; else TLS=OFF; fi
+      echo "   Put these in n8n:  host $H · port $P · SSL/TLS $TLS"
+    else
+      rm -f "$TMP"
+      echo "✖ rejected. Common causes:" >&2
+      echo "   • wrong port/encryption pair — 465 needs SSL ON, 587 needs SSL OFF (STARTTLS)" >&2
+      echo "   • the mailbox exists but MX/DNS has not propagated yet" >&2
+      echo "   • password typed from a password manager with a trailing space" >&2
+      exit 1
+    fi
+    ;;
+  *) die "Unknown command '$1'. Use: preflight | test | keywords | schema | ledger | doctor | web | smtp" ;;
 esac

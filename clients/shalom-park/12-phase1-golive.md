@@ -105,8 +105,12 @@ grep -E '^POSTGRES_PASSWORD=' /opt/propel/.env
 | Field | Value |
 |---|---|
 | User | `alerts@getpropel.tech` |
-| Password | the mailbox password |
-| Host / Port / SSL | exactly as Hostinger's panel states |
+| Password | the mailbox password — **typed into n8n, never pasted into chat** |
+| Host | `smtp.hostinger.com` *(confirmed from the Hostinger panel, 2026-09-23)* |
+| Port | `465` |
+| SSL/TLS | **ON** |
+
+Test it before n8n sees it: `bash /opt/propel-repo/ops/setup/vps-tools.sh smtp` — it asks for the host and password and sends a real email.
 
 > 🔴 **Not the client's domain** (`…@shalomparknigeria.com`) and **not a personal address**. Both erase Propel from the from-line, which is the whole point:
 > 1. **Every alert is a Propel receipt.** Twenty a day landing in their sales inbox saying *your assistant found you a buyer* is the drumbeat the commission conversation rests on.

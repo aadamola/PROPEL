@@ -2,6 +2,13 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-09-23 (later) — SMTP settings confirmed; a mailbox password was exposed in chat and must be rotated
+
+- **Confirmed from the Hostinger panel: `smtp.hostinger.com`, port `465`, SSL/TLS on.** Written into the runbook as confirmed values, replacing "read it off the panel". Matches the port/encryption rule given earlier (465 ↔ SSL on).
+- **🔴 The `alerts@getpropel.tech` password was shared in chat as a screenshot.** Told ADEDAMOLA to rotate it before testing, and to test with the *new* password so a dead one never reaches n8n. **The value is not recorded anywhere in the repo.**
+- **Why this one matters more than a routine hygiene note:** that mailbox will email Shalom Park's sales team twenty times a day announcing ready buyers. Anyone else in it could send the most convincing phishing email possible — a Propel alert asking Collins to share bank details — which is precisely the fraud pattern `SP-ESC-PAYTO` and the privacy policy are built to prevent.
+- **Runbook now says it in the table itself:** the password is typed into n8n, never pasted into chat. The `smtp` test's output never prints the password, so its output is safe to screenshot.
+
 ## 2026-09-23 — Contact address changed · SMTP test made paste-safe
 
 - **Standing instruction from ADEDAMOLA: stop using `justin@koratori.com`; use `aadamola@gmail.com` wherever an address is needed.** Replaced in every live file — `CLAUDE.md` (the contact line now says so explicitly, with the old address marked retired), `clients.json` alert CC, the rebuilt `03` and `06` workflows that embed the registry, `TODO.md`, and the Gmail stopgap in the go-live runbook. **Historical CHANGELOG entries left as written** — they are a dated record, and rewriting history would make the log lie about what was true when. Scrubbable if he wants the address out of the repo entirely.

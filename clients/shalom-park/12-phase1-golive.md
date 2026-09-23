@@ -196,11 +196,24 @@ The first writes `META_VERIFY_TOKEN_SHALOM_PARK` into `.env` without ever printi
 ### Step 9 — prove the endpoint, both ways
 
 ```bash
-curl "https://engine.getpropel.tech/webhook/shalom-park-ig?hub.mode=subscribe&hub.verify_token=REAL&hub.challenge=hello123"   # expect: hello123
-curl "https://engine.getpropel.tech/webhook/shalom-park-ig?hub.mode=subscribe&hub.verify_token=wrong&hub.challenge=hello123" # expect: Forbidden
+bash /opt/propel-repo/ops/setup/vps-tools.sh handshake
 ```
 
-The first proves it works. **The second proves it isn't open to the entire internet** — without the token check, anyone can point their own Meta app at our endpoint and write fabricated buyers into the commission ledger. Run both. The second is the one people skip, because the first already looked like success.
+Three checks, one command. **The token is read from `.env` inside the script and never printed** — not into your shell history, not onto the screen — so the output is safe to screenshot.
+
+| Check | Pass means |
+|---|---|
+| right token | the challenge comes back exactly, as plain text — **Meta will accept this** |
+| **wrong token** | **refused with 403 — strangers cannot subscribe to our endpoint** |
+| no token | refused with 403 |
+
+**The second check is the one that matters most and the one people skip**, because the first already looks like success. Without it, anyone can point their own Meta app at our URL and write fabricated buyers into the commission ledger. If it fails, the script says **"Do not go live."** Believe it.
+
+Other answers and what they mean:
+- **404 on all three** → `05` is not live yet. Publish it (step 8).
+- **403 with the right token** → n8n cannot read the token. Run `vps-tools.sh doctor`.
+
+*Tested 2026-09-23 against the real `Handshake` node code from `05` in four server states — correct, insecure, unpublished, missing env — and diagnosed each correctly. The token appeared in its output zero times.*
 
 ### Step 10 — subscribe the webhook in the Meta app
 

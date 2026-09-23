@@ -12,6 +12,12 @@ CLIENT_SLUG="${1:-}"
 [ -n "$CLIENT_SLUG" ] || { echo "usage: $0 <client-slug>   e.g. shalom-park"; exit 1; }
 [ "$(id -u)" -eq 0 ] || { echo "run with sudo"; exit 1; }
 
+# Resolve where this script lives BEFORE changing directory. Computing it
+# after the cd breaks when the script is run by a relative path: the token
+# gets written, then the schema is "not found", and it looks like everything
+# failed when only the second half did.
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+
 cd /opt/propel
 set -a; . ./.env; set +a
 
@@ -31,7 +37,7 @@ echo "  Read it only when the Meta console asks:  grep ${KEY} /opt/propel/.env"
 # ── 2. Attribution ledger ────────────────────────────────────
 # Real container/user/db names for this stack: compose project 'propel',
 # service 'postgres', POSTGRES_USER=propel, POSTGRES_DB=n8n.
-SQL_FILE="$(dirname "$0")/../concierge/sql/001-attribution-ledger.sql"
+SQL_FILE="$SCRIPT_DIR/../concierge/sql/001-attribution-ledger.sql"
 [ -f "$SQL_FILE" ] || { echo "✖ schema not found: $SQL_FILE"; exit 1; }
 
 echo "▲ Applying attribution ledger to postgres…"

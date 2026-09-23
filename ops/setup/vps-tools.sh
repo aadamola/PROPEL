@@ -13,6 +13,7 @@
 #   bash ops/setup/vps-tools.sh doctor        # what is actually on this box
 #   bash ops/setup/vps-tools.sh web           # why is engine.getpropel.tech not answering
 #   bash ops/setup/vps-tools.sh smtp          # prove a mailbox sends before n8n sees it (asks for what it needs)
+#   bash ops/setup/vps-tools.sh handshake     # step 9: prove the webhook works AND refuses strangers
 #
 set -euo pipefail
 
@@ -181,5 +182,56 @@ case "${1:-preflight}" in
       exit 1
     fi
     ;;
-  *) die "Unknown command '$1'. Use: preflight | test | keywords | schema | ledger | doctor | web | smtp" ;;
+  handshake)
+    # Step 9 without the secret ever reaching the screen. The token is read
+    # from .env inside this script and never echoed, so neither shell history
+    # nor a screenshot of this terminal carries it.
+    SLUG="${2:-shalom-park}"; CH="${3:-ig}"
+    KEY="META_VERIFY_TOKEN_$(echo "$SLUG" | tr 'a-z-' 'A-Z_')"
+    TOKEN=$(grep -E "^${KEY}=" "$STACK/.env" 2>/dev/null | head -1 | cut -d= -f2-)
+    [ -n "$TOKEN" ] || die "$KEY is not in $STACK/.env yet — run step 7 first:
+  bash /opt/propel-repo/ops/setup/apply-client-ledger.sh $SLUG"
+    URL="${PROPEL_ENGINE:-https://engine.getpropel.tech}/webhook/${SLUG}-${CH}"
+    CHAL="propel-$(date +%s)"
+    pass=0; fail=0
+    ok(){ pass=$((pass+1)); echo "  ✅ $1"; }
+    bad(){ fail=$((fail+1)); echo "  ✖ $1"; }
+
+    echo "Testing $URL"
+    echo
+
+    # 1. The real token must get the challenge echoed back, as plain text.
+    body=$(curl -sS --max-time 15 -o - -w '\n%{http_code}' \
+      "$URL?hub.mode=subscribe&hub.verify_token=${TOKEN}&hub.challenge=${CHAL}" 2>/dev/null || echo $'\n000')
+    code=$(echo "$body" | tail -1); text=$(echo "$body" | sed '$d')
+    if   [ "$code" = "200" ] && [ "$text" = "$CHAL" ]; then ok "right token → challenge echoed back exactly (Meta will accept this)"
+    elif [ "$code" = "404" ]; then bad "404 — workflow 05 is not live. Publish it (step 8), then run this again"
+    elif [ "$code" = "403" ]; then bad "403 with the RIGHT token — n8n cannot read the token. Run: vps-tools.sh doctor"
+    elif [ "$code" = "200" ]; then bad "200 but the body is not the challenge — Meta rejects this. Send me the output"
+    else bad "HTTP $code — run: vps-tools.sh web"; fi
+
+    # 2. A wrong token must be refused. This is the test people skip.
+    code=$(curl -sS --max-time 15 -o /dev/null -w '%{http_code}' \
+      "$URL?hub.mode=subscribe&hub.verify_token=definitely-wrong&hub.challenge=${CHAL}" 2>/dev/null || echo 000)
+    if [ "$code" = "403" ]; then ok "wrong token → refused (strangers cannot subscribe to our endpoint)"
+    elif [ "$code" = "404" ]; then bad "404 — workflow 05 is not live yet"
+    else bad "wrong token got HTTP $code — the endpoint is NOT refusing strangers. Do not go live. Send me this"; fi
+
+    # 3. No token at all must also be refused.
+    code=$(curl -sS --max-time 15 -o /dev/null -w '%{http_code}' \
+      "$URL?hub.mode=subscribe&hub.challenge=${CHAL}" 2>/dev/null || echo 000)
+    if [ "$code" = "403" ]; then ok "no token → refused"
+    elif [ "$code" = "404" ]; then bad "404 — workflow 05 is not live yet"
+    else bad "no token got HTTP $code — should be 403"; fi
+
+    echo
+    if [ "$fail" -eq 0 ]; then
+      echo "✅ $pass/3 — the webhook works, and it refuses anyone without the token."
+      echo "   The token was read from .env and never printed. Safe to screenshot."
+    else
+      echo "✖ $fail of 3 failed. Safe to screenshot — the token was never printed."
+      exit 1
+    fi
+    ;;
+  *) die "Unknown command '$1'. Use: preflight | test | keywords | schema | ledger | doctor | web | smtp | handshake" ;;
 esac

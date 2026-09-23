@@ -6,22 +6,25 @@
 
 > 💰 **2026-07-26: PROPEL HAS A PAYING CLIENT.** Shalom Park paid the setup fee. You did that. Second SIM ✅ 09112714482 logged. We're in production mode — full build plan in [ops/production-checklist.md](ops/production-checklist.md), you don't need to read it, I'm running it.
 
-## ⭐ DO THIS NEXT — step 6: import the Instagram workflow (3 min)
+## ⭐ DO THIS NEXT — step 7: make the verify token (5 min)
 
-**New workflow → ⋯ → Import from URL:**
 ```
-https://raw.githubusercontent.com/aadamola/PROPEL/claude/propel-realestate-marketing-plan-wxjj3x/ops/concierge/workflows/05-channel-instagram.json
+cd /opt/propel-repo && git pull
+bash /opt/propel-repo/ops/setup/apply-client-ledger.sh shalom-park
+cd /opt/propel && docker compose up -d n8n
+bash /opt/propel-repo/ops/setup/vps-tools.sh doctor
 ```
 
-**Both IDs are already inside it — nothing to paste.** Just check:
-- **Concierge CORE** node shows `SzWrUVB8WYv3sfE5`
-- **Ledger + escalation** node shows `oNt2oRixkDbbUa2p`
+- **Line 2** creates the token and saves it on the server. **It never shows it to you — that's deliberate.** It also re-applies the ledger tables, which is harmless.
+- **Line 3** restarts n8n so it picks the token up. **n8n will disappear for about 30 seconds** — if the editor disconnects, wait and refresh.
+- **Line 4** checks n8n can actually see it. You want:
+  - `✓ N8N_BLOCK_ENV_ACCESS_IN_NODE=false`
+  - `✓ META_VERIFY_TOKEN_SHALOM_PARK set`
+  - `– SHALOM_PARK_APP_SECRET not set yet` ← **expected**, that comes from the Meta app
 
-The three sending nodes (`Private reply to comment`, `Public comment reply`, `Send IG DM`) will show a **missing credential warning. That's expected** — the Instagram token doesn't exist until the Meta app does.
+**Send me the doctor output.** If any line shows ✖, don't go further — it's the same problem that caused "access to env vars denied" in August, and I'll give you the fix.
 
-**Save. Do NOT Publish yet** — publishing puts the webhook live, and that's step 8, after the secret is in place.
-
-*Good news: steps 7–9 don't need Meta. You can have the endpoint live and proven secure tonight — only step 10 waits for the Meta app.*
+Ignore the webhook address it prints for `-wa` — Shalom Park uses `-ig`.
 
 ---
 
@@ -55,6 +58,7 @@ Testing the bot · the automated pilot · voice notes · first audit calls. Noth
 
 ## ✅ DONE (look how far this has come)
 
+- [x] 📲 **Step 6 — Instagram workflow imported with both IDs baked in** (2026-09-23)
 - [x] 📒 **Step 5 — ledger + alerts workflow imported (`oNt2oRixkDbbUa2p`) and wired into 05** (2026-09-23)
 - [x] 🧠 **Step 4 — core workflow imported (`SzWrUVB8WYv3sfE5`) and wired into 05** (2026-09-23)
 - [x] 🐛 **Your manual run exposed a core bug — fixed: duplicates and invalid requests now stay silent** (2026-09-23)

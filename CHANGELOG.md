@@ -2,6 +2,13 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-09-23 (step 6 ✅) — Step 9 rebuilt so the verify token never reaches the screen
+
+- **Step 6 done** — `05` imported with both sub-workflow IDs baked in.
+- **🔴 Step 9 had him paste the verify token into a `curl` command** — putting a live secret into shell history and into any screenshot sent to me, the day after a mailbox password went through chat that way. **New `vps-tools.sh handshake`**: reads the token from `.env` inside the script, runs all three checks (right token / wrong token / no token), prints only pass/fail. Output is safe to screenshot by construction.
+- **Tested before shipping, against the real `Handshake` node code lifted out of `05`** and served by a local stand-in for n8n, in four states. **Correct** → 3/3. **Insecure (echoes any token)** → caught, says *"Do not go live"*. **Unpublished** → points at step 8. **n8n cannot read the env** → points at `doctor` — the August failure. **Token appeared in the output zero times.** Engine URL is overridable via `PROPEL_ENGINE` so this stays testable.
+- **Fixed `apply-client-ledger.sh` finding its own SQL file.** It computed its location *after* `cd /opt/propel`, so run by a relative path it wrote the token and then failed "schema not found" — the first half succeeding and the second half making it look like everything failed. **Now resolves `SCRIPT_DIR` first; verified from both an absolute and a relative path.**
+
 ## 2026-09-23 (step 5 ✅) — Ledger workflow wired; caught a WhatsApp-era trap before step 10
 
 - **Ledger + escalation imported as `oNt2oRixkDbbUa2p`**, written to `clients.json`, rebuilt. **`05` now carries both real sub-workflow IDs and the preflight no longer flags a placeholder** — step 6 is import-and-save.

@@ -91,6 +91,38 @@
     },
     {
       "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "worth-it",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              },
+              "leftValue": "={{ !($json.fatal === true || $json.duplicate === true) }}",
+              "rightValue": ""
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        510,
+        0
+      ],
+      "id": "worth-model",
+      "name": "Worth a model call?"
+    },
+    {
+      "parameters": {
         "method": "POST",
         "url": "={{ $json.model_url }}",
         "authentication": "genericCredentialType",
@@ -110,8 +142,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        620,
-        0
+        700,
+        -80
       ],
       "id": "gemini",
       "name": "Gemini 3 Flash",
@@ -132,7 +164,7 @@
     },
     {
       "parameters": {
-        "jsCode": "\n// Assemble what the channel adapter needs to act on.\nconst env = $input.first().json;\n\nif (env.fatal)     return [{ json: { send: false, reason: env.reason, fatal: true } }];\nif (env.duplicate) return [{ json: { send: false, reason: 'duplicate_message' } }];\n\nconst esc = env.client?.escalation || {};\nconst target = esc.primary || {};\n\nreturn [{ json: {\n  send: true,\n  client_id:    env.client_id,\n  channel:      env.channel,\n  contact_id:   env.contact_id,\n  thread_ref:   env.thread_ref,\n  subject:      env.subject ? ('Re: ' + String(env.subject).replace(/^re:\\s*/i,'')) : '',\n  reply:        env.reply,\n  escalate:     env.escalate === true,\n  escalation:   env.escalate === true ? {\n    to_name:   target.name || '',\n    to_wa:     target.whatsapp || '',\n    reason:    env.escalation_reason || '',\n    unclaimed_alert_minutes: esc.unclaimed_alert_minutes || 15\n  } : null,\n  ledger: {\n    provider_message_id: env.provider_message_id,\n    contact_hash:        env.contact_hash,\n    contact_e164:        env.contact_e164 || env.contact_email || env.contact_id,\n    channel:             env.channel,\n    unit_interest:       env.unit_interest || '',\n    grounded_in:         env.grounded_in || [],\n    guard_triggered:     env.guard_triggered || ''\n  },\n  // Add-on hooks: enabled per client in clients.json. Each is a future\n  // sub-workflow call; the envelope already carries what they need.\n  addons: {\n    voice_note:  !!(env.capabilities?.voice_notes) && env.channel === 'whatsapp',\n    booking:     !!(env.capabilities?.booking) && /inspect|visit|viewing|book/i.test(env.text || ''),\n    doc_vault:   !!(env.capabilities?.document_vault) && /document|title|c of o|survey|deed/i.test(env.text || ''),\n    lead_score:  !!(env.capabilities?.lead_scoring),\n    followup:    !!(env.capabilities?.followup_sequences)\n  }\n}}];\n"
+        "jsCode": "\n// Assemble what the channel adapter needs to act on.\n//\n// The envelope is read from 'Build prompt' BY NAME, and the model's answer\n// from $input. They are deliberately two sources. Guardrails builds a fresh\n// object out of Gemini's reply, so anything the earlier nodes decided --\n// fatal, duplicate, which client, which channel -- does not survive it. This\n// node used to read everything from $input, found no 'duplicate' flag, and\n// replied to Meta's redeliveries and to unknown clients alike.\nconst env = $('Build prompt').first().json;\nconst g   = $input.first().json;\n\nif (env.fatal)     return [{ json: { send: false, reason: env.reason, fatal: true } }];\nif (env.duplicate) return [{ json: { send: false, reason: 'duplicate_message' } }];\n\nconst esc = env.client?.escalation || {};\nconst target = esc.primary || {};\n\nreturn [{ json: {\n  send: true,\n  client_id:    env.client_id,\n  channel:      env.channel,\n  contact_id:   env.contact_id,\n  thread_ref:   env.thread_ref,\n  subject:      env.subject ? ('Re: ' + String(env.subject).replace(/^re:\\s*/i,'')) : '',\n  reply:        g.reply,\n  escalation_reason: g.escalation_reason || '',\n  unit_interest: g.unit_interest || '',\n  grounded_in:  g.grounded_in || [],\n  guard_triggered: g.guard_triggered || '',\n  escalate:     g.escalate === true,\n  escalation:   g.escalate === true ? {\n    to_name:   target.name || '',\n    to_wa:     target.whatsapp || '',\n    reason:    g.escalation_reason || '',\n    unclaimed_alert_minutes: esc.unclaimed_alert_minutes || 15\n  } : null,\n  ledger: {\n    provider_message_id: env.provider_message_id,\n    contact_hash:        env.contact_hash,\n    contact_e164:        env.contact_e164 || env.contact_email || env.contact_id,\n    channel:             env.channel,\n    unit_interest:       g.unit_interest || '',\n    grounded_in:         g.grounded_in || [],\n    guard_triggered:     g.guard_triggered || ''\n  },\n  // Add-on hooks: enabled per client in clients.json. Each is a future\n  // sub-workflow call; the envelope already carries what they need.\n  addons: {\n    voice_note:  !!(env.capabilities?.voice_notes) && env.channel === 'whatsapp',\n    booking:     !!(env.capabilities?.booking) && /inspect|visit|viewing|book/i.test(env.text || ''),\n    doc_vault:   !!(env.capabilities?.document_vault) && /document|title|c of o|survey|deed/i.test(env.text || ''),\n    lead_score:  !!(env.capabilities?.lead_scoring),\n    followup:    !!(env.capabilities?.followup_sequences)\n  }\n}}];\n"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -182,7 +214,25 @@
       "main": [
         [
           {
+            "node": "Worth a model call?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Worth a model call?": {
+      "main": [
+        [
+          {
             "node": "Gemini 3 Flash",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Build response envelope",
             "type": "main",
             "index": 0
           }

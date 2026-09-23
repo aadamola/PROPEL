@@ -11,11 +11,36 @@ const wf = JSON.parse(fs.readFileSync(path.join(__dirname, '../ops/concierge/wor
 const nodeSrc = n => wf.nodes.find(x => x.name === n).parameters.jsCode;
 
 const staticStore = {};
+const outputs = {};   // what each node last produced -- backs $('Node') lookups
 function run(nodeName, json) {
   const $input = { first: () => ({ json }) };
   const $getWorkflowStaticData = () => staticStore;
-  return new Function('$input', '$getWorkflowStaticData', nodeSrc(nodeName))($input, $getWorkflowStaticData)[0].json;
+  const $ = n => ({ first: () => ({ json: outputs[n] }) });
+  const r = new Function('$input', '$getWorkflowStaticData', '$', nodeSrc(nodeName))($input, $getWorkflowStaticData, $)[0].json;
+  outputs[nodeName] = r;
+  return r;
 }
+
+// The final node receives TWO things in the real graph: the envelope, which it
+// reads from 'Build prompt' by name, and the model's answer on $input. Tests
+// used to hand it one merged object -- the exact false assumption that hid a
+// bug where duplicates and unknown clients were answered.
+function finalise(envelope, model) {
+  outputs['Build prompt'] = envelope;
+  return run('Build response envelope', model || {});
+}
+
+// The whole CORE, node by node, honouring the IF exactly as n8n would.
+function chain(input, modelReply) {
+  let x = run('Load client + KB', input);
+  x = run('Dedup gate', x);
+  x = run('Build prompt', x);
+  const modelCalled = !(x.fatal === true || x.duplicate === true);
+  const g = modelCalled ? run('Guardrails', modelReply) : x;
+  return { ...finalise(outputs['Build prompt'], g), modelCalled };
+}
+const answer = t => ({ candidates: [{ content: { parts: [{ text: JSON.stringify(
+  { reply: t, escalate: false, escalation_reason: '', unit_interest: '4B', grounded_in: ['units[0].price_ngn'] }) }] } }] });
 
 const base = {
   client_id: 'shalom-park', channel: 'whatsapp', provider_message_id: 'wamid.T1',
@@ -67,27 +92,27 @@ const cases = [
 
   { n: 'CORE-11 envelope carries reply, ledger row and escalation target',
     run: () => { const c = run('Load client + KB', { ...base });
-                 return run('Build response envelope', { ...c, duplicate: false, reply: 'It is ₦185,000,000.', escalate: true, escalation_reason: 'buyer ready to pay', unit_interest: '4-bedroom semi-detached', grounded_in: ['units[0].price_ngn'], guard_triggered: '' }); },
+                 return finalise({ ...c, duplicate: false }, { reply: 'It is ₦185,000,000.', escalate: true, escalation_reason: 'buyer ready to pay', unit_interest: '4-bedroom semi-detached', grounded_in: ['units[0].price_ngn'], guard_triggered: '' }); },
     ok: r => r.send === true && r.escalate === true && r.escalation.to_name === 'Collins' && r.escalation.to_wa === '2348064834680'
           && r.escalation.unclaimed_alert_minutes === 15 && r.ledger.unit_interest === '4-bedroom semi-detached'
           && r.ledger.grounded_in.length === 1 },
 
   { n: 'CORE-12 duplicate produces send:false, not a silent success',
-    run: () => run('Build response envelope', { ...base, duplicate: true }),
+    run: () => finalise({ ...base, duplicate: true }, {}),
     ok: r => r.send === false && r.reason === 'duplicate_message' },
 
   { n: 'CORE-13 fatal produces send:false and surfaces the reason',
-    run: () => run('Build response envelope', { ...base, fatal: true, reason: 'unknown client_id: x' }),
+    run: () => finalise({ ...base, fatal: true, reason: 'unknown client_id: x' }, {}),
     ok: r => r.send === false && r.fatal === true && /unknown client_id/.test(r.reason) },
 
   { n: 'CORE-14 email reply subject becomes Re: without doubling',
     run: () => { const c = run('Load client + KB', { ...base, channel: 'email', subject: 'Re: Enquiry' });
-                 return run('Build response envelope', { ...c, duplicate: false, reply: 'Hello', escalate: false }); },
+                 return finalise({ ...c, duplicate: false }, { reply: 'Hello', escalate: false }); },
     ok: r => r.subject === 'Re: Enquiry' },
 
   { n: 'CORE-15 add-on hooks stay off until enabled in the registry',
     run: () => { const c = run('Load client + KB', { ...base, text: 'can I book an inspection and see the title documents?' });
-                 return run('Build response envelope', { ...c, duplicate: false, reply: 'x', escalate: false }); },
+                 return finalise({ ...c, duplicate: false }, { reply: 'x', escalate: false }); },
     ok: r => r.addons.booking === false && r.addons.doc_vault === false && r.addons.voice_note === false },
 
   { n: 'CORE-17 empty input (manual run) still yields a usable model_url',
@@ -101,8 +126,39 @@ const cases = [
   { n: 'CORE-16 enabling a capability arms its hook on intent',
     run: () => { const c = run('Load client + KB', { ...base, text: 'I want to book an inspection' });
                  c.capabilities = { ...c.capabilities, booking: true };
-                 return run('Build response envelope', { ...c, duplicate: false, reply: 'x', escalate: false }); },
-    ok: r => r.addons.booking === true && r.addons.doc_vault === false }
+                 return finalise({ ...c, duplicate: false }, { reply: 'x', escalate: false }); },
+    ok: r => r.addons.booking === true && r.addons.doc_vault === false },
+
+  // --- the whole chain, the way n8n actually runs it --------------------
+  // Found 2026-09-23 from a screenshot of a manual run: every one of these
+  // except CORE-21 used to come back send:true.
+  { n: 'CORE-19 ★ a manual run with no input stays silent and never calls the model',
+    run: () => chain({}, answer('x')),
+    ok: r => r.send === false && r.fatal === true && r.modelCalled === false },
+
+  { n: 'CORE-20 ★ an unknown client fails closed end to end',
+    run: () => chain({ ...base, client_id: 'nobody' }, answer('x')),
+    ok: r => r.send === false && /unknown client_id: nobody/.test(r.reason) && r.modelCalled === false },
+
+  { n: 'CORE-21 a real first message is answered by the model',
+    run: () => chain({ ...base, provider_message_id: 'wamid.CHAIN-1' }, answer('The 4-bedroom is 185,000,000 naira.')),
+    ok: r => r.send === true && /185,000,000/.test(r.reply) && r.modelCalled === true && r.client_id === 'shalom-park' },
+
+  { n: 'CORE-22 ★ Meta redelivering the same message gets NO second reply',
+    run: () => { chain({ ...base, provider_message_id: 'wamid.CHAIN-2' }, answer('first'));
+                 return chain({ ...base, provider_message_id: 'wamid.CHAIN-2' }, answer('second')); },
+    ok: r => r.send === false && r.reason === 'duplicate_message' && r.modelCalled === false && !r.reply },
+
+  { n: 'CORE-23 the reply carries the caller\'s client, not a hardcoded one',
+    run: () => chain({ ...base, client_id: 'propel', provider_message_id: 'wamid.CHAIN-3' }, answer('hello')),
+    ok: r => r.send === true && r.client_id === 'propel' },
+
+  { n: 'CORE-24 the IF sits between Build prompt and the model, keyed on fatal + duplicate',
+    run: () => ({ node: wf.nodes.find(n => n.name === 'Worth a model call?'), c: wf.connections }),
+    ok: ({ node, c }) => node && /fatal/.test(JSON.stringify(node.parameters)) && /duplicate/.test(JSON.stringify(node.parameters))
+                       && c['Build prompt'].main[0][0].node === 'Worth a model call?'
+                       && c['Worth a model call?'].main[0][0].node === 'Gemini 3 Flash'
+                       && c['Worth a model call?'].main[1][0].node === 'Build response envelope' }
 ];
 
 let pass=0, fail=0;

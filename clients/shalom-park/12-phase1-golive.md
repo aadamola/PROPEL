@@ -140,7 +140,9 @@ https://raw.githubusercontent.com/aadamola/PROPEL/claude/propel-realestate-marke
 *Fallback: open the link, Ctrl+A, Ctrl+C, click the empty canvas, Ctrl+V.* Then **Save**.
 Attach the **Gemini** credential to the `Gemini 3 Flash` node.
 
-> **It does not need to be Active.** A workflow called by another workflow runs whether or not it is active — Active only matters for triggers. This trips people up constantly. Only `05` needs the toggle.
+> **Already imported one before 2026-09-23? Delete it and import again.** The earlier version answered Meta's redeliveries and unknown clients instead of staying silent — fixed and tested (`CORE-19`–`CORE-24`). Also delete the **August** CORE if it is still there, so exactly one exists.
+
+> **Newer n8n shows *Publish* instead of an Active switch.** On `03` and `06`, **click Publish** — they have no public trigger, so it is harmless, and it removes any doubt about which version a sub-workflow call uses. `05` is still the only one whose webhook goes live.
 
 📋 **Copy its id from the URL** — the part after `/workflow/`.
 
@@ -152,7 +154,7 @@ Same way, from:
 https://raw.githubusercontent.com/aadamola/PROPEL/claude/propel-realestate-marketing-plan-wxjj3x/ops/concierge/workflows/06-ledger-and-escalation.json
 ```
 
-Attach **Propel Postgres** to both Postgres nodes and **Propel SMTP** to `Alert the sales team`. **Save.** Again — no Active toggle.
+Attach **Propel Postgres** to both Postgres nodes and **Propel SMTP** to `Alert the sales team`. **Save**, then **Publish** if your n8n shows the button.
 
 📋 **Copy its id from the URL.**
 

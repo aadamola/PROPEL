@@ -112,7 +112,15 @@ return [{ json: { ...env, model_url: MODEL_URL, system: SYSTEM + '\\n\\n' + CHAN
 
 const finalise = `
 // Assemble what the channel adapter needs to act on.
-const env = $input.first().json;
+//
+// The envelope is read from 'Build prompt' BY NAME, and the model's answer
+// from $input. They are deliberately two sources. Guardrails builds a fresh
+// object out of Gemini's reply, so anything the earlier nodes decided --
+// fatal, duplicate, which client, which channel -- does not survive it. This
+// node used to read everything from $input, found no 'duplicate' flag, and
+// replied to Meta's redeliveries and to unknown clients alike.
+const env = $('Build prompt').first().json;
+const g   = $input.first().json;
 
 if (env.fatal)     return [{ json: { send: false, reason: env.reason, fatal: true } }];
 if (env.duplicate) return [{ json: { send: false, reason: 'duplicate_message' } }];
@@ -127,12 +135,16 @@ return [{ json: {
   contact_id:   env.contact_id,
   thread_ref:   env.thread_ref,
   subject:      env.subject ? ('Re: ' + String(env.subject).replace(/^re:\\s*/i,'')) : '',
-  reply:        env.reply,
-  escalate:     env.escalate === true,
-  escalation:   env.escalate === true ? {
+  reply:        g.reply,
+  escalation_reason: g.escalation_reason || '',
+  unit_interest: g.unit_interest || '',
+  grounded_in:  g.grounded_in || [],
+  guard_triggered: g.guard_triggered || '',
+  escalate:     g.escalate === true,
+  escalation:   g.escalate === true ? {
     to_name:   target.name || '',
     to_wa:     target.whatsapp || '',
-    reason:    env.escalation_reason || '',
+    reason:    g.escalation_reason || '',
     unclaimed_alert_minutes: esc.unclaimed_alert_minutes || 15
   } : null,
   ledger: {
@@ -140,9 +152,9 @@ return [{ json: {
     contact_hash:        env.contact_hash,
     contact_e164:        env.contact_e164 || env.contact_email || env.contact_id,
     channel:             env.channel,
-    unit_interest:       env.unit_interest || '',
-    grounded_in:         env.grounded_in || [],
-    guard_triggered:     env.guard_triggered || ''
+    unit_interest:       g.unit_interest || '',
+    grounded_in:         g.grounded_in || [],
+    guard_triggered:     g.guard_triggered || ''
   },
   // Add-on hooks: enabled per client in clients.json. Each is a future
   // sub-workflow call; the envelope already carries what they need.
@@ -169,6 +181,15 @@ const core = {
     code('load-ctx', 'Load client + KB', [-40, 0], loadCtx),
     code('dedup', 'Dedup gate', [180, 0], dedup),
     code('build-prompt', 'Build prompt', [400, 0], buildPrompt),
+    // A duplicate or an invalid request has nothing to ask the model. Skipping
+    // the call saves the latency and the tokens, and means nothing the model
+    // says can be mistaken for an answer to a message we should ignore.
+    { parameters: { conditions: { options: { caseSensitive: true, version: 2 }, conditions: [
+        { id: 'worth-it', operator: { type: 'boolean', operation: 'true', singleValue: true },
+          leftValue: '={{ !($json.fatal === true || $json.duplicate === true) }}', rightValue: '' } ],
+        combinator: 'and' }, options: {} },
+      type: 'n8n-nodes-base.if', typeVersion: 2.2, position: [510, 0],
+      id: 'worth-model', name: 'Worth a model call?' },
     { parameters: {
         method: 'POST',
         // Key lives in an n8n credential, not $env: encrypted at rest with
@@ -179,7 +200,7 @@ const core = {
         sendBody: true, specifyBody: 'json',
         jsonBody: "={{ $json.fatal || $json.duplicate ? '{}' : JSON.stringify({ system_instruction: { parts: [{ text: $json.system }] }, contents: [{ role: 'user', parts: [{ text: $json.user_message }] }], generationConfig: { temperature: 0.2, maxOutputTokens: 800, responseMimeType: 'application/json' } }) }}",
         options: { timeout: 20000, response: { response: { neverError: true } } }
-      }, type: 'n8n-nodes-base.httpRequest', typeVersion: 4.2, position: [620, 0],
+      }, type: 'n8n-nodes-base.httpRequest', typeVersion: 4.2, position: [700, -80],
       id: 'gemini', name: 'Gemini 3 Flash', alwaysOutputData: true },
     code('guardrails', 'Guardrails', [840, 0], guardSrc),
     code('finalise', 'Build response envelope', [1060, 0], finalise)
@@ -188,7 +209,10 @@ const core = {
     'Called by a channel': { main: [[{ node: 'Load client + KB', type: 'main', index: 0 }]] },
     'Load client + KB':    { main: [[{ node: 'Dedup gate', type: 'main', index: 0 }]] },
     'Dedup gate':          { main: [[{ node: 'Build prompt', type: 'main', index: 0 }]] },
-    'Build prompt':        { main: [[{ node: 'Gemini 3 Flash', type: 'main', index: 0 }]] },
+    'Build prompt':        { main: [[{ node: 'Worth a model call?', type: 'main', index: 0 }]] },
+    'Worth a model call?': { main: [
+      [{ node: 'Gemini 3 Flash', type: 'main', index: 0 }],
+      [{ node: 'Build response envelope', type: 'main', index: 0 }] ] },
     'Gemini 3 Flash':      { main: [[{ node: 'Guardrails', type: 'main', index: 0 }]] },
     'Guardrails':          { main: [[{ node: 'Build response envelope', type: 'main', index: 0 }]] }
   },
@@ -296,6 +320,28 @@ if (!payload.ok) return [{ json: envelope({ channel: 'instagram_dm', is_actionab
 return [{ json: normalize('instagram', payload.body, 'shalom-park') }];
 `;
 
+
+const igSeen = `
+// Front-door dedup. Meta redelivers webhooks, and a redelivery is the same
+// message, not a new one. This sits BEFORE the keyword lane because most
+// messages never reach the CORE -- a dedup that lives only in the CORE lets
+// a redelivered "price" DM fire the price card twice.
+//
+// Returning no items ends the branch: no reply, no ledger row, no alert.
+const env = $input.first().json;
+const key = env.provider_message_id;
+if (!key) return [{ json: env }];   // nothing to key on: let it through, never drop a buyer
+
+const store = $getWorkflowStaticData('global');
+store.seenMsgs = store.seenMsgs || {};
+const now = Date.now(), TTL = 24 * 60 * 60 * 1000;
+for (const k of Object.keys(store.seenMsgs)) if (now - store.seenMsgs[k] > TTL) delete store.seenMsgs[k];
+
+if (store.seenMsgs[key]) return [];
+store.seenMsgs[key] = now;
+return [{ json: env }];
+`;
+
 const igFastLane = `
 ${keywordsSrc}
 
@@ -350,6 +396,7 @@ return [{ json: {
   escalate: src.escalate === true,
   escalation_reason: src.escalation_reason || '',
   guard_triggered: src.guard_triggered || '',
+  reason: src.reason || '',
   ledger: {
     provider_message_id: env.provider_message_id,
     contact_hash: env.contact_hash,
@@ -372,7 +419,7 @@ const igSendGate = `
 // is a lost lead; a buyer who gets a late human answer is still a lead.
 const LIMITS = ${JSON.stringify(spKw.instagram)};
 const item = $input.first().json;
-if (!item.send) return [{ json: { ...item, send: false, reason: 'empty_reply' } }];
+if (!item.send) return [{ json: { ...item, send: false, reason: item.reason || 'empty_reply' } }];
 
 const store = $getWorkflowStaticData('global');
 store.repliedComments = store.repliedComments || {};
@@ -434,6 +481,7 @@ const instagram = {
     code('ig-skip', 'Log ignored event', [180, 300],
       "// Echoes, read receipts and our own comments land here. Logged, never answered.\nreturn [{ json: { ignored: true, reason: $json.skip_reason, channel: $json.channel } }];"),
 
+    code('ig-seen', 'Seen this message?', [290, 60], igSeen),
     code('ig-keywords', 'Keyword fast lane', [400, 60], igFastLane),
     { parameters: { conditions: { options: { caseSensitive: true, version: 2 }, conditions: [
         { id: 'is-keyword', operator: { type: 'string', operation: 'equals' },
@@ -510,8 +558,9 @@ const instagram = {
     'ACK Meta':             { main: [[{ node: 'Normalise', type: 'main', index: 0 }]] },
     'Normalise':            { main: [[{ node: 'Worth answering?', type: 'main', index: 0 }]] },
     'Worth answering?':     { main: [
-      [{ node: 'Keyword fast lane', type: 'main', index: 0 }],
+      [{ node: 'Seen this message?', type: 'main', index: 0 }],
       [{ node: 'Log ignored event', type: 'main', index: 0 }] ] },
+    'Seen this message?':   { main: [[{ node: 'Keyword fast lane', type: 'main', index: 0 }]] },
     'Keyword fast lane':    { main: [[{ node: 'Keyword matched?', type: 'main', index: 0 }]] },
     'Keyword matched?':     { main: [
       [{ node: 'Guardrails', type: 'main', index: 0 }],

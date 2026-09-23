@@ -30,6 +30,14 @@ function run(name, input) {
   return out[0].json;
 }
 
+/** Run a node and return its raw item array -- [] means the branch stopped. */
+function runRaw(name, input) {
+  const $input = { first: () => ({ json: input }), all: () => [{ json: input }] };
+  const $env = {}; const $ = n => ({ first: () => ({ json: results[n] }) });
+  return new Function('$input', '$env', '$getWorkflowStaticData', '$', 'require', nodeSrc(name))
+    ($input, $env, () => staticData, $, require);
+}
+
 /** One pass of the live pipeline, from a signed Meta payload to a send decision. */
 function pipeline(body) {
   const norm  = run('Normalise', { ok: true, body });
@@ -141,6 +149,29 @@ const cases = [
       const led = JSON.parse(fs.readFileSync(path.join(__dirname, '../ops/concierge/workflows/06-ledger-and-escalation.json'), 'utf8'));
       return led.nodes.filter(n => /postgres|emailSend/.test(n.type))
                       .every(n => n.onError !== 'continueRegularOutput');
+    } },
+
+  { name: 'IGE-13 ★ a redelivered DM is stopped at the front door — no second price card',
+    run: () => {
+      // The keyword lane never reaches the CORE, so the CORE's dedup cannot
+      // protect it. A redelivered "price" DM used to fire the card twice.
+      const env = run('Normalise', { ok: true, body: dm('MID_DUP_1', 'price') });
+      const first  = runRaw('Seen this message?', env);
+      const second = runRaw('Seen this message?', env);
+      return first.length === 1 && second.length === 0;
+    } },
+
+  { name: 'IGE-14 a message with no id is let through — never drop a buyer to be tidy',
+    run: () => {
+      const env = { ...run('Normalise', { ok: true, body: dm('MID_X', 'price') }), provider_message_id: '' };
+      return runRaw('Seen this message?', env).length === 1 && runRaw('Seen this message?', env).length === 1;
+    } },
+
+  { name: 'IGE-15 the front-door dedup sits before BOTH lanes',
+    run: () => {
+      const c = wf.connections;
+      return c['Worth answering?'].main[0][0].node === 'Seen this message?' &&
+             c['Seen this message?'].main[0][0].node === 'Keyword fast lane';
     } },
 
   { name: 'IGE-10 the ledger row carries the keyword that produced the lead',

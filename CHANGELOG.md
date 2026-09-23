@@ -2,6 +2,13 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-09-23 (step 3 ✅) — Alerts mailbox proven end to end
+
+- **`vps-tools.sh smtp` sent a real message from `alerts@getpropel.tech` via `smtp.hostinger.com:465` and it landed in ADEDAMOLA's Gmail Inbox — not spam — displayed as "Propel Alerts".** The mailbox works, the SSL pairing is right, and Gmail trusts the domain. It does *not* yet prove deliverability into `sales@shalomparknigeria.com`; that is checked at go-live.
+- **Asked him to confirm the test used the rotated password**, so the value going into n8n is the new one.
+- **Step 3 complete** bar 3d (Instagram), which is correctly parked until the Meta app exists.
+- **Import made one paste simpler:** steps 4–6 in the runbook now carry the raw GitHub URLs for `03`, `06` and `05`, for n8n's **Import from URL**, with copy-paste as the fallback. The clone worked unauthenticated earlier, so the repo is public and the raw links resolve.
+
 ## 2026-09-23 (later) — SMTP settings confirmed; a mailbox password was exposed in chat and must be rotated
 
 - **Confirmed from the Hostinger panel: `smtp.hostinger.com`, port `465`, SSL/TLS on.** Written into the runbook as confirmed values, replacing "read it off the panel". Matches the port/encryption rule given earlier (465 ↔ SSL on).

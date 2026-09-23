@@ -131,7 +131,13 @@ Test it before n8n sees it: `bash /opt/propel-repo/ops/setup/vps-tools.sh smtp` 
 
 ### Step 4 — import `03-concierge-core.json`
 
-Build → empty canvas → click canvas → paste the JSON → **Save**.
+**New workflow → ⋯ (top right) → Import from URL:**
+
+```
+https://raw.githubusercontent.com/aadamola/PROPEL/claude/propel-realestate-marketing-plan-wxjj3x/ops/concierge/workflows/03-concierge-core.json
+```
+
+*Fallback: open the link, Ctrl+A, Ctrl+C, click the empty canvas, Ctrl+V.* Then **Save**.
 Attach the **Gemini** credential to the `Gemini 3 Flash` node.
 
 > **It does not need to be Active.** A workflow called by another workflow runs whether or not it is active — Active only matters for triggers. This trips people up constantly. Only `05` needs the toggle.
@@ -140,13 +146,23 @@ Attach the **Gemini** credential to the `Gemini 3 Flash` node.
 
 ### Step 5 — import `06-ledger-and-escalation.json`
 
-Same paste. Attach **Propel Postgres** to both Postgres nodes and **Propel SMTP** to `Alert the sales team`. **Save.** Again — no Active toggle.
+Same way, from:
+
+```
+https://raw.githubusercontent.com/aadamola/PROPEL/claude/propel-realestate-marketing-plan-wxjj3x/ops/concierge/workflows/06-ledger-and-escalation.json
+```
+
+Attach **Propel Postgres** to both Postgres nodes and **Propel SMTP** to `Alert the sales team`. **Save.** Again — no Active toggle.
 
 📋 **Copy its id from the URL.**
 
 ### Step 6 — import `05-channel-instagram.json` and wire the two ids
 
-Paste it, then:
+```
+https://raw.githubusercontent.com/aadamola/PROPEL/claude/propel-realestate-marketing-plan-wxjj3x/ops/concierge/workflows/05-channel-instagram.json
+```
+
+Then:
 
 1. Open the **`Concierge CORE`** node → confirm the id matches step 4
 2. Open the **`Ledger + escalation`** node → replace `REPLACE_WITH_LEDGER_WORKFLOW_ID` with the id from step 5

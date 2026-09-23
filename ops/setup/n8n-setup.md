@@ -117,7 +117,7 @@ Still in that chat panel. Try to make it say something it shouldn't:
 >
 > *(It now fails cleanly with a stated reason rather than a confusing URL error — but a red node still isn't proof of a problem here.)*
 
-This is the shared brain every channel will call. **Core workflow ID is `AE422d9ptfvjj0PQ`** — already wired into the email channel, so Step 5 needs no ID pasting.
+This is the shared brain every channel will call. **Core workflow ID is `SzWrUVB8WYv3sfE5`** *(re-imported 2026-09-23; the August `AE422d9…` copy is retired)* — already wired into the email channel, so Step 5 needs no ID pasting.
 
 ---
 

@@ -2,6 +2,14 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-09-23 (step 4 ✅) — Core re-imported as `SzWrUVB8WYv3sfE5`; the old ID was hardcoded in three places
+
+- **Fixed core imported; new workflow ID `SzWrUVB8WYv3sfE5`** written to `clients.json` → `_meta.n8n.core_workflow_id`. The August ID `AE422d9ptfvjj0PQ` is recorded as retired in `_core_id_history`.
+- **The old ID was not only in the registry — it was hardcoded in three more places:** the email channel's builder, the import preflight (which matched callees against a pasted literal), and `ops/setup/n8n-setup.md`. **All three now read from the registry**, so the next re-import is a one-field change. A value that lives in four places will eventually be updated in three.
+- **Verified both callers resolve correctly:** `04` email → CORE → `SzWrUVB8…`, `05` Instagram → CORE → `SzWrUVB8…`.
+- **Checked rather than assumed that he did not need to re-import `03`:** it embeds the registry, so it changed — but a node-by-node diff shows **the only difference is the ID note inside the embedded `_meta.n8n` block. Logic identical.** Told him not to redo it.
+- **Changed how IDs flow:** instead of him pasting IDs into `05` at step 6, he sends each ID to me and I bake it in. Step 6 becomes import-and-save — one fewer copy-paste in the step most likely to go wrong.
+
 ## 2026-09-23 (step 4) — A screenshot of a manual run exposed that "fail closed" was never true
 
 - **ADEDAMOLA imported `03` and ran it by hand. Every node went green, "Succeeded in 240ms" — with every input field `null`.** A green result on empty input is the pattern I had already been burned by twice this month, so I ran the chain instead of trusting the colour.

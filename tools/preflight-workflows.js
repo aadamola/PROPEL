@@ -102,9 +102,11 @@ for (const [file, w] of Object.entries(wf)) {
   for (const n of w.nodes) {
     if (!n.type.includes('executeWorkflow') || n.type.includes('Trigger')) continue;
     const id = n.parameters.workflowId?.value;
-    const target = Object.entries(wf).find(([, t]) =>
-      t.nodes.some(x => x.type.includes('executeWorkflowTrigger')) &&
-      (id === 'AE422d9ptfvjj0PQ' ? t.name.includes('CORE') : /Ledger/.test(t.name)));
+    const REG = JSON.parse(fs.readFileSync(path.join(__dirname, '../ops/concierge/clients.json'), 'utf8'))._meta.n8n;
+    const wants = id === REG.core_workflow_id ? /CORE/
+                : (id === REG.ledger_workflow_id || /REPLACE_WITH_LEDGER/.test(id)) ? /Ledger/ : null;
+    const target = wants && Object.entries(wf).find(([, t]) =>
+      t.nodes.some(x => x.type.includes('executeWorkflowTrigger')) && wants.test(t.name));
     if (!target) { N(`${file} → "${n.name}" calls ${id} — target not in this bundle, check by hand`); continue; }
     const declared = new Set(target[1].nodes.find(x => x.type.includes('executeWorkflowTrigger'))
       .parameters.workflowInputs.values.map(v => v.name));

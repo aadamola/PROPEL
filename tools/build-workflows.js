@@ -242,7 +242,7 @@ const email = {
         { id: 'actionable', operator: { type: 'boolean', operation: 'true', singleValue: true },
           leftValue: '={{ $json.is_actionable }}', rightValue: '' } ], combinator: 'and' }, options: {} },
       type: 'n8n-nodes-base.if', typeVersion: 2.2, position: [180, 0], id: 'if-actionable', name: 'Worth answering?' },
-    { parameters: { workflowId: { __rl: true, value: 'AE422d9ptfvjj0PQ', mode: 'id' },
+    { parameters: { workflowId: { __rl: true, value: registry._meta.n8n.core_workflow_id, mode: 'id' },
         workflowInputs: { mappingMode: 'defineBelow', value: {
           client_id: '={{ $json.client_id }}', channel: '={{ $json.channel }}',
           provider_message_id: '={{ $json.provider_message_id }}', contact_id: '={{ $json.contact_id }}',

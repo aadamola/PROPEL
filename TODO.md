@@ -6,20 +6,20 @@
 
 > 💰 **2026-07-26: PROPEL HAS A PAYING CLIENT.** Shalom Park paid the setup fee. You did that. Second SIM ✅ 09112714482 logged. We're in production mode — full build plan in [ops/production-checklist.md](ops/production-checklist.md), you don't need to read it, I'm running it.
 
-## ⭐ DO THIS NEXT — re-import the core workflow (5 min)
+## ⭐ DO THIS NEXT — step 5: import the ledger + alerts workflow (5 min)
 
-**Your screenshot caught a real bug.** The core would have replied to Meta's duplicate deliveries and to invalid requests instead of staying silent. Fixed and tested. The copy you imported is the old version.
-
-1. In n8n, **delete every workflow called "Propel Concierge — CORE"** — the one from today, and the one from August if it's still there. Exactly one should exist when you're done.
-2. **New workflow → ⋯ → Import from URL:**
+**New workflow → ⋯ → Import from URL:**
 ```
-https://raw.githubusercontent.com/aadamola/PROPEL/claude/propel-realestate-marketing-plan-wxjj3x/ops/concierge/workflows/03-concierge-core.json
+https://raw.githubusercontent.com/aadamola/PROPEL/claude/propel-realestate-marketing-plan-wxjj3x/ops/concierge/workflows/06-ledger-and-escalation.json
 ```
-3. **Gemini 3 Flash** node → attach the `Gemini` credential
-4. **Save**, then **Publish** (harmless here — no public trigger)
-5. 📋 **Copy the workflow ID from the address bar** and **send it to me** — I'll build it into workflow `05` so step 6 has one less thing to paste
 
-**Running it by hand will show "Succeeded" but do nothing** — with no input it now correctly stops before calling Gemini. That's the correct behaviour. The real test is at go-live.
+1. **Record the lead** node → attach `Propel Postgres`
+2. **Append the event** node → attach `Propel Postgres`
+3. **Alert the sales team** node → attach `Propel SMTP`
+4. **Save**, then **Publish**
+5. 📋 **Send me its workflow ID** — same as last time. Then `05` arrives with both IDs already wired, and step 6 is just import-and-save.
+
+*Step 4 ✅ — core is in as `SzWrUVB8WYv3sfE5` and already wired into `05`. No need to re-import it.*
 
 ---
 
@@ -53,6 +53,7 @@ Testing the bot · the automated pilot · voice notes · first audit calls. Noth
 
 ## ✅ DONE (look how far this has come)
 
+- [x] 🧠 **Step 4 — core workflow imported (`SzWrUVB8WYv3sfE5`) and wired into 05** (2026-09-23)
 - [x] 🐛 **Your manual run exposed a core bug — fixed: duplicates and invalid requests now stay silent** (2026-09-23)
 - [x] 📧 **`alerts@getpropel.tech` proven — test email landed in the Inbox, not spam** (2026-09-23)
 - [x] 🔑 **Credentials 3a Gemini + 3b Postgres done; engine.getpropel.tech back up** (2026-09-23)

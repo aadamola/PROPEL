@@ -72,6 +72,24 @@ case "${1:-preflight}" in
       "select coalesce(string_agg(table_name,', '),'NONE — run: vps-tools.sh schema')
          from information_schema.tables
         where table_schema='public' and table_name in ('lead','lead_event');"
+    echo; echo "── what n8n can see (set/missing — values are NEVER printed) ──"
+    # The workflows read these at runtime. If the container was started from
+    # an older compose file, they are simply absent, and the first symptom is
+    # an "access to env vars denied" or a handshake that 403s every time.
+    for V in N8N_BLOCK_ENV_ACCESS_IN_NODE META_VERIFY_TOKEN_SHALOM_PARK SHALOM_PARK_APP_SECRET; do
+      val=$(docker compose exec -T n8n printenv "$V" 2>/dev/null || true)
+      if [ "$V" = "N8N_BLOCK_ENV_ACCESS_IN_NODE" ]; then
+        [ "$val" = "false" ] && echo "  ✓ $V=false" || echo "  ✗ $V is '${val:-unset}' — must be false, or Code nodes cannot read the secrets below"
+      elif [ -n "$val" ]; then echo "  ✓ $V set"
+      else
+        if grep -q "^$V=" "$STACK/.env" 2>/dev/null; then
+          echo "  ✗ $V is in .env but n8n cannot see it — add it to the n8n environment in docker-compose.yml, then: docker compose up -d n8n"
+        else
+          echo "  – $V not set yet"
+        fi
+      fi
+    done
+
     echo; echo "── repo ───────────────────────────────────"
     echo "repo:  $REPO  ($( [ -d "$REPO/.git" ] && git -C "$REPO" rev-parse --short HEAD || echo 'NOT CLONED' ))"
     echo "stack: $STACK"

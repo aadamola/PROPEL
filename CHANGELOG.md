@@ -2,6 +2,13 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-09-23 (step 5 ✅) — Ledger workflow wired; caught a WhatsApp-era trap before step 10
+
+- **Ledger + escalation imported as `oNt2oRixkDbbUa2p`**, written to `clients.json`, rebuilt. **`05` now carries both real sub-workflow IDs and the preflight no longer flags a placeholder** — step 6 is import-and-save.
+- **🔴 Read `apply-client-ledger.sh` before sending him to it, and its closing message was wrong for this client.** Written in the WhatsApp era, it told him the Meta webhook URL is `…/webhook/shalom-park-wa` and to add `WABA_TOKEN`/`WABA_PHONE_ID`. Shalom Park is Instagram-only: the path is `…/shalom-park-ig`. **Following the old printout at step 10 would have pointed Meta at a workflow that is not listening, and the failure would have looked like Meta's fault.** Now prints both paths labelled by channel, says where each secret goes (app secret → `.env`; Instagram token → the n8n Header Auth credential, *not* `.env`), and points at `doctor`.
+- **🟡 Added an n8n environment check to `vps-tools.sh doctor`** — `✓`/`✗` for `N8N_BLOCK_ENV_ACCESS_IN_NODE`, `META_VERIFY_TOKEN_SHALOM_PARK` and `SHALOM_PARK_APP_SECRET`, **never printing a value**. Reason: in August he hit "access to env vars denied", which means the compose file running on his server may predate the repo's. If so, `05`'s handshake would 403 every time at step 9 and look like a token problem. It now distinguishes "not set yet" from **"in `.env` but n8n cannot see it"** — the second one is the compose file, and it says so.
+- **Sequencing clarified: steps 7–9 do not need Meta.** The verify token is ours; only the app secret waits for the Meta app. Activating `05` before the app secret exists is safe — the signature check fails closed and nothing is processed. **He can have the endpoint live and proven secure tonight; only step 10 waits.**
+
 ## 2026-09-23 (step 4 ✅) — Core re-imported as `SzWrUVB8WYv3sfE5`; the old ID was hardcoded in three places
 
 - **Fixed core imported; new workflow ID `SzWrUVB8WYv3sfE5`** written to `clients.json` → `_meta.n8n.core_workflow_id`. The August ID `AE422d9ptfvjj0PQ` is recorded as retired in `_core_id_history`.

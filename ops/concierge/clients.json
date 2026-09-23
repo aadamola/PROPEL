@@ -11,7 +11,7 @@
     "n8n": {
       "core_workflow_id": "SzWrUVB8WYv3sfE5",
       "instance": "https://engine.getpropel.tech",
-      "ledger_workflow_id": null,
+      "ledger_workflow_id": "oNt2oRixkDbbUa2p",
       "_import_order": "Import 03 (CORE) then 06 (ledger + escalation), then paste each id into the matching node of 05 (Instagram). A channel pointing at a sub-workflow that does not exist fails in a way that reads like a code bug.",
       "_core_id_history": "AE422d9ptfvjj0PQ (Aug 2026, retired — carried the envelope bug) → SzWrUVB8WYv3sfE5 (2026-09-23)"
     },

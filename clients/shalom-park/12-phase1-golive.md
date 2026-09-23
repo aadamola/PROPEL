@@ -164,10 +164,10 @@ Attach **Propel Postgres** to both Postgres nodes and **Propel SMTP** to `Alert 
 https://raw.githubusercontent.com/aadamola/PROPEL/claude/propel-realestate-marketing-plan-wxjj3x/ops/concierge/workflows/05-channel-instagram.json
 ```
 
-Then:
+**Both sub-workflow IDs are already baked in** (sent back after steps 4 and 5, written to `clients.json`, rebuilt). Just confirm:
 
-1. Open the **`Concierge CORE`** node → confirm the id matches step 4
-2. Open the **`Ledger + escalation`** node → replace `REPLACE_WITH_LEDGER_WORKFLOW_ID` with the id from step 5
+1. **`Concierge CORE`** shows `SzWrUVB8WYv3sfE5`
+2. **`Ledger + escalation`** shows `oNt2oRixkDbbUa2p`
 3. Attach **Shalom Park IG** (Header Auth) to all three HTTP nodes: `Private reply to comment`, `Public comment reply`, `Send IG DM` — *or leave these until the token exists; they only matter at send time*
 4. **Save**
 
@@ -175,10 +175,19 @@ Then:
 
 ### Step 7 — secrets on the server, never in chat 🔒
 
+**The verify token is ours — make it now.** The app secret has to wait for the Meta app.
+
+```bash
+bash /opt/propel-repo/ops/setup/apply-client-ledger.sh shalom-park
+cd /opt/propel && docker compose up -d n8n
+bash /opt/propel-repo/ops/setup/vps-tools.sh doctor
 ```
-nano /opt/propel/.env     # SHALOM_PARK_APP_SECRET, META_VERIFY_TOKEN_SHALOM_PARK
-docker compose up -d n8n
-```
+
+The first writes `META_VERIFY_TOKEN_SHALOM_PARK` into `.env` without ever printing it (and re-applies the ledger schema, which is harmless — it is idempotent). The last confirms **n8n can actually see it**: look for `✓ N8N_BLOCK_ENV_ACCESS_IN_NODE=false` and `✓ META_VERIFY_TOKEN_SHALOM_PARK set`.
+
+> ⚠️ **If `doctor` says a variable is "in .env but n8n cannot see it"**, the compose file on the server predates the one in the repo. Add the missing lines to the `n8n` service's `environment:` block — they are in `ops/setup/vps-bootstrap.sh` — then `docker compose up -d n8n`. This is the same thing that caused *"access to env vars denied"* in August.
+
+**Use the `-ig` webhook address, not `-wa`.** Shalom Park is Instagram-only; the script prints both.
 
 ### Step 8 — activate `05` only 🟢
 

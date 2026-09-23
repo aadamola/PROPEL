@@ -2,6 +2,12 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-09-23 (step 7 ✅) — n8n sees the token; August's env error fixed at the root
+
+- **`vps-tools.sh n8n-env` ran on the live box: override merged, n8n `Started` (genuinely recreated this time, not merely `Running`), and the check now reads `✓ N8N_BLOCK_ENV_ACCESS_IN_NODE=false` · `✓ META_VERIFY_TOKEN_SHALOM_PARK set` · `– SHALOM_PARK_APP_SECRET not set yet` (correct — comes from the Meta app).** The "access to env vars denied" error from August is fixed, not worked around.
+- **Checked for a webhook path conflict before sending him to publish:** newer n8n refuses to publish a workflow whose webhook path another live workflow already claims. `/webhook/shalom-park-ig` is used only by `05`; the August workflows hold `/whatsapp`, `/instagram` and `/shalom-park-wa`. Clear.
+- **Stated plainly that publishing `05` does not start answering buyers:** Meta is not pointed at the address until step 10, and any POST is rejected by the signature check while the app secret is empty. **Phase 0 carries on by hand, unaffected** — the "never both answering" rule holds.
+
 ## 2026-09-23 (step 7) — `doctor` caught the August root cause; fixed with an override, not an edit
 
 - **Step 7 ran cleanly as far as it could:** verify token generated into `.env` and never printed; ledger schema re-applied idempotently (the `already exists, skipping` notices are correct); `lead_rows = 0`.

@@ -41,9 +41,45 @@
 
 ## 5. LinkedIn (the surveyor/valuer + developer hunting ground)
 
-- [ ] Create **Company Page**: Propel — tagline: *"AI-forward digital marketing for real estate. Lagos. We move property."*
+- [ ] Create **Company Page** — *in progress 2026-09-24*. Exact values:
+
+| Field | Value | Why |
+|---|---|---|
+| Name | `Propel` | |
+| linkedin.com/company/ | **`getpropel`** | **The website already links here** (`site/index.html`). Anything else breaks that link |
+| Website | `https://getpropel.tech` | **Only if it loads in a browser** — a dead link on a new page reads as abandoned |
+| Industry | `Marketing Services` | (`Advertising Services` if it does not appear) — the real-estate focus goes in the tagline and About |
+| Organization size | `0-1 employees` | **True.** Inflating it is the same lie as buying followers (rule 2) |
+| Organization type | `Sole proprietorship` | Matches the legal form (docs/08) until the Ltd triggers fire |
+| Logo | `site/assets/mark-512.png` | The triangle alone. LinkedIn shows logos at thumbnail size, where the wordmark version's tagline turns to mush; the name prints beside it anyway |
+| Tagline | `AI-forward digital marketing for real estate. Lagos. We move property.` | The decided tagline, 70 of 120 characters |
+| Cover (after creation) | `site/assets/banner.png` | Already exactly 1584×396, LinkedIn's cover size |
+| Location | `Lagos, Nigeria` | City only — no street address for a remote-first sole prop |
+
+**About** (after creation — paste as is):
+
+> Propel is a digital marketing agency built for Nigerian real estate — developers, estate surveyors and valuers, realtors and agents.
+>
+> We sell inspections booked and deals closed, not likes.
+>
+> What that means in practice:
+> • Instagram and WhatsApp assistants that answer buyers in seconds, day and night, from facts the developer has signed off — and hand serious buyers to a person
+> • Content built around the property, not around vanity numbers
+> • Every enquiry logged and attributed, so you know which campaign produced which buyer
+>
+> Propel is built by a real estate professional: B.Sc. Estate Management, NIESV exam passed and on the ESV track, with around five years in the industry. We understand title, allocation and payment plans because that is the field we trained in — not a sector we are learning on your budget.
+>
+> We work only on Meta's official business platforms, so a client's number is never put at risk by unofficial automation tools. We do not buy followers, run engagement pods or post fake reviews. And we do not market land with a disputed title, at any fee.
+>
+> Lagos first.
+>
+> getpropel.tech · WhatsApp +234 901 912 0968
+
+**Specialties:** Real Estate Marketing · Property Marketing · Instagram Marketing · WhatsApp Business · Lead Generation · Marketing Automation · AI Assistants · Developer Marketing · Content Strategy · Lagos Real Estate
+
 - [ ] Update Adedamola's personal headline — the personal profile will outperform the page; the page just needs to exist and look sharp
-- [ ] Headline suggestion: *"Founder @ Propel | Estate Management + NIESV-trained | Digital marketing for realtors, surveyors & developers"*
+- [ ] Headline suggestion: *"Founder @ Propel | B.Sc. Estate Management · NIESV exam passed, ESV track | Digital marketing for realtors, surveyors & developers"*
+  - *Corrected 2026-09-24 from "NIESV-trained", which is vaguer than the standard and can read as membership. CLAUDE.md's wording is "NIESV exam passed / ESV-track" until chartered — accuracy is the brand.*
 - [ ] LinkedIn is text-first: founder posts here need no face and no video — this is our strongest personal-brand channel given current constraints
 
 ## 6. YouTube (park it properly — 5 min)

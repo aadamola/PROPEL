@@ -2,6 +2,16 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-09-24 — LinkedIn Company Page: exact values, About copy, and a credential wording fix
+
+- **Side task from ADEDAMOLA: he is creating Propel's LinkedIn Company Page.** Wrote every field into `ops/setup/account-setup.md` §5 so the page and the repo agree.
+- **Vanity URL is `getpropel` — not a free choice.** `site/index.html` already links to `linkedin.com/company/getpropel`; any other address silently breaks the website's own LinkedIn link.
+- **Organisation size `0-1 employees`, type `Sole proprietorship`.** Both true. Inflating headcount on a page is the same lie as buying followers (rule 2), and the legal form matches docs/08 until the Ltd triggers fire.
+- **Logo: the plain triangle (`mark-512.png`), not the wordmark avatar.** Looked at both first. LinkedIn renders page logos at thumbnail size, where the wordmark version's "WE MOVE PROPERTY" line is illegible — and the page name prints beside the logo anyway. `banner.png` is already exactly LinkedIn's 1584×396 cover size.
+- **Website field only if `getpropel.tech` loads** — I cannot check it from here (the sandbox proxy blocks the domain), and a dead link on a brand-new page reads as abandoned.
+- **About copy written to the brand rules:** credential stated as *"NIESV exam passed and on the ESV track"*, never "chartered"; **no results, lead counts or client wins claimed** — capabilities only; official-API-only, no bought followers, no disputed land stated as positions.
+- **Corrected the personal-headline suggestion** from *"NIESV-trained"* to *"NIESV exam passed, ESV track"*. "Trained" is vaguer than the standard and can read as membership.
+
 ## 2026-09-23 (step 7 ✅) — n8n sees the token; August's env error fixed at the root
 
 - **`vps-tools.sh n8n-env` ran on the live box: override merged, n8n `Started` (genuinely recreated this time, not merely `Running`), and the check now reads `✓ N8N_BLOCK_ENV_ACCESS_IN_NODE=false` · `✓ META_VERIFY_TOKEN_SHALOM_PARK set` · `– SHALOM_PARK_APP_SECRET not set yet` (correct — comes from the Meta app).** The "access to env vars denied" error from August is fixed, not worked around.

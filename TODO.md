@@ -29,6 +29,8 @@ You want **`✅ 3/3`**. The one that matters most is **"wrong token → refused"
 - [ ] **(5 min)** **Send Collins the follow-up** — [03-followup-questions.md](clients/shalom-park/03-followup-questions.md). *Seven fields still open. The ₦95m condo price is settled; the rest aren't.*
 - [ ] **(20 min)** **First 10 prospect names** → WhatsApp me names + IG handles. *Unblocks 10 audit teardowns. Longest-outstanding item on this list — and Shalom Park is still a pipeline of one.*
 
+> ⚠️ **Loose end from the LinkedIn side task:** `getpropel` was taken on LinkedIn, so the website's LinkedIn link (`site/index.html`) points at **someone else's page** until you tell me the URL that stuck. One message, then I fix it.
+
 ## NOT YET — I'm holding these, don't think about them
 
 **Parked from "this week" to keep the list at five** (the protocol, not a demotion — I'll star them when their turn comes):

@@ -46,7 +46,7 @@
 | Field | Value | Why |
 |---|---|---|
 | Name | `Propel` | |
-| linkedin.com/company/ | **`getpropel`** | **The website already links here** (`site/index.html`). Anything else breaks that link |
+| linkedin.com/company/ | ~~`getpropel`~~ **taken on LinkedIn (2026-09-24)** → **`getpropel-ng`**, fallback `getpropelng` | Mirrors Instagram **@getpropel.ng**, so one handle predicts the other. **First check `linkedin.com/company/getpropel` is not an old page of his own** — if it is, use it rather than creating a second. ⚠️ **`site/index.html` still links to `/company/getpropel` — someone else's page. Update the site the moment the new URL is confirmed.** |
 | Website | `https://getpropel.tech` | **Only if it loads in a browser** — a dead link on a new page reads as abandoned |
 | Industry | `Marketing Services` | (`Advertising Services` if it does not appear) — the real-estate focus goes in the tagline and About |
 | Organization size | `0-1 employees` | **True.** Inflating it is the same lie as buying followers (rule 2) |

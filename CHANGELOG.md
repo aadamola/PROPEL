@@ -2,6 +2,18 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-09-24 (later) — Instagram is `@getpropel.tech`, not `.ng`; eleven references fixed; bio rewritten
+
+- **ADEDAMOLA shared a screenshot of Propel's Instagram. The handle is `getpropel.tech` — every file in the repo said `getpropel.ng`.** The account had been renamed to match the domain at some point and nothing recorded it. **Eleven references across nine files**, and two of them faced the public:
+  - **`site/index.html`'s Instagram button pointed at `instagram.com/getpropel.ng`** — no longer ours, and whoever registers it next receives our website's traffic.
+  - **`propel-kb.json` — Propel's own Concierge knowledge base — would have given prospects the wrong handle** when asked. Rebuilt into `03`.
+  - Also CLAUDE.md, README, production checklist, account setup, founder interview answers, and docs/11.
+- **Adopted `getpropel.tech` as the standard: handle = domain on every platform.** Which also reverses my LinkedIn suggestion from minutes earlier — `getpropel-ng` was chosen to mirror a handle that no longer existed. **Now `getpropel-tech`** (LinkedIn allows no dots). One name to remember everywhere.
+- **Bio rewritten, 146 of 150 characters.** The old one offered a free audit and never said how to claim it, and it omitted the credential the whole positioning rests on. New line 2: *"AI marketing by a real estate professional · Lagos"*. New line 3: *"Free 30-min marketing audit — DM "AUDIT""*.
+- **Wrote the `audit` saved reply to go with it, and said to load it first** — a bio that promises a reply nobody sends is worse than no promise. Its four questions are exactly the booking route in `propel-kb.json`, so the manual reply and the future assistant collect the same facts.
+- **Highlights:** hold *Results* until there are real ones. An empty or padded Results highlight is the fake social proof rule 2 forbids.
+- **0 posts noted, not pushed.** The 14-day launch calendar is already written; the starred action stays steps 8 + 9.
+
 ## 2026-09-24 — LinkedIn Company Page: exact values, About copy, and a credential wording fix
 
 - **Side task from ADEDAMOLA: he is creating Propel's LinkedIn Company Page.** Wrote every field into `ops/setup/account-setup.md` §5 so the page and the repo agree.

@@ -4,7 +4,7 @@
 
 ## 0. Handle strategy
 
-✅ **TAKEN: @getpropel.ng** on Instagram (2026-07-26). Use the same handle on TikTok and LinkedIn for consistency; domain is **getpropel.tech**.
+✅ **Instagram: @getpropel.tech** (originally @getpropel.ng on 2026-07-26; renamed to match the domain — noticed 2026-09-24). Use the same handle on TikTok and LinkedIn for consistency; domain is **getpropel.tech**.
 
 ## 1. Domain & email (do first — 15 min)
 
@@ -39,6 +39,36 @@
 - [ ] Bio: *"Marketing that sells Lagos property 🏠 Free audit ⬇️"* + WhatsApp link
 - [ ] Same profile image
 
+## Instagram bio + the AUDIT reply (2026-09-24)
+
+**Bio — 146 of 150 characters:**
+
+```
+We get realtors, surveyors & developers seen and sold.
+AI marketing by a real estate professional · Lagos
+Free 30-min marketing audit — DM "AUDIT"
+```
+
+**What changed and why:** the old bio offered a free audit but never said how to claim one, and it left out the credential that the positioning rests on. "Built by a real estate professional" is proof no follower count can fake, and it is the line that speaks to surveyors and valuers. "AI marketing" moves into line 2; the name field ("Propel | Real Estate Marketing") is searchable on Instagram and already carries the keyword.
+
+**Saved reply — shortcut `audit`** (Settings → Business tools → Saved replies). **Load it before the bio goes live**, or the bio promises a reply that nobody sends:
+
+```
+Here's how the free audit works: we go through your Instagram, your listings and how your enquiries get answered, and show you exactly where buyers are slipping away — and what we'd change. 30 minutes, no obligation.
+
+To set it up, send me:
+1. Your name and business
+2. Are you an agent, a surveyor/valuer or a developer?
+3. Your Instagram handle
+4. Your biggest marketing headache right now
+
+What's the best number to reach you on?
+```
+
+The four questions are the booking route in `ops/concierge/propel-kb.json` — the same qualifying facts Propel's own assistant will collect once it is live. Every answer goes into `ops/crm/pipeline.csv` the same day.
+
+**Highlights:** *Audits* is up. *About* and *Services* covers exist in `site/assets/`. **Hold *Results* until there are real ones** — an empty or padded Results highlight is the fake social proof rule 2 forbids.
+
 ## 5. LinkedIn (the surveyor/valuer + developer hunting ground)
 
 - [ ] Create **Company Page** — *in progress 2026-09-24*. Exact values:
@@ -46,7 +76,7 @@
 | Field | Value | Why |
 |---|---|---|
 | Name | `Propel` | |
-| linkedin.com/company/ | ~~`getpropel`~~ **taken on LinkedIn (2026-09-24)** → **`getpropel-ng`**, fallback `getpropelng` | Mirrors Instagram **@getpropel.ng**, so one handle predicts the other. **First check `linkedin.com/company/getpropel` is not an old page of his own** — if it is, use it rather than creating a second. ⚠️ **`site/index.html` still links to `/company/getpropel` — someone else's page. Update the site the moment the new URL is confirmed.** |
+| linkedin.com/company/ | ~~`getpropel`~~ taken on LinkedIn → **`getpropel-tech`** (fallback `getpropeltech`) | **Handle = domain on every platform:** Instagram `getpropel.tech`, site `getpropel.tech`, LinkedIn `getpropel-tech` (LinkedIn allows no dots). One name to remember. First check `linkedin.com/company/getpropel` is not an old page of his own. ⚠️ **`site/index.html` still links to `/company/getpropel` — update it the moment the new URL is confirmed.** |
 | Website | `https://getpropel.tech` | **Only if it loads in a browser** — a dead link on a new page reads as abandoned |
 | Industry | `Marketing Services` | (`Advertising Services` if it does not appear) — the real-estate focus goes in the tagline and About |
 | Organization size | `0-1 employees` | **True.** Inflating it is the same lie as buying followers (rule 2) |

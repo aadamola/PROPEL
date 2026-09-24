@@ -67,7 +67,7 @@ Adedamola has ADHD. TODO.md at repo root is his single external brain for Propel
 
 ## Current state (update every session that changes it)
 
-- **Phase:** **PRODUCTION MODE with a paying client (2026-07-26).** Propel is public — WhatsApp **+234 901 912 0968** (human line), **+234 911 271 4482** (AI line), Instagram **@getpropel.ng**, site wired with QR. **Shalom Park Estate (IFT Realty) paid the setup fee — first revenue.** Build track: **ops/production-checklist.md**; client record: **clients/shalom-park/**.
+- **Phase:** **PRODUCTION MODE with a paying client (2026-07-26).** Propel is public — WhatsApp **+234 901 912 0968** (human line), **+234 911 271 4482** (AI line), Instagram **@getpropel.tech**, site wired with QR. **Shalom Park Estate (IFT Realty) paid the setup fee — first revenue.** Build track: **ops/production-checklist.md**; client record: **clients/shalom-park/**.
 - **Standing ruling:** the Concierge gets built on OUR assets first (Propel's own line + Apex Gardens sandbox). Payment clears the commercial gate only — a client's live accounts are touched, and their facts published, only past **vetting (rule 5) and a signed warranted facts sheet (rule 2)**. Money never clears those two.
 - **Every new client starts with ops/templates/warranted-facts-sheet.md.** It is the sole permitted source for that client's KB, ads and copy. Blank fields ship as escalation triggers, never assumptions.
 - **Built and ready:** brand assets (site/assets/ — in-house PNGs; Canva picks now optional), website draft v1 (site/), Propel Concierge product (docs/10) + binding QA standard (docs/11), Shalom Park demo pack (demos/shalom-park/, pitch-only), Document Vault + Voice-Note Concierge add-ons, Broker Hub in validation.

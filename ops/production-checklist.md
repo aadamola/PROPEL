@@ -19,7 +19,7 @@ Two gates survive the payment, because money doesn't clear them:
 
 | Instance | Runs on | Purpose | Status |
 |---|---|---|---|
-| **Propel's own Concierge** | our WhatsApp + @getpropel.ng | Answers our real prospects 24/7 — and is itself the proof we sell | Phase 1 |
+| **Propel's own Concierge** | our WhatsApp + @getpropel.tech | Answers our real prospects 24/7 — and is itself the proof we sell | Phase 1 |
 | **Apex Gardens demo** | our sandbox number | The estate Shalom Park messages *from their own phone* in the meeting | Phase 2 |
 | **Shalom Park deployment** | their assets | **The paid build — client waiting** | Phase 3 — **gated on facts sheet + vetting + App Review** |
 
@@ -51,7 +51,7 @@ Verified July 2026 — every one of these is a thing cheap competitors over-prom
 - [x] **(A)** ✅ Domain **getpropel.tech** bought (Hostinger, 2026-07-29).
 - [x] **(A)** ✅ **Hostinger KVM 2 LIVE** — 72.62.213.187, Manchester UK, Ubuntu 24.04, 8 GB. *Monthly term, expires 2026-08-29 — review before renewal (vps-setup.md §0).*
 - [ ] **(A · 10 min · ~₦25k)** LLM credits per docs/13 §3: Claude Haiku 4.5 (~$12) + DeepSeek V4 Flash (~$5). I hand over exact top-up links.
-- [ ] **(A · 10 min)** Meta Business Suite: link @getpropel.ng + WhatsApp; convert IG to Business account.
+- [ ] **(A · 10 min)** Meta Business Suite: link @getpropel.tech + WhatsApp; convert IG to Business account.
 - [x] **(B)** ✅ **Meta app runbook + App Review package written** — `ops/setup/meta-app-setup.md`: dependency chain, app/product/webhook config, IG prerequisites, permission map, and the full **App Review submission text** (use-case copy, screencast script, reviewer test instructions, rejection-risk table). Webhook-verification workflow ready to import: `ops/concierge/workflows/`.
 - [ ] **(A)** Create the Meta app + register 09112714482 + set webhooks (`ops/setup/meta-app-setup.md` §9).
 - [ ] **(A · afternoon)** ⚡ **PROVE THE FAST LANE:** create a test app inside a client-owned portfolio and send one message. If self-integration works without App Review, Shalom Park's build stops waiting on our CAC (`meta-app-setup.md` §9b). **Verify before promising them any date.**

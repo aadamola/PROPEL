@@ -84,7 +84,7 @@ The four questions are the booking route in `ops/concierge/propel-kb.json` — t
 | Field | Value | Why |
 |---|---|---|
 | Name | `Propel` | |
-| linkedin.com/company/ | **`getpropel.tech`** (his choice, 2026-09-24); if LinkedIn rejects the dot → `getpropel-tech` | Handle = domain on every platform. *(Earlier note said LinkedIn allows no dots — stated with more certainty than I had; try it.)* ⚠️ `site/index.html` still links to `/company/getpropel` — someone else's page — update it the moment the URL is confirmed. |
+| linkedin.com/company/ | ✅ **`getpropel-tech`** — live 2026-09-24 | `getpropel` was taken by someone else. Mirrors the domain and Instagram (`getpropel.tech`) as closely as LinkedIn allows. `site/index.html` updated to match. |
 | Website | **leave blank** | **The site is not live (confirmed 2026-09-24).** A dead link on a new page reads as abandoned. Fill it in the day the site launches |
 | Industry | `Marketing Services` | (`Advertising Services` if it does not appear) — the real-estate focus goes in the tagline and About |
 | Organization size | `0-1 employees` | **True.** Inflating it is the same lie as buying followers (rule 2) |

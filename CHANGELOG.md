@@ -2,6 +2,12 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-09-24 (late 3) — LinkedIn URL confirmed: `getpropel-tech`; website link fixed
+
+- **LinkedIn accepted `getpropel-tech`.** `getpropel` belonged to someone else, so the website's LinkedIn link had been pointing at another company's page. **`site/index.html` now links to `linkedin.com/company/getpropel-tech`** — there are no other LinkedIn company links in the repo.
+- Recorded in account-setup, CLAUDE.md's public-presence line (alongside a note that the site itself is not live), and the TODO loose end is closed.
+- **Propel's public presence is now consistent:** domain `getpropel.tech` · Instagram `@getpropel.tech` · LinkedIn `getpropel-tech`.
+
 ## 2026-09-24 (late 2) — LinkedIn page live; About rewritten to survive the offerings realignment
 
 - **Propel's LinkedIn Company Page is created** — triangle logo in, 0 followers.

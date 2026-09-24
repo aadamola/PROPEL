@@ -30,8 +30,6 @@ You want **`✅ 3/3`**. The one that matters most is **"wrong token → refused"
 - [ ] **(20 min)** **First 10 prospect names** → WhatsApp me names + IG handles. *Unblocks 10 audit teardowns. Longest-outstanding item on this list — and Shalom Park is still a pipeline of one.*
 
 > 🔴 **2 min, do it now:** your Instagram bio links to `getpropel.tech`, which isn't live — change the link to `wa.me/2349019120968?text=Hi%20Propel%2C%20I%20want%20a%20free%20marketing%20audit` until it is.
->
-> ⚠️ **LinkedIn:** try `getpropel.tech`, or `getpropel-tech` if it rejects the dot. Leave Website blank. Tell me the URL that stuck and I'll fix the website's LinkedIn link.
 
 ## NOT YET — I'm holding these, don't think about them
 
@@ -58,7 +56,7 @@ Testing the bot · the automated pilot · voice notes · first audit calls. Noth
 
 ## ✅ DONE (look how far this has come)
 
-- [x] 💼 **LinkedIn Company Page created — Propel, triangle logo** (2026-09-24)
+- [x] 💼 **LinkedIn Company Page live — linkedin.com/company/getpropel-tech** (2026-09-24)
 - [x] 🔐 **Step 7 — verify token live in n8n; August's "access to env vars denied" fixed at the root** (2026-09-23)
 - [x] 📲 **Step 6 — Instagram workflow imported with both IDs baked in** (2026-09-23)
 - [x] 📒 **Step 5 — ledger + alerts workflow imported (`oNt2oRixkDbbUa2p`) and wired into 05** (2026-09-23)

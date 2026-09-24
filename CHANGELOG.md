@@ -2,6 +2,12 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-09-24 (late 2) — LinkedIn page live; About rewritten to survive the offerings realignment
+
+- **Propel's LinkedIn Company Page is created** — triangle logo in, 0 followers.
+- **Rewrote the About before he pasted it.** The v1 I wrote an hour earlier listed services and ended with `getpropel.tech`. Since then he has said the offer is being realigned and the site is not live — so v1 would have published a service list about to change, and a dead link. **v2 is built around who we serve, the credential, and how we work** — principles that survive a change of offer. Contact is the WhatsApp human line. 1,030 of 2,000 characters; checked for no "chartered", no guarantees, no prices, no dead link.
+- **Still open:** which vanity URL LinkedIn accepted, so the website's LinkedIn link can be corrected.
+
 ## 2026-09-24 (late) — The website is not live; what that breaks; offerings realignment parked
 
 - **ADEDAMOLA: "our website isn't live yet".** CLAUDE.md had it as "built and ready", and I had been treating `getpropel.tech` as a working destination. Three consequences, in order of urgency:

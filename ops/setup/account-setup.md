@@ -79,7 +79,7 @@ The four questions are the booking route in `ops/concierge/propel-kb.json` — t
 
 ## 5. LinkedIn (the surveyor/valuer + developer hunting ground)
 
-- [ ] Create **Company Page** — *in progress 2026-09-24*. Exact values:
+- [x] Create **Company Page** — *created 2026-09-24; triangle logo in*. Exact values:
 
 | Field | Value | Why |
 |---|---|---|
@@ -94,24 +94,26 @@ The four questions are the booking route in `ops/concierge/propel-kb.json` — t
 | Cover (after creation) | `site/assets/banner.png` | Already exactly 1584×396, LinkedIn's cover size |
 | Location | `Lagos, Nigeria` | City only — no street address for a remote-first sole prop |
 
-**About** (after creation — paste as is):
+**About / Overview** — *v2, 2026-09-24. Paste as is. 1,030 of 2,000 characters.*
+
+*Rewritten around who we serve, the credential and how we work — **not a list of services**, because the offer is being realigned (see CLAUDE.md) and principles survive that where a service list would not. No link to `getpropel.tech` (not live); contact is the WhatsApp human line. Revisit during the offerings realignment.*
 
 > Propel is a digital marketing agency built for Nigerian real estate — developers, estate surveyors and valuers, realtors and agents.
 >
-> We sell inspections booked and deals closed, not likes.
->
-> What that means in practice:
-> • Instagram and WhatsApp assistants that answer buyers in seconds, day and night, from facts the developer has signed off — and hand serious buyers to a person
-> • Content built around the property, not around vanity numbers
-> • Every enquiry logged and attributed, so you know which campaign produced which buyer
+> We measure ourselves by inspections booked and deals closed, not likes.
 >
 > Propel is built by a real estate professional: B.Sc. Estate Management, NIESV exam passed and on the ESV track, with around five years in the industry. We understand title, allocation and payment plans because that is the field we trained in — not a sector we are learning on your budget.
 >
-> We work only on Meta's official business platforms, so a client's number is never put at risk by unofficial automation tools. We do not buy followers, run engagement pods or post fake reviews. And we do not market land with a disputed title, at any fee.
+> How we work:
+> • AI where it saves a buyer's time — instant, accurate answers from facts the developer has signed off, with a person one message away
+> • Official Meta business platforms only, so a client's number is never put at risk by unofficial automation tools
+> • Every enquiry logged and attributed, so marketing spend stops being a guess
+> • No bought followers, engagement pods or fake reviews — ever
+> • No marketing for land with a disputed title, at any fee
 >
 > Lagos first.
 >
-> getpropel.tech · WhatsApp +234 901 912 0968
+> Free 30-minute marketing audit: WhatsApp +234 901 912 0968
 
 **Specialties:** Real Estate Marketing · Property Marketing · Instagram Marketing · WhatsApp Business · Lead Generation · Marketing Automation · AI Assistants · Developer Marketing · Content Strategy · Lagos Real Estate
 

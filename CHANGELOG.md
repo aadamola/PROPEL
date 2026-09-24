@@ -2,6 +2,16 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-09-24 (late) — The website is not live; what that breaks; offerings realignment parked
+
+- **ADEDAMOLA: "our website isn't live yet".** CLAUDE.md had it as "built and ready", and I had been treating `getpropel.tech` as a working destination. Three consequences, in order of urgency:
+  - **🔴 The Instagram bio's only link was an error page.** Replaced with a WhatsApp link to the human line with the audit request pre-typed — the same link the site itself uses, and for a free-audit offer a conversation converts better than a homepage anyway.
+  - **🟡 LinkedIn's website field stays blank** until launch. A dead link on a brand-new page reads as abandoned.
+  - **🟡 The privacy and data-deletion pages live on the unlaunched site — and Meta requires both URLs to be live before an app goes Live.** Now a gate before step 10.
+- **The split that resolves it:** checked what each page contains. **The homepage carries the packages and ₦ prices** — exactly what he wants to rethink — **the two legal pages carry no offerings at all.** So the legal pages can go live now without pre-empting any decision about the offer, and the homepage waits.
+- **LinkedIn vanity URL: `getpropel.tech`, his choice.** I had asserted that LinkedIn allows no dots; I am not actually sure of that, so the instruction is now *try it, fall back to `getpropel-tech`*. Corrected in the repo rather than left stated as fact.
+- **⏸️ Offerings realignment parked at his request ("later on").** Recorded in CLAUDE.md with everything it touches, so nothing is missed when it starts: the homepage, **`propel-kb.json` — the rate card Propel's own Concierge would quote, which therefore must not go live before the realignment** — `docs/03` pricing, the LinkedIn About and the IG bio. Not started.
+
 ## 2026-09-24 (later) — Instagram is `@getpropel.tech`, not `.ng`; eleven references fixed; bio rewritten
 
 - **ADEDAMOLA shared a screenshot of Propel's Instagram. The handle is `getpropel.tech` — every file in the repo said `getpropel.ng`.** The account had been renamed to match the domain at some point and nothing recorded it. **Eleven references across nine files**, and two of them faced the public:

@@ -29,7 +29,9 @@ You want **`✅ 3/3`**. The one that matters most is **"wrong token → refused"
 - [ ] **(5 min)** **Send Collins the follow-up** — [03-followup-questions.md](clients/shalom-park/03-followup-questions.md). *Seven fields still open. The ₦95m condo price is settled; the rest aren't.*
 - [ ] **(20 min)** **First 10 prospect names** → WhatsApp me names + IG handles. *Unblocks 10 audit teardowns. Longest-outstanding item on this list — and Shalom Park is still a pipeline of one.*
 
-> ⚠️ **Loose end from the LinkedIn side task:** `getpropel` was taken on LinkedIn — use **`getpropel-tech`** to match your Instagram and domain. The website's LinkedIn link points at **someone else's page** until you tell me the URL that stuck. One message, then I fix it.
+> 🔴 **2 min, do it now:** your Instagram bio links to `getpropel.tech`, which isn't live — change the link to `wa.me/2349019120968?text=Hi%20Propel%2C%20I%20want%20a%20free%20marketing%20audit` until it is.
+>
+> ⚠️ **LinkedIn:** try `getpropel.tech`, or `getpropel-tech` if it rejects the dot. Leave Website blank. Tell me the URL that stuck and I'll fix the website's LinkedIn link.
 
 ## NOT YET — I'm holding these, don't think about them
 
@@ -40,6 +42,9 @@ You want **`✅ 3/3`**. The one that matters most is **"wrong token → refused"
 - Sight the title + approval documents — *last open vetting gate*
 - TikTok + LinkedIn pages
 - ⏰ **VPS: your monthly term ran to 29 Aug and auto-renewal was on — check what Hostinger actually charged you.** *Not urgent, but renewal is where their 2–3× jump lands, and that date has passed.*
+
+- 🌐 **Publish the privacy + data-deletion pages** — *needed before step 10:* Meta requires both links to be live before an app goes Live. They contain no offerings, so they can go up ahead of the homepage.
+- 🧭 **Realign Propel's offerings** — *you asked to do this later.* It will touch the homepage, the rate card Propel's own assistant would quote, the pricing doc, and the LinkedIn About. Propel's own assistant stays offline until it's done.
 
 Testing the bot · the automated pilot · voice notes · first audit calls. Nothing here is actionable until the week's items land.
 

@@ -51,6 +51,14 @@ Free 30-min marketing audit — DM "AUDIT"
 
 **What changed and why:** the old bio offered a free audit but never said how to claim one, and it left out the credential that the positioning rests on. "Built by a real estate professional" is proof no follower count can fake, and it is the line that speaks to surveyors and valuers. "AI marketing" moves into line 2; the name field ("Propel | Real Estate Marketing") is searchable on Instagram and already carries the keyword.
 
+**Bio link — until the site is live, point it at WhatsApp, not `getpropel.tech`:**
+
+```
+wa.me/2349019120968?text=Hi%20Propel%2C%20I%20want%20a%20free%20marketing%20audit
+```
+
+The site is not live (2026-09-24), so the bio's only link was an error page. This opens WhatsApp on the human line with the audit request pre-typed — the same link the site uses — and for a free-audit offer, a conversation converts better than a homepage anyway. Switch back to `getpropel.tech` the day the site launches.
+
 **Saved reply — shortcut `audit`** (Settings → Business tools → Saved replies). **Load it before the bio goes live**, or the bio promises a reply that nobody sends:
 
 ```
@@ -76,8 +84,8 @@ The four questions are the booking route in `ops/concierge/propel-kb.json` — t
 | Field | Value | Why |
 |---|---|---|
 | Name | `Propel` | |
-| linkedin.com/company/ | ~~`getpropel`~~ taken on LinkedIn → **`getpropel-tech`** (fallback `getpropeltech`) | **Handle = domain on every platform:** Instagram `getpropel.tech`, site `getpropel.tech`, LinkedIn `getpropel-tech` (LinkedIn allows no dots). One name to remember. First check `linkedin.com/company/getpropel` is not an old page of his own. ⚠️ **`site/index.html` still links to `/company/getpropel` — update it the moment the new URL is confirmed.** |
-| Website | `https://getpropel.tech` | **Only if it loads in a browser** — a dead link on a new page reads as abandoned |
+| linkedin.com/company/ | **`getpropel.tech`** (his choice, 2026-09-24); if LinkedIn rejects the dot → `getpropel-tech` | Handle = domain on every platform. *(Earlier note said LinkedIn allows no dots — stated with more certainty than I had; try it.)* ⚠️ `site/index.html` still links to `/company/getpropel` — someone else's page — update it the moment the URL is confirmed. |
+| Website | **leave blank** | **The site is not live (confirmed 2026-09-24).** A dead link on a new page reads as abandoned. Fill it in the day the site launches |
 | Industry | `Marketing Services` | (`Advertising Services` if it does not appear) — the real-estate focus goes in the tagline and About |
 | Organization size | `0-1 employees` | **True.** Inflating it is the same lie as buying followers (rule 2) |
 | Organization type | `Sole proprietorship` | Matches the legal form (docs/08) until the Ltd triggers fire |

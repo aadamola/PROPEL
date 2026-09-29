@@ -2,6 +2,13 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-09-29 — Workflow 05 imported and checked; canvas spacing fixed
+
+- **ADEDAMOLA's screenshot of `05` in n8n matches the build:** both entry points, "Seen this message?" dedup before the keyword lane, both lanes merging at "Prepare send", and the send gate feeding the reply and the ledger. **The warning triangles on the three send nodes are expected** — the Shalom Park Instagram credential can't exist until the Meta app does (step 10).
+- **Cosmetic fix:** the node labels in the middle of the canvas overlapped. Main-row spacing is now 220px (`tools/build-workflows.js`). The logic hasn't changed and all suites are green. **No re-import needed** — the next import picks up the new spacing.
+- **Session-start check:** the IFT Realty next action (shoot day + who grants Meta admin) is **11 days overdue**. The VPS renewal check was due **today**.
+- **Waiting on ADEDAMOLA:** ⭐ steps 8 + 9 (Publish `05` → `vps-tools.sh handshake` → ✅ 3/3).
+
 ## 2026-09-24 (late 3) — LinkedIn URL confirmed: `getpropel-tech`; website link fixed
 
 - **LinkedIn accepted `getpropel-tech`.** `getpropel` belonged to someone else, so the website's LinkedIn link had been pointing at another company's page. **`site/index.html` now links to `linkedin.com/company/getpropel-tech`** — there are no other LinkedIn company links in the repo.

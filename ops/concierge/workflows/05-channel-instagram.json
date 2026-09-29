@@ -162,7 +162,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        290,
+        400,
         60
       ],
       "id": "ig-seen",
@@ -175,7 +175,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        400,
+        620,
         60
       ],
       "id": "ig-keywords",
@@ -206,7 +206,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        620,
+        840,
         60
       ],
       "id": "ig-matched",
@@ -219,7 +219,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        840,
+        1060,
         -60
       ],
       "id": "ig-guard",
@@ -250,7 +250,7 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.2,
       "position": [
-        840,
+        1060,
         200
       ],
       "id": "ig-core",
@@ -263,7 +263,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1060,
+        1280,
         60
       ],
       "id": "ig-prepare",
@@ -276,7 +276,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1280,
+        1500,
         60
       ],
       "id": "ig-gate",
@@ -335,7 +335,7 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.2,
       "position": [
-        1500,
+        1720,
         60
       ],
       "id": "ig-route",
@@ -362,7 +362,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1720,
+        1940,
         -60
       ],
       "id": "ig-private-reply",
@@ -389,7 +389,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1940,
+        2160,
         -60
       ],
       "id": "ig-public-reply",
@@ -416,7 +416,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1720,
+        1940,
         180
       ],
       "id": "ig-dm",
@@ -456,8 +456,8 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.2,
       "position": [
-        1500,
-        340
+        1720,
+        380
       ],
       "id": "ig-ledger",
       "name": "Ledger + escalation"
@@ -469,7 +469,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1720,
+        1940,
         400
       ],
       "id": "ig-held",

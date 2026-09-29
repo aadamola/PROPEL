@@ -481,33 +481,33 @@ const instagram = {
     code('ig-skip', 'Log ignored event', [180, 300],
       "// Echoes, read receipts and our own comments land here. Logged, never answered.\nreturn [{ json: { ignored: true, reason: $json.skip_reason, channel: $json.channel } }];"),
 
-    code('ig-seen', 'Seen this message?', [290, 60], igSeen),
-    code('ig-keywords', 'Keyword fast lane', [400, 60], igFastLane),
+    code('ig-seen', 'Seen this message?', [400, 60], igSeen),
+    code('ig-keywords', 'Keyword fast lane', [620, 60], igFastLane),
     { parameters: { conditions: { options: { caseSensitive: true, version: 2 }, conditions: [
         { id: 'is-keyword', operator: { type: 'string', operation: 'equals' },
           leftValue: '={{ $json.lane }}', rightValue: 'keyword' } ], combinator: 'and' }, options: {} },
-      type: 'n8n-nodes-base.if', typeVersion: 2.2, position: [620, 60],
+      type: 'n8n-nodes-base.if', typeVersion: 2.2, position: [840, 60],
       id: 'ig-matched', name: 'Keyword matched?' },
 
-    code('ig-guard', 'Guardrails', [840, -60], guardSrc),
+    code('ig-guard', 'Guardrails', [1060, -60], guardSrc),
     { parameters: { workflowId: { __rl: true, value: registry._meta.n8n.core_workflow_id, mode: 'id' },
         workflowInputs: { mappingMode: 'defineBelow', value: {
           client_id: '=shalom-park', channel: '={{ $json.channel }}',
           provider_message_id: '={{ $json.provider_message_id }}', contact_id: '={{ $json.contact_id }}',
           contact_hash: '={{ $json.contact_hash }}', display_name: '={{ $json.display_name }}',
           text: '={{ $json.text }}', thread_ref: '={{ $json.thread_ref }}' } }, options: {} },
-      type: 'n8n-nodes-base.executeWorkflow', typeVersion: 1.2, position: [840, 200],
+      type: 'n8n-nodes-base.executeWorkflow', typeVersion: 1.2, position: [1060, 200],
       id: 'ig-core', name: 'Concierge CORE' },
 
-    code('ig-prepare', 'Prepare send', [1060, 60], igPrepare),
-    code('ig-gate', 'Send gate (Meta limits)', [1280, 60], igSendGate),
+    code('ig-prepare', 'Prepare send', [1280, 60], igPrepare),
+    code('ig-gate', 'Send gate (Meta limits)', [1500, 60], igSendGate),
     { parameters: { rules: { values: [
         { conditions: { options: { caseSensitive: true, version: 2 }, conditions: [
             { operator: { type: 'string', operation: 'equals' }, leftValue: '={{ $json.channel }}', rightValue: 'instagram_comment' } ], combinator: 'and' }, outputKey: 'comment' },
         { conditions: { options: { caseSensitive: true, version: 2 }, conditions: [
             { operator: { type: 'string', operation: 'equals' }, leftValue: '={{ $json.channel }}', rightValue: 'instagram_dm' } ], combinator: 'and' }, outputKey: 'dm' }
       ] }, options: { fallbackOutput: 'extra' } },
-      type: 'n8n-nodes-base.switch', typeVersion: 3.2, position: [1500, 60],
+      type: 'n8n-nodes-base.switch', typeVersion: 3.2, position: [1720, 60],
       id: 'ig-route', name: 'Comment or DM?' },
 
     { parameters: { method: 'POST', url: `${GRAPH_BASE}/me/messages`,
@@ -515,21 +515,21 @@ const instagram = {
         sendBody: true, specifyBody: 'json',
         jsonBody: "={{ JSON.stringify({ recipient: { comment_id: $json.comment_id }, message: { text: $json.reply } }) }}",
         options: { timeout: 15000, response: { response: { neverError: true } } } },
-      type: 'n8n-nodes-base.httpRequest', typeVersion: 4.2, position: [1720, -60],
+      type: 'n8n-nodes-base.httpRequest', typeVersion: 4.2, position: [1940, -60],
       id: 'ig-private-reply', name: 'Private reply to comment' },
     { parameters: { method: 'POST', url: `=${GRAPH_BASE}/{{ $('Send gate (Meta limits)').first().json.comment_id }}/replies`,
         authentication: 'genericCredentialType', genericAuthType: 'httpHeaderAuth',
         sendBody: true, specifyBody: 'json',
         jsonBody: "={{ JSON.stringify({ message: $('Send gate (Meta limits)').first().json.public_comment_reply }) }}",
         options: { timeout: 15000, response: { response: { neverError: true } } } },
-      type: 'n8n-nodes-base.httpRequest', typeVersion: 4.2, position: [1940, -60],
+      type: 'n8n-nodes-base.httpRequest', typeVersion: 4.2, position: [2160, -60],
       id: 'ig-public-reply', name: 'Public comment reply' },
     { parameters: { method: 'POST', url: `${GRAPH_BASE}/me/messages`,
         authentication: 'genericCredentialType', genericAuthType: 'httpHeaderAuth',
         sendBody: true, specifyBody: 'json',
         jsonBody: "={{ JSON.stringify({ recipient: { id: $json.contact_id }, message: { text: $json.reply } }) }}",
         options: { timeout: 15000, response: { response: { neverError: true } } } },
-      type: 'n8n-nodes-base.httpRequest', typeVersion: 4.2, position: [1720, 180],
+      type: 'n8n-nodes-base.httpRequest', typeVersion: 4.2, position: [1940, 180],
       id: 'ig-dm', name: 'Send IG DM' },
     { parameters: { workflowId: { __rl: true, value: registry._meta.n8n.ledger_workflow_id || 'REPLACE_WITH_LEDGER_WORKFLOW_ID', mode: 'id' },
         workflowInputs: { mappingMode: 'defineBelow', value: {
@@ -543,9 +543,9 @@ const instagram = {
           escalation_reason: '={{ $json.escalation_reason }}', guard_triggered: '={{ $json.guard_triggered }}',
           reason: '={{ $json.reason }}',
           escalate: '={{ $json.escalate }}', send: '={{ $json.send }}' } }, options: {} },
-      type: 'n8n-nodes-base.executeWorkflow', typeVersion: 1.2, position: [1500, 340],
+      type: 'n8n-nodes-base.executeWorkflow', typeVersion: 1.2, position: [1720, 380],
       id: 'ig-ledger', name: 'Ledger + escalation' },
-    code('ig-held', 'Held for a human', [1720, 400],
+    code('ig-held', 'Held for a human', [1940, 400],
       "// Nothing sent: cap reached, reply already used, or an empty reply.\n" +
       "// This is the escalation queue until the notifier workflow ships.\n" +
       "return [{ json: { held: true, reason: $json.reason, rule_id: $json.rule_id, handle: $json.contact_handle, channel: $json.channel } }];")

@@ -20,6 +20,8 @@
 >
 > Hard limits: no bought followers, pods or fake reviews; no faked scarcity, results or social proof; no face-on-camera; no asking his personal network to follow; official Meta APIs only; NDPA-safe (no scraped personal data); drafts, not sends.
 
+*Re-run on 2026-10-15 through the **Nevo's Brain MCP** (Nevo David's growth playbooks); findings in §10.*
+
 *"Insane" is read as **disproportionate return for the hours**, not as rule-breaking. Every move below would survive being described out loud to a client.*
 
 ---
@@ -144,7 +146,7 @@ Every move: his time, my part, the guardrail.
 
 **Why it's disproportionate:** it creates three assets from one 20-minute task.
 
-1. **The opener.** Every firm gets a private, specific message from us a week later: *"We asked about [estate] on Tuesday at 9:14pm. The first reply came Thursday at 11am, 38 hours later. Here's what that window costs, and what an instant reply looks like on your phone."* That's the strongest cold opener in this market, because it's about them, true and measurable.
+1. **The opener.** Every firm gets a private message with **its own result, free, with no pitch attached** (the exact wording is in §10). The demo is offered only once they reply. *(Revised after the Nevo check: a first message that pitches gets ignored; one that gives gets answered.)*
 2. **The PR asset.** After 8 weeks, ~80 firms: the **Lagos Property Response Report**: median reply time, % never answered, out-of-hours gaps, all aggregate. Nobody publishes Nigerian data on this. Journalists, NIESV, REDAN and developers will quote it.
 3. **The content.** Market Saturday gets real corridor pricing ranges.
 
@@ -285,3 +287,87 @@ Every move: his time, my part, the guardrail.
 ## 9. What I need from ADEDAMOLA
 
 One decision, when you're ready: **approve, change or reject the three-door offer (§4).** Everything else in this plan I can run, apart from the 20 minutes a week of sending, which has to come from your account.
+
+---
+
+## 10. Pressure-tested against Nevo David's playbook (via the Nevo's Brain MCP, 2026-10-15)
+
+*Nevo grew Postiz, a bootstrapped social-media scheduler, to $2M+ ARR. His audience is developers and SaaS buyers; ours is Lagos property sellers. So every tactic below was **translated, not copied**, and anything that breaks our rules was dropped. 12 searches; sources at the end. Only generic marketing questions were sent; no client data left us.*
+
+### What it confirms
+
+| Nevo's finding | What it means for Propel |
+|---|---|
+| **Marketing products churn; products that hold data or run in the background don't.** Customers can stop marketing any time, but they rarely leave the system their data lives in ([startup ideas, Aug 2026](https://x.com/wickedguro/status/2090778859352563921)) | **The strongest argument yet for §4.** Content retainers are marketing, and they churn. The Concierge runs 24/7 and holds the attribution ledger. Make the Concierge the core and content the ingredient |
+| **Sell the outcome, not the tool.** "Get 1M TikTok views in 10 days" sells; "schedule posts to TikTok" doesn't ([Aug 2026 posts](https://x.com/wickedguro)) | Lead with "every enquiry answered in seconds, inspections booked overnight", not "AI marketing" |
+| **Never compete on cheapest.** Price-shoppers aren't making money and churn fastest ([Jun 2026 posts](https://x.com/wickedguro)) | Retire "20% off" (§4). Price on value, and keep naira prices public |
+| **Unknown brands borrow authority**, and the founder's account beats a 10-follower company account ([Papermark interview](https://www.youtube.com/watch?v=z6TpKJSSrbI), [one face](https://gitroom.com/blog/5-steps-build-brand-company)) | ADEDAMOLA's personal LinkedIn is the main channel; the company page reposts. *A profile photo isn't a face-on-camera video. That's his call* |
+| **Hooks with real results, never invented numbers** ([hooks](https://gitroom.com/blog/hook-developers)) | Same as rule 2. The Response Report gives us real numbers to hook with |
+
+### What it changes in this plan
+
+**1. Move 1's follow-up must GIVE, not pitch.** Nevo: people ignore or block any message selling a service ("I can improve your conversion rate…"), but they reply to messages that bring something and ask for something small. Outreach should be *give, give, give, then take in private* ([outbound→inbound](https://www.youtube.com/watch?v=3p97bZzBHx8), [Alex is Building](https://x.com/AlexIsBuilding/status/2079192005003919602)). **The private follow-up is rewritten:**
+
+> *"Hi [name], we're measuring how fast Lagos estates answer Instagram enquiries. Yours: we asked on [day, time], first reply [time] later. The market median so far is [X]. That's yours to keep, no pitch attached. If it's useful, I'll send you the full report when it's out."*
+
+No offer in message one. The demo is offered **only when they reply**, and the report gets sent to everyone either way. **Outbound becomes inbound:** they open the commercial conversation.
+
+**2. The headline must say what we do in plain words.** Nevo: vague slogans are for famous companies. An unknown brand's headline and sub-headline must explain the product without a scroll. Long headlines are fine, and "Like X, but Y" works when people ask what makes us different ([headlines](https://gitroom.com/blog/perfect-company-messaging)). *"We move property"* stays as the **tagline**, but it can't be the headline. Queued for the realignment pass:
+
+> **Headline:** Every property enquiry answered in seconds, from facts you've approved, with every sale traced back to its source.
+> **Sub:** For Lagos developers and surveyor-led firms. Built by a real estate professional, on Meta's official platforms.
+
+**3. A new move: "group owners" (Nevo's n8n-template play, translated).** Postiz's jump from ~$6K to ~$12K MRR came from emailing the owners of n8n communities. Postiz didn't ask them to buy. It asked to be included in their templates, and offered something bigger than the ask: a free top plan, a newsletter feature, introductions. About 80% replied ([Alex is Building](https://x.com/AlexIsBuilding/status/2079192005003919602), [buyers where they gather](https://x.com/wickedguro/status/2069034977304653858)).
+
+**Our equivalent:** the people developers already listen to.
+- Owners of realtor networks that sell for developers.
+- Real estate trainers and coaches who run WhatsApp, Telegram and Instagram communities.
+- Property lawyers.
+- Nigerian property podcasts and YouTube channels.
+- **The offer:** a free assistant for their *own* enquiries, a named feature in the Lagos Response Report, and introductions.
+- **The ask:** mention us, or introduce us, to the developers they work with.
+- **The rule:** about ten people, each one researched by hand. That's not volume.
+
+**4. A new move: answer-engine visibility (AEO).** ChatGPT, Perplexity and Claude now answer "who does X". The content they cite doesn't have to sit on your website: forum threads, LinkedIn articles and X articles all count. **The narrower the query, the easier it is to be the cited answer** ([distribution playbook](https://x.com/wickedguro/status/2086788813301661865)). The site isn't live, which doesn't matter for AEO.
+
+**Our version:**
+- **Nairaland's property section** (Nigeria's biggest forum, and heavily indexed).
+- r/Nigeria and r/lagos.
+- LinkedIn articles under ADEDAMOLA's name.
+
+Write genuinely useful answers to the questions buyers and developers already ask: *how to check an estate before you pay, what Governor's Consent means, why your enquiries go cold*. Target narrow queries we can own outright, such as *"AI enquiry assistant for real estate developers in Nigeria"*. I draft; he posts; 15 min/week.
+
+**5. A new faceless format: slideshows** (4–5 images with text, on TikTok and Instagram). Distribution is now interest-based, so small accounts get reach without followers. **Nevo names real estate as a category where this works** ([slideshows](https://x.com/wickedguro/status/2046261869963587636), [outcomes](https://x.com/wickedguro/status/2096974398167392500)). Slide 1 carries 95% of the weight: a specific person, a conflict, a reveal.
+
+- **Our formula:** *[specific person] + [doubt] → showed them → changed their mind*, **only from true events.** For example: *"My client was sure nobody messages after 9pm. I showed him the timestamps."* (Post that only once it has actually happened and IFT approves.)
+- **Evergreen formats:** "5 things diaspora buyers check before sending ₦50m" · "What Governor's Consent actually means, in 4 slides".
+- This solves "no face on camera" for short-form, and it suits Shalom Park's own account too.
+
+**6. Founding pilots become an application with a real close date.** "Apply for one of 3 founding pilots, applications close [date]" outperforms "book a call", and the application qualifies the prospect: estate, number of units, monthly enquiries, who answers DMs today. **Nevo's own warning:** never re-run a "closing soon" offer that didn't close. Repeated false scarcity kills trust ([waitlist](https://www.youtube.com/watch?v=F_dC4_DyXE4)). Rule 2 says the same.
+
+**7. Be the first comment.** Turn on post notifications for the accounts our buyers read: big Nigerian property pages, and developers' founders on LinkedIn. Keep prepared, genuinely useful comments ready so we're first in the thread ([competitor conversations](https://gitroom.com/blog/tell-people-opensource-better-closed-source)). This goes into the existing 10-minute daily engagement block.
+
+**8. Never cold-email from `getpropel.tech`.** Nevo uses a separate, warmed-up domain for outreach, because spam reports damage the main domain ([outbound](https://www.youtube.com/watch?v=3p97bZzBHx8)). For us the stakes are higher: `alerts@getpropel.tech` delivers **lead alerts to Shalom Park's sales team**. If cold email ever happens, it goes out from a separate domain. *Our outreach is Instagram/LinkedIn DMs for now, so this is a standing rule, not a task.*
+
+### What we don't take from it
+
+| Nevo tactic | Why not |
+|---|---|
+| Hiring someone to scrape community owners' emails at scale | NDPA, and it contradicts our trust positioning. Research ~10 public business contacts by hand |
+| VPN or mobile-proxy location spoofing, multiple TikTok accounts | Platform manipulation. We're targeting Lagos from Lagos anyway |
+| Paid quote reposts / sponsored influencer posts | Not banned, but they're spend above the gate (rule 1) and must be disclosed as paid. **Earliest: after a second client** |
+| Open source, GitHub, Product Hunt, Hacker News | Not where Lagos property sellers are |
+| Lifetime deals | Wrong model for a service with running costs |
+
+### Revised priority order (this replaces the order in §5)
+
+1. **Response Test**, with the give-first follow-up. *(Unchanged in cost: 20 min/week.)*
+2. **Demo on their phone**, offered only after they reply.
+3. **Group owners**, about ten hand-picked. *(New: Nevo's single biggest jump came from this.)*
+4. **Slideshows**, true stories only. *(New: the faceless short-form answer.)*
+5. **AEO answers**: Nairaland, Reddit, LinkedIn articles. *(New: compounds, and costs nothing.)*
+6. Launch watch · buyer-question data · comment-to-DM · NIESV session · LinkedIn posts · client intros · referrals · calculator (as in §5).
+
+### Sources searched (Nevo's Brain)
+
+[How to Choose a Startup Idea in 2026](https://x.com/wickedguro/status/2090778859352563921) · [Outbound-to-Inbound Cold Outreach](https://www.youtube.com/watch?v=3p97bZzBHx8) · [Alex is Building interview](https://x.com/AlexIsBuilding/status/2079192005003919602) · [Reach buyers where they gather](https://x.com/wickedguro/status/2069034977304653858) · [Writing a clear website headline](https://gitroom.com/blog/perfect-company-messaging) · [Hooks: real results, no fake numbers](https://gitroom.com/blog/hook-developers) · [Distribution Playbook $2M→$3M](https://x.com/wickedguro/status/2086788813301661865) · [TikTok slideshows](https://x.com/wickedguro/status/2046261869963587636) · [Selling SaaS through outcomes](https://x.com/wickedguro/status/2096974398167392500) · [Application-only waitlist](https://www.youtube.com/watch?v=F_dC4_DyXE4) · [Joining competitor conversations](https://gitroom.com/blog/tell-people-opensource-better-closed-source) · [One founder as the face](https://gitroom.com/blog/5-steps-build-brand-company) · [Papermark / founder account](https://www.youtube.com/watch?v=z6TpKJSSrbI) · [Churn by ICP cohort](https://x.com/wickedguro/status/2110786062490431852) · Nevo's X posts, Jun & Aug 2026

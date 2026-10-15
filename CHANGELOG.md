@@ -2,6 +2,22 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-10-15 (late night 3) — Growth plan re-run through the Nevo's Brain MCP
+
+- **The nevo link is now connected** as a connector: *Nevo's Brain*, a searchable library of Nevo David's growth playbooks (Postiz, bootstrapped to $2M+ ARR). Ran 12 searches; only generic marketing questions were sent and no client data left us. Findings are in **docs/15 §10**, with sources.
+- **Confirms:** marketing retainers churn, but systems that hold data and run in the background don't. That's the strongest argument yet for making the Concierge the core product. Also confirmed: sell outcomes, never compete on price, the founder's account over the company's, real numbers only.
+- **Changes:**
+  - (1) The Response Test follow-up now **gives the firm its result with no pitch**; the demo is offered only after a reply.
+  - (2) A plain-words headline; "We move property" becomes the tagline only (queued for the realignment).
+  - (3) New: **group owners** (realtor-network owners, coaches, lawyers, property podcasts): bring something big, ask small. This was Nevo's biggest single jump.
+  - (4) New: **AEO answers** on Nairaland, Reddit and LinkedIn articles.
+  - (5) New: **faceless slideshows**, true stories only.
+  - (6) Founding pilots become an application with a real close date.
+  - (7) Be first to comment.
+  - (8) **Standing rule: never cold-email from getpropel.tech**, because alerts@ carries Shalom Park's lead alerts.
+- **Rejected:** scraping contacts at scale (NDPA), location spoofing and multiple accounts, and paid reposts before a second client (spend gate, disclosure).
+- **Waiting on ADEDAMOLA:** unchanged. ⭐ Collins promo check; Response Test #1 this week; the offer decision later.
+
 ## 2026-10-15 (late night 2) — Positioning corrected; growth plan written (docs/15)
 
 - **Asked:** "correct our marketing, positioning and add us insane growth hacks". The prompt was improved and run; the improved prompt is in docs/15 §0. The nevo MCP link (`mcp.nevo.md/mcp`) was **blocked by this session's network policy**, so the plan was built from the repo only.

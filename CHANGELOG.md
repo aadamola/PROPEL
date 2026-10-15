@@ -2,6 +2,16 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-10-15 (late night 2) — Positioning corrected; growth plan written (docs/15)
+
+- **Asked:** "correct our marketing, positioning and add us insane growth hacks". The prompt was improved and run; the improved prompt is in docs/15 §0. The nevo MCP link (`mcp.nevo.md/mcp`) was **blocked by this session's network policy**, so the plan was built from the repo only.
+- **Diagnosis:** a pipeline of one, and zero audits sent since July while ~9,000 lines of infrastructure shipped. **The binding constraint is outbound, not positioning.**
+- **Positioning (recommended):** stop being a "digital marketing agency" and become **the enquiry-to-inspection system for Nigerian property sellers**, built on three proof pillars: speed, truth (only signed facts), accountability (the ledger). Beachhead: Lekki–Epe developers plus surveyor-led firms; agents later.
+- **Offer (ADEDAMOLA decides):** three doors replace six products: a free Response Audit, Concierge Instagram-first, and Launch Partner (fee + commission). The estimated revenue per ADEDAMOLA-hour is roughly 3× that of retainers. Retire "20% off"; replace it with a founding pilot. **Rate card, site and KB are untouched until he rules.**
+- **Growth engine:** the **Lagos Response Test**. 10 genuine pricing questions a week, reply times logged, private follow-ups, and an aggregate Lagos Property Response Report at about 8 weeks. Plus: demo-on-their-phone closes, a launch watch, real buyer-question data (with IFT's permission), comment-to-DM, a NIESV session, LinkedIn text posts, client intros, agent referrals, and a leak calculator. **Refused list** in §6.
+- **Fixed now:** the unsourced "10× more" stat in content-engine Day 11 (now cites HBR 2011 as directional only) and the "costs" → "can cost" hook on Day 2. Five site/bio copy fixes are queued for the realignment pass (WhatsApp mention, "verified listings", "NIESV-trained", "five products", the two-partner table).
+- **Waiting on ADEDAMOLA:** ⭐ Collins promo check. This week: Response Test #1 (replaces "10 names"). Later: the offer decision.
+
 ## 2026-10-15 (late night) — PR #10 opened so Vercel can deploy the legal pages
 
 - **PR #10** (`claude/propel-realestate-marketing-plan-wxjj3x` → `main`, 52 commits): Shalom Park Instagram Phase 0 + Phase 1, VPS tools, and `site-legal/`. The diff was scanned for secrets first; none found. **Vercel Root Directory must be `site-legal`.**

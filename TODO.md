@@ -23,11 +23,13 @@ Today (15 Oct) is the promo review date. Copy, paste, send:
 - [ ] **(5 min, OVERDUE since 29 Sep)** ⏰ **VPS: check what Hostinger charged on renewal.** *Your monthly term ran to 29 Aug, auto-renewal was on, and you last logged in on 10 Aug — so this hasn't been looked at. Renewal is where their 2–3× jump lands.*
 - [ ] **(5 min)** 🎬 **Book the shoot day with Collins** — one site visit, about 3 hours, and it produces all 14 days of content. Shot list is written: [10-phase0-content-pack.md](clients/shalom-park/10-phase0-content-pack.md). *Collins and Mercy go on camera, not you.*
 - [ ] **(1 message)** 🔴 **Ask Shalom Park who can grant Meta admin.** Script in [04-meta-access-pack.md](clients/shalom-park/04-meta-access-pack.md). *Not Collins — he's a Sales Executive. The session is now 15 minutes and needs no SIM.*
-- [ ] **(20 min)** **First 10 prospect names** → WhatsApp me names + IG handles. *Unblocks 10 audit teardowns. Longest-outstanding item on this list — and Shalom Park is still a pipeline of one.*
+- [ ] **(20 min)** 🔥 **Response Test #1: ask 10 developers one real question on Instagram.** *"Hi, what's the current price and payment plan on [estate]?"* Send it from your account, then tell me who you messaged and when. I log the reply times and write every follow-up. Never claim to be a buyer, never name anyone publicly. **This replaces "10 prospect names": same list, and now it does something.** Plan: [docs/15](docs/15-positioning-and-growth.md) §5.
 
 > 🔴 **2 min, do it now:** your Instagram bio links to `getpropel.tech`, which isn't live — change the link to `wa.me/2349019120968?text=Hi%20Propel%2C%20I%20want%20a%20free%20marketing%20audit` until it is.
 
 ## NOT YET — I'm holding these, don't think about them
+
+- **Decide the three-door offer** ([docs/15](docs/15-positioning-and-growth.md) §4): approve, change or reject. When you say go, I draft the site, rate card, KB, bio and LinkedIn in one pass.
 
 - Collins follow-up, 7 open fields: [03-followup-questions.md](clients/shalom-park/03-followup-questions.md). *Moved down to make room for the legal pages.*
 

@@ -42,7 +42,7 @@ Direct, generous, numbers-forward, Lagos-fluent. We give away real tactics (the 
 
 ### Day 2 — The ₦3m empty month (Reel) [VOICE]
 **Format:** kinetic text over Lagos property b-roll; numbers animate on screen as the voiceover lands.
-**Script (30s):** HOOK: "One empty month costs a Lagos agent three million naira. Here's the maths." → ₦60m property × 5% commission = ₦3m animates on screen. Miss one deal because a buyer never found you — that's the invoice. → "Your marketing isn't an expense. Its absence is." CTA: "Free 30-min audit — link in bio."
+**Script (30s):** HOOK: "One empty month can cost a Lagos agent three million naira. Here's the maths." → ₦60m property × 5% commission = ₦3m animates on screen. Miss one deal because a buyer never found you — that's the invoice. → "Your marketing isn't an expense. Its absence is." CTA: "Free 30-min audit — link in bio."
 
 ### Day 3 — Teardown Monday #1 (carousel, 6 slides)
 Anonymized real listing post vs. our rebuild: weak hook → scroll-stopping hook · no title status → "C of O verified" badge · no CTA → WhatsApp CTA · caption wall → structured caption. Final slide: "Want yours torn down (kindly)? Free audit ⬇️"
@@ -72,7 +72,7 @@ Screenshot of our content engine/AI workflow (sanitized): "This is how one strat
 
 ### Day 11 — Playbook Wednesday: WhatsApp is your CRM (Reel) [SCREEN]
 **Format:** screen recording of a WhatsApp Business setup (demo account), voiceover on top — the fixes happen live on screen.
-**Script:** HOOK: "Your WhatsApp is leaking money. Three fixes, two minutes." → 1) Business profile with catalog, not personal number 2) Labels: hot lead / inspection booked / follow-up Friday 3) Quick replies for the 5 questions every buyer asks. → "Leads you reply to in 5 minutes close 10× more." CTA.
+**Script:** HOOK: "Your WhatsApp is leaking money. Three fixes, two minutes." → 1) Business profile with catalog, not personal number 2) Labels: hot lead / inspection booked / follow-up Friday 3) Quick replies for the 5 questions every buyer asks. → "The first reply usually wins the buyer. Five minutes, not five hours." CTA. *(No multiplier on screen. The only solid source is US B2B data: HBR, "The Short Life of Online Sales Leads", 2011, which found firms that responded within an hour were ~7× more likely to qualify the lead. Use our own Lagos Response Test numbers once they exist; docs/15 §5.)*
 
 ### Day 12 — The AI advantage, honestly (static + caption)
 What AI does for our clients (volume, speed, testing) and what it never does (invent title status, fake reviews, replace the human close). Differentiates us from the AI-slop wave; pre-answers the skeptic.

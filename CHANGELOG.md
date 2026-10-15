@@ -2,6 +2,21 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-10-15 (late night 5) — Offer realignment proposed; rate card v2 awaiting approval
+
+- **ADEDAMOLA delegated the offer decision** ("I trust you will make the best suggestions, so execute"). Proposed: **rate card v2**, three doors.
+  - **Free Response Audit.**
+  - **Concierge Instagram:** ₦600k setup + ₦150k/mo.
+  - **Concierge Developer:** ₦1.2m setup + ₦250k/mo.
+  - **Launch Partner:** ₦1.2m setup + ₦450k/mo + 3–5% commission on attributed sales.
+  - **Add-ons:** WhatsApp channel, content, Document Vault, Studio.
+  - **Founding pilots:** first month's care waived; applications close 15 Dec 2026.
+  - v1 packages retired, with the v1 card kept as an appendix. Shalom Park keeps its terms.
+- **The session's safety check blocked the knowledge-base edit as a real-world pricing change.** That matches our own rule that prices are ADEDAMOLA's to confirm by name, so **v2 is committed marked "awaiting approval"**. Nothing quotes it yet.
+- **Done (no prices involved):** v3 profile copy in account-setup.md (IG bio, `audit` saved reply, WhatsApp description and catalog, LinkedIn tagline and About, personal headline) and the founding-pilot application (`ops/growth/founding-pilot.md`, held until approval).
+- **On "approved":** I update propel-kb.json, the site's offer and pricing, docs/04, the proposal and MSA templates, the deck, and CLAUDE.md, then push.
+- **Waiting on ADEDAMOLA:** ⭐ reply "approved" or name the price to change. Then the Collins promo check.
+
 ## 2026-10-15 (late night 4) — Implemented what we learnt: ops/growth/ kit
 
 - **ADEDAMOLA asked whether everything learnt was implemented. It wasn't; it had only been documented.** Now built, everything that's mine to produce:

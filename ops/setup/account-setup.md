@@ -39,7 +39,61 @@
 - [ ] Bio: *"Marketing that sells Lagos property 🏠 Free audit ⬇️"* + WhatsApp link
 - [ ] Same profile image
 
-## Instagram bio + the AUDIT reply (2026-09-24)
+## ⭐ v3 copy: positioning v2 (2026-10-15). Use this; it supersedes the sections below
+
+*From docs/15 + rate card v2. **No prices in any of this copy**: profiles point to the free Response Audit, and prices are given in conversation.*
+
+**Instagram bio (139 of 150 characters):**
+```
+Every property enquiry answered in seconds.
+For Lagos developers & surveyor-led firms, by a real estate pro
+Free Response Audit: DM "AUDIT"
+```
+**Name field:** `Propel | Property Enquiry System` *(searchable; replaces "Real Estate Marketing")*
+**Bio link:** unchanged until the site is live: `wa.me/2349019120968?text=Hi%20Propel%2C%20I%27d%20like%20a%20free%20Response%20Audit`
+
+**Saved reply `audit` (replace the old one):**
+```
+Here's how the free Response Audit works: we check how fast your enquiries actually get answered, walk through how a buyer gets from your post to an inspection, and show you what an instant reply looks like on your own phone. 30 minutes, no obligation.
+
+To set it up, send me:
+1. Your name and company
+2. Which estate or listings you sell
+3. Roughly how many Instagram enquiries you get a month
+4. Who answers your DMs today, and until what time?
+```
+
+**WhatsApp Business description:**
+> Every property enquiry answered in seconds, from facts you've approved, with every sale traced back to its source. For Lagos developers and surveyor-led firms. Built by a real estate professional. Free Response Audit, just message us.
+
+**WhatsApp catalog:** three items: *Free Response Audit · Propel Concierge · Launch Partner*. One line each from docs/03, **no prices in the catalog** (prices change; the catalog lingers).
+
+**LinkedIn tagline (106 of 120):** `Every property enquiry answered in seconds. For Lagos developers and surveyor-led firms. We move property.`
+
+**LinkedIn About v3:**
+> Propel answers your property enquiries in seconds, only says what you've approved, and shows you which sales it brought in.
+>
+> We work with developers and surveyor-led firms in Lagos. Buyers enquire at 11pm, from London and from Lekki, and the first reply usually wins. Propel makes sure that reply is yours: instant, accurate and on the record.
+>
+> How it works:
+> • Content and campaigns bring buyers to your Instagram
+> • Your assistant answers them 24/7, only from a facts sheet you sign. It never guesses a price, a title or a return
+> • Serious buyers reach your team within minutes, routed to whoever is on duty
+> • Every enquiry is logged, so you can see which sales we brought you. Our Launch Partners pay us partly on exactly that
+>
+> Built by a real estate professional: B.Sc. Estate Management, NIESV exam passed and on the ESV track, around five years in the industry.
+> Built only on Meta's official business platforms. No bought followers, no fake reviews, and no marketing for land with a disputed title, at any fee.
+>
+> Free Response Audit: WhatsApp +234 901 912 0968
+
+**ADEDAMOLA's personal LinkedIn headline:**
+`Founder @ Propel · Every property enquiry answered in seconds | B.Sc. Estate Management · NIESV exam passed, ESV track`
+
+**Specialties:** Real Estate Marketing · Property Enquiry Automation · Instagram Automation · Lead Attribution · Developer Marketing · Off-plan Sales · Lagos Real Estate · AI Assistants
+
+---
+
+## Instagram bio + the AUDIT reply (2026-09-24) *(superseded by v3 above)*
 
 **Bio — 146 of 150 characters:**
 

@@ -1,114 +1,106 @@
 # Propel — Services & Pricing
 
-*Rate card v1 · July 2026 · All prices in ₦, VAT (7.5%) exclusive · 3-month minimum term on retainers · Billed monthly in advance.*
+> ⏳ **STATUS: AWAITING ADEDAMOLA'S APPROVAL (2026-10-15).** Proposed by the AI Managing Partner after ADEDAMOLA delegated the offer decision. Prices are his to confirm (CLAUDE.md decision rights). **Until he replies "approved", nothing here is quoted to anyone**: the site, Propel's assistant knowledge base and the templates still carry v1 (summarised at the bottom), and none of them is live.
 
-**Founding Client Offer (first 5 clients only):** 20% off any retainer for a 6-month commitment + video testimonial and case-study rights.
+*Rate card **v2 (proposed)** · 2026-10-15. Reasoning: [docs/15](15-positioning-and-growth.md) §4 + §10. All prices in ₦, VAT (7.5%) exclusive.*
 
----
-
-## 1. Propel Presence — *Be everywhere your buyers look*
-
-AI-accelerated social media management for real estate professionals.
-
-| | **Starter — ₦250,000/mo** | **Growth — ₦450,000/mo** | **Authority — ₦750,000/mo** |
-|---|---|---|---|
-| Platforms | Instagram + TikTok | + Facebook, YouTube Shorts | + LinkedIn, YouTube long-form |
-| Posts/week | 4 (incl. 2 Reels edited from client footage) | 7 (incl. 4 Reels) | 10+ (incl. daily short-form) |
-| Listing packages (copy + creative per property) | 4/mo | 10/mo | Unlimited (fair use) |
-| Personal-brand scripting (talking-head videos) | — | 2/mo | 4/mo + monthly remote coaching |
-| Community management (DMs/comments, business hours) | Basic | Full + WhatsApp routing | Full + AI-assisted 24/7 first-response |
-| Monthly strategy call & report | ✔ | ✔ | ✔ + quarterly business review |
-
-**Who it's for:** agents and surveyors/valuers building deal flow through audience. Surveyor/valuer editions lead with credential-forward, compliance-safe content (valuation explainers, "verify before you buy" series) — an underserved trust angle competitors ignore.
+**What we are:** the enquiry-to-inspection system for Nigerian property sellers. We bring buyers in, answer them in seconds from facts you've signed, and prove which sales we drove.
+**Tagline:** We move property.
 
 ---
 
-## 2. Propel Leads — *Pipeline you can count*
+## Three doors
 
-Paid media + conversion infrastructure, accountable to cost-per-qualified-lead.
+### Door 1 — Free Response Audit · ₦0
 
-| | **Ignite — ₦350,000/mo** | **Accelerate — ₦600,000/mo** |
+We measure how fast your enquiries actually get answered, walk your funnel from post to inspection, and show you an instant reply on your own phone. 30 minutes on WhatsApp or a call. Useful whether or not you hire us.
+
+### Door 2 — Propel Concierge · the core
+
+Your enquiries answered 24/7 from a facts sheet you sign. Hot buyers reach your team in minutes; every enquiry is logged.
+
+| | **Concierge Instagram** | **Concierge Developer** |
 |---|---|---|
-| Ad platforms | Meta (IG/FB) | + Google Search/YouTube + TikTok |
-| Campaigns managed | 2 concurrent | 5 concurrent |
-| Landing pages | 1 (built + hosted) | Up to 4 + A/B testing |
-| Lead capture | WhatsApp click-to-chat + form → sheet/CRM | Full CRM pipeline + AI lead scoring |
-| AI qualification bot (budget, location, timeline screening) | — | ✔ |
-| Creative variants (AI-generated & tested) | 8/mo | 20+/mo |
-| Reporting | Weekly scorecard | Weekly scorecard + live dashboard |
+| For | Surveyor-led firms, agencies, single-estate sellers | Developers, per estate |
+| Instagram DMs + comment keywords, answered 24/7 | ✔ | ✔ |
+| Answers only from your signed facts sheet; tested before it speaks to a buyer | ✔ | ✔ |
+| Hot-lead alerts to your team | Email | Email, routed to whoever is on duty by Lagos time (weekday / evening / weekend / supervisor) |
+| Every enquiry logged | ✔ | ✔ + **attribution ledger** your own auditor can verify |
+| Campaign keywords (one per promo or ad) | Up to 5 | Unlimited, with promo review dates |
+| Monthly report | ✔ | ✔ + monthly review call |
+| **Setup** | **₦600,000** | **₦1,200,000** |
+| **Care** | **₦150,000 / month** | **₦250,000 / month** |
 
-**Ad spend is separate**, paid by client directly to platforms (we advise ₦300k–₦2m/mo depending on goals). We never touch ad spend cash — cleaner trust story.
+### Door 3 — Launch Partner · per estate, for the sales period
 
----
+Concierge Developer **plus** content for your Instagram and campaign management, paid for partly by results.
 
-## 3. Propel Launch — *Sell out the project*
-
-One-off project marketing for off-plan developments and estate launches. Custom-quoted; typical bands:
-
-| Package | Scope | Fee |
-|---|---|---|
-| **Launch Lite — ₦1,500,000** | Project brand kit, launch content pack (20 assets), 6-week campaign management, landing page + lead system | Per project |
-| **Launch Full — ₦3,000,000** | + 3D/render-based video trailer, drone shoot, influencer/agent-network seeding, 12-week campaign, weekly sales-team lead reviews | Per project |
-| **Launch Partner — ₦5,000,000 + per-unit kicker** | Full-stack sales & marketing partnership through sell-out; negotiated bonus per unit sold | Per project |
-
-**Continuation path:** every Launch converts to a Growth/Accelerate retainer for the sales period.
-
----
-
-## 4. Propel Studio — *Content that closes diaspora buyers*
-
-Production services, delivered via our vetted partner crews. Priced per shoot (Lagos metro; travel billed at cost):
-
-| Service | Price |
+| | |
 |---|---|
-| Listing video shoot (up to 3 hrs, 1 property, 2 edited Reels + 1 walkthrough) | ₦180,000 |
-| Drone/aerial add-on | ₦100,000 |
-| 360° virtual tour (per property, hosted) | ₦150,000 |
-| Property photography (25 edited images) | ₦90,000 |
-| Founder/personal-brand shoot (half-day, 8–10 short videos harvested) | ₦250,000 |
-
-Retainer clients get 10–15% off Studio rates. Studio is deliberately margin-thin: it's the physical touchpoint that feeds retainer content and builds trust.
+| Includes | Everything in Concierge Developer · 8 content pieces/month for your account (from your footage + slideshows) · ad campaign management (ad spend paid by you directly to Meta) |
+| **Setup** | **₦1,200,000** |
+| **Monthly** | **₦450,000** |
+| **Success commission** | On sales the ledger attributes to us, inside a 12-month window. Agreed per estate: **anchor 5%, floor 3%** (docs/09). Below 3%, or with no attribution mechanism, we walk away |
+| Minimum | 6 months |
 
 ---
 
-## 5. Propel OS — *Your marketing machine, installed*
+## Add-ons (only alongside a Concierge)
 
-One-off systems builds with optional care plan:
-
-| Build | Scope | Price |
-|---|---|---|
-| WhatsApp Business + CRM setup | Business profile, catalogs, quick replies, CRM pipeline, lead routing | ₦350,000 |
-| Full OS | The above + email/SMS nurture sequences + reporting dashboard | ₦700,000 |
-| Care plan (optional) | Monitoring, tweaks, monthly optimization | ₦100,000/mo |
-
-## 6. Propel Concierge — *The AI agent that answers every DM* ⭐ NEW
-
-24/7 AI agents on WhatsApp + Instagram trained on the client's verified listings: instant answers, lead qualification (budget/area/timeline), inspection booking, hot-lead handoff with full context. Full spec: [docs/10-propel-concierge.md](10-propel-concierge.md).
-
-| Tier | Setup | Monthly care |
-|---|---|---|
-| **Concierge Lite** (WhatsApp only, ≤20 listings) | ₦450,000 | ₦100,000 |
-| **Concierge Pro** (WhatsApp + IG + Messenger, CRM, booking) | ₦800,000 | ₦150,000 |
-| **Concierge Developer** (per project: routing, attribution, diaspora tuning) | ₦1,200,000 | ₦250,000 |
-
-Guardrail clients love: the agent answers ONLY from client-warranted listing facts — it never guesses prices or title status, and escalates anything legal to the licensed human. Retainer clients get 15% off setup. Every deployment passes the Propel Systems QA suite (docs/11 §3).
-
-**Add-ons & offerings in validation (docs/11 §4 — not yet rate-card-final):**
-| Item | Status | Indicative price |
-|---|---|---|
-| Document Vault (secure expiring doc links + verified credentials) | Add-on, live | ₦200,000 setup + ₦50,000/mo |
-| Voice-Note Concierge (AI WhatsApp voice replies) | Add-on, live | Included in Pro/Developer tiers |
-| Broker Hub (live inventory + co-branded flyers for broker networks) | VALIDATION | ₦600,000 setup + ₦150,000/mo |
-| Outbound Voice AI (live qualification calls) | Month-3+ pilot | TBD after consent/latency testing |
+| Add-on | Price |
+|---|---|
+| **WhatsApp channel** (Meta's official WhatsApp Business Platform, on a dedicated number, never a salesperson's personal line) | +₦350,000 setup · +₦50,000/month. *WhatsApp's own message fees are billed by Meta to the client* |
+| **Content for your Instagram** (8 pieces/month) | ₦250,000/month *(included in Launch Partner)* |
+| **Document Vault** (secure expiring document links) | ₦200,000 setup · ₦50,000/month |
+| **Studio** (vetted partner crews; travel at cost) | Listing shoot ₦180,000 · drone ₦100,000 · 360° tour ₦150,000 · photography (25 images) ₦90,000 |
 
 ---
 
-## Bundling & Blended Targets
+## Founding pilots (Q4 2026)
 
-- **Flagship bundle (target ⅓ of clients):** Growth Presence + Ignite Leads = ₦800k/mo → bundle price **₦700,000/mo**.
-- **Blended average target:** ₦450k/client/month in year 1.
-- **What we don't do:** one-off "manage my page for ₦100k" gigs, unpaid pitches/spec work, clients who fail the title/credential vetting checklist, and handling client ad-spend cash.
+**Three pilots this quarter. Applications close 15 December 2026.** Both limits are real: when three are signed or the date passes, it closes, and it isn't re-run with a new date.
 
-## Payment Terms (all services)
+- Full setup at rate card. **The first month's care is waived.**
+- In return: written case-study rights, and a named review call at day 30.
+- Vetting (rule 5) and a signed warranted-facts sheet (rule 2) apply as always.
+- Application questions: [ops/growth/founding-pilot.md](../ops/growth/founding-pilot.md).
 
-Monthly in advance via transfer/Paystack · work pauses automatically at 7 days overdue · 3-month minimum on retainers, then monthly rolling with 30 days' notice · annual price review indexed to tooling/FX costs (contractual).
+*Replaces v1's "20% off for 6 months". Discounts anchor the price low and attract the buyers most likely to leave.*
+
+---
+
+## Terms (all services)
+
+- **Setup is paid in full before the build starts.** Care and monthly fees are paid monthly in advance.
+- **The go-live clock starts when two things are true:** the client's Meta access is granted and the facts sheet is signed. **We don't promise a go-live date before our Meta access test has run for that client**, because Business Verification and App Review timing is Meta's, not ours.
+- 3-month minimum on care (6 on Launch Partner), then monthly with 30 days' notice. Work pauses automatically at 7 days overdue.
+- Ad spend goes from the client directly to the platforms. We never hold ad money.
+- Annual price review, indexed to tooling and FX costs.
+- **Existing clients keep the terms they signed.** (Shalom Park is unaffected.)
+
+## What we don't do
+
+One-off "manage my page" gigs · unpaid spec work · clients who fail title or credential vetting (we don't market disputed land at any fee) · handling ad-spend cash · bought followers, engagement pods or fake reviews · unofficial WhatsApp gateways.
+
+---
+
+## Why v2 (one paragraph)
+
+v1 offered six product lines to be delivered by one person at 20 hours a week. The market's only signal so far, a developer who asked for the AI enquiry system before we pitched it, points at the Concierge. Content retainers are marketing, and marketing churns. A system that runs in the background and holds the client's records doesn't. By our estimate the Concierge earns about 3× more per ADEDAMOLA-hour than the retainers did. Content, ads and shoots stay available, as ingredients and add-ons rather than products on the menu. *(docs/15 §4, §10.)*
+
+---
+
+## Appendix — rate card v1 (retired 2026-10-15)
+
+Kept for the record and for any conversation that referenced it. **No longer offered to new clients.**
+
+| v1 line | v1 price | Where it went in v2 |
+|---|---|---|
+| Presence Starter / Growth / Authority | ₦250k / ₦450k / ₦750k per month | "Content for your Instagram" add-on; inside Launch Partner |
+| Leads Ignite / Accelerate | ₦350k / ₦600k per month | Campaign management inside Launch Partner |
+| Launch Lite / Full / Partner | ₦1.5m / ₦3m / ₦5m + kicker | Launch Partner (setup + monthly + commission) |
+| Studio | per shoot | Unchanged, now an add-on |
+| OS (WhatsApp Business + CRM / Full OS / care) | ₦350k / ₦700k / ₦100k pm | WhatsApp channel add-on; the ledger replaces the CRM |
+| Concierge Lite / Pro / Developer | ₦450k / ₦800k / ₦1.2m setup | Concierge Instagram / Concierge Developer |
+| Growth + Ignite bundle | ₦700k per month | Retired |
+| Founding offer: 20% off for 6 months | — | Founding pilots |

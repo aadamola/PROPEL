@@ -7,7 +7,7 @@
 - **Decision (ADEDAMOLA): clients invite `getpropel.ng@gmail.com` as a person with full control, not Propel as a Partner.** Reason: Partner access makes every new asset wait on the client sharing it, and that wait was a serious bottleneck. Decided; don't relitigate.
 - **New template: `ops/templates/meta-access-guide.md`.** Plain-language walkthrough: invite the email with full control, switch on Instagram / Page / WhatsApp / ad account (if ads in scope), confirm, how to remove us, a written "we will never" list (remove their admins, touch verification or payment, invite third parties), troubleshooting, and a WhatsApp-ready short version. Step 4 of the Shalom Park access pack and the onboarding checklist now point to it.
 - **Risks recorded in the guide's internal notes:** the invite must be accepted by a real person's Facebook profile with 2FA on (Meta disables business-named profiles, which would lock us out of every client at once); one profile is a single point of failure, so add a backup person once there are 2+ clients; commission evidence still lives in our own ledger.
-- **Waiting on ADEDAMOLA:** confirm which Facebook profile accepts the invites, and that 2FA is on.
+- **Invite-accepting profile settled:** ADEDAMOLA's own Facebook profile (login stays automatelabs@hotmail.com), with getpropel.ng@gmail.com added as a secondary contact email (done 2026-10-15). **Waiting on ADEDAMOLA:** confirm 2FA is on.
 
 ## 2026-07-31 (evening) — Fast lane built out: access pack, attribution ledger, proof test
 

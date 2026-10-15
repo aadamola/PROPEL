@@ -2,6 +2,13 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-10-15 (night, late) — ✅ PR #10 merged; getpropel.tech live on Vercel
+
+- **PR #10 merged** into `main` (merge commit `c2013be`). `site-legal/` is on `main` with `index.html`, `privacy.html` and `data-deletion.html`.
+- **Vercel set up** (new account, signed in with GitHub): project imported from `aadamola/PROPEL` with **Root Directory `site-legal`** and Framework Preset Other. **DNS at Hostinger:** `A @ → 216.198.79.1` and `CNAME www →` Vercel's project-specific target. `engine` / `flow` / `status` were left alone. ADEDAMOLA confirmed `getpropel.tech` loads the holding page with both legal links.
+- **Vercel Hobby is non-commercial by its terms.** It's fine for unblocking Meta. Before client work goes on it, either move to Pro (~$20/mo) or serve from the VPS via Caddy. Recommendation: the VPS.
+- **Waiting on ADEDAMOLA:** ⭐ paste both legal URLs into the Meta app (App settings → Basic) and save. Then the `hello@getpropel.tech` forwarder before Meta review.
+
 ## 2026-10-15 (late night) — PR #10 opened so Vercel can deploy the legal pages
 
 - **PR #10** (`claude/propel-realestate-marketing-plan-wxjj3x` → `main`, 52 commits): Shalom Park Instagram Phase 0 + Phase 1, VPS tools, and `site-legal/`. The diff was scanned for secrets first; none found. **Vercel Root Directory must be `site-legal`.**

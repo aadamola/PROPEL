@@ -6,23 +6,25 @@
 
 > 💰 **2026-07-26: PROPEL HAS A PAYING CLIENT.** Shalom Park paid the setup fee. You did that. Second SIM ✅ 09112714482 logged. We're in production mode — full build plan in [ops/production-checklist.md](ops/production-checklist.md), you don't need to read it, I'm running it.
 
-## ⭐ DO THIS NEXT — steps 8 + 9: switch the webhook on, then prove it (3 min)
+## ⭐ DO THIS NEXT: unblock Publish, then steps 8 + 9 (5 min)
 
-**Step 8** — in n8n, open **Propel Concierge — Instagram channel** → click **Publish**.
+n8n won't publish while 3 nodes have no login. Give them a **placeholder** login:
 
-**Step 9** — straight after, on the server:
-```
-bash /opt/propel-repo/ops/setup/vps-tools.sh handshake
-```
+1. Open **Private reply to comment** → Credential → **Create new** (Header Auth)
+   - Credential name: `Shalom Park IG`
+   - Name: `Authorization`
+   - Value: `Bearer PENDING-META-APP`
+2. Open **Public comment reply** and **Send IG DM** → pick that same `Shalom Park IG` from the dropdown
+3. **Save** → **Publish**
+4. On the server: `bash /opt/propel-repo/ops/setup/vps-tools.sh handshake` → want **✅ 3/3**
 
-You want **`✅ 3/3`**. The one that matters most is **"wrong token → refused"** — it proves strangers can't hook their own Meta app to our address. The output never shows the token, so it's safe to screenshot.
-
-**Publishing does NOT start answering buyers.** Meta isn't pointed at this address until step 10, and even if something sends to it, it's rejected without the Meta app secret. **Keep running Phase 0 by hand exactly as you are.**
+**The placeholder is safe.** Every message is refused at "Verify signature" until the Meta app secret exists (step 10), so nothing can reach the send nodes. At step 10 we just swap the value. **Keep running Phase 0 by hand.**
 
 ---
 
 ## THIS WEEK — one per sitting, in this order
 
+- [ ] **(1 message, TODAY 15 Oct)** 📅 **Ask Collins: are the ₦5m condo entry and 70% 4-bed offers still running?** The automated cards switch back to the signed terms after today on their own. **The Phase 0 saved replies don't.** Until he says yes, don't paste the promo replies by hand.
 - [ ] **(5 min, DUE TODAY 29 Sep)** ⏰ **VPS: check what Hostinger charged on renewal.** *Your monthly term ran to 29 Aug, auto-renewal was on, and you last logged in on 10 Aug — so this hasn't been looked at. Renewal is where their 2–3× jump lands.*
 - [ ] **(5 min)** 🎬 **Book the shoot day with Collins** — one site visit, about 3 hours, and it produces all 14 days of content. Shot list is written: [10-phase0-content-pack.md](clients/shalom-park/10-phase0-content-pack.md). *Collins and Mercy go on camera, not you.*
 - [ ] **(1 message)** 🔴 **Ask Shalom Park who can grant Meta admin.** Script in [04-meta-access-pack.md](clients/shalom-park/04-meta-access-pack.md). *Not Collins — he's a Sales Executive. The session is now 15 minutes and needs no SIM.*

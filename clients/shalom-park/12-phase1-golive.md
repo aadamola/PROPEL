@@ -121,13 +121,15 @@ Test it before n8n sees it: `bash /opt/propel-repo/ops/setup/vps-tools.sh smtp` 
 
 **MX records take minutes, sometimes a few hours.** Create the mailbox first, then do 3a and 3b while it settles. If it still hasn't resolved when you reach the import, a Gmail app password on `aadamola@gmail.com` works as a stopgap — **contingency, not plan.**
 
-#### 3d · `Shalom Park IG` — Header Auth ⏸️ *later*
+#### 3d · `Shalom Park IG` — Header Auth · create NOW with a placeholder, real token at step 10
 | Field | Value |
 |---|---|
 | Name | `Authorization` |
-| Value | `Bearer <IG token>` |
+| Value | `Bearer PENDING-META-APP` *(placeholder; at step 10 replace it with `Bearer <IG token>`)* |
 
-**Create it when the Meta app exists.** You can import and wire everything else first — the credential just gets attached to the three HTTP nodes in step 6 once you have the token.
+**Create it now, with the placeholder value.** Newer n8n **refuses to Publish** a workflow while any node is missing a credential ("3 nodes have issues, fix them before publishing"). Corrected 2026-10-15; this runbook used to say the warning didn't block anything.
+
+**The placeholder is safe.** Nothing reaches the send nodes unless it passes `Verify signature`, and that check fails closed while `SHALOM_PARK_APP_SECRET` is empty. So every POST gets a 403 until step 10. At step 10 you **edit this credential's value**. The three nodes don't need re-wiring.
 
 ### Step 4 — import `03-concierge-core.json`
 
@@ -168,10 +170,10 @@ https://raw.githubusercontent.com/aadamola/PROPEL/claude/propel-realestate-marke
 
 1. **`Concierge CORE`** shows `SzWrUVB8WYv3sfE5`
 2. **`Ledger + escalation`** shows `oNt2oRixkDbbUa2p`
-3. Attach **Shalom Park IG** (Header Auth) to all three HTTP nodes: `Private reply to comment`, `Public comment reply`, `Send IG DM` — *or leave these until the token exists; they only matter at send time*
+3. Attach **Shalom Park IG** (Header Auth) to all three HTTP nodes: `Private reply to comment`, `Public comment reply`, `Send IG DM`. **Required: n8n won't Publish without it** (placeholder value from 3d)
 4. **Save**
 
-✅ **Done when:** the two sub-workflow ids are real and no `REPLACE_WITH_` text remains anywhere on the canvas. *(The three HTTP nodes may still show a credential warning until 3d — that is expected and does not block the import.)*
+✅ **Done when:** the two sub-workflow ids are real and no `REPLACE_WITH_` text remains anywhere on the canvas. *(The three HTTP nodes show a warning until **Shalom Park IG** is attached. It doesn't block the import, but it **does block Publish** in step 8.)*
 
 ### Step 7 — secrets on the server, never in chat 🔒
 
@@ -225,6 +227,8 @@ Other answers and what they mean:
 
 Fields: **`comments`** and **`messages`**. Callback URL as above, verify token from `.env`.
 
+**First, swap in the real token:** n8n → Credentials → **Shalom Park IG** → change the value from `Bearer PENDING-META-APP` to `Bearer <IG token>` → Save. Then put the app secret into `.env` (`vps-tools.sh n8n-env`). **Until both are done, a send fails on purpose.**
+
 ---
 
 ## Also required before the Meta app will save
@@ -233,7 +237,7 @@ Fields: **`comments`** and **`messages`**. Callback URL as above, verify token f
 |---|---|
 | `getpropel.tech/privacy.html` loads — **⚠️ the site is not live yet (2026-09-24); publish these two pages first, they carry no offerings** | Meta app → Basic Settings → Privacy Policy URL |
 | `getpropel.tech/data-deletion.html` loads | Meta app → Basic Settings → Data Deletion URL |
-| Test suite **135 passing** | I run it; it is green |
+| Test suite **154 passing** | I run it; it is green |
 
 ## The cutover, in order
 

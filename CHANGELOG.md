@@ -2,6 +2,13 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-10-15 — Publish blocked by missing credentials; runbook corrected
+
+- **n8n refused to Publish `05`:** *"3 nodes have issues, fix them before publishing."* **My runbook was wrong.** It said the credential warning on the three send nodes didn't block anything. In newer n8n it blocks Publish.
+- **Fix:** create the `Shalom Park IG` Header Auth credential **now**, with the placeholder value `Bearer PENDING-META-APP`, and attach it to all three send nodes. **It's safe.** `Verify signature` fails closed while `SHALOM_PARK_APP_SECRET` is empty, so every POST is refused with a 403 before it can reach a send node. At step 10 we edit the credential's value and don't re-wire anything. Runbook steps 3d, 6, 8 and 10 updated. Also corrected the stale test count (135 → 154).
+- **📅 Today is the promo review date** (₦5m condo entry · 70% on the 4-bed). Automated cards revert to the signed terms on their own after today. **The Phase 0 saved replies are pasted by hand and don't revert**, so promo replies stop being pasted until Collins re-confirms. That gap needs a guard in the generated saved-replies file.
+- **Waiting on ADEDAMOLA:** ⭐ placeholder credential → Publish → handshake. Promo re-confirmation from Collins (today).
+
 ## 2026-09-29 — Workflow 05 imported and checked; canvas spacing fixed
 
 - **ADEDAMOLA's screenshot of `05` in n8n matches the build:** both entry points, "Seen this message?" dedup before the keyword lane, both lanes merging at "Prepare send", and the send gate feeding the reply and the ledger. **The warning triangles on the three send nodes are expected** — the Shalom Park Instagram credential can't exist until the Meta app does (step 10).

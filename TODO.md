@@ -6,28 +6,20 @@
 
 > 💰 **2026-07-26: PROPEL HAS A PAYING CLIENT.** Shalom Park paid the setup fee. You did that. Second SIM ✅ 09112714482 logged. We're in production mode — full build plan in [ops/production-checklist.md](ops/production-checklist.md), you don't need to read it, I'm running it.
 
-## ⭐ DO THIS NEXT: stop Flowise, apply the fix, re-run the handshake (5 min)
+## ⭐ DO THIS NEXT: one WhatsApp to Collins, today (1 min)
 
-Paste these on the server, one at a time:
+Today (15 Oct) is the promo review date. Copy, paste, send:
 
-```
-cd /opt/propel && docker compose stop flowise
-cd /opt/propel-repo && git pull
-bash /opt/propel-repo/ops/setup/vps-tools.sh n8n-env
-bash /opt/propel-repo/ops/setup/vps-tools.sh handshake
-```
+> *"Hi Collins, quick check: are the ₦5m entry deposit on the condo and the 70% deposit on the 4-bed still running? I need a yes or no today so our Instagram replies stay accurate."*
 
-You want **✅ 3/3**. Screenshot it and send it to me.
-
-- **Line 1:** Flowise was using 99% of the CPU, which is why Hostinger throttled the server. We don't use Flowise yet, and `docker compose start flowise` brings it back. **Don't click "Remove limitations".** Once Flowise stops, the server recovers on its own.
-- **Lines 2–4:** this fixes **my** bug. n8n wasn't allowed to load the code that checks the token, so the webhook answered "OK" to everyone. Nothing is connected to it yet, so nothing leaked.
+- **He says yes:** send me his reply and I'll push the review date out 30 days.
+- **He says no, or no reply by tomorrow:** change the 5 promo saved replies in Instagram (`condo`, `duplex`, `promo`, `pay`, `disc`) to the standard terms. Each card in [09-phase0-saved-replies.md](clients/shalom-park/09-phase0-saved-replies.md) now has the replacement text underneath, marked ⏰. **Instagram won't change them for you.**
 
 ---
 
 ## THIS WEEK — one per sitting, in this order
 
-- [ ] **(1 message, TODAY 15 Oct)** 📅 **Ask Collins: are the ₦5m condo entry and 70% 4-bed offers still running?** The automated cards switch back to the signed terms after today on their own. **The Phase 0 saved replies don't.** Until he says yes, don't paste the promo replies by hand.
-- [ ] **(5 min, DUE TODAY 29 Sep)** ⏰ **VPS: check what Hostinger charged on renewal.** *Your monthly term ran to 29 Aug, auto-renewal was on, and you last logged in on 10 Aug — so this hasn't been looked at. Renewal is where their 2–3× jump lands.*
+- [ ] **(5 min, OVERDUE since 29 Sep)** ⏰ **VPS: check what Hostinger charged on renewal.** *Your monthly term ran to 29 Aug, auto-renewal was on, and you last logged in on 10 Aug — so this hasn't been looked at. Renewal is where their 2–3× jump lands.*
 - [ ] **(5 min)** 🎬 **Book the shoot day with Collins** — one site visit, about 3 hours, and it produces all 14 days of content. Shot list is written: [10-phase0-content-pack.md](clients/shalom-park/10-phase0-content-pack.md). *Collins and Mercy go on camera, not you.*
 - [ ] **(1 message)** 🔴 **Ask Shalom Park who can grant Meta admin.** Script in [04-meta-access-pack.md](clients/shalom-park/04-meta-access-pack.md). *Not Collins — he's a Sales Executive. The session is now 15 minutes and needs no SIM.*
 - [ ] **(5 min)** **Send Collins the follow-up** — [03-followup-questions.md](clients/shalom-park/03-followup-questions.md). *Seven fields still open. The ₦95m condo price is settled; the rest aren't.*
@@ -60,6 +52,8 @@ Testing the bot · the automated pilot · voice notes · first audit calls. Noth
 
 ## ✅ DONE (look how far this has come)
 
+- [x] 🛡️ **Steps 8 + 9: Instagram webhook published and handshake ✅ 3/3.** It answers Meta and refuses strangers (2026-10-15)
+- [x] 🧯 **Flowise stopped; the server is out of CPU throttle** (2026-10-15)
 - [x] 💼 **LinkedIn Company Page live — linkedin.com/company/getpropel-tech** (2026-09-24)
 - [x] 🔐 **Step 7 — verify token live in n8n; August's "access to env vars denied" fixed at the root** (2026-09-23)
 - [x] 📲 **Step 6 — Instagram workflow imported with both IDs baked in** (2026-09-23)

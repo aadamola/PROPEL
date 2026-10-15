@@ -247,10 +247,20 @@ const live = r => {
 };
 const TIER1 = ['SP-2B','SP-4B','SP-5B','SP-LAND','SP-INVEST','SP-DEVPLOT','SP-ESC-PROMO',
                'SP-PRICE-GEN','SP-LOC','SP-INSPECT','SP-PAY','SP-INFO'];
+// A saved reply lives inside Instagram, not in this file. Once pasted, a
+// promo keeps going out long after the automation has reverted -- so every
+// promo card carries its own expiry and the standard text to swap in.
 const entry = r => {
   const { text, promo } = live(r);
-  return [`### \`${r.shortcut}\` — ${r.intent}${promo ? '  🎟️ *promo text — live*' : ''}` +
-          (r.escalate ? '  ⚠️ *then tell Collins*' : ''), '', '```', text, '```', ''].join('\n');
+  const out = [`### \`${r.shortcut}\` — ${r.intent}${promo ? '  🎟️ *promo text — live*' : ''}` +
+          (r.escalate ? '  ⚠️ *then tell Collins*' : ''), '', '```', text, '```', ''];
+  if (promo) {
+    const until = r.promo_until || r.promo_review_by;
+    const why = r.promo_until ? 'the promotion ends' : 'Collins has not re-confirmed it';
+    out.push(`> ⏰ **Good until ${until}.** After that, if ${why}, open this saved reply in Instagram and replace the text with the standard terms below. Instagram won't update it for you.`,
+             '', '```', r.dm_response, '```', '');
+  }
+  return out.join('\n');
 };
 const srDoc = [
   '# Phase 0 — Instagram Saved Replies',

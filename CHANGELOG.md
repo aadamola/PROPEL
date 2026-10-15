@@ -2,6 +2,14 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-10-15 (evening) — ✅ Steps 8 + 9 done: webhook live, handshake 3/3
+
+- **`n8n-env` re-applied:** `NODE_FUNCTION_ALLOW_BUILTIN allows crypto` ✓, `N8N_BLOCK_ENV_ACCESS_IN_NODE=false` ✓, verify token set ✓, app secret not set yet (expected until step 10).
+- **Handshake ✅ 3/3:** the right token gets the challenge echoed back exactly, and a wrong token or no token is refused. **`05` is published.** Meta will accept the subscription as soon as the app exists.
+- **Phase 0 promo guard shipped:** saved replies live inside Instagram, so the file can't change them after they're pasted. Every promo card in `09-phase0-saved-replies.md` now shows **"Good until <date>"** plus the standard-terms text to swap in. `build-keywords.js` generates both, so they can't drift.
+- **Go-live position:** steps 1–9 ✅. **Step 10 is blocked on the client side:** a Meta app inside Shalom Park's portfolio (who grants Meta admin?), the app secret, the IG token, and the privacy + data-deletion pages live before Meta will save the app.
+- **Waiting on ADEDAMOLA:** ⭐ the promo re-confirmation message to Collins (today). Then: who grants Meta admin, the shoot day, and the overdue VPS renewal check.
+
 ## 2026-10-15 (later) — Handshake failed 3/3: n8n couldn't load `crypto`; Flowise was throttling the server
 
 - **Handshake: all three checks got HTTP 200**, including the wrong-token and no-token requests. **Root cause (my defect):** five Code nodes `require('crypto')`, and n8n blocks Node built-ins unless `NODE_FUNCTION_ALLOW_BUILTIN` lists them. The node threw before it could answer, and n8n's fallback reply was a 200. **The unit tests run in plain Node, where `require` always works, so they couldn't see this.** That's the same class of failure as August's `$env` block.

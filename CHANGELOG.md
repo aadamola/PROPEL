@@ -2,6 +2,12 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-10-15 (late night) — PR #10 opened so Vercel can deploy the legal pages
+
+- **PR #10** (`claude/propel-realestate-marketing-plan-wxjj3x` → `main`, 52 commits): Shalom Park Instagram Phase 0 + Phase 1, VPS tools, and `site-legal/`. The diff was scanned for secrets first; none found. **Vercel Root Directory must be `site-legal`.**
+- **Meta invite email answered:** the Partner route uses Propel's **Business ID**, not an email. If Propel has no Business portfolio yet, the fallback is a person invite to **aadamola@gmail.com** (the email on ADEDAMOLA's Facebook login), with access to the Instagram account and Page only, never full admin.
+- **Waiting on ADEDAMOLA:** ⭐ Collins promo check. Then merge PR #10 → Vercel → DNS.
+
 ## 2026-10-15 (night) — Reviewed ADEDAMOLA's 3-track Meta plan; legal-only site built; a deletion gap of mine found
 
 - **The plan's structure is right:** legal pages first (no dependency), a screen-share instead of email ping-pong, a system-user token instead of Graph Explorer. **Corrected before anything goes out:**

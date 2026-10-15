@@ -2,6 +2,16 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-10-15 (night) — Reviewed ADEDAMOLA's 3-track Meta plan; legal-only site built; a deletion gap of mine found
+
+- **The plan's structure is right:** legal pages first (no dependency), a screen-share instead of email ping-pong, a system-user token instead of Graph Explorer. **Corrected before anything goes out:**
+  - **Track 1:** don't use the plan's page templates. We already have NDPA-correct pages (controller = property business, processor = Propel). The templates claim "verified Instagram accounts" (untrue), cast Propel as controller, and promise a 48-hour purge from a ledger that refuses deletes by design. **Hosting:** Hostinger File Manager needs a web-hosting plan we don't have, and the VPS runs Caddy, not Nginx. The root domain is planned for Vercel. Paths stay `/privacy.html` and `/data-deletion.html`, as the runbook says, not `/legal/`.
+  - **Track 2:** the plan asks for "Full Control / Business Admin". We ask to be added as a **Partner with scoped access** (04-meta-access-pack §4), which is easier for a director to say yes to and two taps to remove. The person who grants it is their admin, not Collins. `developer@getpropel.tech` doesn't exist.
+  - **Track 3:** system user **Employee, not Admin** (standing rule). App contact email = **aadamola@gmail.com**, since Meta sends policy and review deadlines there. The secret and token go **straight to the server and the n8n credential**, never through WhatsApp. **Missing from the plan:** the Step 0 test (does it run without App Review?) before any date goes to the client, and the webhook subscription only on cutover morning (Phase 0 and Phase 1 must never both answer).
+- **Built `site-legal/`** (`tools/build-legal-site.js`): the two legal pages copied unchanged from `site/` plus a holding page with no offerings. Vercel serves it now. At launch the Root Directory switches to `site/` and DNS never changes. A `--check` mode is in `test-all`: it fails if the copies drift or anything else lands in the folder.
+- **🔴 My defect:** `data-deletion.html` promises "reply `DELETE`", but no keyword rule handles it, and the ledger refuses `DELETE` by design (LSQL-08). Logged in the go-live checklist as a hard pre-cutover item. **Also:** both pages give `hello@getpropel.tech` as the contact, and that mailbox doesn't exist yet. It needs a forwarder.
+- **Waiting on ADEDAMOLA:** ⭐ Collins promo check (today). Then the legal pages: hello@ forwarder → Vercel → DNS (needs a PR to `main`).
+
 ## 2026-10-15 (evening) — ✅ Steps 8 + 9 done: webhook live, handshake 3/3
 
 - **`n8n-env` re-applied:** `NODE_FUNCTION_ALLOW_BUILTIN allows crypto` ✓, `N8N_BLOCK_ENV_ACCESS_IN_NODE=false` ✓, verify token set ✓, app secret not set yet (expected until step 10).

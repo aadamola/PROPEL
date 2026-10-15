@@ -19,15 +19,17 @@ Today (15 Oct) is the promo review date. Copy, paste, send:
 
 ## THIS WEEK — one per sitting, in this order
 
+- [ ] **(20 min)** 🌐 **Put the two legal pages online (Track 1).** ① Hostinger → Emails → create forwarder **hello@getpropel.tech → aadamola@gmail.com** ② vercel.com → sign in with GitHub → Add New Project → `aadamola/PROPEL` → **Root Directory: `site-legal`** → Deploy ③ Project → Settings → Domains → add `getpropel.tech` + `www` → copy the DNS records Vercel shows into Hostinger DNS. *Use `site-legal`, **not** `site`. `site` has the prices we're realigning. Vercel deploys from `main`, so tell me first and I'll open the PR that gets it there.*
 - [ ] **(5 min, OVERDUE since 29 Sep)** ⏰ **VPS: check what Hostinger charged on renewal.** *Your monthly term ran to 29 Aug, auto-renewal was on, and you last logged in on 10 Aug — so this hasn't been looked at. Renewal is where their 2–3× jump lands.*
 - [ ] **(5 min)** 🎬 **Book the shoot day with Collins** — one site visit, about 3 hours, and it produces all 14 days of content. Shot list is written: [10-phase0-content-pack.md](clients/shalom-park/10-phase0-content-pack.md). *Collins and Mercy go on camera, not you.*
 - [ ] **(1 message)** 🔴 **Ask Shalom Park who can grant Meta admin.** Script in [04-meta-access-pack.md](clients/shalom-park/04-meta-access-pack.md). *Not Collins — he's a Sales Executive. The session is now 15 minutes and needs no SIM.*
-- [ ] **(5 min)** **Send Collins the follow-up** — [03-followup-questions.md](clients/shalom-park/03-followup-questions.md). *Seven fields still open. The ₦95m condo price is settled; the rest aren't.*
 - [ ] **(20 min)** **First 10 prospect names** → WhatsApp me names + IG handles. *Unblocks 10 audit teardowns. Longest-outstanding item on this list — and Shalom Park is still a pipeline of one.*
 
 > 🔴 **2 min, do it now:** your Instagram bio links to `getpropel.tech`, which isn't live — change the link to `wa.me/2349019120968?text=Hi%20Propel%2C%20I%20want%20a%20free%20marketing%20audit` until it is.
 
 ## NOT YET — I'm holding these, don't think about them
+
+- Collins follow-up, 7 open fields: [03-followup-questions.md](clients/shalom-park/03-followup-questions.md). *Moved down to make room for the legal pages.*
 
 **Parked from "this week" to keep the list at five** (the protocol, not a demotion — I'll star them when their turn comes):
 
@@ -43,6 +45,8 @@ Today (15 Oct) is the promo review date. Copy, paste, send:
 Testing the bot · the automated pilot · voice notes · first audit calls. Nothing here is actionable until the week's items land.
 
 ## WAITING ON ME (AI partner) — nothing for you to do here
+
+- 🔴 **Before step 10:** make the `DELETE` reply actually work. The privacy page promises it, but no keyword handles it, and the ledger refuses deletes by design. Needs a rule plus an erasure design that keeps the chain verifiable.
 
 - ✅ Website wired to your number · ✅ WhatsApp QR generated (site/assets/whatsapp-qr.png)
 - Live Concierge build on the new SIM → starts the moment you send it + VPS exists

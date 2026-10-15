@@ -235,8 +235,10 @@ Fields: **`comments`** and **`messages`**. Callback URL as above, verify token f
 
 | Check | Where |
 |---|---|
-| `getpropel.tech/privacy.html` loads — **⚠️ the site is not live yet (2026-09-24); publish these two pages first, they carry no offerings** | Meta app → Basic Settings → Privacy Policy URL |
+| `getpropel.tech/privacy.html` loads. **Serve `site-legal/` from Vercel** (the two legal pages plus a holding page that sells nothing; `node tools/build-legal-site.js`). At launch, switch Vercel's Root Directory to `site/`; DNS doesn't change | Meta app → Basic Settings → Privacy Policy URL |
 | `getpropel.tech/data-deletion.html` loads | Meta app → Basic Settings → Data Deletion URL |
+| **`hello@getpropel.tech` receives mail.** Both pages give it as the contact address. Set it up as a forwarder to `aadamola@gmail.com` | Hostinger → Emails |
+| **A `DELETE` reply is handled, and the ledger can honour it.** The page promises both, and the append-only ledger refuses deletes by design. **AI partner owes this before cutover** | `keywords.csv` + ledger erasure design |
 | Test suite **154 passing** | I run it; it is green |
 
 ## The cutover, in order

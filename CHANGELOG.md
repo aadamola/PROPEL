@@ -2,6 +2,14 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-10-15 (evening) — Prices off the homepage; plans now end in "Book a call"
+
+- **Decision (ADEDAMOLA):** no prices on the website. Every plan ends in a free 30-minute call, then a written proposal in naira. Inspiration: gomega.ai's plan cards.
+- **Checked first:** the homepage prices (₦250k / ₦700k / ₦1.5m+) matched `docs/03` and `propel-kb.json` exactly; `site-legal/` carries no prices. So nothing was wrong, the offer was just being rethought.
+- **Built (`site/index.html`):** "How fast do you want to move property?" section with three plans, **Presence · Leads (most popular) · Launch**, each with a one-line outcome, a "Your growth team" checklist and a **Book a call** WhatsApp button that names the plan. New "Built only for Nigerian real estate" block lists who we serve with three capability facts (24/7 DMs, replies in seconds, Friday scorecard). **No borrowed result stats** — Mega's "-68% cost per lead" style numbers are results we haven't earned (rule 2). Added a "How much does it cost?" FAQ. Hero button now reads "See the plans". Checked at 390px: no horizontal scroll.
+- **Still quoting prices:** `ops/concierge/propel-kb.json` (not live). Switch it to "book a call" before Propel's own Concierge goes live. `docs/03` stays as the internal rate card.
+- **Waiting on ADEDAMOLA:** review the draft PR.
+
 ## 2026-10-15 (late night) — PR #10 opened so Vercel can deploy the legal pages
 
 - **PR #10** (`claude/propel-realestate-marketing-plan-wxjj3x` → `main`, 52 commits): Shalom Park Instagram Phase 0 + Phase 1, VPS tools, and `site-legal/`. The diff was scanned for secrets first; none found. **Vercel Root Directory must be `site-legal`.**

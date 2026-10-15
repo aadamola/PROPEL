@@ -2,10 +2,12 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
-## 2026-10-15 — Meta partner-access guide (client-facing)
+## 2026-10-15 — Meta access guide (client-facing) · access method ruled
 
-- **New template: `ops/templates/meta-partner-access-guide.md`.** Plain-language walkthrough for any client to add Propel as a **Partner** in their Meta Business account using Propel's Business ID — **no email, no password**. Covers the click-path, a least-privilege permission table (Instagram full control · Page messages · WhatsApp full control · ad account only if ads are in scope), how to verify, how to remove us, troubleshooting, and a WhatsApp-ready short version. Generalises step 4 of the Shalom Park access pack; linked from there and from the onboarding checklist.
-- **Waiting on ADEDAMOLA:** Propel's own Business portfolio ID (business.facebook.com → Settings → Business info) to fill `[PROPEL BUSINESS ID]` before first send. Screen share remains the recommended delivery for Shalom Park.
+- **Decision (ADEDAMOLA): clients invite `getpropel.ng@gmail.com` as a person with full control, not Propel as a Partner.** Reason: Partner access makes every new asset wait on the client sharing it, and that wait was a serious bottleneck. Decided; don't relitigate.
+- **New template: `ops/templates/meta-access-guide.md`.** Plain-language walkthrough: invite the email with full control, switch on Instagram / Page / WhatsApp / ad account (if ads in scope), confirm, how to remove us, a written "we will never" list (remove their admins, touch verification or payment, invite third parties), troubleshooting, and a WhatsApp-ready short version. Step 4 of the Shalom Park access pack and the onboarding checklist now point to it.
+- **Risks recorded in the guide's internal notes:** the invite must be accepted by a real person's Facebook profile with 2FA on (Meta disables business-named profiles, which would lock us out of every client at once); one profile is a single point of failure, so add a backup person once there are 2+ clients; commission evidence still lives in our own ledger.
+- **Waiting on ADEDAMOLA:** confirm which Facebook profile accepts the invites, and that 2FA is on.
 
 ## 2026-07-31 (evening) — Fast lane built out: access pack, attribution ledger, proof test
 

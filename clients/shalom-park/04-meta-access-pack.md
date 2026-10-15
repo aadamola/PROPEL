@@ -58,18 +58,17 @@ They'll need:
 
 ### 4. Grant Propel access (5 min)
 
-**Business Settings → Users → Partners → Add partner**, using Propel's Business ID *(I supply it — it's a number, nothing sensitive)*.
+**Business Settings → Users → People → Invite people**, email **getpropel.ng@gmail.com**, access level **Full control**. Then switch on full control for:
+- Instagram account
+- Page
+- WhatsApp account *(created in step 5, or we add it ourselves once in)*
+- Ad account *(only if we run their ads)*
 
-Assign **only** what's needed:
-- Instagram account → **full control**
-- Page → **manage messages**
-- WhatsApp account → **full control** *(created in step 5)*
+*Done when: getpropel.ng@gmail.com shows under People (pending until we accept).*
 
-*Done when: Propel shows under Partners.*
+*Client-facing walkthrough, the "we will never" list and troubleshooting: `ops/templates/meta-access-guide.md`. Why People rather than Partner: ADEDAMOLA's ruling of 2026-10-15, so routine work never waits on the client.*
 
-*Client-facing walkthrough of this step (no email needed, permission table, troubleshooting): `ops/templates/meta-partner-access-guide.md`.*
-
-**Say this out loud on the call, because it's true and it's the thing that makes them comfortable:** they own everything, we're a partner with scoped access, and removing us is two taps in this same screen.
+**Say this out loud on the call, because it's true and it's the thing that makes them comfortable:** they own everything, their own admins keep full control, we never remove them or touch payment and verification, and removing us is two clicks in this same screen.
 
 ### 5. WhatsApp number decision (make it on the call)
 

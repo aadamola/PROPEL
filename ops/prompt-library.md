@@ -89,4 +89,59 @@ the blocker.
 
 ---
 
+## P7 — Response Test follow-up (weekly, per firm)
+
+**Inputs:** a row from `ops/growth/response-test.csv` (firm, contact name, estate, asked_at, first_reply_at), the current median and number of firms measured.
+
+```
+Draft the give-first follow-up for this firm using Script 2 in
+ops/growth/response-test.md. Rules: use only the logged timestamps; include the
+median ONLY if at least 10 firms have been measured; no offer, no Propel pitch,
+no comparison with a named competitor; ≤60 words; warm and specific. If they never
+replied, use the "never replied" variant. Output the message plus the CSV fields
+to update (followup_sent_at left blank for ADEDAMOLA to fill once sent).
+```
+**QA:** recompute reply_hours from the two timestamps yourself before sending.
+
+## P8 — AEO answer (forum / LinkedIn)
+
+**Inputs:** the question as asked (Nairaland / Reddit / LinkedIn), platform.
+
+```
+Write a genuinely complete answer as Adedamola (B.Sc. Estate Management, NIESV exam
+passed, ~5 years in Lagos property; NEVER "chartered"). Answer fully on its own;
+numbered steps where useful; plain English; no legal advice (point to a property
+lawyer); never name or criticise a specific estate or developer; no links in the
+body on Nairaland/Reddit; mention Propel only in the sign-off, and only on LinkedIn.
+Flag any factual claim about Lagos procedure as [VERIFY] for a human check.
+```
+
+## P9 — Faceless slideshow (TikTok / IG carousel)
+
+**Inputs:** topic, target viewer (diaspora buyer / developer / surveyor), any true event with client approval.
+
+```
+Write a 4–6 slide faceless slideshow. Slide 1 is the hook and does 95% of the work:
+a specific person or moment, a number only if real, a small story the viewer finishes
+in their head. One idea per slide, ≤18 words each. The "[person] + doubt → showed them"
+formula is ONLY allowed with a supplied true event and client approval; otherwise use
+"N things to…" or "problem → fix per slide". Give two alternative slide-1 hooks for
+an A/B test, plus a caption ending in a question. No invented numbers.
+```
+
+## P10 — Group-owner outreach
+
+**Inputs:** person, type (realtor network / coach / lawyer / podcast / NIESV), one specific real thing they did, what we can give them.
+
+```
+Draft the group-owner message from ops/growth/group-owners.md, personalised with
+the specific thing they did. Bring something big (free assistant for their own
+business, a feature in the Response Report, an intro) and ask for something small
+(one developer intro or a mention). ≤90 words, first person as Adedamola, no
+"please promote us", no commission promises. If the specific thing isn't real and
+checkable, output "DO NOT SEND — no genuine personalisation" instead.
+```
+
+---
+
 *Add prompts here as workflows stabilize (rule: done twice → template). Each new prompt needs: inputs list, the prompt, and QA notes.*

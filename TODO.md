@@ -23,11 +23,14 @@ Today (15 Oct) is the promo review date. Copy, paste, send:
 - [ ] **(5 min, OVERDUE since 29 Sep)** ⏰ **VPS: check what Hostinger charged on renewal.** *Your monthly term ran to 29 Aug, auto-renewal was on, and you last logged in on 10 Aug — so this hasn't been looked at. Renewal is where their 2–3× jump lands.*
 - [ ] **(5 min)** 🎬 **Book the shoot day with Collins** — one site visit, about 3 hours, and it produces all 14 days of content. Shot list is written: [10-phase0-content-pack.md](clients/shalom-park/10-phase0-content-pack.md). *Collins and Mercy go on camera, not you.*
 - [ ] **(1 message)** 🔴 **Ask Shalom Park who can grant Meta admin.** Script in [04-meta-access-pack.md](clients/shalom-park/04-meta-access-pack.md). *Not Collins — he's a Sales Executive. The session is now 15 minutes and needs no SIM.*
-- [ ] **(20 min)** 🔥 **Response Test #1: ask 10 developers one real question on Instagram.** *"Hi, what's the current price and payment plan on [estate]?"* Send it from your account, then tell me who you messaged and when. I log the reply times and write every follow-up. Never claim to be a buyer, never name anyone publicly. **This replaces "10 prospect names": same list, and now it does something.** Plan: [docs/15](docs/15-positioning-and-growth.md) §5.
+- [ ] **(20 min)** 🔥 **Response Test #1.** Open [ops/growth/response-test.csv](ops/growth/response-test.csv): 7 developers are already listed. Find each one on Instagram and check it's the real account, then send exactly: *"Hi, what's the current price and payment plan on [estate]?"* Tell me who you messaged and when; I log it and write every follow-up. **Never claim to be a buyer. AMG (Abijo) gets the question only. No pitch until we've checked Shalom Park's agreement for exclusivity.**
 
 > 🔴 **2 min, do it now:** your Instagram bio links to `getpropel.tech`, which isn't live — change the link to `wa.me/2349019120968?text=Hi%20Propel%2C%20I%20want%20a%20free%20marketing%20audit` until it is.
 
 ## NOT YET — I'm holding these, don't think about them
+
+- Ready when you want them, all in [ops/growth/](ops/growth/README.md): 2 forum answers to post, 4 slideshows, 10 comment starters, the group-owner message. **Not this week.** The Response Test comes first.
+- **Check the Shalom Park agreement for exclusivity** before pitching any Abijo / Ibeju-Lekki competitor.
 
 - **Decide the three-door offer** ([docs/15](docs/15-positioning-and-growth.md) §4): approve, change or reject. When you say go, I draft the site, rate card, KB, bio and LinkedIn in one pass.
 

@@ -2,6 +2,20 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-10-15 (late night 4) — Implemented what we learnt: ops/growth/ kit
+
+- **ADEDAMOLA asked whether everything learnt was implemented. It wasn't; it had only been documented.** Now built, everything that's mine to produce:
+  - **`ops/growth/response-test.md` + `.csv`**: the four scripts (question · give-first follow-up · reply → demo offer · report), the public/private rules, and a tracker **seeded with 7 publicly reported Lekki–Epe developers** found by web search (Harmony Garden, Zenytal, Pazino, Zularich, Eystone, Numerohomes × Joebass, AMG). Every Instagram handle is `[VERIFY]`.
+  - **`group-owners.md`**: who counts, how to find them by hand, the give-big/ask-small offer, the message, and the never list.
+  - **`aeo-answers.md`**: two forum/LinkedIn answers ready to post (estate due-diligence checklist; buying from abroad). The developer article is held until we have ≥10 firms of our own data.
+  - **`slideshows.md`**: four faceless slideshows ready now; two story formats locked until a true event plus client approval.
+  - **`first-comment.md`**: notification setup and 10 comment starters.
+  - **Prompt library P7–P10** (Response Test follow-up, AEO answer, slideshow, group-owner outreach), per rule 7.
+  - **Content engine:** Tue/Thu become slideshow slots; daily first-comment, a comment keyword on every post, Monday Response Test sends, one AEO answer a week, and the founder's LinkedIn as the main LinkedIn channel.
+- **Caught while seeding:** AMG's Green Park Estate is in **Abijo, the same area as Shalom Park**. Marked as a client conflict: the question only, no pitch until the Shalom Park agreement is checked for exclusivity. Also logged: a reported LASG statement that most Ibeju-Lekki/Epe estates lack approval (undated source), so **rule 5 vetting runs before any demo or pitch**.
+- **Deliberately not implemented:** the headline, bio, site, rate card and founding-pilot terms. That's the offerings decision (docs/15 §4), and it's ADEDAMOLA's call.
+- **Waiting on ADEDAMOLA:** ⭐ Collins promo check. Then Response Test #1 (the list is ready).
+
 ## 2026-10-15 (late night 3) — Growth plan re-run through the Nevo's Brain MCP
 
 - **The nevo link is now connected** as a connector: *Nevo's Brain*, a searchable library of Nevo David's growth playbooks (Postiz, bootstrapped to $2M+ ARR). Ran 12 searches; only generic marketing questions were sent and no client data left us. Findings are in **docs/15 §10**, with sources.

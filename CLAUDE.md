@@ -37,6 +37,7 @@ AI-forward digital marketing agency for Nigerian real estate — realtors, estat
 | ops/setup/ + ops/content/ | Account setup, brand assets tracker, content engine + launch calendar |
 | ops/crm/pipeline.csv | Pipeline — keep it current after every prospect touch |
 | ops/production-checklist.md | **Live production build track** — phases, gates, owners, blockers |
+| docs/15 + ops/growth/ | **Positioning + growth plan** (Nevo-tested) and the ready-to-use kit: Response Test tracker/scripts, group owners, AEO answers, slideshows, first-comment |
 
 ## Operating rules (non-negotiable)
 

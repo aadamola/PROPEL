@@ -20,12 +20,12 @@
 
 ## SOW template (one per engagement — 1 page)
 
-- **Package:** [Presence tier / Leads tier / Launch / Studio / OS / Concierge tier + add-ons] per rate card v[1] dated [ ]
-- **Fee:** ₦[ ]/month or ₦[ ] project · Founding-client discount: [Y/N, %, expiry — temporary and stated]
+- **Door:** [Concierge Instagram / Concierge Developer / Launch Partner] + add-ons [WhatsApp channel / content / Document Vault / Studio] per rate card v[2] dated [ ] (docs/03)
+- **Fees:** setup ₦[ ] (paid in full before the build) · monthly ₦[ ] (monthly in advance) · [Launch Partner] commission [ ]% · founding pilot: [Y/N — first month's care waived; case-study rights; day-30 review]
 - **Deliverables & cadence:** [pull exact lines from docs/03]
-- **Client obligations:** warranted facts sheet within [3] days of request · raw footage cadence [ ] · approval turnaround [24h; silence = escalate, never publish]
-- **Commission mandates (developer deals):** attribution mechanism (all Propel leads logged via tracked links/CRM before handoff) · commission [ ]% on attributed sales closing within [12] months · exclusivity scope [digital lead-gen] · reporting monthly
-- **Success metrics reported:** leads, DMs started, inspections booked, CPL (never vanity metrics)
+- **Client obligations:** signed warranted facts sheet · a person with Meta business admin for a 15-minute access session · named escalation contacts with hours · facts reviewed monthly by a named notifier · [content add-on: footage cadence, approval turnaround 24h; silence = escalate, never publish]
+- **Commission mandates (Launch Partner):** attribution mechanism (every Propel lead logged in the append-only attribution ledger, verifiable by the client's auditor with 002-verify-ledger.sql) · commission [ ]% on attributed sales closing within [12] months · exclusivity scope [digital lead-gen] · reporting monthly
+- **Reported monthly from the ledger:** conversations answered, first-reply time, hand-offs, inspections booked (as reported by the client), attributed sales (never vanity metrics)
 - Signatures + date
 
 ## Lawyer questions (bring to the favor-rate review)

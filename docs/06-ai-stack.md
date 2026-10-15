@@ -32,7 +32,7 @@
 | **Video** | CapCut Pro + AI assist (captioning is non-negotiable — property Reels are watched muted) | Reels at volume |
 | **CRM (ours)** | Airtable + pipeline.csv mirror (HubSpot free only if a client workflow demands it) | Our pipeline + templated client pipelines (Propel OS) |
 | **Ads** | Meta Business Suite, Google Ads, TikTok Ads + AI creative testing | Humans set strategy/budgets; AI generates variants |
-| **Analytics/reporting** | Looker Studio + scorecard template | Live dashboard per ₦600k+ client; weekly auto-scorecards |
+| **Analytics/reporting** | Looker Studio + scorecard template | Monthly ledger report per client (ops/templates/monthly-report.md) |
 
 *Procurement rules: prefer NGN-billed or one-time-cost tools where quality is equal; annual plans only after a tool survives 90 days; every tool named in the quarterly stack re-scan (docs/12 §5) or it dies. Hard line: client PII never to third-country APIs without NDPA assessment (docs/13 §3).*
 
@@ -53,7 +53,7 @@
 ### W2 — Listing Turbo (per property, <2 hours)
 Photos/video + property facts in → full listing package out: platform-optimized copy (IG/TikTok/portal versions), 2 Reel edits, 6 ad variants, WhatsApp broadcast blurb, and a diaspora-targeted long caption. This is the demo we sell with.
 
-### W3 — AI Lead Concierge (Propel OS product)
+### W3 — AI Lead Concierge (the core product, docs/10)
 Ad/DM leads hit WhatsApp → AI qualifies (budget band, preferred area, cash vs. mortgage, timeline) → scores and routes hot leads to the agent with a context summary; nurtures the rest with drip content. Human handoff is explicit and fast — Lagos buyers will not tolerate a bot that overstays.
 
 ### W4 — Audit Video Machine (sales)
@@ -89,7 +89,7 @@ Campaign + platform data pulled → scorecard (leads, DMs, inspections booked, c
 | Horizon | AI position |
 |---|---|
 | Months 1–6 | Efficiency: same services, fraction of the cost base |
-| Months 6–12 | Product: AI concierge + reporting as sellable, sticky add-ons (Propel OS) |
+| Months 6–12 | Product: the Concierge + monthly ledger reporting (docs/03 v2) |
 | Months 12–24 | Moat: proprietary benchmarks + creative-performance dataset by Lagos micro-market; possible white-label SaaS tier |
 
 Competitors will adopt the same tools eventually. They won't have two years of vertical data, a prompt/creative library tuned to Nigerian real estate, or the brand. That's the plan.

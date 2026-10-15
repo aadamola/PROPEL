@@ -10,12 +10,12 @@
 
 | Sub-segment | Why the economics work | Product fit (existing) |
 |---|---|---|
-| **Shortlet operators** (Lekki/VI/Oniru) | Think in occupancy rate = recurring monthly pain with budget; direct-booking push to escape platform fees | Presence + Leads (booking-direct funnel) + **Concierge** (high-volume repetitive inquiries, 24/7, availability/pricing/location — arguably better PMF than sales) + Studio |
+| **Shortlet operators** (Lekki/VI/Oniru) | Think in occupancy rate = recurring monthly pain with budget; direct-booking push to escape platform fees | **Concierge** (+ content and campaign add-ons for a booking-direct funnel) (high-volume repetitive inquiries, 24/7, availability/pricing/location — arguably better PMF than sales) + Studio |
 | **Property management firms** (NIESV members — founder's tribe) | Vacancy is a recurring, budgeted problem; management fees fund marketing; surveyor credibility opens the door | "Vacancy-fill" framing of Leads + Concierge tenant pre-qualification (income band, move date) + Presence for the firm's brand |
 
 ## Activation triggers (any one)
 
-1. Phase 1 exit gate hit (4+ retainers, first case study) — capacity exists;
+1. 4+ paying Concierge clients and a first case study — capacity exists;
 2. A shortlet operator or PM firm approaches us inbound (sell, don't defer — founding-client terms);
 3. Month 4 pipeline review shows sales-side pipeline thinner than target — this lane becomes the diversification play.
 
@@ -24,7 +24,7 @@
 - Pipeline may include shortlet/PM prospects tagged `lane:rental-adjacent` — sold only on triggers above (or inbound).
 - One founding-client slot MAY be a shortlet operator if inbound arrives — a live occupancy case study would open the whole lane.
 - Concierge KB schema already supports rental fields (availability calendar, nightly/annual rates) — no build needed until first client.
-- Launch copy, rate card, site: **untouched.** Agents/surveyors "who also do lettings" are already served.
+- Rate card and site: no rental line. Agents/surveyors "who also do lettings" are already served.
 
 ## What we will NOT do
 

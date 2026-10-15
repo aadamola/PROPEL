@@ -1,6 +1,6 @@
 # Propel Concierge — Product Spec v1
 
-*The 24/7 AI agent that answers every DM. Promoted from a Propel OS line-item to a headline product, July 2026. This is our most defensible offer: it compounds our AI edge into recurring revenue and makes clients stickier than any content retainer.*
+*The 24/7 AI agent that answers every DM. Our core product since rate card v2 (docs/03, Oct 2026); promoted from a line-item in July 2026. This is our most defensible offer: it compounds our AI edge into recurring revenue and makes clients stickier than any content retainer.*
 
 ## The pitch (client-facing)
 
@@ -25,7 +25,7 @@
 | Brain | Claude API with per-client system prompt (persona, tone, guardrails) + retrieval over the client's knowledge base |
 | Knowledge base | Structured listing sheets + FAQs, client-warranted in writing; versioned per client in their folder; updated weekly or on new listing |
 | Orchestration | Self-hosted n8n on VPS (docs/12 architecture); custom agent-SDK build when volume justifies |
-| CRM | Lead + transcript logged to client's pipeline (Propel OS); tags = source, score, status |
+| CRM | Lead + transcript logged to the attribution ledger; tags = source, score, status |
 | Compliance | Meta 24-hour messaging window rules respected (template messages beyond window); NDPA consent line in first response; opt-out honored instantly |
 
 ## Guardrails (contractual, non-negotiable)

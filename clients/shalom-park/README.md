@@ -11,17 +11,17 @@
 | Entity | IFT Realty Ltd |
 | Project | Shalom Park Estate — Abijo, Ibeju-Lekki |
 | Relationship | Setup fee **PAID** ✅ · secured on relationship terms |
-| Package | [CONFIRM] — mapping to Concierge Developer (₦1.2m setup + ₦250k/mo) per docs/09 |
+| Package | [CONFIRM] — Concierge Developer per the July deal (00-deal-memo.md); existing terms are unaffected by rate card v2 |
 | Amount received | [CONFIRM WITH ADEDAMOLA] |
 | Ongoing care fee | [CONFIRM — start date and amount] |
-| Commission on Propel-attributed sales | [CONFIRM — anchor ≥3%, docs/09] |
+| Commission on Propel-attributed sales | [CONFIRM — anchor ≥3%, 00-deal-memo.md] |
 | Marketing-use rights | **GRANTED** — we may name them as a client |
 
 **Open commercial questions for ADEDAMOLA (not blocking the build):** exact amount received and what it covers · whether care fee and commission were agreed and at what rate · whether anything is in writing.
 
 ## What we now owe them
 
-The DM + comment Concierge on Shalom Park's Instagram and WhatsApp — the thing they asked for and paid to start. Build track: `ops/production-checklist.md`.
+The DM + comment Concierge on Shalom Park's Instagram (Instagram-only since 2026-09-15) — the thing they asked for and paid to start. Go-live runbook: `12-phase1-golive.md`; the generic path for future clients: `ops/onboarding/`.
 
 ## Site visit — 2026-07-26 (ADEDAMOLA, first-hand)
 

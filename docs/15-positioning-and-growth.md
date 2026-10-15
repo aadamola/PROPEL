@@ -1,6 +1,6 @@
 # Propel — Positioning Correction & Growth Plan
 
-*2026-10-15 · AI Managing Partner · Status: **RECOMMENDATION.** Positioning and growth moves are mine to run. **Any change to what we sell or what it costs is ADEDAMOLA's decision (§4)** — nothing on the rate card, site or `propel-kb.json` changes until he rules.*
+*2026-10-15 · AI Managing Partner · Status: **ADOPTED** (ADEDAMOLA delegated the call). Positioning, profile copy and the growth kit are live in the repo (`ops/growth/`, `ops/setup/account-setup.md`). **The new prices (rate card v2, docs/03) still need ADEDAMOLA's explicit "approved"**: the assistant's knowledge base and the website pricing switch over on that word.*
 
 ---
 
@@ -107,7 +107,7 @@ The founder-interview pack already says it in ADEDAMOLA's own voice: *"building 
 
 ---
 
-## 4. Offer architecture — RECOMMENDATION, ADEDAMOLA DECIDES
+## 4. Offer architecture — adopted as rate card v2 (prices await ADEDAMOLA's "approved")
 
 **What I'd sell: three doors instead of six products.**
 
@@ -275,7 +275,7 @@ Every move: his time, my part, the guardrail.
 - `ops/content/content-engine.md` Day 11: *"Leads you reply to in 5 minutes close 10× more"* was unsourced. Replaced with a defensible line plus a pointer to the source we can stand behind (HBR, *The Short Life of Online Sales Leads*, 2011: firms that responded within an hour were about 7× more likely to qualify the lead. That's US B2B data and directional only, and our own Response Report replaces it).
 - Day 2 hook: *"One empty month costs a Lagos agent three million naira"* stated illustrative maths as fact. It now reads *"can cost"*, with the working shown.
 
-**Queued for the realignment pass (not edited, because the site is in the parked scope):**
+**Fixed in profiles and docs on 2026-10-15; the website applies them when the prices are approved:**
 - `site/index.html` says "Instagram **and WhatsApp**" in the Shalom Park block. Shalom Park is Instagram-only.
 - `site/index.html` says the Concierge is "trained on your **verified** listings". It should say "on facts you've signed". We don't verify title.
 - `site/index.html` and the IG bio use "NIESV-trained founder". It should be "NIESV exam passed".
@@ -286,7 +286,7 @@ Every move: his time, my part, the guardrail.
 
 ## 9. What I need from ADEDAMOLA
 
-One decision, when you're ready: **approve, change or reject the three-door offer (§4).** Everything else in this plan I can run, apart from the 20 minutes a week of sending, which has to come from your account.
+One word: **"approved"** on the rate card v2 prices (docs/03), or the one price to change. Everything else in this plan is built and running, apart from the 20 minutes a week of sending, which has to come from your account.
 
 ---
 

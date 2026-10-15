@@ -1,15 +1,16 @@
-# Propel Ops Tools — Quality Rules as Code
+# Tools: quality rules as code
 
-*Runnable systems that mechanically enforce service quality. Prose rules can be forgotten; these can't. All plain Node, zero dependencies — they run anywhere, including the future VPS.*
+*Plain Node, zero dependencies. On the VPS they run through `ops/setup/vps-tools.sh` (Docker only, no Node on the host).*
 
-| Tool | Enforces | Run |
+| Tool | What it does | Run |
 |---|---|---|
-| `pipeline-check.js` | Standing cadence #1: no stale follow-ups. Exit 1 while anything is overdue. | `node tools/pipeline-check.js` |
-| `listing-intake.js` | Rule 2 (truth in marketing): facts complete + title docs sighted + written warranty on file + no ROI/scarcity/legal-claim language — or the listing is **BLOCKED** from content packs, Concierge KBs, and campaigns. | `node tools/listing-intake.js <listing.json>` |
-| `scorecard-gen.js` | W5 honest reporting: metrics JSON → client scorecard with machine-computed deltas (numbers can't be massaged by hand). | `node tools/scorecard-gen.js <metrics.json>` |
-
-`examples/` has the file shapes: copy `listing-example.json` per property (its demo values deliberately FAIL validation — flip the booleans only when literally true), and `metrics-example.json` per client-week.
-
-**Session ritual:** `node tools/pipeline-check.js` at the start of every working session; `node sandbox/apex-gardens/concierge-prototype.js --test` before anything Concierge-related ships.
-
-**Pipeline to production:** these same scripts port into n8n nodes on the VPS (docs/06 v1.1) — the repo versions are the reference implementations and stay the source of truth for the logic.
+| `test-all.js` | **Every suite + the import preflight. Run before any deploy.** | `node tools/test-all.js` |
+| `new-client.js` | Scaffolds a client: folder, empty KB, keyword table, Phase 0 log, registry row (everything off) | `node tools/new-client.js <slug> "<Name>" "<Legal name>"` |
+| `build-keywords.js` | Compiles + lints each client's `keywords.csv` → rules JSON, readable view, Phase 0 saved replies | `node tools/build-keywords.js [--client=<slug>] [--check]` |
+| `build-workflows.js` | Builds `03`, `04`, `05-…-<slug>` per client, `06` from the registry and libraries | `node tools/build-workflows.js` |
+| `preflight-workflows.js` | Import preflight + registry checks (no active client may lack a KB, alert inbox or on-duty person) | in `test-all` |
+| `test-onboarding.js` | **Client #2 rehearsal**: onboards a fictional client end to end in a throwaway copy | in `test-all` |
+| `build-legal-site.js` | Builds `site-legal/` (legal pages + holding page) and checks it never drifts or sells | `node tools/build-legal-site.js [--check]` |
+| `listing-intake.js` | Rule 2 gate for content: facts complete, documents sighted, written warranty, no ROI/scarcity language | `node tools/listing-intake.js <listing.json>` (`examples/listing-example.json` shows the shape) |
+| `pipeline-check.js` | Standing cadence 1: flags overdue follow-ups | `node tools/pipeline-check.js` |
+| `test-*.js`, `test-ledger-sql.sh` | Normaliser, CORE chains, guardrails, keywords, Instagram workflow, on-call, ledger SQL on real PostgreSQL | in `test-all` |

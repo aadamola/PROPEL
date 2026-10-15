@@ -1,4 +1,6 @@
-# Partner Memo — Shalom Park Estate (IFT Realty Ltd)
+# Deal memo — Shalom Park Estate (IFT Realty Ltd)
+
+*Historical: written July 2026 while they were a prospect. It's kept because it sets the commission logic (anchor 5%, floor 3%, 12-month attribution) the deal rests on. Package names in it are rate card v1.*
 
 *Prepared July 2026. Status: PROSPECT — no contact made yet. Nothing goes public until vetting + signed agreement.*
 

@@ -140,7 +140,7 @@ SHALOM_PARK_APP_SECRET=<Meta app secret — signs every webhook payload>
 
 ## 5. Attribution wiring — not optional
 
-> 🔴 **Correction with money attached: the source spec set the attribution window to 180 days. docs/09 agreed 12 months.** Halving the window halves the period in which a closing earns us commission — on a sales cycle where diaspora buyers routinely take months on off-plan, that is real revenue given away in a schema comment. The ledger stays at **12 months**, and if a client ever negotiates it down, that is a commercial decision made in a contract, not a default in a database.
+> 🔴 **Correction with money attached: the source spec set the attribution window to 180 days. clients/shalom-park/00-deal-memo.md agreed 12 months.** Halving the window halves the period in which a closing earns us commission — on a sales cycle where diaspora buyers routinely take months on off-plan, that is real revenue given away in a schema comment. The ledger stays at **12 months**, and if a client ever negotiates it down, that is a commercial decision made in a contract, not a default in a database.
 
 Every inbound message writes to Propel's ledger **before** any handoff (`ops/concierge/attribution-ledger.md`).
 
@@ -156,7 +156,7 @@ A professional exit is a sales asset; improvising one is a dispute. On terminati
 2. We supply a conversation-history export and the final attribution ledger
 3. Webhook subscriptions removed from their WABA
 4. **They keep the number, the display name, the verification and the history.** Nothing of theirs leaves with us
-5. We retain the ledger for the open attribution window — **commission earned before termination survives it**, per docs/09
+5. We retain the ledger for the open attribution window — **commission earned before termination survives it**, per clients/shalom-park/00-deal-memo.md
 
 ---
 

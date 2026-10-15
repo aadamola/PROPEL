@@ -1,30 +1,46 @@
-# Proposal — [Client Name]
+# Proposal — [Client] · [Estate]
 
 **Prepared by Propel · [Date] · Valid 14 days**
 
-## Your goal (in your words)
-> "[Exact phrase the prospect used on the audit call — their goal, not ours.]"
+## What you told us (in your words)
+> "[Exact phrase from the Response Audit — their goal, not ours.]"
 
-## What's in the way (from your audit)
-1. **[Gap 1]** — costing you approximately [X inspections/deals per month, assumption stated].
-2. **[Gap 2]** — [one-line money-left-on-table framing].
-3. **[Gap 3]** — [one-line framing].
+## What we found (from your Response Audit)
+1. **[Leak 1]** — [e.g. a buyer who asked at 9:14pm got a reply 38 hours later].
+2. **[Leak 2]**
+3. **[Leak 3]**
 
-## The fix — [Package name], ₦[X]/month
+## The fix — [Door: Concierge Instagram / Concierge Developer / Launch Partner]
+
 | We deliver | So that |
 |---|---|
-| [Deliverable 1] | [Outcome tied to Gap 1] |
-| [Deliverable 2] | [Outcome tied to Gap 2] |
-| [Deliverable 3] | [Outcome tied to Gap 3] |
-| Weekly scorecard: leads, DMs, inspections booked | You see exactly what your money does |
+| Your Instagram DMs and comments answered 24/7, only from a facts sheet you sign | No buyer waits, and nothing is ever guessed |
+| Hot buyers alerted to [your team / whoever is on duty] within minutes | Your team spends time on buyers who are ready |
+| Every enquiry logged [+ attribution ledger your auditor can verify] | You see what we brought you |
+| [Launch Partner: content + campaign management] | [outcome] |
+| Monthly report from the ledger | Numbers you can check, not adjectives |
+
+## Investment
+*(Figures exactly as rate card [docs/03 version], VAT 7.5% exclusive.)*
+
+| | ₦ |
+|---|---|
+| Setup (paid in full before the build starts) | [ ] |
+| Monthly care / fee (monthly in advance) | [ ] |
+| [Launch Partner] Success commission on ledger-attributed sales, 12-month window | [ ]% |
+| [Add-ons] | [ ] |
+
+Minimum term: [3 / 6] months, then monthly with 30 days' notice. Ad spend (if any) is paid by you directly to Meta; we never hold it.
 
 ## What we need from you
-[Footage cadence / listing facts sheets / approval turnaround — max 3 items.]
+1. The warranted facts sheet, signed by someone who can warrant it
+2. A 15-minute screen-share with whoever can grant Meta business access
+3. The names and hours of the people who should receive hot buyers
 
-## Terms
-₦[X]/month, monthly in advance · 3-month minimum, then monthly rolling (30 days' notice) · ad spend (if any) paid by you directly to platforms — we never hold your ad money · onboarding complete within 5 working days of payment.
+## Timeline
+We start the build the day the facts sheet is signed and Meta access is granted. **We confirm the go-live date after a one-hour Meta access test on your account**: Meta's verification timing is theirs, and we don't promise what we don't control.
 
 ## Start
-Reply "GO" on WhatsApp → invoice + e-sign link same day → onboarding call within 48 hours.
+Reply "GO" → agreement + invoice the same day → facts sheet session within 48 hours.
 
-*[Founding Client Offer line if applicable: 20% off for 6-month term — X of 5 slots left.]*
+*[Founding pilot, only if it applies and is still open: first month's care waived in exchange for case-study rights and a day-30 review. Applications close [date].]*

@@ -70,7 +70,7 @@ cat <<DONE
 
  Once the client's Meta app exists:
    App secret → add  ${SLUG_U}_APP_SECRET=  to /opt/propel/.env
-                then:  docker compose up -d n8n
+                then:  bash /opt/propel-repo/ops/setup/vps-tools.sh n8n-env
    Instagram token → goes in the n8n credential (Header Auth,
                 "Bearer <token>"), NOT in .env
    WhatsApp only → ${SLUG_U}_WABA_TOKEN= and ${SLUG_U}_WABA_PHONE_ID=

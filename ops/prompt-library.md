@@ -24,21 +24,18 @@ Voice: [client voice tag]. Market language: use "C of O", "Governor's Consent",
 from inputs as [VERIFY].
 ```
 
-## P2 — Prospect Audit Teardown (sales weapon)
+## P2 — Response Audit pack (sales weapon)
 
-**Inputs:** prospect's IG/TikTok handle content summary, website/portal presence notes, segment (agent / surveyor-valuer / developer).
+**Inputs:** the firm's Response Test row (timestamps), their public Instagram (recent posts, bio, highlights), their public listing facts, segment (developer / surveyor-led firm / agency).
 
 ```
-You are Propel's growth strategist. Produce a marketing teardown of this real estate
-professional for a 60-second audit video + follow-up one-pager:
-1. Scorecard (1–10): content quality, posting consistency, lead capture, trust
-   signals, differentiation — one-line justification each
-2. The 3 highest-leverage gaps, each framed as money left on the table (estimate
-   in inspections/deals, stated as an assumption)
-3. One "quick win they can do this week for free" (build goodwill)
-4. The Propel fix: map each gap to a package (docs/03), one sentence each
-Tone: direct, respectful, zero fluff. For surveyors/valuers, lead with unleveraged
-credential trust (NIESV/ESVARBON). End with the exact 3 talking points for the video.
+Fill ops/templates/response-audit.md for this firm. Section 1 uses ONLY the logged
+timestamps (median only if ≥10 firms measured). Section 2 walks post → comment → DM →
+inspection offer → documents as a buyer would, naming each leak. Pick the 3 biggest
+leaks and frame each as buyers lost, clearly stated as an assumption. Give one free
+fix they can do this week. Then spec a DEMO assistant from their PUBLIC listing only,
+labelled DEMO. Never name or compare competitors, never quote returns, never promise a
+go-live date. For surveyor-led firms, lead with the credential trust they're not using.
 ```
 
 ## P3 — Monthly Content Calendar (per client)
@@ -54,24 +51,26 @@ answer real Lagos buyer anxieties (omonile, fake agents, off-plan risk, diaspora
 remote-buying). Mark any post requiring client footage with [SHOOT].
 ```
 
-## P4 — Weekly Scorecard Commentary
+## P4 — Monthly Concierge report
 
-**Inputs:** this week's + last week's metrics (leads, DMs, CPL, inspections), campaign changes made.
+**Inputs:** ledger export for the month (counts by event type, first-reply times, escalations with pick-up times), the previous month's report, client-reported inspections and sales, facts review notes, promo review dates.
 
 ```
-Write the client scorecard commentary in plain English, 120 words max, structure:
-WHAT HAPPENED (numbers vs. last week) → WHY (attribute honestly, including losses) →
-WHAT WE'RE DOING NEXT WEEK (1–2 specific actions). No jargon, no vanity metrics,
-never hide a bad week — reframe it as diagnosis + action.
+Fill ops/templates/monthly-report.md. Every number comes from the ledger export or
+is labelled "as reported by your team". Plain English, under 300 words of commentary:
+what happened → why (honestly, including misses) → one change for next month. List
+every buyer question that hit no rule (they become triggers). Never a vanity metric,
+never a projection.
 ```
 
 ## P5 — Proposal Generator
 
-**Inputs:** audit output (P2), call notes, recommended package + price, prospect's stated goal.
+**Inputs:** Response Audit pack (P2), call notes, recommended door + rate card v2 figures (docs/03), prospect's stated goal.
 
 ```
 Fill ops/templates/proposal.md using the audit findings and call notes. Mirror the
-prospect's own words for their goal. Tie each deliverable line to one of their 3 gaps.
+prospect's own words for their goal. Tie each deliverable line to one of their 3 leaks.
+Copy figures exactly from docs/03; never a custom price unless ADEDAMOLA set one.
 One page. No feature lists without a "so that..." outcome clause.
 ```
 
@@ -82,9 +81,9 @@ One page. No feature lists without a "so that..." outcome clause.
 ```
 Draft 2 reply options for this objection: (a) short WhatsApp-native reply (≤80 words,
 warm, one question back), (b) fuller version with one proof point from our case
-studies. Use the objection playbook in docs/04 §6 as the strategic base. Never
-discount first — reframe value, then offer a smaller package if price is genuinely
-the blocker.
+studies. Base: docs/15 (positioning) and the offer in docs/03. Never
+discount: reframe value; if price is genuinely the blocker, offer Concierge Instagram
+instead of Developer, or the founding pilot if it's open.
 ```
 
 ---

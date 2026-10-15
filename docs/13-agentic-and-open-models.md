@@ -84,7 +84,7 @@ ADEDAMOLA proposed a dual-model architecture: a fast cheap model for ~90% of cha
 
 - Content engine + internal ops token spend: ~80–90% reduction at T2 pricing (pennies per million tokens vs. dollars).
 - QA depth: red-team coverage grows weekly at near-zero marginal cost → fewer production incidents → churn armor compounds.
-- Benchmarks dataset (Role 2) accelerates the docs/06 §5 moat by ~2 quarters — this is the asset a future SaaS pivot (docs/02 §4.3) is built on.
+- Benchmarks dataset (Role 2) accelerates the docs/06 §5 moat by ~2 quarters — this is the asset a future SaaS pivot (a future pivot, see CHANGELOG history.3) is built on.
 - Rate card: unchanged, again. Efficiency lands in margin.
 
 ## 5. Implementation order (all engine-room items; none blocked on launch sprint)

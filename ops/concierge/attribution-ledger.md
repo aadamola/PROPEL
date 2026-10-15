@@ -36,7 +36,7 @@ Both are solved by the same thing: **an append-only ledger, on our infrastructur
 | `contact_e164` | Phone in international format. **Required** — it's how a lead is matched to a sale |
 | `contact_hash` | SHA-256 of `contact_e164`, for matching without exposing the number in exports |
 | `first_contact_at` | Timestamptz — **the field the whole claim rests on** |
-| `attribution_expires_at` | `first_contact_at + 12 months` (docs/09 window) |
+| `attribution_expires_at` | `first_contact_at + 12 months` (clients/shalom-park/00-deal-memo.md window) |
 
 **`lead_event`** — append-only, hash-chained.
 

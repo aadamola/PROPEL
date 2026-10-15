@@ -1,103 +1,21 @@
-# n8n Workflows
+# n8n workflows
 
-*I author these as JSON; ADEDAMOLA pastes them in. Every code node is syntax-validated before it lands here.*
+*Built by `tools/build-workflows.js` from the registry (`../clients.json`) and the tested libraries in `../lib/`. **Never hand-edit a generated file**: change the source and rebuild, then `node tools/test-all.js` (includes the import preflight).*
 
-## Import — the paste trick
+| File | Built? | Purpose | Import |
+|---|---|---|---|
+| `02-concierge-brain-gemini.json` | hand-made | Chat-panel brain for ear tests; **source of the Guardrails node** every other workflow embeds | Optional |
+| `03-concierge-core.json` | ✅ | **The CORE.** Every channel calls it: registry → KB → dedup → prompt → Gemini → guardrails → envelope. **Embeds the registry and every active client's KB** | Once; **re-import into the existing workflow whenever a client is added or a KB changes** |
+| `04-channel-email.json` | ✅ | Email channel (IMAP in, SMTP out). Single-client today | When an email client is sold |
+| `05-channel-instagram-<slug>.json` | ✅ one per client | Instagram comments + DMs: verify → signature → dedup → keyword fast lane → CORE → send gate → ledger | One per client with Instagram enabled |
+| `06-ledger-and-escalation.json` | ✅ | For **every** answered message: alerts the client's own team first, then writes the lead + an append-only event. **Embeds the registry** | Once; re-import when a client is added |
 
-Faster than file import, and it's the method to use:
+Current workflow IDs live in **one place only**: `clients.json → _meta.n8n`. The builder bakes them into the channel workflows.
 
-1. **Build a workflow** → you land on an empty canvas
-2. Copy the entire JSON of the workflow file
-3. **Click the canvas**, then `Ctrl+V` / `Cmd+V` → n8n renders the nodes instantly
-4. **Save**, then toggle **Inactive → Active** 🟢
+## Rules that cost us days to learn
+- **Re-import into the existing workflow** (open it → ⋯ → Import from URL → Save → Publish) so its ID doesn't change. A new ID means updating `_meta.n8n` and rebuilding.
+- **Newer n8n says *Publish*.** Publish `03` and `06` (they have no public trigger) and each client's `05` (its webhook goes live).
+- n8n needs `N8N_BLOCK_ENV_ACCESS_IN_NODE=false`, `NODE_FUNCTION_ALLOW_BUILTIN=crypto` and each client's secrets: all written by `vps-tools.sh n8n-env`.
+- Secrets never go in a workflow file. Verify tokens and app secrets live in `/opt/propel/.env`; Instagram tokens live in n8n credentials.
 
-**An inactive workflow does not answer webhooks.** It's the most common reason a Meta verification fails while everything looks correct on screen.
-
-## The workflows
-
-| File | Purpose |
-|---|---|
-| `00-webhook-verification.json` | Generic handshake for Propel's own WhatsApp + Instagram webhooks |
-| `01-shalom-park-wa-ingest.json` | **Shalom Park:** verify handshake + signature-checked message intake on `/webhook/shalom-park-wa` |
-| `02-concierge-brain-gemini.json` | **Chat-panel brain** — standalone, for the ear test. No Meta needed |
-| `03-concierge-core.json` | **THE CORE.** Sub-workflow every channel calls: registry → KB → dedup → prompt → Gemini → guardrails → envelope |
-| `04-channel-email.json` | **Email channel** — IMAP in, SMTP out, with auto-reply/bounce/newsletter filtering |
-| `06-ledger-and-escalation.json` | **Ledger + escalation.** Called for EVERY answered message: writes the lead and an append-only event, then emails the sales team when a human is needed. On-duty routing is Lagos-time aware. Needs **Postgres** and **SMTP** credentials |
-| `05-channel-instagram-shalom-park.json` | **Instagram channel** — comments + DMs, with the 24-rule keyword fast lane in front of the brain. Needs an n8n **Header Auth** credential holding `Authorization: Bearer <SHALOM_PARK_IG_TOKEN>`. See [`../../../clients/shalom-park/06-instagram-keyword-plan.md`](../../../clients/shalom-park/06-instagram-keyword-plan.md) |
-
-Architecture and the reasoning behind it: [`../architecture.md`](../architecture.md).
-
-## Import order (matters)
-
-**Import `03-concierge-core.json` and `06-ledger-and-escalation.json` first**, save each, then copy their workflow IDs from the browser URL and paste them into the `Concierge CORE` and `Ledger + escalation` nodes of the channel workflows (06 ships as `REPLACE_WITH_LEDGER_WORKFLOW_ID`). A channel workflow pointing at a core that doesn't exist yet fails in a way that reads like a code bug.
-
-Channel workflows also need credentials configured in n8n's UI: **IMAP** and **SMTP** for email.
-
----
-
-## Required before importing
-
-n8n only exposes environment variables to Code nodes when explicitly allowed. On the VPS, in `docker-compose.yml`, add to the `n8n` service's `environment:` block:
-
-```
-      N8N_BLOCK_ENV_ACCESS_IN_NODE: "false"
-      META_VERIFY_TOKEN_SHALOM_PARK: ${META_VERIFY_TOKEN_SHALOM_PARK}
-      SHALOM_PARK_APP_SECRET: ${SHALOM_PARK_APP_SECRET}
-```
-
-For the brain (`02`) you also need `GEMINI_API_KEY: ${GEMINI_API_KEY}` in that same block.
-
-Then `docker compose up -d n8n`.
-
-## Testing the brain before Meta exists
-
-`02` uses n8n's **Chat Trigger** — open the workflow and click **Chat** at the bottom of the canvas. That's a full conversation with the live Concierge, no WhatsApp, no Meta app, no webhook. Try to break it: ask for rental yields, demand a discount, tell it to ignore its instructions, ask for a price it doesn't have.
-
-Run `node tools/test-guardrails.js` before any deploy — 14 tests over the guardrail layer, no API key needed.
-
-The verify token is generated by `ops/setup/apply-client-ledger.sh`. **`SHALOM_PARK_APP_SECRET` is the App Secret from the client's Meta app** (App Settings → Basic → App Secret) — add it to `/opt/propel/.env` by hand. Secrets stay in `.env`; they never go in a workflow file, because workflow files get pasted into chats and committed to repos.
-
----
-
-## Two things `01` does that a minimal version doesn't
-
-### It checks the verify token
-
-A handshake that echoes `hub.challenge` without comparing `hub.verify_token` against our secret will pass Meta's verification — and will also let **anyone on the internet subscribe their own Meta app to our endpoint** by hitting the URL with any token at all. The token is the only thing protecting a public URL. Compared here in constant time, so the endpoint doesn't leak the secret a character at a time under timing analysis.
-
-### It verifies the payload signature
-
-Meta signs every POST with `X-Hub-Signature-256`, an HMAC of the **raw** body using the app secret. Without checking it, anyone who learns the URL can POST fabricated buyer messages — and those write straight into the attribution ledger that our commission claims rest on. **Fake leads in the evidence trail is worse than no evidence trail.**
-
-This is why the POST webhook sets `rawBody: true`: the HMAC must be computed over the exact bytes Meta sent, not over a re-serialised object.
-
-## Response behaviour, and why it's shaped this way
-
-| Case | Response |
-|---|---|
-| Valid handshake | `200` + the challenge as **plain text** |
-| Bad or missing verify token | `403 Forbidden` |
-| Valid signed message | `200 EVENT_RECEIVED`, immediately |
-| Bad signature | `403` |
-
-**Plain text matters.** Meta expects the raw challenge string in the body. Responding with the whole JSON object — which is what `responseMode: lastNode` produces — fails verification even though the challenge is visibly in there.
-
-**ACK first, process after.** Meta retries any webhook it doesn't see acknowledged within seconds, so the flow responds `200` before any brain, database or LLM work happens. Doing the thinking first and answering afterwards produces duplicate deliveries, and duplicates in a commission ledger are the exact problem the `provider_message_id` unique key exists to catch.
-
-## Testing
-
-**Handshake** (replace the token with the real one from `.env`):
-
-```bash
-curl "https://engine.getpropel.tech/webhook/shalom-park-wa?hub.mode=subscribe&hub.verify_token=REAL_TOKEN&hub.challenge=hello123"
-```
-
-Expect exactly `hello123`. Then confirm the guard works:
-
-```bash
-curl "https://engine.getpropel.tech/webhook/shalom-park-wa?hub.mode=subscribe&hub.verify_token=wrong&hub.challenge=hello123"
-```
-
-Expect `Forbidden`. **Run both.** The second test is the one that proves the endpoint isn't open to the world — and it's the test people skip, because the first one already looked like success.
-
-An n8n 404 page means the workflow isn't active.
+Full path for a new client: [ops/onboarding/README.md](../../onboarding/README.md). Problems: [ops/onboarding/solutions.md](../../onboarding/solutions.md).

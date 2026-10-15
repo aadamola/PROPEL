@@ -82,6 +82,6 @@ Days 1–3: VPS + self-hosted n8n + domain/email live · Days 4–7: Apex Garden
 **System:** first-response <5s · 0% invented price/availability/title in QA and production audits · doc delivery <60s · flyer render <5s · WhatsApp account health green (no policy strikes).
 **Commercial:** demo→pilot conversion ≥15% · 3 pilots in month 1 of selling (= ₦1m+ collected at founding-pilot pricing) · pilot→retainer conversion ≥66% at month 2 · median client speed-to-lead improvement published per case study.
 
-## 7. Long-term (adopted, matches docs/02 Phase 4)
+## 7. Long-term
 
 Proven n8n/Airtable/Concierge stacks + accumulated conversation/benchmark data → productized SaaS for African real estate (build/kill decision at docs/02 milestone 4.3, from 20 client interviews). The study and our roadmap independently converge here — good sign.

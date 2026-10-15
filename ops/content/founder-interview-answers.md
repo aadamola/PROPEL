@@ -20,7 +20,7 @@
 > Propel.
 
 **3. What exactly do you do**
-> We're a digital marketing agency built exclusively for Nigerian real estate — realtors, estate surveyors and valuers, agents and developers. We run the content, the campaigns and the AI assistants that answer property buyers around the clock, so enquiries turn into inspections instead of going cold.
+> Propel is the enquiry-to-inspection system for Nigerian property sellers, mainly developers and surveyor-led firms. We bring buyers in, answer them in seconds from facts the seller has signed, and prove which sales we brought. The assistants answer around the clock, so enquiries turn into inspections instead of going cold.
 
 **4. Thirty seconds**
 > Most property businesses in Lagos lose buyers to silence. Someone messages at 11pm asking about a unit, nobody replies until morning, and by then they're talking to three other estates. We fix that — content that brings buyers in, and an AI assistant on WhatsApp and Instagram that answers them instantly, from facts the developer has signed off on. Our tagline is "We move property." We don't sell likes. We sell inspections booked and deals closed.
@@ -134,10 +134,10 @@
 > WhatsApp **+234 901 912 0968** · Instagram **@getpropel.tech** · **getpropel.tech**
 
 **2. Services offered**
-> Four things. **Content and presence** — the posts, videos and property content that build a following worth having. **Lead campaigns** — paid advertising that produces enquiries, not impressions. **Project launches** — full campaigns for developers selling out an estate. And **Propel Concierge** — the 24/7 AI assistant answering buyers on WhatsApp and Instagram, which is where most people start with us.
+> Three doors. A **free Response Audit**: we measure how fast your enquiries really get answered and show you an instant reply on your own phone. **Propel Concierge**: your Instagram enquiries answered in seconds, 24/7, only from facts you've signed, with every lead logged. And **Launch Partner** for developers: the Concierge plus content and campaigns for an estate's sales period, paid partly on sales we can prove we brought.
 
 **3. How people can support**
-> Two ways. If you're in real estate — an agent, a surveyor, a developer — message me for a free 30-minute audit of your digital presence. No obligation; I'll show you exactly where buyers are leaking. And if you know someone in the industry who's tired of losing enquiries to slow replies, send them my number. At this stage a referral is worth more to me than a like.
+> Two ways. If you're in real estate — an agent, a surveyor, a developer — message me for a free Response Audit. No obligation; I'll show you how fast your enquiries are really answered and where buyers slip away. And if you know someone in the industry who's tired of losing enquiries to slow replies, send them my number. At this stage a referral is worth more to me than a like.
 
 ---
 

@@ -4,60 +4,48 @@
 
 ---
 
-> 💰 **2026-07-26: PROPEL HAS A PAYING CLIENT.** Shalom Park paid the setup fee. You did that. Second SIM ✅ 09112714482 logged. We're in production mode — full build plan in [ops/production-checklist.md](ops/production-checklist.md), you don't need to read it, I'm running it.
-
 ## ⭐ DO THIS NEXT: approve the new prices (1 min, phone)
 
-Read the table in [docs/03](docs/03-services-and-pricing.md) and reply **"approved"**, or name the one price to change. That one word lets me update the site, Propel's assistant and every template.
+Read the table at the top of [docs/03](docs/03-services-and-pricing.md) and reply **"approved"**, or name the one price to change. That one word switches Propel's assistant and the website to the new offer and clears out the old rate card.
 
 ---
 
 ## THIS WEEK — one per sitting, in this order
 
-- [ ] **(1 message, OVERDUE since 15 Oct)** 📅 **Collins promo check.** Ask whether the ₦5m condo entry and the 70% 4-bed offers are still running. Until he says yes, use the standard saved replies, not the promo ones ([09-phase0-saved-replies.md](clients/shalom-park/09-phase0-saved-replies.md), marked ⏰).
-- [ ] **(20 min)** 🌐 **Put the two legal pages online (Track 1).** ① Hostinger → Emails → create forwarder **hello@getpropel.tech → aadamola@gmail.com** ② vercel.com → sign in with GitHub → Add New Project → `aadamola/PROPEL` → **Root Directory: `site-legal`** → Deploy ③ Project → Settings → Domains → add `getpropel.tech` + `www` → copy the DNS records Vercel shows into Hostinger DNS. *Use `site-legal`, **not** `site`. `site` has the prices we're realigning. **First merge PR #10** (github.com/aadamola/PROPEL/pull/10 → Merge). Vercel deploys from `main`.*
-- [ ] **(5 min, OVERDUE since 29 Sep)** ⏰ **VPS: check what Hostinger charged on renewal.** *Your monthly term ran to 29 Aug, auto-renewal was on, and you last logged in on 10 Aug — so this hasn't been looked at. Renewal is where their 2–3× jump lands.*
-- [ ] **(1 message)** 🔴 **Ask Shalom Park who can grant Meta admin.** Script in [04-meta-access-pack.md](clients/shalom-park/04-meta-access-pack.md). *Not Collins — he's a Sales Executive. The session is now 15 minutes and needs no SIM.*
-- [ ] **(20 min)** 🔥 **Response Test #1.** Open [ops/growth/response-test.csv](ops/growth/response-test.csv): 7 developers are already listed. Find each one on Instagram and check it's the real account, then send exactly: *"Hi, what's the current price and payment plan on [estate]?"* Tell me who you messaged and when; I log it and write every follow-up. **Never claim to be a buyer. AMG (Abijo) gets the question only. No pitch until we've checked Shalom Park's agreement for exclusivity.**
+- [ ] **(1 message, OVERDUE since 15 Oct)** 📅 **Collins promo check.** Ask whether the ₦5m condo entry and the 70% 4-bed offers are still running. Until he says yes, use the standard saved replies, not the promo ones (marked ⏰ in [09-phase0-saved-replies.md](clients/shalom-park/09-phase0-saved-replies.md)).
+- [ ] **(1 message)** 🔴 **Ask Shalom Park who can grant Meta admin.** Script: [04-meta-access-pack.md](clients/shalom-park/04-meta-access-pack.md). Not Collins. This unblocks step 10.
+- [ ] **(20 min)** 🌐 **Legal pages live.** ① Merge PR #10 (github.com/aadamola/PROPEL/pull/10) ② Hostinger → Emails → forwarder **hello@getpropel.tech → aadamola@gmail.com** ③ vercel.com → New Project → `aadamola/PROPEL` → **Root Directory `site-legal`** → Deploy ④ Settings → Domains → `getpropel.tech` + `www` → copy the DNS records into Hostinger.
+- [ ] **(20 min)** 🔥 **Response Test #1.** 7 developers are ready in [ops/growth/response-test.csv](ops/growth/response-test.csv). Check each Instagram handle, then send: *"Hi, what's the current price and payment plan on [estate]?"* Tell me who and when. Never claim to be a buyer. AMG gets the question only.
+- [ ] **(5 min)** ⏰ **VPS renewal: check what Hostinger charged** (overdue since 29 Sep).
 
-> 🔴 **2 min, do it now:** your Instagram bio links to `getpropel.tech`, which isn't live — change the link to `wa.me/2349019120968?text=Hi%20Propel%2C%20I%20want%20a%20free%20marketing%20audit` until it is.
+---
 
 ## NOT YET — I'm holding these, don't think about them
 
-- **(5 min)** 🎬 **Book the shoot day with Collins** — one site visit, about 3 hours, and it produces all 14 days of content. Shot list is written: [10-phase0-content-pack.md](clients/shalom-park/10-phase0-content-pack.md). *Collins and Mercy go on camera, not you.* *(Moved down to keep this week at 5.)*
+- 🎬 Book the Shalom Park shoot day with Collins (3 hours, 14 days of content: [10-phase0-content-pack.md](clients/shalom-park/10-phase0-content-pack.md)). Collins and Mercy on camera, not you.
+- Collins follow-up, 7 open fields: [03-followup-questions.md](clients/shalom-park/03-followup-questions.md)
+- 💰 Confirm the Shalom Park setup amount received, care fee and commission rate (needed for the first P&L)
+- Check the Shalom Park agreement for exclusivity before pitching any Abijo / Ibeju-Lekki developer
+- 🔴 CAC filing for Propel (invoicing, banking, Propel's own Meta verification)
+- Sight Shalom Park's title + approval documents (last open vetting gate)
+- Growth kit, ready when the Response Test is running: forum answers, slideshows, comment starters, group-owner message ([ops/growth/](ops/growth/README.md))
+- Apply the v3 profile copy to Instagram, LinkedIn and WhatsApp ([account-setup.md](ops/setup/account-setup.md)). It contains no prices, so it can go any time
 
-- Ready when you want them, all in [ops/growth/](ops/growth/README.md): 2 forum answers to post, 4 slideshows, 10 comment starters, the group-owner message. **Not this week.** The Response Test comes first.
-- **Check the Shalom Park agreement for exclusivity** before pitching any Abijo / Ibeju-Lekki competitor.
-
-- **Decide the three-door offer** ([docs/15](docs/15-positioning-and-growth.md) §4): approve, change or reject. When you say go, I draft the site, rate card, KB, bio and LinkedIn in one pass.
-
-- Collins follow-up, 7 open fields: [03-followup-questions.md](clients/shalom-park/03-followup-questions.md). *Moved down to make room for the legal pages.*
-
-**Parked from "this week" to keep the list at five** (the protocol, not a demotion — I'll star them when their turn comes):
-
-- 💰 Confirm the Shalom Park care fee + commission rate — *MRR reads zero because nothing is confirmed as started*
-- 🔴 CAC filing for Propel — *less urgent for THIS client since we use IFT Realty's portfolio and their RC number; still needed for invoicing, banking and every client after this one*
-- Sight the title + approval documents — *last open vetting gate*
-- TikTok + LinkedIn pages
-- ⏰ **VPS: your monthly term ran to 29 Aug and auto-renewal was on — check what Hostinger actually charged you.** *Not urgent, but renewal is where their 2–3× jump lands, and that date has passed.*
-
-- 🌐 **Publish the privacy + data-deletion pages** — *needed before step 10:* Meta requires both links to be live before an app goes Live. They contain no offerings, so they can go up ahead of the homepage.
-- 🧭 **Realign Propel's offerings** — *you asked to do this later.* It will touch the homepage, the rate card Propel's own assistant would quote, the pricing doc, and the LinkedIn About. Propel's own assistant stays offline until it's done.
-
-Testing the bot · the automated pilot · voice notes · first audit calls. Nothing here is actionable until the week's items land.
+---
 
 ## WAITING ON ME (AI partner) — nothing for you to do here
 
-- 🔴 **Before step 10:** make the `DELETE` reply actually work. The privacy page promises it, but no keyword handles it, and the ledger refuses deletes by design. Needs a rule plus an erasure design that keeps the chain verifiable.
-
-- ✅ Website wired to your number · ✅ WhatsApp QR generated (site/assets/whatsapp-qr.png)
-- Live Concierge build on the new SIM → starts the moment you send it + VPS exists
-- Meta app + App Review submission → starts after CAC + Business Suite link
-- 10 audit teardowns → starts the moment you send names
-- ✅ Instagram keyword automation built (24 rules, 103 tests green) → goes live the moment the Business Suite session lands
+- On your "approved": switch Propel's assistant knowledge base and the website to rate card v2; remove the old card
+- 🔴 Before Shalom Park cutover: make a `DELETE` reply work (a keyword rule + a ledger erasure design that keeps the chain verifiable)
+- Every Response Test follow-up, the day each reply time is known
+- The Lagos Property Response Report once 10+ firms are measured
+- Per-client WhatsApp and email channels, only when one is sold
+- ✅ Onboarding playbook + client #2 rehearsal ([ops/onboarding/](ops/onboarding/README.md)): the next client starts with `node tools/new-client.js`
 
 ## ✅ DONE (look how far this has come)
 
+- [x] 🧹 **Repo rebased "as if we opened today"**: old plans, packages and demos retired; one onboarding playbook; the engine is ready for client #2 (2026-10-15)
+- [x] 🧭 **Positioning v2 adopted + growth kit built** (docs/15, ops/growth/) (2026-10-15)
 - [x] 🛡️ **Steps 8 + 9: Instagram webhook published and handshake ✅ 3/3.** It answers Meta and refuses strangers (2026-10-15)
 - [x] 🧯 **Flowise stopped; the server is out of CPU throttle** (2026-10-15)
 - [x] 💼 **LinkedIn Company Page live — linkedin.com/company/getpropel-tech** (2026-09-24)

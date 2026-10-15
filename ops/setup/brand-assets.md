@@ -51,4 +51,3 @@
 - [ ] YouTube banner + LinkedIn company banner
 - [ ] Carousel template family (teardown, playbook, proof)
 - [ ] Rate-card one-pager (from docs/03)
-- [ ] Client pitch deck build (from deck/pitch-deck.md)

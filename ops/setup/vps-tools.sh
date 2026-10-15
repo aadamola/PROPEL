@@ -15,6 +15,7 @@
 #   bash ops/setup/vps-tools.sh smtp          # prove a mailbox sends before n8n sees it (asks for what it needs)
 #   bash ops/setup/vps-tools.sh handshake     # step 9: prove the webhook works AND refuses strangers
 #   bash ops/setup/vps-tools.sh n8n-env       # give n8n the settings an older compose file is missing
+#   bash ops/setup/vps-tools.sh jev           # sandbox only: Jev vs keyword lane on fictional Apex Gardens messages
 #
 set -euo pipefail
 
@@ -34,7 +35,7 @@ need_repo(){
   cd /opt && git clone -b claude/propel-realestate-marketing-plan-wxjj3x https://github.com/aadamola/PROPEL.git propel-repo"
 }
 case "${1:-preflight}" in
-  preflight|test|keywords|schema|ledger) need_repo ;;
+  preflight|test|keywords|schema|ledger|jev) need_repo ;;
 esac
 
 run_node(){ docker run --rm -v "$REPO":/app -w /app "$NODE_IMAGE" node "$@"; }
@@ -184,6 +185,19 @@ case "${1:-preflight}" in
       echo "   • a trailing space pasted in from a password manager" >&2
       exit 1
     fi
+    ;;
+  jev)
+    # Sandbox only. Sends the FICTIONAL Apex Gardens messages to TypeSafe Jev
+    # and scores it against the keyword lane. The harness refuses any file not
+    # marked fictional, so no real buyer message can ride along.
+    # The key is read from .env and handed to the container through the
+    # environment, never on a command line, so it is not in ps or history.
+    TYPESAFE_API_KEY=$(grep -E "^TYPESAFE_API_KEY=" "$STACK/.env" 2>/dev/null | head -1 | cut -d= -f2-)
+    [ -n "$TYPESAFE_API_KEY" ] || die "TYPESAFE_API_KEY is not in $STACK/.env yet. Add one line:
+  TYPESAFE_API_KEY=<your key>"
+    export TYPESAFE_API_KEY
+    docker run --rm -e TYPESAFE_API_KEY -v "$REPO":/app -w /app/sandbox/apex-gardens/jev-bakeoff \
+      "$NODE_IMAGE" node bakeoff.js --jev "${@:2}"
     ;;
   handshake)
     # Step 9 without the secret ever reaching the screen. The token is read

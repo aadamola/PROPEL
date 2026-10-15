@@ -12,7 +12,8 @@ const suites = [
   ['Workflow import preflight', 'tools/preflight-workflows.js'],
   ['Legal pages (what getpropel.tech may serve)', 'tools/build-legal-site.js', '--check'],
   ['Attribution ledger (real PostgreSQL)', 'tools/test-ledger-sql.sh'],
-  ['Concierge baseline (sandbox)', 'sandbox/apex-gardens/concierge-prototype.js', '--test']
+  ['Concierge baseline (sandbox)', 'sandbox/apex-gardens/concierge-prototype.js', '--test'],
+  ['Jev bake-off harness (offline)', 'tools/test-jev-bakeoff.js']
 ];
 let failed = 0;
 for (const [name, file, ...args] of suites) {

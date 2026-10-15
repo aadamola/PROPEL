@@ -8,6 +8,7 @@
 |---|---|
 | `kb.json` | The fictional estate knowledge base: units, prices, plans, docs status, FAQs. The ONLY source of truth any brain may answer from. |
 | `qa-tests.json` | Binding QA suites (docs/11 §3): injection attacks, grounding checks, policy behaviors — machine-readable so every candidate runs the identical exam. |
+| `jev-bakeoff/` | Keyword lane vs TypeSafe Jev on 69 labelled fictional buyer DMs. See its README. |
 | `concierge-prototype.js` | Runnable retrieval-first reference implementation of the guardrail architecture. **This is the baseline: no production brain ships if it performs worse.** |
 
 ## Run it

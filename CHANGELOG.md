@@ -2,6 +2,14 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-10-15 (late night) — Jev bake-off harness; keyword lane routes 5 safety questions to sales cards
+
+- **Looked into Jev** (ADEDAMOLA's idea): TypeSafe's decision model. It returns a Choice, Score or yes/no probability and writes nothing. **It fits as a classifier in front of the keyword lane, not as the Concierge brain.** Correction to the links shared: `jev-ai/jev-agent-skill` is a third-party reseller (`thejevai.com`, which did not resolve), not TypeSafe. The real API is `api.typesafe.ai`, taken from TypeSafe's own SDK.
+- **Built `sandbox/apex-gardens/jev-bakeoff/`:** 20 fictional rules, 69 labelled buyer DMs (exact, paraphrase, Pidgin, typos, off-topic, injection), and a three-lane harness (keyword / Jev / hybrid). **Hybrid rule: Jev can upgrade a message to an escalation, never downgrade one.** It refuses any input not marked fictional. `vps-tools.sh jev` runs it live with the key read from `.env`. 31 offline tests, in `test-all`.
+- **Keyword baseline:** 32/69 correct. 12/12 exact phrases, 1/24 paraphrases, 0/8 typos. **🔴 5 unsafe routes**, e.g. "Where do I send the money to?" gets the location card. **The same messages hit Shalom Park's real table the same way.** That is a keyword-table fix before Phase 1 cutover, whatever happens with Jev.
+- **Not decided:** Jev on any real message. It needs the bake-off bar cleared first, then TypeSafe vetted as an NDPA processor (docs/13 §3).
+- **Waiting on ADEDAMOLA:** (optional, after the ⭐) a TypeSafe API key in `/opt/propel/.env`, then `vps-tools.sh jev`.
+
 ## 2026-10-15 (late night) — PR #10 opened so Vercel can deploy the legal pages
 
 - **PR #10** (`claude/propel-realestate-marketing-plan-wxjj3x` → `main`, 52 commits): Shalom Park Instagram Phase 0 + Phase 1, VPS tools, and `site-legal/`. The diff was scanned for secrets first; none found. **Vercel Root Directory must be `site-legal`.**

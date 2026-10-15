@@ -29,6 +29,7 @@ Today (15 Oct) is the promo review date. Copy, paste, send:
 
 ## NOT YET — I'm holding these, don't think about them
 
+- 🧪 **Jev test (optional, 10 min):** get an API key at typesafe.ai → add `TYPESAFE_API_KEY=<key>` to `/opt/propel/.env` → on the VPS: `cd /opt/propel-repo && git fetch origin claude/project-thread-7ryu3o && git checkout claude/project-thread-7ryu3o && bash ops/setup/vps-tools.sh jev` → screenshot the output to me. *Fictional data only. Costs under one US cent.*
 - Collins follow-up, 7 open fields: [03-followup-questions.md](clients/shalom-park/03-followup-questions.md). *Moved down to make room for the legal pages.*
 
 **Parked from "this week" to keep the list at five** (the protocol, not a demotion — I'll star them when their turn comes):
@@ -46,6 +47,7 @@ Testing the bot · the automated pilot · voice notes · first audit calls. Noth
 
 ## WAITING ON ME (AI partner) — nothing for you to do here
 
+- 🔴 **Before cutover:** the keyword table sends 5 kinds of money and legal questions to sales cards (e.g. "Where do I send the money to?" gets the location card). Found by the Jev bake-off. It needs trigger fixes in `keywords.csv`.
 - 🔴 **Before step 10:** make the `DELETE` reply actually work. The privacy page promises it, but no keyword handles it, and the ledger refuses deletes by design. Needs a rule plus an erasure design that keeps the chain verifiable.
 
 - ✅ Website wired to your number · ✅ WhatsApp QR generated (site/assets/whatsapp-qr.png)

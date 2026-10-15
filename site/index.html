@@ -59,14 +59,25 @@
   .tag{display:inline-block;background:rgba(0,229,122,.14);color:var(--green);font-size:.75rem;font-weight:700;padding:4px 10px;border-radius:99px;margin-bottom:12px;letter-spacing:.04em}
 
   /* Pricing */
-  .price-card{display:flex;flex-direction:column}
-  .price{font-size:2rem;font-weight:900;margin:10px 0 2px}
-  .per{color:var(--mist);font-size:.85rem;margin-bottom:16px}
-  .price-card ul{list-style:none;margin:0 0 22px;flex:1}
-  .price-card li{padding:7px 0;border-bottom:1px solid rgba(255,255,255,.06);color:var(--mist);font-size:.95rem}
-  .price-card li::before{content:"✓ ";color:var(--green);font-weight:700}
-  .flag{border:2px solid var(--green)}
-  .flag .tag{background:var(--green);color:var(--navy)}
+  .plan{display:flex;flex-direction:column}
+  .plan-no{color:var(--mist);font-size:.78rem;font-weight:700;letter-spacing:.18em}
+  .plan-name{font-size:2rem;font-weight:900;font-style:italic;color:var(--green);margin:6px 0 10px;line-height:1.1}
+  .plan>p{margin-bottom:20px}
+  .team{background:rgba(255,255,255,.04);border-radius:14px;padding:20px;margin-bottom:22px;flex:1}
+  .team-h{color:var(--mist);font-size:.72rem;font-weight:700;letter-spacing:.18em;margin-bottom:10px}
+  .team ul{list-style:none}
+  .team li{display:flex;align-items:center;gap:12px;padding:7px 0;font-size:.97rem}
+  .team li::before{content:"✓";flex:0 0 28px;height:28px;border-radius:50%;background:rgba(0,229,122,.14);color:var(--green);font-weight:700;font-size:.85rem;display:flex;align-items:center;justify-content:center}
+  .btn-call{display:flex;align-items:center;justify-content:space-between;border:2px solid var(--green);border-radius:14px;padding:10px 10px 10px 20px;color:var(--white);font-weight:700;font-size:1.05rem}
+  .btn-call::after{content:"→";flex:0 0 44px;height:44px;border-radius:10px;background:var(--green);color:var(--navy);display:flex;align-items:center;justify-content:center;font-size:1.2rem}
+  .btn-call:active{transform:scale(.98)}
+  .flag{border:2px solid var(--green);position:relative}
+  .pill{position:absolute;top:22px;right:22px;background:var(--green);color:var(--navy);font-size:.72rem;font-weight:800;padding:5px 12px;border-radius:99px;letter-spacing:.04em}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px;margin:30px 0}
+  .stats b{display:block;color:var(--green);font-size:1.6rem;font-weight:900}
+  .stats small{color:var(--mist);font-size:.95rem}
+  .who{list-style:none;max-width:640px}
+  .who li{padding:16px 0;border-top:1px solid rgba(255,255,255,.1);font-size:1.08rem}
 
   /* Steps */
   .step{display:flex;gap:16px;align-items:flex-start;margin-top:26px}
@@ -121,7 +132,7 @@
     <p>AI-powered digital marketing for Nigerian real estate — realtors, estate surveyors &amp; valuers, and developers. We don't sell likes. We sell <b style="color:var(--white)">inspections booked and deals closed.</b></p>
     <div class="cta-row">
       <a class="btn btn-green" href="https://wa.me/2349019120968?text=Hi%20Propel%2C%20I%20want%20a%20free%20marketing%20audit">Get your free 30-min audit</a>
-      <a class="btn btn-ghost" href="#packages">See packages &amp; pricing</a>
+      <a class="btn btn-ghost" href="#packages">See the plans</a>
     </div>
     <div class="micro">No forms. No waiting. The audit happens on WhatsApp — where your buyers already are.</div>
   </div>
@@ -160,29 +171,54 @@
 
 <section id="packages">
   <div class="wrap">
-    <h2>Transparent naira pricing.</h2>
-    <p class="sub">Monthly retainers, paid in advance, 3-month minimum. Ad spend (if any) goes from you directly to the platforms — we never hold your ad money.</p>
+    <h2><span class="accent">How fast</span> do you want to move property?</h2>
+    <p class="sub">Pick the engine that fits your business. Every plan starts with a free 30-minute call. We scope it to your listings and goals, then send a written proposal in naira. Ad spend (if any) goes from you directly to the platforms — we never hold your ad money.</p>
     <div class="grid g3">
-      <div class="card price-card">
-        <span class="tag">STARTER</span>
-        <div class="price">₦250k</div><div class="per">per month</div>
-        <ul><li>Instagram + TikTok managed</li><li>4 posts weekly incl. 2 Reels</li><li>4 listing packages monthly</li><li>Monthly strategy call + report</li></ul>
-        <a class="btn btn-ghost btn-block" href="https://wa.me/2349019120968?text=Hi%20Propel%2C%20Starter%20plan">Ask about Starter</a>
+      <div class="card plan">
+        <span class="plan-no">PLAN 01</span>
+        <div class="plan-name">Presence</div>
+        <p>Show up every day where your buyers scroll, with content that looks like you mean business.</p>
+        <div class="team"><div class="team-h">YOUR GROWTH TEAM</div>
+          <ul><li>Content &amp; social management</li><li>Listing packages</li><li>Monthly strategy call + report</li></ul></div>
+        <a class="btn-call" href="https://wa.me/2349019120968?text=Hi%20Propel%2C%20I%27d%20like%20to%20book%20a%20call%20about%20the%20Presence%20plan">Book a call</a>
       </div>
-      <div class="card price-card flag">
-        <span class="tag">MOST POPULAR — GROWTH + LEADS</span>
-        <div class="price">₦700k</div><div class="per">per month (bundle)</div>
-        <ul><li>Everything in Growth Presence</li><li>7 posts weekly incl. 4 Reels</li><li>Meta ads + landing page + WhatsApp capture</li><li>10 listing packages monthly</li><li>Weekly lead scorecard</li></ul>
-        <a class="btn btn-green btn-block" href="https://wa.me/2349019120968?text=Hi%20Propel%2C%20Growth%20bundle">Ask about the bundle</a>
+      <div class="card plan flag">
+        <span class="pill">MOST POPULAR</span>
+        <span class="plan-no">PLAN 02</span>
+        <div class="plan-name">Leads</div>
+        <p>Turn attention into inspections booked, and answer every enquiry before your competitor does.</p>
+        <div class="team"><div class="team-h">YOUR GROWTH TEAM</div>
+          <ul><li>Content &amp; social management</li><li>Meta ads + landing page</li><li>Concierge — AI agent on your DMs, 24/7</li><li>Weekly lead scorecard</li></ul></div>
+        <a class="btn-call" href="https://wa.me/2349019120968?text=Hi%20Propel%2C%20I%27d%20like%20to%20book%20a%20call%20about%20the%20Leads%20plan">Book a call</a>
       </div>
-      <div class="card price-card">
-        <span class="tag">DEVELOPERS</span>
-        <div class="price">₦1.5m+</div><div class="per">per project launch</div>
-        <ul><li>Project brand kit + campaign</li><li>Launch content pack (20+ assets)</li><li>Lead system + sales-team reviews</li><li>Scale to full sell-out partnership</li></ul>
-        <a class="btn btn-ghost btn-block" href="https://wa.me/2349019120968?text=Hi%20Propel%2C%20project%20launch">Talk about your project</a>
+      <div class="card plan">
+        <span class="plan-no">PLAN 03</span>
+        <div class="plan-name">Launch</div>
+        <p>For developers. Take an off-plan project from launch to sold out with the full machine behind it.</p>
+        <div class="team"><div class="team-h">YOUR GROWTH TEAM</div>
+          <ul><li>Project brand + campaign</li><li>Studio — video, drone &amp; 360° tours</li><li>Ads + lead system</li><li>Concierge for the project</li><li>Sales-team lead reviews</li></ul></div>
+        <a class="btn-call" href="https://wa.me/2349019120968?text=Hi%20Propel%2C%20I%27d%20like%20to%20book%20a%20call%20about%20the%20Launch%20plan">Book a call</a>
       </div>
     </div>
-    <p class="micro" style="margin-top:18px">Founding-client rates available for a limited number of early partners — ask on WhatsApp.</p>
+    <p class="micro" style="margin-top:18px">Founding-client slots open for a limited number of early partners — ask on the call.</p>
+  </div>
+</section>
+
+<section id="who" style="border-top:1px solid rgba(255,255,255,.08)">
+  <div class="wrap">
+    <h2>Built only for Nigerian real estate.</h2>
+    <p class="sub">Property businesses grow by earning trust and replying first. We build both.</p>
+    <div class="stats">
+      <div><b>24/7</b><small>every DM answered</small></div>
+      <div><b>Seconds</b><small>to reply to an enquiry</small></div>
+      <div><b>Every Friday</b><small>your lead scorecard</small></div>
+    </div>
+    <ul class="who">
+      <li>Realtors &amp; agents</li>
+      <li>Estate surveyors &amp; valuers</li>
+      <li>Real estate firms &amp; brokerages</li>
+      <li>Small-to-mid developers</li>
+    </ul>
   </div>
 </section>
 
@@ -227,6 +263,7 @@
 <section id="faq">
   <div class="wrap">
     <h2>Questions Lagos always asks.</h2>
+    <details><summary>How much does it cost?</summary><p>It depends on your listings, your goals and which plan fits. Book a free 30-minute call and we will send a written proposal in naira. No surprises, and ad spend always stays with you.</p></details>
     <details><summary>Can you guarantee sales?</summary><p>No one honest can. We guarantee the system: content shipped, campaigns live, qualified leads reported weekly — and you see everything in your Friday scorecard.</p></details>
     <details><summary>My cousin manages my page for ₦80k. Why pay more?</summary><p>We're not selling posts, we're selling inspections booked. One extra closed deal at 5% commission on a ₦60m property pays for a year of the difference.</p></details>
     <details><summary>Do you handle my ad budget?</summary><p>Never. Ad spend goes from your card directly to Meta/Google/TikTok. We manage the campaigns; your money stays yours. Cleaner for everyone.</p></details>

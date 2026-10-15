@@ -78,9 +78,11 @@ case "${1:-preflight}" in
     # The workflows read these at runtime. If the container was started from
     # an older compose file, they are simply absent, and the first symptom is
     # an "access to env vars denied" or a handshake that 403s every time.
-    for V in N8N_BLOCK_ENV_ACCESS_IN_NODE META_VERIFY_TOKEN_SHALOM_PARK SHALOM_PARK_APP_SECRET; do
+    for V in N8N_BLOCK_ENV_ACCESS_IN_NODE NODE_FUNCTION_ALLOW_BUILTIN META_VERIFY_TOKEN_SHALOM_PARK SHALOM_PARK_APP_SECRET; do
       val=$(docker compose exec -T n8n printenv "$V" 2>/dev/null || true)
-      if [ "$V" = "N8N_BLOCK_ENV_ACCESS_IN_NODE" ]; then
+      if [ "$V" = "NODE_FUNCTION_ALLOW_BUILTIN" ]; then
+        echo ",$val," | grep -Eq ',(crypto|\*),' && echo "  ✓ $V allows crypto" || echo "  ✗ $V is '${val:-unset}' — must include crypto. Fix with: bash /opt/propel-repo/ops/setup/vps-tools.sh n8n-env"
+      elif [ "$V" = "N8N_BLOCK_ENV_ACCESS_IN_NODE" ]; then
         [ "$val" = "false" ] && echo "  ✓ $V=false" || echo "  ✗ $V is '${val:-unset}' — must be false. Fix with: bash /opt/propel-repo/ops/setup/vps-tools.sh n8n-env"
       elif [ -n "$val" ]; then echo "  ✓ $V set"
       else
@@ -212,11 +214,17 @@ case "${1:-preflight}" in
     else bad "HTTP $code — run: vps-tools.sh web"; fi
 
     # 2. A wrong token must be refused. This is the test people skip.
-    code=$(curl -sS --max-time 15 -o /dev/null -w '%{http_code}' \
-      "$URL?hub.mode=subscribe&hub.verify_token=definitely-wrong&hub.challenge=${CHAL}" 2>/dev/null || echo 000)
+    body=$(curl -sS --max-time 15 -o - -w '\n%{http_code}' \
+      "$URL?hub.mode=subscribe&hub.verify_token=definitely-wrong&hub.challenge=${CHAL}" 2>/dev/null || echo $'\n000')
+    code=$(echo "$body" | tail -1); text=$(echo "$body" | sed '$d' | tr -d '\r' | head -c 300)
     if [ "$code" = "403" ]; then ok "wrong token → refused (strangers cannot subscribe to our endpoint)"
     elif [ "$code" = "404" ]; then bad "404 — workflow 05 is not live yet"
-    else bad "wrong token got HTTP $code — the endpoint is NOT refusing strangers. Do not go live. Send me this"; fi
+    else
+      bad "wrong token got HTTP $code — the endpoint is NOT refusing strangers. Do not go live. Send me this"
+      # Safe to print: this request carried a deliberately wrong token.
+      echo "     server said: ${text:-<empty body>}"
+      echo "     usual cause: n8n cannot load 'crypto' — run: bash /opt/propel-repo/ops/setup/vps-tools.sh n8n-env"
+    fi
 
     # 3. No token at all must also be refused.
     code=$(curl -sS --max-time 15 -o /dev/null -w '%{http_code}' \
@@ -254,10 +262,16 @@ case "${1:-preflight}" in
 # webhook secrets below. It also lets ANY workflow read EVERY variable n8n
 # is given -- fine while ADEDAMOLA is the only person with n8n editor access,
 # and the reason nobody else should ever be given it.
+#
+# NODE_FUNCTION_ALLOW_BUILTIN=crypto lets Code nodes load Node's crypto
+# module -- the verify-token check and Meta's signature check both need it.
+# Without it n8n throws before either runs, and the webhook answers 200 to
+# everyone instead of 403. Preflight reads this exact line.
 services:
   n8n:
     environment:
       N8N_BLOCK_ENV_ACCESS_IN_NODE: "false"
+      NODE_FUNCTION_ALLOW_BUILTIN: "crypto"
       META_VERIFY_TOKEN_SHALOM_PARK: ${META_VERIFY_TOKEN_SHALOM_PARK:-}
       SHALOM_PARK_APP_SECRET: ${SHALOM_PARK_APP_SECRET:-}
 YAML

@@ -2,6 +2,14 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-10-15 (later) — Handshake failed 3/3: n8n couldn't load `crypto`; Flowise was throttling the server
+
+- **Handshake: all three checks got HTTP 200**, including the wrong-token and no-token requests. **Root cause (my defect):** five Code nodes `require('crypto')`, and n8n blocks Node built-ins unless `NODE_FUNCTION_ALLOW_BUILTIN` lists them. The node threw before it could answer, and n8n's fallback reply was a 200. **The unit tests run in plain Node, where `require` always works, so they couldn't see this.** That's the same class of failure as August's `$env` block.
+- **Fix:** the `n8n-env` override now sets `NODE_FUNCTION_ALLOW_BUILTIN: "crypto"`, and the bootstrap does the same for new servers. `doctor` checks the setting. **Preflight now reads the allow-list from the override and fails any Code node that `require`s something outside it.** It found all five on its first run. When a stranger isn't refused, `handshake` now prints what the server said (safe to show, because that request uses a deliberately wrong token).
+- **No exposure:** Meta isn't subscribed yet and the app secret is empty. Every POST still fails at the signature check, which can't pass without the secret.
+- **🔥 Hostinger throttled the CPU.** `flowise start` was at 99.2%; this is the Flowise crash-loop known since September, now visible as a cost. **Action: `docker compose stop flowise`.** Flowise isn't on the live path (n8n is), so stopping it is reversible and costs nothing. Advised **not** to click "Remove limitations": the credits recover on their own once the load stops. Flowise is to be fixed or removed before the brain bake-off.
+- **Waiting on ADEDAMOLA:** ⭐ four lines on the server → handshake ✅ 3/3. Promo re-confirmation from Collins (today).
+
 ## 2026-10-15 — Publish blocked by missing credentials; runbook corrected
 
 - **n8n refused to Publish `05`:** *"3 nodes have issues, fix them before publishing."* **My runbook was wrong.** It said the credential warning on the three send nodes didn't block anything. In newer n8n it blocks Publish.

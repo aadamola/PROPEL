@@ -234,6 +234,7 @@ services:
       # Code nodes read API keys and verify tokens from env. Without this,
       # $env is blocked and every workflow fails with an empty-secret error.
       N8N_BLOCK_ENV_ACCESS_IN_NODE: "false"
+      NODE_FUNCTION_ALLOW_BUILTIN: "crypto"   # verify-token + signature checks; see vps-tools.sh n8n-env
       # Per-client Meta credentials (empty until SOP #01 runs for that client)
       META_VERIFY_TOKEN_SHALOM_PARK: ${META_VERIFY_TOKEN_SHALOM_PARK:-}
       SHALOM_PARK_APP_SECRET: ${SHALOM_PARK_APP_SECRET:-}

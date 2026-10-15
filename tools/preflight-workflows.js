@@ -17,6 +17,15 @@ const files = fs.readdirSync(DIR).filter(f => f.endsWith('.json')).sort();
 const wf = {};
 for (const f of files) wf[f] = JSON.parse(fs.readFileSync(path.join(DIR, f), 'utf8'));
 
+// n8n refuses require() of Node built-ins in Code nodes unless they are
+// listed in NODE_FUNCTION_ALLOW_BUILTIN. Our unit tests run in plain Node,
+// where require always works -- so this gap only showed up on the server,
+// as a handshake that answered 200 to everyone. Read the allow-list from the
+// override that vps-tools.sh actually writes, not from a copy of it.
+const TOOLS = fs.readFileSync(path.join(__dirname, '../ops/setup/vps-tools.sh'), 'utf8');
+const allowLine = TOOLS.match(/NODE_FUNCTION_ALLOW_BUILTIN:\s*"([^"]*)"/);
+const ALLOWED = new Set(allowLine ? allowLine[1].split(',').map(x => x.trim()).filter(Boolean) : []);
+
 const problems = [];
 const notes = [];
 const P = (file, msg) => problems.push(`${file}: ${msg}`);
@@ -32,6 +41,13 @@ for (const [file, w] of Object.entries(wf)) {
     if (n.parameters.jsCode) {
       try { new Function(n.parameters.jsCode); }
       catch (e) { P(file, `"${n.name}" has a syntax error: ${e.message}`); }
+
+      // 1b. Built-in modules must be on the server's allow-list.
+      for (const m of n.parameters.jsCode.matchAll(/require\(\s*['"]([^'"]+)['"]\s*\)/g)) {
+        if (!ALLOWED.has(m[1]) && !ALLOWED.has('*')) {
+          P(file, `"${n.name}" requires '${m[1]}' but the n8n-env override does not allow it (NODE_FUNCTION_ALLOW_BUILTIN) -- n8n will throw before the node runs`);
+        }
+      }
 
       // 2. Every $('Node') reference must name a node that exists.
       for (const m of n.parameters.jsCode.matchAll(/\$\(\s*'([^']+)'\s*\)/g)) {

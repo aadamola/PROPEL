@@ -6,19 +6,21 @@
 
 > 💰 **2026-07-26: PROPEL HAS A PAYING CLIENT.** Shalom Park paid the setup fee. You did that. Second SIM ✅ 09112714482 logged. We're in production mode — full build plan in [ops/production-checklist.md](ops/production-checklist.md), you don't need to read it, I'm running it.
 
-## ⭐ DO THIS NEXT: unblock Publish, then steps 8 + 9 (5 min)
+## ⭐ DO THIS NEXT: stop Flowise, apply the fix, re-run the handshake (5 min)
 
-n8n won't publish while 3 nodes have no login. Give them a **placeholder** login:
+Paste these on the server, one at a time:
 
-1. Open **Private reply to comment** → Credential → **Create new** (Header Auth)
-   - Credential name: `Shalom Park IG`
-   - Name: `Authorization`
-   - Value: `Bearer PENDING-META-APP`
-2. Open **Public comment reply** and **Send IG DM** → pick that same `Shalom Park IG` from the dropdown
-3. **Save** → **Publish**
-4. On the server: `bash /opt/propel-repo/ops/setup/vps-tools.sh handshake` → want **✅ 3/3**
+```
+cd /opt/propel && docker compose stop flowise
+cd /opt/propel-repo && git pull
+bash /opt/propel-repo/ops/setup/vps-tools.sh n8n-env
+bash /opt/propel-repo/ops/setup/vps-tools.sh handshake
+```
 
-**The placeholder is safe.** Every message is refused at "Verify signature" until the Meta app secret exists (step 10), so nothing can reach the send nodes. At step 10 we just swap the value. **Keep running Phase 0 by hand.**
+You want **✅ 3/3**. Screenshot it and send it to me.
+
+- **Line 1:** Flowise was using 99% of the CPU, which is why Hostinger throttled the server. We don't use Flowise yet, and `docker compose start flowise` brings it back. **Don't click "Remove limitations".** Once Flowise stops, the server recovers on its own.
+- **Lines 2–4:** this fixes **my** bug. n8n wasn't allowed to load the code that checks the token, so the webhook answered "OK" to everyone. Nothing is connected to it yet, so nothing leaked.
 
 ---
 

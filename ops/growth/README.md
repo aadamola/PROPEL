@@ -9,7 +9,6 @@
 | [aeo-answers.md](aeo-answers.md) | Two forum/LinkedIn answers ready to post; a third held for our own data | 15 min/week |
 | [slideshows.md](slideshows.md) | Four faceless slideshows ready to post; two locked until a true event | Posting only |
 | [first-comment.md](first-comment.md) | Notification setup + 10 comment starters | Inside the daily 10 min |
-
 | [founding-pilot.md](founding-pilot.md) | Founding pilot application questions (applications close 15 Dec 2026) | One message per qualified firm |
 
 **Offer approved 2026-10-15:** rate card v2 is in [docs/03](../../docs/03-services-and-pricing.md); profile copy is in [account-setup.md](../setup/account-setup.md). The founding-pilot application can go out, after a firm has replied to the Response Test.

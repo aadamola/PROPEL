@@ -4,15 +4,16 @@
 
 ---
 
-## ⭐ DO THIS NEXT: approve the new prices (1 min, phone)
+## ⭐ DO THIS NEXT: one WhatsApp to Collins (1 min, phone)
 
-Read the table at the top of [docs/03](docs/03-services-and-pricing.md) and reply **"approved"**, or name the one price to change. That one word switches Propel's assistant and the website to the new offer and clears out the old rate card.
+> *"Hi Collins, quick check: are the ₦5m entry deposit on the condo and the 70% deposit on the 4-bed still running? I need a yes or no so our Instagram replies stay accurate."*
+
+Until he says yes, use the **standard** saved replies, not the promo ones (marked ⏰ in [09-phase0-saved-replies.md](clients/shalom-park/09-phase0-saved-replies.md)). If he says yes, send me his reply and I'll push the review date out 30 days.
 
 ---
 
 ## THIS WEEK — one per sitting, in this order
 
-- [ ] **(1 message, OVERDUE since 15 Oct)** 📅 **Collins promo check.** Ask whether the ₦5m condo entry and the 70% 4-bed offers are still running. Until he says yes, use the standard saved replies, not the promo ones (marked ⏰ in [09-phase0-saved-replies.md](clients/shalom-park/09-phase0-saved-replies.md)).
 - [ ] **(1 message)** 🔴 **Ask Shalom Park who can grant Meta admin.** Script: [04-meta-access-pack.md](clients/shalom-park/04-meta-access-pack.md). Not Collins. This unblocks step 10.
 - [ ] **(20 min)** 🌐 **Legal pages live.** ① Merge PR #10 (github.com/aadamola/PROPEL/pull/10) ② Hostinger → Emails → forwarder **hello@getpropel.tech → aadamola@gmail.com** ③ vercel.com → New Project → `aadamola/PROPEL` → **Root Directory `site-legal`** → Deploy ④ Settings → Domains → `getpropel.tech` + `www` → copy the DNS records into Hostinger.
 - [ ] **(20 min)** 🔥 **Response Test #1.** 7 developers are ready in [ops/growth/response-test.csv](ops/growth/response-test.csv). Check each Instagram handle, then send: *"Hi, what's the current price and payment plan on [estate]?"* Tell me who and when. Never claim to be a buyer. AMG gets the question only.
@@ -35,7 +36,6 @@ Read the table at the top of [docs/03](docs/03-services-and-pricing.md) and repl
 
 ## WAITING ON ME (AI partner) — nothing for you to do here
 
-- On your "approved": switch Propel's assistant knowledge base and the website to rate card v2; remove the old card
 - 🔴 Before Shalom Park cutover: make a `DELETE` reply work (a keyword rule + a ledger erasure design that keeps the chain verifiable)
 - Every Response Test follow-up, the day each reply time is known
 - The Lagos Property Response Report once 10+ firms are measured
@@ -44,6 +44,7 @@ Read the table at the top of [docs/03](docs/03-services-and-pricing.md) and repl
 
 ## ✅ DONE (look how far this has come)
 
+- [x] 💰 **New prices approved; Propel's assistant and the website switched to the three doors** (2026-10-15)
 - [x] 🧹 **Repo rebased "as if we opened today"**: old plans, packages and demos retired; one onboarding playbook; the engine is ready for client #2 (2026-10-15)
 - [x] 🧭 **Positioning v2 adopted + growth kit built** (docs/15, ops/growth/) (2026-10-15)
 - [x] 🛡️ **Steps 8 + 9: Instagram webhook published and handshake ✅ 3/3.** It answers Meta and refuses strangers (2026-10-15)

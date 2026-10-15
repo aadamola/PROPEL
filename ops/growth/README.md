@@ -12,4 +12,4 @@
 
 | [founding-pilot.md](founding-pilot.md) | Founding pilot application questions (applications close 15 Dec 2026) | One message per qualified firm |
 
-**Offer proposed 2026-10-15, awaiting ADEDAMOLA's "approved":** rate card v2 is in [docs/03](../../docs/03-services-and-pricing.md); the v3 profile copy (no prices) is in [account-setup.md](../setup/account-setup.md). **Don't send the founding-pilot application until the rate card is approved.**
+**Offer approved 2026-10-15:** rate card v2 is in [docs/03](../../docs/03-services-and-pricing.md); profile copy is in [account-setup.md](../setup/account-setup.md). The founding-pilot application can go out, after a firm has replied to the Response Test.

@@ -2,6 +2,15 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-10-15 (approved) — Rate card v2 approved and applied everywhere
+
+- **ADEDAMOLA: "Approved."** Rate card v2 is now the published offer.
+- **Applied:**
+  - `ops/concierge/propel-kb.json` v2 (three doors, add-ons, founding pilots; never quotes a commission rate or a go-live date; never says how many pilot places are left), rebuilt into `03`. **The server's copy is unchanged until the next `03` re-import, and Propel's own assistant isn't live.**
+  - `docs/03`: approval recorded, v1 appendix removed.
+  - **`site/index.html` v2**: plain-words hero ("Every property enquiry, answered in seconds"), three doors, approved prices, the credential stated accurately, Shalom Park shown as an Instagram client, FAQ on go-live timing and never touching a salesperson's number, footer links to the legal pages, the dead TikTok link removed. **Still not live:** the domain serves `site-legal/` until launch.
+- docs/15, ops/growth and CLAUDE.md updated. TODO ⭐ moves to the overdue Collins promo check.
+
 ## 2026-10-15 (final) — Repo rebased "as if we opened today"; onboarding playbook; engine ready for client #2
 
 **The prompt, improved and run:** *Act as Propel's AI Managing Partner, with full repo access and the standing rules in CLAUDE.md. Audit the repo A–Z against the current strategy (positioning v2, rate card v2): apply the new offer everywhere, remove superseded material so history lives only in CHANGELOG and git, rebase CLAUDE.md, README, TODO and the operating plan to today, and turn everything learned onboarding Shalom Park into a step-by-step playbook (gates, owners, commands, problems and fixes), with the engine itself made ready for client #2. Keep CHANGELOG history, live client records, and the legal and QA doctrine. Anything that changes prices or goes public still needs ADEDAMOLA's explicit approval.*

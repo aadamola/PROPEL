@@ -1,8 +1,6 @@
 # Propel — Services & Pricing
 
-> ⏳ **STATUS: AWAITING ADEDAMOLA'S APPROVAL (2026-10-15).** Proposed by the AI Managing Partner after ADEDAMOLA delegated the offer decision. Prices are his to confirm (CLAUDE.md decision rights). **Until he replies "approved", nothing here is quoted to anyone**: the site, Propel's assistant knowledge base and the templates still carry v1 (summarised at the bottom), and none of them is live.
-
-*Rate card **v2 (proposed)** · 2026-10-15. Reasoning: [docs/15](15-positioning-and-growth.md) §4 + §10. All prices in ₦, VAT (7.5%) exclusive.*
+*Rate card **v2** · **approved by ADEDAMOLA 2026-10-15**. Reasoning: [docs/15](15-positioning-and-growth.md) §4 + §10. All prices in ₦, VAT (7.5%) exclusive.*
 
 **What we are:** the enquiry-to-inspection system for Nigerian property sellers. We bring buyers in, answer them in seconds from facts you've signed, and prove which sales we drove.
 **Tagline:** We move property.
@@ -88,19 +86,4 @@ One-off "manage my page" gigs · unpaid spec work · clients who fail title or c
 
 v1 offered six product lines to be delivered by one person at 20 hours a week. The market's only signal so far, a developer who asked for the AI enquiry system before we pitched it, points at the Concierge. Content retainers are marketing, and marketing churns. A system that runs in the background and holds the client's records doesn't. By our estimate the Concierge earns about 3× more per ADEDAMOLA-hour than the retainers did. Content, ads and shoots stay available, as ingredients and add-ons rather than products on the menu. *(docs/15 §4, §10.)*
 
----
-
-## Appendix — rate card v1 (retired 2026-10-15)
-
-Kept for the record and for any conversation that referenced it. **No longer offered to new clients.**
-
-| v1 line | v1 price | Where it went in v2 |
-|---|---|---|
-| Presence Starter / Growth / Authority | ₦250k / ₦450k / ₦750k per month | "Content for your Instagram" add-on; inside Launch Partner |
-| Leads Ignite / Accelerate | ₦350k / ₦600k per month | Campaign management inside Launch Partner |
-| Launch Lite / Full / Partner | ₦1.5m / ₦3m / ₦5m + kicker | Launch Partner (setup + monthly + commission) |
-| Studio | per shoot | Unchanged, now an add-on |
-| OS (WhatsApp Business + CRM / Full OS / care) | ₦350k / ₦700k / ₦100k pm | WhatsApp channel add-on; the ledger replaces the CRM |
-| Concierge Lite / Pro / Developer | ₦450k / ₦800k / ₦1.2m setup | Concierge Instagram / Concierge Developer |
-| Growth + Ignite bundle | ₦700k per month | Retired |
-| Founding offer: 20% off for 6 months | — | Founding pilots |
+*Rate card v1 (July 2026) was retired on 2026-10-15; its history is in CHANGELOG.md and git.*

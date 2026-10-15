@@ -1,0 +1,174 @@
+{
+  "_meta": {
+    "purpose": "Client registry. Adding client #2 is a row here, not a new workflow.",
+    "rule": "Every workflow reads this. Nothing about a client is hardcoded in a node.",
+    "defaults": {
+      "model": "gemini-3.6-flash",
+      "api_version": "v1beta",
+      "fallback_model": "gemini-3.5-flash",
+      "_rule": "PIN an explicit version. Never '-latest' (Google can swap the model under a QA-passed system) and never '-preview' (can be withdrawn without notice). Confirm availability with: curl -s 'https://generativelanguage.googleapis.com/v1beta/models?key=$KEY' | grep '\"name\"'"
+    },
+    "n8n": {
+      "core_workflow_id": "SzWrUVB8WYv3sfE5",
+      "instance": "https://engine.getpropel.tech",
+      "ledger_workflow_id": "oNt2oRixkDbbUa2p",
+      "_import_order": "Import 03 (CORE) then 06 (ledger + escalation), then paste each id into the matching node of 05 (Instagram). A channel pointing at a sub-workflow that does not exist fails in a way that reads like a code bug.",
+      "_core_id_history": "AE422d9ptfvjj0PQ (Aug 2026, retired — carried the envelope bug) → SzWrUVB8WYv3sfE5 (2026-09-23)"
+    },
+    "meta_graph": {
+      "version": "v21.0",
+      "_rule": "Pinned like the model. Confirm the version the client's app actually exposes during the Business Suite session and update here only — never in a node."
+    }
+  },
+  "clients": {
+    "shalom-park": {
+      "name": "Shalom Park Estate",
+      "developer": "IFT Realty Ltd",
+      "status": "active",
+      "kb_file": "clients/shalom-park/kb.json",
+      "channels": {
+        "whatsapp": {
+          "enabled": false,
+          "webhook_path": "shalom-park-wa",
+          "token_env": "SHALOM_PARK_WABA_TOKEN",
+          "phone_id_env": "SHALOM_PARK_WABA_PHONE_ID",
+          "verify_env": "META_VERIFY_TOKEN_SHALOM_PARK",
+          "secret_env": "SHALOM_PARK_APP_SECRET",
+          "_status": "STRIPPED 2026-09-15 on ADEDAMOLA's instruction. Shalom Park ships as an INSTAGRAM-ONLY automation. This removes WABA creation, phone-number registration (and with it the risk of wiping a working handset), WhatsApp display-name review, message templates and the 24-hour window. Re-enable by flipping this boolean — the adapter, the normaliser and the tests are all still here and still green."
+        },
+        "instagram": {
+          "enabled": true,
+          "webhook_path": "shalom-park-ig",
+          "token_env": "SHALOM_PARK_IG_TOKEN",
+          "secret_env": "SHALOM_PARK_APP_SECRET",
+          "keyword_automation": true,
+          "_primary": "THE channel for this client. Comments and DMs, keyword fast lane in front of the brain."
+        },
+        "email": {
+          "enabled": false,
+          "address": "sales@shalomparknigeria.com",
+          "mailbox_env": "SHALOM_PARK_IMAP",
+          "_status": "Parked with WhatsApp — Instagram-only launch. Adapter (04) is built and tested; flip the boolean when wanted."
+        }
+      },
+      "escalation": {
+        "primary": {
+          "name": "Collins",
+          "whatsapp": "2348064834680",
+          "hours": "Mon-Fri 08:00-20:00"
+        },
+        "secondary": {
+          "name": "Mercy",
+          "whatsapp": "2349035508012",
+          "hours": "Weekends / evenings"
+        },
+        "supervisor": {
+          "name": "Tobi",
+          "whatsapp": "2347035461661",
+          "hours": "Overrides"
+        },
+        "unclaimed_alert_minutes": 15
+      },
+      "capabilities": {
+        "voice_notes": false,
+        "booking": false,
+        "document_vault": false,
+        "lead_scoring": false,
+        "followup_sequences": false,
+        "multilingual": false
+      },
+      "policy": {
+        "may_autosend_layout_map": false,
+        "may_autosend_title_pages": false,
+        "attribution_window_months": 12
+      },
+      "keywords": {
+        "enabled": true,
+        "rules_file": "clients/shalom-park/keywords.json",
+        "source_csv": "clients/shalom-park/keywords.csv",
+        "assistant_signature": "— Shalom Park Estate assistant",
+        "links": {
+          "mode": "none",
+          "_mode_options": "none = ship no link (default, safe) | human_line = point buyers at the sales WhatsApp in escalation.primary | concierge = point at Shalom Park's own Cloud API number once it is live",
+          "wa_e164": null,
+          "website": "https://shalomparknigeria.com",
+          "whatsapp_template": "https://wa.me/{{WA_E164}}?text=Hi%20Shalom%20Park%2C%20I%20saw%20your%20Instagram.%20Ref%3A%20{{CODE}}",
+          "_attribution": "The Ref code lands in the buyer's first WhatsApp message, so the ledger can tie a closed sale back to the exact Instagram keyword that produced it.",
+          "_mode_ruling": "mode stays \"none\" and that is now the CORRECT setting, not a placeholder. On an Instagram-only build the conversation converts inside the DM; bouncing a warm lead to a wa.me link leaks conversions and breaks attribution. Hot leads reach Collins through the ESCALATION (a human being messaged), which needs no WhatsApp API at all."
+        },
+        "instagram": {
+          "public_reply_enabled": true,
+          "private_replies_per_comment": 1,
+          "private_reply_window_days": 7,
+          "max_automated_dms_per_hour": 180,
+          "_limits": "Meta allows ONE private reply per comment inside a 7-day window and roughly 200 automated DMs an hour. 180 leaves headroom; overflow queues to a human instead of being dropped."
+        },
+        "readable_view": "clients/shalom-park/keywords.md",
+        "_surface": "IN-HOUSE ONLY. The CSV is the editable source of truth; keywords.md is the generated read-only view. No third-party spreadsheet holds client facts.",
+        "_copy_rule": "Sell, do not disclaim. No response volunteers what the assistant cannot do — nobody asked. Where a fact is not held, it becomes an offer (\"I will get you the breakdown in writing\"), never a confession. Every response closes on one question that moves the lead forward. Escalation still fires; the copy just stops announcing it."
+      },
+      "alerts": {
+        "email_to": [
+          "sales@shalomparknigeria.com"
+        ],
+        "email_cc": [
+          "aadamola@gmail.com"
+        ],
+        "from": "alerts@getpropel.tech",
+        "sms_provider": null,
+        "_ruling": "Email is the interim alert channel. It is HONESTLY WEAKER than a WhatsApp ping — a sales inbox gets checked, a phone buzzes. Stripping the WhatsApp API is what removed the strong option, and that is a real cost of the Instagram-only decision, not a detail. Upgrade path: a Nigerian SMS gateway (Termii / Africa's Talking) at roughly ₦4 a message — at 20 leads a day that is about ₦2,400/month, far inside the docs/07 tooling gate. Set sms_provider and the notifier sends hot leads by SMS and the rest by email.",
+        "_from_ruling": "Alerts send from alerts@getpropel.tech — a PROPEL-owned mailbox. Never the client's domain (@shalomparknigeria.com) and not a personal address: both erase Propel from the from-line, which is the point. Every alert is a receipt — 20 a day landing in their sales inbox saying 'your assistant found you a buyer' is the drumbeat the commission conversation rests on. Their mailbox is also revocable infrastructure, and sending AS their domain fails SPF/DKIM without their credentials. Set this up BEFORE go-live: changing a sender once alerts are flowing means the first ones from the new address can land in spam, and a missed lead alert is the failure this layer exists to prevent. SMTP host and port come from the Hostinger panel when the mailbox is created."
+      },
+      "_ledger": {
+        "enabled": true,
+        "note": "Every answered message writes a lead row and an append-only event. Commission on one unit is ₦5.5–6m; evidence that lives only in the client's infrastructure is not evidence."
+      }
+    },
+    "propel": {
+      "name": "Propel",
+      "developer": "Propel",
+      "status": "active",
+      "kb_file": "ops/concierge/propel-kb.json",
+      "channels": {
+        "whatsapp": {
+          "enabled": true,
+          "webhook_path": "propel-wa",
+          "token_env": "PROPEL_WABA_TOKEN",
+          "phone_id_env": "PROPEL_WABA_PHONE_ID",
+          "verify_env": "META_VERIFY_TOKEN_PROPEL",
+          "secret_env": "PROPEL_APP_SECRET"
+        },
+        "instagram": {
+          "enabled": true,
+          "webhook_path": "propel-ig",
+          "token_env": "PROPEL_IG_TOKEN",
+          "secret_env": "PROPEL_APP_SECRET"
+        },
+        "email": {
+          "enabled": true,
+          "address": "hello@getpropel.tech",
+          "mailbox_env": "PROPEL_IMAP"
+        }
+      },
+      "escalation": {
+        "primary": {
+          "name": "Adedamola",
+          "whatsapp": "2349019120968",
+          "hours": "Business hours"
+        },
+        "unclaimed_alert_minutes": 30
+      },
+      "capabilities": {
+        "voice_notes": false,
+        "booking": false,
+        "document_vault": false,
+        "lead_scoring": false,
+        "followup_sequences": false,
+        "multilingual": false
+      },
+      "policy": {
+        "attribution_window_months": 12
+      }
+    }
+  }
+}

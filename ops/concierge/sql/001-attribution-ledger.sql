@@ -4,9 +4,27 @@
 --
 -- Apply:  docker compose exec -T postgres psql -U propel -d n8n -f - < 001-attribution-ledger.sql
 
-BEGIN;
+-- No extensions required, deliberately.
+--
+-- This used to begin with CREATE EXTENSION pgcrypto. That is a privileged
+-- operation, and inside a transaction a privilege failure aborts everything
+-- after it -- so the whole script would roll back and psql would still exit 0.
+-- Silent, total, and it looks exactly like nothing ran.
+--
+-- gen_random_uuid() is built in from PostgreSQL 13 and sha256(bytea) from 11,
+-- so the extension was never actually needed. Hashes are byte-identical to the
+-- old digest() form, so existing rows still verify.
 
-CREATE EXTENSION IF NOT EXISTS pgcrypto;
+DO $guard$
+BEGIN
+    IF current_setting('server_version_num')::int < 130000 THEN
+        RAISE EXCEPTION 'PostgreSQL 13 or newer required (found %). gen_random_uuid() is built in from 13.',
+            current_setting('server_version');
+    END IF;
+END
+$guard$;
+
+BEGIN;
 
 CREATE TABLE IF NOT EXISTS lead (
     lead_id                UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -29,10 +47,27 @@ CREATE TABLE IF NOT EXISTS lead (
     conversion_status      TEXT        NOT NULL DEFAULT 'qualified'
         CHECK (conversion_status IN ('new','qualified','handed_off','closed_won','closed_lost','expired')),
     first_contact_at       TIMESTAMPTZ NOT NULL DEFAULT now(),
-    attribution_expires_at TIMESTAMPTZ NOT NULL
-        GENERATED ALWAYS AS (first_contact_at + INTERVAL '12 months') STORED,
+    -- Set by trigger, not GENERATED ALWAYS. PostgreSQL requires a generation
+    -- expression to be IMMUTABLE, and `timestamptz + interval '12 months'` is
+    -- only STABLE: adding months to a timestamptz depends on the session
+    -- TimeZone, so the same inputs can give different answers. A trigger has
+    -- no such requirement and the window stays guaranteed rather than merely
+    -- defaulted.
+    attribution_expires_at TIMESTAMPTZ NOT NULL DEFAULT (now() + INTERVAL '12 months'),
     UNIQUE (client_id, contact_hash)
 );
+
+CREATE OR REPLACE FUNCTION lead_set_expiry() RETURNS TRIGGER AS $$
+BEGIN
+    NEW.attribution_expires_at := NEW.first_contact_at + INTERVAL '12 months';
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+DROP TRIGGER IF EXISTS lead_expiry_trg ON lead;
+CREATE TRIGGER lead_expiry_trg
+    BEFORE INSERT OR UPDATE OF first_contact_at ON lead
+    FOR EACH ROW EXECUTE FUNCTION lead_set_expiry();
 
 CREATE INDEX IF NOT EXISTS lead_client_idx  ON lead (client_id, first_contact_at DESC);
 CREATE INDEX IF NOT EXISTS lead_expiry_idx  ON lead (attribution_expires_at);
@@ -62,13 +97,13 @@ BEGIN
      LIMIT 1;
 
     NEW.prev_hash := COALESCE(last_hash, 'GENESIS');
-    NEW.row_hash  := encode(digest(
+    NEW.row_hash  := encode(sha256(convert_to(
         NEW.prev_hash
         || COALESCE(NEW.lead_id::text,'')
         || NEW.event_type
         || COALESCE(NEW.payload::text,'{}')
         || to_char(NEW.occurred_at AT TIME ZONE 'UTC','YYYY-MM-DD"T"HH24:MI:SS.USOF'),
-        'sha256'), 'hex');
+        'UTF8')), 'hex');
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
@@ -109,3 +144,9 @@ SELECT l.lead_id,
  WHERE l.attribution_expires_at > now();
 
 COMMIT;
+
+-- Proof it worked. If this prints two rows, the ledger exists.
+\echo ''
+SELECT table_name AS created FROM information_schema.tables
+ WHERE table_schema='public' AND table_name IN ('lead','lead_event')
+ ORDER BY table_name;

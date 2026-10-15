@@ -131,7 +131,7 @@
 ## 8 · Find us
 
 **1. Where to find the business**
-> WhatsApp **+234 901 912 0968** · Instagram **@getpropel.ng** · **getpropel.tech**
+> WhatsApp **+234 901 912 0968** · Instagram **@getpropel.tech** · **getpropel.tech**
 
 **2. Services offered**
 > Four things. **Content and presence** — the posts, videos and property content that build a following worth having. **Lead campaigns** — paid advertising that produces enquiries, not impressions. **Project launches** — full campaigns for developers selling out an estate. And **Propel Concierge** — the 24/7 AI assistant answering buyers on WhatsApp and Instagram, which is where most people start with us.

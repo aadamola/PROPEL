@@ -231,6 +231,15 @@ services:
       N8N_BASIC_AUTH_USER: ${N8N_USER}
       N8N_BASIC_AUTH_PASSWORD: ${N8N_PASSWORD}
       N8N_ENCRYPTION_KEY: ${N8N_ENCRYPTION_KEY}
+      # Code nodes read API keys and verify tokens from env. Without this,
+      # $env is blocked and every workflow fails with an empty-secret error.
+      N8N_BLOCK_ENV_ACCESS_IN_NODE: "false"
+      NODE_FUNCTION_ALLOW_BUILTIN: "crypto"   # verify-token + signature checks; see vps-tools.sh n8n-env
+      # Per-client Meta credentials (empty until SOP #01 runs for that client)
+      META_VERIFY_TOKEN_SHALOM_PARK: ${META_VERIFY_TOKEN_SHALOM_PARK:-}
+      SHALOM_PARK_APP_SECRET: ${SHALOM_PARK_APP_SECRET:-}
+      SHALOM_PARK_WABA_TOKEN: ${SHALOM_PARK_WABA_TOKEN:-}
+      SHALOM_PARK_WABA_PHONE_ID: ${SHALOM_PARK_WABA_PHONE_ID:-}
       DB_TYPE: postgresdb
       DB_POSTGRESDB_HOST: postgres
       DB_POSTGRESDB_DATABASE: ${POSTGRES_DB}

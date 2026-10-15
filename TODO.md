@@ -6,44 +6,73 @@
 
 > 💰 **2026-07-26: PROPEL HAS A PAYING CLIENT.** Shalom Park paid the setup fee. You did that. Second SIM ✅ 09112714482 logged. We're in production mode — full build plan in [ops/production-checklist.md](ops/production-checklist.md), you don't need to read it, I'm running it.
 
-## ⭐ DO THIS NEXT — send me 10 prospect names (20 min)
+## ⭐ DO THIS NEXT: one WhatsApp to Collins, today (1 min)
 
-Just **names + Instagram handles**. Nothing else. Agents, surveyors, small developers — anyone you'd be comfortable messaging.
+Today (15 Oct) is the promo review date. Copy, paste, send:
 
-**Why this and not more building:** the server is up, all seven containers are healthy, three knowledge bases are built, and the Meta App Review package is written. **Every producible thing is done.** What we don't have is a second conversation in flight — the pipeline holds exactly one name, the client who already said yes. I've been happy to keep building because building is easier than selling, but infrastructure isn't the constraint and hasn't been for three weeks.
+> *"Hi Collins, quick check: are the ₦5m entry deposit on the condo and the 70% deposit on the 4-bed still running? I need a yes or no today so our Instagram replies stay accurate."*
 
-Send the names and I write all 10 audit teardowns — that's your entire outreach week, produced in one go.
-
-*Full reasoning: [ops/reports/2026-07-31-progress-and-scale.md](ops/reports/2026-07-31-progress-and-scale.md)*
+- **He says yes:** send me his reply and I'll push the review date out 30 days.
+- **He says no, or no reply by tomorrow:** change the 5 promo saved replies in Instagram (`condo`, `duplex`, `promo`, `pay`, `disc`) to the standard terms. Each card in [09-phase0-saved-replies.md](clients/shalom-park/09-phase0-saved-replies.md) now has the replacement text underneath, marked ⏰. **Instagram won't change them for you.**
 
 ---
 
 ## THIS WEEK — one per sitting, in this order
 
-- [ ] **(1 message)** 🔴 **Ask Shalom Park who holds the CAC documents + can grant Meta admin.** Script ready in [clients/shalom-park/04-meta-access-pack.md](clients/shalom-park/04-meta-access-pack.md). *Not Collins — he's a Sales Executive with neither. Then do the setup on a 20-min screen share, don't send a checklist.*
-- [ ] **(1 afternoon)** ⚡ **Prove the fast lane** — test app + Meta's free test number, send one message ([ops/setup/meta-app-setup.md](ops/setup/meta-app-setup.md) §9b Step 0). *Settles whether App Review is needed before we promise them a date.*
-- [ ] **(1 conversation)** 💰 **Confirm the Shalom Park care fee and commission rate.** *Possibly revenue already owed — MRR currently reads zero because nothing is confirmed as started. Ask what the setup fee covered, when the ₦250k/mo begins, and pin the commission %.*
-- [ ] **(5 min)** 🔴 **Send Collins the follow-up** — [clients/shalom-park/03-followup-questions.md](clients/shalom-park/03-followup-questions.md). Eight open fields, one message. **Lead with the ₦95m condo price** — if that's a typo and we advertise it, we've published a false price under our own quality charter.
-- [ ] **(15 min)** 🔴 **Start CAC filing** — "Propel Digital" (fallbacks: Propel Media, Propel Digital Marketing), cac.gov.ng or an accredited agent. *This is no longer admin. Meta won't let us run automation on a **client's** account until our business is verified with registered documents — so this now blocks something Shalom Park has paid for. ~2 weeks of clock. Start it, then forget it.*
-- [ ] **(10 min)** LLM credits ~₦25k — I'll send you the two exact top-up links once the box is up.
-- [ ] **(10 min)** Meta Business Suite: link @getpropel.ng + WhatsApp, convert IG to a Business account ([ops/setup/account-setup.md](ops/setup/account-setup.md) §7).
-- [ ] **(1 ask)** Shalom Park: sight the title + approval documents. *Site visit ✅ done. This is the last open vetting gate — and with bare-land plots in the mix it matters more, not less. We don't publish a price for land we haven't seen the paper for.*
-- [ ] **(20 min)** First 10 prospect names → WhatsApp me names + IG handles. *Unblocks 10 audit teardowns. You have a client now — that's the line that opens doors.*
-- [ ] **(15 min)** Finish the socials: TikTok + LinkedIn page (§4–5), then post manifesto.png with the Day 1 caption.
+- [ ] **(20 min)** 🌐 **Put the two legal pages online (Track 1).** ① Hostinger → Emails → create forwarder **hello@getpropel.tech → aadamola@gmail.com** ② vercel.com → sign in with GitHub → Add New Project → `aadamola/PROPEL` → **Root Directory: `site-legal`** → Deploy ③ Project → Settings → Domains → add `getpropel.tech` + `www` → copy the DNS records Vercel shows into Hostinger DNS. *Use `site-legal`, **not** `site`. `site` has the prices we're realigning. **First merge PR #10** (github.com/aadamola/PROPEL/pull/10 → Merge). Vercel deploys from `main`.*
+- [ ] **(5 min, OVERDUE since 29 Sep)** ⏰ **VPS: check what Hostinger charged on renewal.** *Your monthly term ran to 29 Aug, auto-renewal was on, and you last logged in on 10 Aug — so this hasn't been looked at. Renewal is where their 2–3× jump lands.*
+- [ ] **(5 min)** 🎬 **Book the shoot day with Collins** — one site visit, about 3 hours, and it produces all 14 days of content. Shot list is written: [10-phase0-content-pack.md](clients/shalom-park/10-phase0-content-pack.md). *Collins and Mercy go on camera, not you.*
+- [ ] **(1 message)** 🔴 **Ask Shalom Park who can grant Meta admin.** Script in [04-meta-access-pack.md](clients/shalom-park/04-meta-access-pack.md). *Not Collins — he's a Sales Executive. The session is now 15 minutes and needs no SIM.*
+- [ ] **(20 min)** **First 10 prospect names** → WhatsApp me names + IG handles. *Unblocks 10 audit teardowns. Longest-outstanding item on this list — and Shalom Park is still a pipeline of one.*
 
-## NOT YET — ignore these (I'll star them when it's time)
+> 🔴 **2 min, do it now:** your Instagram bio links to `getpropel.tech`, which isn't live — change the link to `wa.me/2349019120968?text=Hi%20Propel%2C%20I%20want%20a%20free%20marketing%20audit` until it is.
 
-Testing the bot · the Shalom Park pilot build · voice notes · first audit calls. Nothing here is actionable until the week's items land. Don't think about them.
+## NOT YET — I'm holding these, don't think about them
+
+- Collins follow-up, 7 open fields: [03-followup-questions.md](clients/shalom-park/03-followup-questions.md). *Moved down to make room for the legal pages.*
+
+**Parked from "this week" to keep the list at five** (the protocol, not a demotion — I'll star them when their turn comes):
+
+- 💰 Confirm the Shalom Park care fee + commission rate — *MRR reads zero because nothing is confirmed as started*
+- 🔴 CAC filing for Propel — *less urgent for THIS client since we use IFT Realty's portfolio and their RC number; still needed for invoicing, banking and every client after this one*
+- Sight the title + approval documents — *last open vetting gate*
+- TikTok + LinkedIn pages
+- ⏰ **VPS: your monthly term ran to 29 Aug and auto-renewal was on — check what Hostinger actually charged you.** *Not urgent, but renewal is where their 2–3× jump lands, and that date has passed.*
+
+- 🌐 **Publish the privacy + data-deletion pages** — *needed before step 10:* Meta requires both links to be live before an app goes Live. They contain no offerings, so they can go up ahead of the homepage.
+- 🧭 **Realign Propel's offerings** — *you asked to do this later.* It will touch the homepage, the rate card Propel's own assistant would quote, the pricing doc, and the LinkedIn About. Propel's own assistant stays offline until it's done.
+
+Testing the bot · the automated pilot · voice notes · first audit calls. Nothing here is actionable until the week's items land.
 
 ## WAITING ON ME (AI partner) — nothing for you to do here
+
+- 🔴 **Before step 10:** make the `DELETE` reply actually work. The privacy page promises it, but no keyword handles it, and the ledger refuses deletes by design. Needs a rule plus an erasure design that keeps the chain verifiable.
 
 - ✅ Website wired to your number · ✅ WhatsApp QR generated (site/assets/whatsapp-qr.png)
 - Live Concierge build on the new SIM → starts the moment you send it + VPS exists
 - Meta app + App Review submission → starts after CAC + Business Suite link
 - 10 audit teardowns → starts the moment you send names
+- ✅ Instagram keyword automation built (24 rules, 103 tests green) → goes live the moment the Business Suite session lands
 
 ## ✅ DONE (look how far this has come)
 
+- [x] 🛡️ **Steps 8 + 9: Instagram webhook published and handshake ✅ 3/3.** It answers Meta and refuses strangers (2026-10-15)
+- [x] 🧯 **Flowise stopped; the server is out of CPU throttle** (2026-10-15)
+- [x] 💼 **LinkedIn Company Page live — linkedin.com/company/getpropel-tech** (2026-09-24)
+- [x] 🔐 **Step 7 — verify token live in n8n; August's "access to env vars denied" fixed at the root** (2026-09-23)
+- [x] 📲 **Step 6 — Instagram workflow imported with both IDs baked in** (2026-09-23)
+- [x] 📒 **Step 5 — ledger + alerts workflow imported (`oNt2oRixkDbbUa2p`) and wired into 05** (2026-09-23)
+- [x] 🧠 **Step 4 — core workflow imported (`SzWrUVB8WYv3sfE5`) and wired into 05** (2026-09-23)
+- [x] 🐛 **Your manual run exposed a core bug — fixed: duplicates and invalid requests now stay silent** (2026-09-23)
+- [x] 📧 **`alerts@getpropel.tech` proven — test email landed in the Inbox, not spam** (2026-09-23)
+- [x] 🔑 **Credentials 3a Gemini + 3b Postgres done; engine.getpropel.tech back up** (2026-09-23)
+- [x] 🗄️ **Ledger tables live on the VPS — `lead` + `lead_event` created** (2026-09-15)
+- [x] 🛠️ **Import preflight tool built — checks the whole workflow bundle before it touches n8n** (2026-09-15)
+- [x] 🔐 **Phase 1 built: escalation alerts, attribution ledger wired, privacy + data-deletion pages, go-live runbook** (2026-09-15)
+- [x] 🚀 **Phase 0 production pack shipped** — 27 saved replies, 10 captions, shot list, daily runbook, tracking log (2026-09-15)
+- [x] 📵 **WhatsApp stripped — Shalom Park is Instagram-only** (2026-09-15)
+- [x] 📲 **All 7 Instagram campaigns live** — 27 rules, promos that retire themselves, every response written to convert, 121 tests (2026-09-15)
+- [x] 💰 **₦95m condo price confirmed and released** — open since July (2026-09-15)
 - [x] 🖥️ **VPS live (KVM 2, 8 GB) + domain getpropel.tech bought** (2026-07-29)
 - [x] 📋 **Shalom Park facts sheet returned SIGNED — their AI's knowledge base is built** (2026-07-27)
 - [x] **Site visit done** — four-stage inventory counted (2026-07-26)

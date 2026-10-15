@@ -19,7 +19,7 @@ Two gates survive the payment, because money doesn't clear them:
 
 | Instance | Runs on | Purpose | Status |
 |---|---|---|---|
-| **Propel's own Concierge** | our WhatsApp + @getpropel.ng | Answers our real prospects 24/7 — and is itself the proof we sell | Phase 1 |
+| **Propel's own Concierge** | our WhatsApp + @getpropel.tech | Answers our real prospects 24/7 — and is itself the proof we sell | Phase 1 |
 | **Apex Gardens demo** | our sandbox number | The estate Shalom Park messages *from their own phone* in the meeting | Phase 2 |
 | **Shalom Park deployment** | their assets | **The paid build — client waiting** | Phase 3 — **gated on facts sheet + vetting + App Review** |
 
@@ -51,7 +51,7 @@ Verified July 2026 — every one of these is a thing cheap competitors over-prom
 - [x] **(A)** ✅ Domain **getpropel.tech** bought (Hostinger, 2026-07-29).
 - [x] **(A)** ✅ **Hostinger KVM 2 LIVE** — 72.62.213.187, Manchester UK, Ubuntu 24.04, 8 GB. *Monthly term, expires 2026-08-29 — review before renewal (vps-setup.md §0).*
 - [ ] **(A · 10 min · ~₦25k)** LLM credits per docs/13 §3: Claude Haiku 4.5 (~$12) + DeepSeek V4 Flash (~$5). I hand over exact top-up links.
-- [ ] **(A · 10 min)** Meta Business Suite: link @getpropel.ng + WhatsApp; convert IG to Business account.
+- [ ] **(A · 10 min)** Meta Business Suite: link @getpropel.tech + WhatsApp; convert IG to Business account.
 - [x] **(B)** ✅ **Meta app runbook + App Review package written** — `ops/setup/meta-app-setup.md`: dependency chain, app/product/webhook config, IG prerequisites, permission map, and the full **App Review submission text** (use-case copy, screencast script, reviewer test instructions, rejection-risk table). Webhook-verification workflow ready to import: `ops/concierge/workflows/`.
 - [ ] **(A)** Create the Meta app + register 09112714482 + set webhooks (`ops/setup/meta-app-setup.md` §9).
 - [ ] **(A · afternoon)** ⚡ **PROVE THE FAST LANE:** create a test app inside a client-owned portfolio and send one message. If self-integration works without App Review, Shalom Park's build stops waiting on our CAC (`meta-app-setup.md` §9b). **Verify before promising them any date.**
@@ -70,10 +70,12 @@ Verified July 2026 — every one of these is a thing cheap competitors over-prom
 - [ ] **(B)** **Pin every image tag.** The stack ships on `:latest`, which means an unattended pull can change production under us. Pin to the digests actually running once the box is stable.
 - [x] **(B)** ✅ **Propel's own KB built** — `ops/concierge/propel-kb.json`: full rate card from docs/03, the free-audit offer, differentiators, honesty rules (no invented results), 6 must-not-say topics, 5 escalation triggers, AI disclosure and the never-claim-chartered guard.
 - [x] **(B)** ✅ **Attribution ledger designed + SQL written** — `ops/concierge/attribution-ledger.md` + `sql/001-attribution-ledger.sql`: append-only, hash-chained, DB-enforced immutability, 12-month window, hashed-contact export view, NDPA position. **Protects a ₦5.5m–₦6m per-unit commission claim even if the client revokes our Meta access.**
-- [ ] **(B)** Wire the flow: IG comment → one private reply → WhatsApp → qualify → book audit → **log to the ledger** → hand to ADEDAMOLA.
+- [x] **(B)** ✅ **Multi-channel architecture built and tested** — client registry, channel normaliser, shared CORE sub-workflow, email channel (IMAP/SMTP). WhatsApp + Instagram + Email collapse to one envelope; **61 tests pass with no API key** (`node tools/test-all.js`). Add-on hooks provisioned (voice notes, booking, doc vault, lead scoring, follow-ups) as registry flags. Design: `ops/concierge/architecture.md`.
+- [ ] **(B)** Instagram adapter (same pattern as email; normaliser already handles DM + comment).
+- [ ] **(B)** Reply dispatchers: WhatsApp Cloud API send + escalation notifier to the named human.
 - [ ] **(B)** `tools/verify-ledger.js` — recompute the chain, exit non-zero on a break.
 - [ ] **(B)** Monthly reconciliation workflow + client-facing export. *This is what actually collects commission — the habit, not the clause.*
-- [ ] **(B)** Guardrails live: retrieval-first, no invented facts, escalation template, kill switch, AI disclosure in first message, NDPA privacy line.
+- [x] **(B)** ✅ **Guardrails built and unit-tested** — `ops/concierge/system-prompt.md` + Guardrails node: banned-topic sweep, ungrounded-claim detection via `grounded_in` citations, unparseable-output containment, empty-reply guard. **`node tools/test-guardrails.js` → 14/14**, no API key required. Two real regex bugs caught by the tests before shipping.
 - [ ] **(B)** **Run the binding QA suite** (`sandbox/apex-gardens/qa-tests.json` — injection / grounding / policy). *Nothing talks to a human until it passes clean.*
 - [ ] **(A · 20 min)** Ear test: message it like a hostile buyer. Try to break it. Tell me what felt wrong.
 - [ ] **(A)** Go live on our own number. **Now every prospect conversation is also a demo.**

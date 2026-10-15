@@ -44,4 +44,4 @@ Propel is a remote-first digital marketing agency serving realtors, estate surve
 
 ## Status
 
-**PRODUCTION MODE with a paying client** (since 2026-07-26). Propel is public — WhatsApp +234 901 912 0968 · Instagram [@getpropel.ng](https://instagram.com/getpropel.ng) · domain **getpropel.tech** · live VPS running the automation stack. First client: Shalom Park Estate (IFT Realty Ltd) — signed facts sheet in, knowledge base built, Concierge deployment in progress. Live track: [ops/production-checklist.md](ops/production-checklist.md) · current state: [CLAUDE.md](CLAUDE.md) · decision log: [CHANGELOG.md](CHANGELOG.md).
+**PRODUCTION MODE with a paying client** (since 2026-07-26). Propel is public — WhatsApp +234 901 912 0968 · Instagram [@getpropel.tech](https://instagram.com/getpropel.tech) · domain **getpropel.tech** · live VPS running the automation stack. First client: Shalom Park Estate (IFT Realty Ltd) — signed facts sheet in, knowledge base built, Concierge deployment in progress. Live track: [ops/production-checklist.md](ops/production-checklist.md) · current state: [CLAUDE.md](CLAUDE.md) · decision log: [CHANGELOG.md](CHANGELOG.md).

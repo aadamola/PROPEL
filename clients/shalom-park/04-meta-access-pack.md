@@ -67,6 +67,8 @@ Assign **only** what's needed:
 
 *Done when: Propel shows under Partners.*
 
+*Client-facing walkthrough of this step (no email needed, permission table, troubleshooting): `ops/templates/meta-partner-access-guide.md`.*
+
 **Say this out loud on the call, because it's true and it's the thing that makes them comfortable:** they own everything, we're a partner with scoped access, and removing us is two taps in this same screen.
 
 ### 5. WhatsApp number decision (make it on the call)

@@ -2,6 +2,11 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-10-15 — Meta partner-access guide (client-facing)
+
+- **New template: `ops/templates/meta-partner-access-guide.md`.** Plain-language walkthrough for any client to add Propel as a **Partner** in their Meta Business account using Propel's Business ID — **no email, no password**. Covers the click-path, a least-privilege permission table (Instagram full control · Page messages · WhatsApp full control · ad account only if ads are in scope), how to verify, how to remove us, troubleshooting, and a WhatsApp-ready short version. Generalises step 4 of the Shalom Park access pack; linked from there and from the onboarding checklist.
+- **Waiting on ADEDAMOLA:** Propel's own Business portfolio ID (business.facebook.com → Settings → Business info) to fill `[PROPEL BUSINESS ID]` before first send. Screen share remains the recommended delivery for Shalom Park.
+
 ## 2026-07-31 (evening) — Fast lane built out: access pack, attribution ledger, proof test
 
 - **The cheap test that settles the unknown (`meta-app-setup.md` §9b Step 0):** create an app in an unverified portfolio, use Meta's free instant test number, send and receive. Three readable outcomes — self-integration confirmed / verification is the gate but not review / review required regardless. **One afternoon instead of three weeks of client expectations built on a guess.**

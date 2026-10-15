@@ -17,7 +17,7 @@ Package: [ ] · Start date: [ ] · Account lead: [ ]
 - [ ] WhatsApp group created: client + account lead + producer
 
 ## Day 1–2 — Access & assets
-- [ ] IG/TikTok/FB access granted (Business Manager partner access — never passwords where avoidable)
+- [ ] IG/TikTok/FB access granted (Business Manager partner access via Propel's Business ID — never passwords; send `meta-partner-access-guide.md`)
 - [ ] Logo, brand colors, headshots, past best-performing content collected
 - [ ] Listing facts sheets received for active properties (title status client-warranted in writing)
 - [ ] Ad account linked (Leads clients) — client pays platforms directly

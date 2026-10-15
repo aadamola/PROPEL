@@ -88,7 +88,7 @@ Instagram has **Saved Replies** built into every Business account: Settings → 
 cd /opt/propel
 bash ops/setup/apply-client-ledger.sh shalom-park
 ```
-Then import `05-channel-instagram.json` into n8n and **Activate it**. Meta tests the webhook the second you click Verify, and an inactive workflow returns a 404 that reads like a server fault.
+Then import `05-channel-instagram-shalom-park.json` into n8n and **Activate it**. Meta tests the webhook the second you click Verify, and an inactive workflow returns a 404 that reads like a server fault.
 
 ### Opening line for the call
 

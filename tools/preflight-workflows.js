@@ -11,7 +11,8 @@
  */
 const fs = require('fs');
 const path = require('path');
-const DIR = path.join(__dirname, '../ops/concierge/workflows');
+const ROOT = process.env.PROPEL_ROOT || path.join(__dirname, '..');
+const DIR = path.join(ROOT, 'ops/concierge/workflows');
 
 const files = fs.readdirSync(DIR).filter(f => f.endsWith('.json')).sort();
 const wf = {};
@@ -22,7 +23,7 @@ for (const f of files) wf[f] = JSON.parse(fs.readFileSync(path.join(DIR, f), 'ut
 // where require always works -- so this gap only showed up on the server,
 // as a handshake that answered 200 to everyone. Read the allow-list from the
 // override that vps-tools.sh actually writes, not from a copy of it.
-const TOOLS = fs.readFileSync(path.join(__dirname, '../ops/setup/vps-tools.sh'), 'utf8');
+const TOOLS = fs.readFileSync(path.join(ROOT, 'ops/setup/vps-tools.sh'), 'utf8');
 const allowLine = TOOLS.match(/NODE_FUNCTION_ALLOW_BUILTIN:\s*"([^"]*)"/);
 const ALLOWED = new Set(allowLine ? allowLine[1].split(',').map(x => x.trim()).filter(Boolean) : []);
 
@@ -118,7 +119,7 @@ for (const [file, w] of Object.entries(wf)) {
   for (const n of w.nodes) {
     if (!n.type.includes('executeWorkflow') || n.type.includes('Trigger')) continue;
     const id = n.parameters.workflowId?.value;
-    const REG = JSON.parse(fs.readFileSync(path.join(__dirname, '../ops/concierge/clients.json'), 'utf8'))._meta.n8n;
+    const REG = JSON.parse(fs.readFileSync(path.join(ROOT, 'ops/concierge/clients.json'), 'utf8'))._meta.n8n;
     const wants = id === REG.core_workflow_id ? /CORE/
                 : (id === REG.ledger_workflow_id || /REPLACE_WITH_LEDGER/.test(id)) ? /Ledger/ : null;
     const target = wants && Object.entries(wf).find(([, t]) =>
@@ -129,6 +130,25 @@ for (const [file, w] of Object.entries(wf)) {
     const sent = Object.keys(n.parameters.workflowInputs?.value || {});
     const dropped = sent.filter(k => !declared.has(k));
     if (dropped.length) P(file, `"${n.name}" sends [${dropped.join(', ')}] but ${target[0]} does not declare them — they are silently dropped`);
+  }
+}
+
+// 9. The registry itself. A client switched to "active" with a hole in its row
+//    fails at the worst moment: a buyer's message with nobody to tell.
+const REGISTRY = JSON.parse(fs.readFileSync(path.join(ROOT, 'ops/concierge/clients.json'), 'utf8'));
+for (const [slug, c] of Object.entries(REGISTRY.clients)) {
+  if (c.status !== 'active') { N(`client "${slug}" is ${c.status || 'missing a status'} — not built, not answering`); continue; }
+  const at = `clients.json → ${slug}`;
+  if (!c.kb_file || !fs.existsSync(path.join(ROOT, c.kb_file))) P(at, `active but its kb_file (${c.kb_file}) does not exist`);
+  const a = c.alerts || {};
+  if (!a.from) P(at, 'active with no alerts.from — lead alerts would have no sender');
+  if (!(a.email_to || []).length) P(at, 'active with no alerts.email_to — a buyer needing a human would reach nobody');
+  if (!(c.escalation && c.escalation.primary && c.escalation.primary.name)) P(at, 'active with no escalation.primary — nobody is on duty');
+  const ig = c.channels && c.channels.instagram;
+  if (ig && ig.enabled) {
+    const f = `05-channel-instagram-${slug}.json`;
+    if (!wf[f]) P(at, `Instagram enabled but ${f} was not built — run node tools/build-workflows.js`);
+    if (c.keywords && c.keywords.enabled && !fs.existsSync(path.join(ROOT, c.keywords.rules_file))) P(at, `keywords enabled but ${c.keywords.rules_file} is missing — run node tools/build-keywords.js`);
   }
 }
 

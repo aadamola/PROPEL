@@ -160,10 +160,10 @@ Attach **Propel Postgres** to both Postgres nodes and **Propel SMTP** to `Alert 
 
 📋 **Copy its id from the URL.**
 
-### Step 6 — import `05-channel-instagram.json` and wire the two ids
+### Step 6 — import `05-channel-instagram-shalom-park.json` and wire the two ids
 
 ```
-https://raw.githubusercontent.com/aadamola/PROPEL/claude/propel-realestate-marketing-plan-wxjj3x/ops/concierge/workflows/05-channel-instagram.json
+https://raw.githubusercontent.com/aadamola/PROPEL/claude/propel-realestate-marketing-plan-wxjj3x/ops/concierge/workflows/05-channel-instagram-shalom-park.json
 ```
 
 **Both sub-workflow IDs are already baked in** (sent back after steps 4 and 5, written to `clients.json`, rebuilt). Just confirm:

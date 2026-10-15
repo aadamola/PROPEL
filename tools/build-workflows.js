@@ -8,8 +8,10 @@
  */
 const fs = require('fs');
 const path = require('path');
-const R = p => fs.readFileSync(path.join(__dirname, '..', p), 'utf8');
-const W = (p, o) => fs.writeFileSync(path.join(__dirname, '..', p), JSON.stringify(o, null, 2) + '\n');
+// PROPEL_ROOT lets the onboarding rehearsal test build a throwaway copy.
+const ROOT = process.env.PROPEL_ROOT || path.join(__dirname, '..');
+const R = p => fs.readFileSync(path.join(ROOT, p), 'utf8');
+const W = (p, o) => fs.writeFileSync(path.join(ROOT, p), JSON.stringify(o, null, 2) + '\n');
 
 // --- tested sources ------------------------------------------------------
 const normalizeSrc = R('ops/concierge/lib/normalize.js')
@@ -21,10 +23,12 @@ const guardSrc = JSON.parse(R('ops/concierge/workflows/02-concierge-brain-gemini
   .nodes.find(n => n.name === 'Guardrails').parameters.jsCode;
 
 const registry = JSON.parse(R('ops/concierge/clients.json'));
-const kbs = {
-  'shalom-park': JSON.parse(R('clients/shalom-park/kb.json')),
-  'propel':      JSON.parse(R('ops/concierge/propel-kb.json'))
-};
+// Every client's KB comes from its registry row -- adding a client is a row,
+// never an edit here. Clients still onboarding are skipped: the CORE refuses
+// them anyway until their status is "active".
+const kbs = Object.fromEntries(Object.entries(registry.clients)
+  .filter(([, c]) => c.kb_file && c.status === 'active')
+  .map(([slug, c]) => [slug, JSON.parse(R(c.kb_file))]));
 
 const code = (id, name, pos, js) => ({
   parameters: { jsCode: js }, type: 'n8n-nodes-base.code', typeVersion: 2, position: pos, id, name
@@ -279,16 +283,27 @@ const keywordsSrc = R('ops/concierge/lib/keywords.js')
   .replace(/^'use strict';$/m, '')
   .replace(/^module\.exports[\s\S]*$/m, '');
 
-const kwTable = JSON.parse(R('clients/shalom-park/keywords.json'));
-const spKw = registry.clients['shalom-park'].keywords;
 const GRAPH = registry._meta.meta_graph.version;
+const SLUG_ENV = slug => slug.toUpperCase().replace(/-/g, '_');
+const IG_DEFAULT_LIMITS = { public_reply_enabled: true, private_replies_per_comment: 1,
+  private_reply_window_days: 7, max_automated_dms_per_hour: 180 };
+
+function buildInstagram(slug, client) {
+const ig = client.channels.instagram;
+const kwCfg = client.keywords || {};
+const kwTable = kwCfg.enabled ? JSON.parse(R(kwCfg.rules_file)) : { rules: [] };
+const spKw = { assistant_signature: kwCfg.assistant_signature || '', links: kwCfg.links || { mode: 'none' },
+               instagram: kwCfg.instagram || IG_DEFAULT_LIMITS };
+const VERIFY_ENV = ig.verify_env || ('META_VERIFY_TOKEN_' + SLUG_ENV(slug));
+const SECRET_ENV = ig.secret_env || (SLUG_ENV(slug) + '_APP_SECRET');
+const HOOK = ig.webhook_path || (slug + '-ig');
 
 const igHandshake = `
 // Constant-time compare: the verify token is the only thing standing
 // between this public URL and anyone subscribing their own Meta app to it.
 const crypto = require('crypto');
 const q = $input.first().json.query || {};
-const expected = String($env.META_VERIFY_TOKEN_SHALOM_PARK || '');
+const expected = String($env.${VERIFY_ENV} || '');
 const got = String(q['hub.verify_token'] || '');
 const ok = expected.length > 0 && got.length === expected.length &&
   crypto.timingSafeEqual(Buffer.from(got), Buffer.from(expected));
@@ -304,7 +319,7 @@ const igVerifySig = `
 // the attribution ledger our commission claims rest on.
 const crypto = require('crypto');
 const item = $input.first();
-const secret = String($env.SHALOM_PARK_APP_SECRET || '');
+const secret = String($env.${SECRET_ENV} || '');
 const header = String(item.json.headers?.['x-hub-signature-256'] || '');
 const raw = item.binary?.data ? Buffer.from(item.binary.data.data, 'base64') : Buffer.from(JSON.stringify(item.json.body || {}));
 const expected = 'sha256=' + crypto.createHmac('sha256', secret).update(raw).digest('hex');
@@ -317,7 +332,7 @@ const igNormalize = `
 ${normalizeSrc}
 const payload = $input.first().json;
 if (!payload.ok) return [{ json: envelope({ channel: 'instagram_dm', is_actionable: false, skip_reason: 'bad_signature' }) }];
-return [{ json: normalize('instagram', payload.body, 'shalom-park') }];
+return [{ json: normalize('instagram', payload.body, ${JSON.stringify(slug)}) }];
 `;
 
 
@@ -345,7 +360,7 @@ return [{ json: env }];
 const igFastLane = `
 ${keywordsSrc}
 
-// The keyword table, compiled from clients/shalom-park/keywords.csv.
+// The keyword table, compiled from ${kwCfg.source_csv || '(no keyword table: every message goes to the brain)'}.
 // Rebuild with: node tools/build-keywords.js && node tools/build-workflows.js
 const TABLE = ${JSON.stringify(kwTable)};
 const CFG = ${JSON.stringify({ assistant_signature: spKw.assistant_signature, links: spKw.links })};
@@ -385,7 +400,7 @@ return [{ json: {
   intent: lane.intent || '',
   matched_phrase: lane.matched_phrase || '',
   text: env.text,
-  client_id: 'shalom-park',
+  client_id: ${JSON.stringify(slug)},
   channel: env.channel,
   contact_id: env.contact_id,
   contact_handle: env.contact_handle,
@@ -451,21 +466,21 @@ return [{ json: { ...item, send: true } }];
 const GRAPH_BASE = 'https://graph.facebook.com/' + GRAPH;
 
 const instagram = {
-  name: 'Propel Concierge — Instagram channel (keyword fast lane + brain)',
+  name: 'Propel Concierge — Instagram — ' + (client.name || slug),
   nodes: [
-    { parameters: { httpMethod: 'GET', path: 'shalom-park-ig', responseMode: 'responseNode', options: {} },
+    { parameters: { httpMethod: 'GET', path: HOOK, responseMode: 'responseNode', options: {} },
       type: 'n8n-nodes-base.webhook', typeVersion: 2, position: [-700, -180],
-      id: 'ig-verify', name: 'IG webhook (verify)', webhookId: 'shalom-park-ig-verify' },
+      id: 'ig-verify', name: 'IG webhook (verify)', webhookId: HOOK + '-verify' },
     code('ig-handshake', 'Handshake', [-480, -180], igHandshake),
     { parameters: { respondWith: 'text', responseBody: '={{ $json.body }}',
         options: { responseCode: '={{ $json.status }}' } },
       type: 'n8n-nodes-base.respondToWebhook', typeVersion: 1.1, position: [-260, -180],
       id: 'ig-respond-challenge', name: 'Respond challenge' },
 
-    { parameters: { httpMethod: 'POST', path: 'shalom-park-ig', responseMode: 'responseNode',
+    { parameters: { httpMethod: 'POST', path: HOOK, responseMode: 'responseNode',
         options: { rawBody: true } },
       type: 'n8n-nodes-base.webhook', typeVersion: 2, position: [-700, 60],
-      id: 'ig-events', name: 'IG webhook (events)', webhookId: 'shalom-park-ig-events' },
+      id: 'ig-events', name: 'IG webhook (events)', webhookId: HOOK + '-events' },
     code('ig-sig', 'Verify signature', [-480, 60], igVerifySig),
     { parameters: { respondWith: 'text', responseBody: '={{ $json.ok ? "EVENT_RECEIVED" : "Forbidden" }}',
         options: { responseCode: '={{ $json.status }}' } },
@@ -492,7 +507,7 @@ const instagram = {
     code('ig-guard', 'Guardrails', [1060, -60], guardSrc),
     { parameters: { workflowId: { __rl: true, value: registry._meta.n8n.core_workflow_id, mode: 'id' },
         workflowInputs: { mappingMode: 'defineBelow', value: {
-          client_id: '=shalom-park', channel: '={{ $json.channel }}',
+          client_id: '=' + slug, channel: '={{ $json.channel }}',
           provider_message_id: '={{ $json.provider_message_id }}', contact_id: '={{ $json.contact_id }}',
           contact_hash: '={{ $json.contact_hash }}', display_name: '={{ $json.display_name }}',
           text: '={{ $json.text }}', thread_ref: '={{ $json.thread_ref }}' } }, options: {} },
@@ -581,9 +596,14 @@ const instagram = {
   },
   settings: { executionOrder: 'v1' }, pinData: {}
 };
-W('ops/concierge/workflows/05-channel-instagram.json', instagram);
+const file = `05-channel-instagram-${slug}.json`;
+W('ops/concierge/workflows/' + file, instagram);
+console.log('built: ' + file);
+}
 
-console.log('built: 05-channel-instagram.json');
+for (const [slug, c] of Object.entries(registry.clients)) {
+  if (c.status === 'active' && c.channels && c.channels.instagram && c.channels.instagram.enabled) buildInstagram(slug, c);
+}
 
 // =========================================================================
 // 06 — LEDGER + ESCALATION (called for EVERY answered message)
@@ -596,7 +616,6 @@ const oncallSrc = R('ops/concierge/lib/oncall.js')
   .replace(/^'use strict';$/m, '')
   .replace(/^module\.exports[\s\S]*$/m, '');
 
-const spAlerts = registry.clients['shalom-park'].alerts;
 
 const composeAlert = `
 ${oncallSrc}
@@ -644,6 +663,12 @@ return [{ json: {
   assigned_sales_rep: who.name || '',
   on_duty: who,
   payload_json: JSON.stringify(payload),
+  // Each client's alerts go to THAT client's team. Missing addresses stay
+  // empty on purpose: the email node then fails red instead of sending one
+  // client's buyer to another client's inbox.
+  alert_from: (client.alerts && client.alerts.from) || '',
+  alert_to:   ((client.alerts && client.alerts.email_to) || []).join(','),
+  alert_cc:   ((client.alerts && client.alerts.email_cc) || []).join(','),
   alert_subject: (hot ? '[HOT] ' : '') + 'Instagram lead — ' + (client.name || inp.client_id) + ' — @' + (inp.contact_handle || inp.contact_id || ''),
   alert_body: alert
 }}];
@@ -695,9 +720,9 @@ const ledger = {
           leftValue: "={{ $('Resolve on-duty + compose').first().json.notify }}", rightValue: '' } ], combinator: 'and' }, options: {} },
       type: 'n8n-nodes-base.if', typeVersion: 2.2, position: [180, 0], id: 'led-notify', name: 'Tell a human?' },
     { parameters: {
-        fromEmail: spAlerts.from,
-        toEmail: spAlerts.email_to.join(','),
-        ccEmail: spAlerts.email_cc.join(','),
+        fromEmail: "={{ $('Resolve on-duty + compose').first().json.alert_from }}",
+        toEmail: "={{ $('Resolve on-duty + compose').first().json.alert_to }}",
+        ccEmail: "={{ $('Resolve on-duty + compose').first().json.alert_cc }}",
         subject: "={{ $('Resolve on-duty + compose').first().json.alert_subject }}",
         emailFormat: 'text',
         message: "={{ $('Resolve on-duty + compose').first().json.alert_body }}",

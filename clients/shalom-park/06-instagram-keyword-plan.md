@@ -141,7 +141,7 @@ Everything is in the repo. One file is edited by hand; the rest is generated:
 ```
 Edit clients/shalom-park/keywords.csv
 node tools/build-keywords.js      # lint + compile -> keywords.json + keywords.md
-node tools/build-workflows.js     # embed into 05-channel-instagram.json
+node tools/build-workflows.js     # embed into 05-channel-instagram-shalom-park.json
 node tools/test-all.js            # 121 tests
   ↓  re-paste the workflow into n8n
 ```
@@ -162,7 +162,7 @@ node tools/test-all.js            # 121 tests
 | `clients/shalom-park/keywords.md` | Readable view. Generated; do not hand-edit |
 | `clients/shalom-park/keywords.json` | Compiled. Generated; do not hand-edit |
 | `ops/concierge/lib/keywords.js` | The matcher — tokenised, emoji-safe, pidgin-aware, promo-aware |
-| `ops/concierge/workflows/05-channel-instagram.json` | The adapter: verify → normalise → fast lane → guardrail → send |
+| `ops/concierge/workflows/05-channel-instagram-shalom-park.json` | The adapter: verify → normalise → fast lane → guardrail → send |
 | `tools/build-keywords.js` | Compiler + linter |
 | `tools/test-keywords.js` | 48 rule tests |
 | `tools/test-ig-workflow.js` | 10 end-to-end tests against the shipped workflow |

@@ -39,6 +39,18 @@ esac
 
 run_node(){ docker run --rm -v "$REPO":/app -w /app "$NODE_IMAGE" node "$@"; }
 
+# Every client's webhook secrets, read from .env -- never a hardcoded list, so
+# onboarding client #2 needs no edit here. A verify token implies an app
+# secret of the same client, listed even before it exists so that adding it
+# later only needs a restart.
+client_env_vars(){
+  local envf="$STACK/.env"
+  [ -f "$envf" ] || return 0
+  { grep -oE '^(META_VERIFY_TOKEN_[A-Z0-9_]+|[A-Z0-9_]+_APP_SECRET)=' "$envf" | tr -d '='
+    grep -oE '^META_VERIFY_TOKEN_[A-Z0-9_]+=' "$envf" | sed -E 's/^META_VERIFY_TOKEN_([A-Z0-9_]+)=$/\1_APP_SECRET/'
+  } | sort -u
+}
+
 # ON_ERROR_STOP is not optional. Without it psql prints the error, carries on
 # through an aborted transaction, rolls the whole thing back at COMMIT -- and
 # still exits 0. You get a clean-looking run and an empty database.
@@ -78,7 +90,7 @@ case "${1:-preflight}" in
     # The workflows read these at runtime. If the container was started from
     # an older compose file, they are simply absent, and the first symptom is
     # an "access to env vars denied" or a handshake that 403s every time.
-    for V in N8N_BLOCK_ENV_ACCESS_IN_NODE NODE_FUNCTION_ALLOW_BUILTIN META_VERIFY_TOKEN_SHALOM_PARK SHALOM_PARK_APP_SECRET; do
+    for V in N8N_BLOCK_ENV_ACCESS_IN_NODE NODE_FUNCTION_ALLOW_BUILTIN $(client_env_vars); do
       val=$(docker compose exec -T n8n printenv "$V" 2>/dev/null || true)
       if [ "$V" = "NODE_FUNCTION_ALLOW_BUILTIN" ]; then
         echo ",$val," | grep -Eq ',(crypto|\*),' && echo "  ✓ $V allows crypto" || echo "  ✗ $V is '${val:-unset}' — must include crypto. Fix with: bash /opt/propel-repo/ops/setup/vps-tools.sh n8n-env"
@@ -272,9 +284,11 @@ services:
     environment:
       N8N_BLOCK_ENV_ACCESS_IN_NODE: "false"
       NODE_FUNCTION_ALLOW_BUILTIN: "crypto"
-      META_VERIFY_TOKEN_SHALOM_PARK: ${META_VERIFY_TOKEN_SHALOM_PARK:-}
-      SHALOM_PARK_APP_SECRET: ${SHALOM_PARK_APP_SECRET:-}
 YAML
+    # One line per client secret found in .env (see client_env_vars).
+    for V in $(client_env_vars); do
+      printf '      %s: ${%s:-}\n' "$V" "$V" >> "$OV"
+    done
 
     # Prove the merged result parses BEFORE anything running is restarted.
     if ! docker compose config -q 2>/tmp/propel-compose-err; then

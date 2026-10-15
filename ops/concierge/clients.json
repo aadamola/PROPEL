@@ -42,7 +42,8 @@
           "token_env": "SHALOM_PARK_IG_TOKEN",
           "secret_env": "SHALOM_PARK_APP_SECRET",
           "keyword_automation": true,
-          "_primary": "THE channel for this client. Comments and DMs, keyword fast lane in front of the brain."
+          "_primary": "THE channel for this client. Comments and DMs, keyword fast lane in front of the brain.",
+          "verify_env": "META_VERIFY_TOKEN_SHALOM_PARK"
         },
         "email": {
           "enabled": false,
@@ -105,7 +106,43 @@
         },
         "readable_view": "clients/shalom-park/keywords.md",
         "_surface": "IN-HOUSE ONLY. The CSV is the editable source of truth; keywords.md is the generated read-only view. No third-party spreadsheet holds client facts.",
-        "_copy_rule": "Sell, do not disclaim. No response volunteers what the assistant cannot do — nobody asked. Where a fact is not held, it becomes an offer (\"I will get you the breakdown in writing\"), never a confession. Every response closes on one question that moves the lead forward. Escalation still fires; the copy just stops announcing it."
+        "_copy_rule": "Sell, do not disclaim. No response volunteers what the assistant cannot do — nobody asked. Where a fact is not held, it becomes an offer (\"I will get you the breakdown in writing\"), never a confession. Every response closes on one question that moves the lead forward. Escalation still fires; the copy just stops announcing it.",
+        "phase0": {
+          "saved_replies_file": "clients/shalom-park/09-phase0-saved-replies.md",
+          "priority_rules": [
+            "SP-2B",
+            "SP-4B",
+            "SP-5B",
+            "SP-LAND",
+            "SP-INVEST",
+            "SP-DEVPLOT",
+            "SP-ESC-PROMO",
+            "SP-PRICE-GEN",
+            "SP-LOC",
+            "SP-INSPECT",
+            "SP-PAY",
+            "SP-INFO"
+          ],
+          "faqs": [
+            {
+              "q": "What are the prices?",
+              "a": "4-bed semi-detached ₦185m · 5-bed off-plan ₦200m · 2-bed condominium ₦95m · plots 648 sqm at ₦125,000/sqm. Which one are you looking at?"
+            },
+            {
+              "q": "Where is the estate?",
+              "a": "Abijo, opposite GRA Second Gate, Ibeju-Lekki — under 5 minutes from the Lekki-Epe Expressway. Want to come and see it?"
+            },
+            {
+              "q": "Can I inspect?",
+              "a": "Any day of the week, weekends included — representatives are on site. We also do virtual inspections over Zoom or WhatsApp video. What day works for you?"
+            },
+            {
+              "q": "What payment plans are there?",
+              "a": "Deposit with the balance over 3, 6 or 12 months, and there are campaigns running that open it up further. Which unit are you looking at?"
+            }
+          ],
+          "_rule": "FAQs are published to every visitor, so every figure here must trace to the signed facts sheet."
+        }
       },
       "alerts": {
         "email_to": [
@@ -122,6 +159,11 @@
       "_ledger": {
         "enabled": true,
         "note": "Every answered message writes a lead row and an append-only event. Commission on one unit is ₦5.5–6m; evidence that lives only in the client's infrastructure is not evidence."
+      },
+      "facts_sheet": {
+        "signed_by": "Collins",
+        "signed_on": "2026-07-27",
+        "file": "clients/shalom-park/docs/facts-sheet-SIGNED-2026-07-27.pdf"
       }
     },
     "propel": {
@@ -142,7 +184,8 @@
           "enabled": true,
           "webhook_path": "propel-ig",
           "token_env": "PROPEL_IG_TOKEN",
-          "secret_env": "PROPEL_APP_SECRET"
+          "secret_env": "PROPEL_APP_SECRET",
+          "verify_env": "META_VERIFY_TOKEN_PROPEL"
         },
         "email": {
           "enabled": true,
@@ -168,6 +211,14 @@
       },
       "policy": {
         "attribution_window_months": 12
+      },
+      "alerts": {
+        "email_to": [
+          "aadamola@gmail.com"
+        ],
+        "email_cc": [],
+        "from": "alerts@getpropel.tech",
+        "sms_provider": null
       }
     }
   }

@@ -23,7 +23,7 @@ Faster than file import, and it's the method to use:
 | `03-concierge-core.json` | **THE CORE.** Sub-workflow every channel calls: registry → KB → dedup → prompt → Gemini → guardrails → envelope |
 | `04-channel-email.json` | **Email channel** — IMAP in, SMTP out, with auto-reply/bounce/newsletter filtering |
 | `06-ledger-and-escalation.json` | **Ledger + escalation.** Called for EVERY answered message: writes the lead and an append-only event, then emails the sales team when a human is needed. On-duty routing is Lagos-time aware. Needs **Postgres** and **SMTP** credentials |
-| `05-channel-instagram.json` | **Instagram channel** — comments + DMs, with the 24-rule keyword fast lane in front of the brain. Needs an n8n **Header Auth** credential holding `Authorization: Bearer <SHALOM_PARK_IG_TOKEN>`. See [`../../../clients/shalom-park/06-instagram-keyword-plan.md`](../../../clients/shalom-park/06-instagram-keyword-plan.md) |
+| `05-channel-instagram-shalom-park.json` | **Instagram channel** — comments + DMs, with the 24-rule keyword fast lane in front of the brain. Needs an n8n **Header Auth** credential holding `Authorization: Bearer <SHALOM_PARK_IG_TOKEN>`. See [`../../../clients/shalom-park/06-instagram-keyword-plan.md`](../../../clients/shalom-park/06-instagram-keyword-plan.md) |
 
 Architecture and the reasoning behind it: [`../architecture.md`](../architecture.md).
 

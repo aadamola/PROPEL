@@ -2,14 +2,14 @@
 /**
  * End-to-end test of the SHIPPED Instagram workflow.
  *
- * Runs the actual code nodes out of 05-channel-instagram.json against real
+ * Runs the actual code nodes out of 05-channel-instagram-shalom-park.json against real
  * Meta webhook payload shapes, with n8n's globals shimmed. This tests the
  * file that gets pasted into n8n — not a reimplementation of it.
  */
 const fs = require('fs');
 const path = require('path');
 
-const wf = JSON.parse(fs.readFileSync(path.join(__dirname, '../ops/concierge/workflows/05-channel-instagram.json'), 'utf8'));
+const wf = JSON.parse(fs.readFileSync(path.join(__dirname, '../ops/concierge/workflows/05-channel-instagram-shalom-park.json'), 'utf8'));
 const nodeSrc = name => {
   const n = wf.nodes.find(x => x.name === name);
   if (!n || !n.parameters.jsCode) throw new Error('no code node named ' + name);

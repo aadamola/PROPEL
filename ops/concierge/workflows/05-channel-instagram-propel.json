@@ -1,0 +1,694 @@
+{
+  "name": "Propel Concierge — Instagram — Propel",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "GET",
+        "path": "propel-ig",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -700,
+        -180
+      ],
+      "id": "ig-verify",
+      "name": "IG webhook (verify)",
+      "webhookId": "propel-ig-verify"
+    },
+    {
+      "parameters": {
+        "jsCode": "\n// Constant-time compare: the verify token is the only thing standing\n// between this public URL and anyone subscribing their own Meta app to it.\nconst crypto = require('crypto');\nconst q = $input.first().json.query || {};\nconst expected = String($env.META_VERIFY_TOKEN_PROPEL || '');\nconst got = String(q['hub.verify_token'] || '');\nconst ok = expected.length > 0 && got.length === expected.length &&\n  crypto.timingSafeEqual(Buffer.from(got), Buffer.from(expected));\nif (q['hub.mode'] === 'subscribe' && ok) {\n  return [{ json: { status: 200, body: String(q['hub.challenge'] || '') } }];\n}\nreturn [{ json: { status: 403, body: 'Forbidden' } }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -480,
+        -180
+      ],
+      "id": "ig-handshake",
+      "name": "Handshake"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $json.body }}",
+        "options": {
+          "responseCode": "={{ $json.status }}"
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        -260,
+        -180
+      ],
+      "id": "ig-respond-challenge",
+      "name": "Respond challenge"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "propel-ig",
+        "responseMode": "responseNode",
+        "options": {
+          "rawBody": true
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -700,
+        60
+      ],
+      "id": "ig-events",
+      "name": "IG webhook (events)",
+      "webhookId": "propel-ig-events"
+    },
+    {
+      "parameters": {
+        "jsCode": "\n// Meta signs every POST with an HMAC over the RAW bytes. Without this check\n// anyone who learns the URL can post fabricated buyer messages straight into\n// the attribution ledger our commission claims rest on.\nconst crypto = require('crypto');\nconst item = $input.first();\nconst secret = String($env.PROPEL_APP_SECRET || '');\nconst header = String(item.json.headers?.['x-hub-signature-256'] || '');\nconst raw = item.binary?.data ? Buffer.from(item.binary.data.data, 'base64') : Buffer.from(JSON.stringify(item.json.body || {}));\nconst expected = 'sha256=' + crypto.createHmac('sha256', secret).update(raw).digest('hex');\nconst ok = secret && header.length === expected.length &&\n  crypto.timingSafeEqual(Buffer.from(header), Buffer.from(expected));\nreturn [{ json: { ok, body: item.json.body, status: ok ? 200 : 403 } }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -480,
+        60
+      ],
+      "id": "ig-sig",
+      "name": "Verify signature"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $json.ok ? \"EVENT_RECEIVED\" : \"Forbidden\" }}",
+        "options": {
+          "responseCode": "={{ $json.status }}"
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        -260,
+        60
+      ],
+      "id": "ig-ack",
+      "name": "ACK Meta"
+    },
+    {
+      "parameters": {
+        "jsCode": "\n/**\n * Channel normaliser — the single source of truth.\n *\n * Every inbound channel collapses to ONE envelope shape so the brain,\n * the ledger and the dispatcher never learn what a channel is. Adding a\n * channel means adding a case here; it means changing nothing downstream.\n *\n * This file is unit-tested (tools/test-normalizer.js) and its source is\n * embedded verbatim into the workflow JSON at build time, so what ships\n * is exactly what was tested.\n */\n\n\nconst crypto = require('crypto');\n\nconst sha256 = s => crypto.createHash('sha256').update(String(s)).digest('hex');\n\n/** Envelope: the only shape anything downstream ever sees. */\nfunction envelope(o) {\n  return {\n    client_id:           o.client_id || '',\n    channel:             o.channel,            // whatsapp | instagram_dm | instagram_comment | email\n    provider_message_id: o.provider_message_id || '',\n    contact_id:          o.contact_id || '',   // channel-native id, used for replying\n    contact_e164:        o.contact_e164 || '',\n    contact_email:       o.contact_email || '',\n    contact_handle:      o.contact_handle || '',\n    contact_hash:        o.contact_hash || sha256(o.contact_id || o.contact_e164 || o.contact_email || ''),\n    display_name:        o.display_name || '',\n    text:                (o.text || '').trim(),\n    media_type:          o.media_type || 'text',\n    occurred_at:         o.occurred_at || new Date().toISOString(),\n    thread_ref:          o.thread_ref || '',   // what a reply must quote (IG comment id, email Message-ID)\n    subject:             o.subject || '',\n    is_actionable:       o.is_actionable !== false,\n    skip_reason:         o.skip_reason || ''\n  };\n}\n\nconst skip = (channel, reason) => envelope({ channel, is_actionable: false, skip_reason: reason });\n\n/** WhatsApp Cloud API webhook body. */\nfunction fromWhatsApp(body, client_id) {\n  const value = body?.entry?.[0]?.changes?.[0]?.value;\n  if (value?.statuses) return skip('whatsapp', 'status_callback');\n  const m = value?.messages?.[0];\n  if (!m) return skip('whatsapp', 'no_message');\n\n  const contact = value?.contacts?.[0];\n  const type = m.type || 'text';\n  let text = '';\n  if (type === 'text')                      text = m.text?.body || '';\n  else if (type === 'button')               text = m.button?.text || '';\n  else if (type === 'interactive')          text = m.interactive?.button_reply?.title || m.interactive?.list_reply?.title || '';\n  else if (['image','video','document'].includes(type)) text = m[type]?.caption || '';\n\n  return envelope({\n    client_id, channel: 'whatsapp',\n    provider_message_id: m.id,\n    contact_id: m.from, contact_e164: m.from,\n    display_name: contact?.profile?.name || '',\n    text, media_type: type,\n    occurred_at: m.timestamp ? new Date(Number(m.timestamp) * 1000).toISOString() : new Date().toISOString()\n  });\n}\n\n/** Instagram messaging + comment webhooks. */\nfunction fromInstagram(body, client_id) {\n  const entry = body?.entry?.[0];\n\n  // Comment on a post/reel\n  const change = entry?.changes?.[0];\n  if (change?.field === 'comments') {\n    const v = change.value || {};\n    // Never reply to the business replying to itself.\n    if (v.from?.id && entry?.id && v.from.id === entry.id) return skip('instagram_comment', 'own_comment');\n    return envelope({\n      client_id, channel: 'instagram_comment',\n      provider_message_id: v.id,\n      contact_id: v.from?.id, contact_handle: v.from?.username || '',\n      display_name: v.from?.username || '',\n      text: v.text || '',\n      thread_ref: v.id,          // one private reply is allowed against this comment id\n      occurred_at: new Date().toISOString()\n    });\n  }\n\n  // Direct message\n  const msg = entry?.messaging?.[0];\n  if (msg) {\n    if (msg.message?.is_echo) return skip('instagram_dm', 'echo');\n    if (msg.read || msg.delivery) return skip('instagram_dm', 'read_or_delivery_receipt');\n    return envelope({\n      client_id, channel: 'instagram_dm',\n      provider_message_id: msg.message?.mid,\n      contact_id: msg.sender?.id,\n      text: msg.message?.text || '',\n      media_type: msg.message?.attachments?.[0]?.type || 'text',\n      occurred_at: msg.timestamp ? new Date(Number(msg.timestamp)).toISOString() : new Date().toISOString()\n    });\n  }\n  return skip('instagram_dm', 'unrecognised_payload');\n}\n\n/** IMAP Email Trigger output. */\nfunction fromEmail(mail, client_id) {\n  const from = mail?.from?.value?.[0] || {};\n  const address = (from.address || mail?.from?.text || '').toLowerCase();\n\n  // Never answer machines. An auto-reply loop between two robots is\n  // the classic way an email bot embarrasses a client.\n  const headers = mail?.headers || {};\n  const h = k => String(headers[k] ?? headers[k?.toLowerCase()] ?? '');\n  if (h('auto-submitted') && !/^no$/i.test(h('auto-submitted'))) return skip('email', 'auto_submitted');\n  if (h('x-autoreply') || h('x-autorespond') || h('precedence').match(/bulk|junk|list/i)) return skip('email', 'auto_responder');\n  if (h('list-unsubscribe')) return skip('email', 'bulk_mail');\n  if (/^(mailer-daemon|postmaster|no-?reply|do-?not-?reply|bounce)/i.test(address)) return skip('email', 'noreply_sender');\n\n  const subject = mail?.subject || '';\n  if (/^(out of office|automatic reply|auto:|undeliverable)/i.test(subject)) return skip('email', 'out_of_office');\n\n  // Strip quoted history so the model reads the new message, not the whole thread.\n  const raw = mail?.textPlain || mail?.text || '';\n  const text = String(raw)\n    .split(/^\\s*(On .+ wrote:|-{2,}\\s*Original Message|_{5,}|From:\\s)/m)[0]\n    .split(/\\n>{1,}/)[0]\n    .trim();\n\n  return envelope({\n    client_id, channel: 'email',\n    provider_message_id: mail?.messageId || '',\n    contact_id: address, contact_email: address,\n    display_name: from.name || '',\n    text, subject,\n    thread_ref: mail?.messageId || '',\n    occurred_at: mail?.date ? new Date(mail.date).toISOString() : new Date().toISOString()\n  });\n}\n\nfunction normalize(channel, payload, client_id) {\n  switch (channel) {\n    case 'whatsapp':  return fromWhatsApp(payload, client_id);\n    case 'instagram': return fromInstagram(payload, client_id);\n    case 'email':     return fromEmail(payload, client_id);\n    default:          return skip(channel || 'unknown', 'unsupported_channel');\n  }\n}\n\n\nconst payload = $input.first().json;\nif (!payload.ok) return [{ json: envelope({ channel: 'instagram_dm', is_actionable: false, skip_reason: 'bad_signature' }) }];\nreturn [{ json: normalize('instagram', payload.body, \"propel\") }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -40,
+        60
+      ],
+      "id": "ig-normalize",
+      "name": "Normalise"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "actionable",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              },
+              "leftValue": "={{ $json.is_actionable }}",
+              "rightValue": ""
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        180,
+        60
+      ],
+      "id": "ig-actionable",
+      "name": "Worth answering?"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Echoes, read receipts and our own comments land here. Logged, never answered.\nreturn [{ json: { ignored: true, reason: $json.skip_reason, channel: $json.channel } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        180,
+        300
+      ],
+      "id": "ig-skip",
+      "name": "Log ignored event"
+    },
+    {
+      "parameters": {
+        "jsCode": "\n// Front-door dedup. Meta redelivers webhooks, and a redelivery is the same\n// message, not a new one. This sits BEFORE the keyword lane because most\n// messages never reach the CORE -- a dedup that lives only in the CORE lets\n// a redelivered \"price\" DM fire the price card twice.\n//\n// Returning no items ends the branch: no reply, no ledger row, no alert.\nconst env = $input.first().json;\nconst key = env.provider_message_id;\nif (!key) return [{ json: env }];   // nothing to key on: let it through, never drop a buyer\n\nconst store = $getWorkflowStaticData('global');\nstore.seenMsgs = store.seenMsgs || {};\nconst now = Date.now(), TTL = 24 * 60 * 60 * 1000;\nfor (const k of Object.keys(store.seenMsgs)) if (now - store.seenMsgs[k] > TTL) delete store.seenMsgs[k];\n\nif (store.seenMsgs[key]) return [];\nstore.seenMsgs[key] = now;\nreturn [{ json: env }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        400,
+        60
+      ],
+      "id": "ig-seen",
+      "name": "Seen this message?"
+    },
+    {
+      "parameters": {
+        "jsCode": "\n/**\n * Keyword fast lane.\n *\n * A deterministic layer that sits IN FRONT of the Concierge brain. An exact\n * rule match returns a pre-written, human-approved response with no model\n * call: ~0ms, ₦0, and zero hallucination surface. Anything that does not\n * match falls through to the brain, which still has the KB and the\n * guardrails.\n *\n * Same doctrine as docs/13 \"arithmetic never goes to a language model\":\n * an answer we already know the exact words for should never be regenerated.\n *\n * Two invariants this file exists to hold:\n *   1. An escalate_only rule BEATS any commercial rule when both match, so\n *      \"what is the ROI on the 4 bedroom\" can never fire the price card.\n *   2. A rule whose link cannot be resolved ships with no link at all.\n *      A keyword automation that DMs a dead link is worse than none.\n *\n * Unit-tested (tools/test-keywords.js) and embedded verbatim into the\n * workflow JSON at build time, so shipped code is tested code.\n */\n\n\n/** Spelled numbers and shorthand people actually type in Lagos IG comments. */\nconst WORD_NUMBERS = {\n  one: '1', two: '2', three: '3', four: '4', five: '5', six: '6',\n  seven: '7', eight: '8', nine: '9', ten: '10'\n};\n\n/**\n * Fold a raw message into comparable tokens.\n * Strips emoji and punctuation (IG comments are ~40% emoji), normalises\n * \"4bed\" / \"4-bedroom\" / \"four bedroom\" to one shape, and lowercases.\n */\nfunction normalizeText(s) {\n  return String(s == null ? '' : s)\n    .toLowerCase()\n    .replace(/[‘’ʼ]/g, \"'\")\n    .replace(/[^\\p{L}\\p{N}\\s']/gu, ' ')       // emoji, ₦, punctuation -> space\n    .replace(/'/g, '')                        // don't -> dont, governor's -> governors\n    .replace(/(\\d)\\s*(bedrooms?|beds?|bdrm|br)\\b/g, '$1 bedroom')\n    .replace(/\\s+/g, ' ')\n    .trim();\n}\n\nfunction tokenize(s) {\n  return normalizeText(s)\n    .split(' ')\n    .filter(Boolean)\n    .map(t => WORD_NUMBERS[t] || t);\n}\n\n/**\n * Contiguous token-subsequence match.\n *\n * Token-based on purpose: a naive substring search matches \"land\" inside\n * \"Ireland\" and \"landscape\", which is the single most common way a keyword\n * bot embarrasses a client in public.\n */\nfunction containsPhrase(hay, needle) {\n  if (!needle.length || needle.length > hay.length) return false;\n  outer:\n  for (let i = 0; i <= hay.length - needle.length; i++) {\n    for (let j = 0; j < needle.length; j++) {\n      if (hay[i + j] !== needle[j]) continue outer;\n    }\n    return true;\n  }\n  return false;\n}\n\n/** Pre-tokenise a rule's phrases once, at compile time. */\nfunction compileRule(rule) {\n  return {\n    ...rule,\n    _phrases: (rule.trigger_phrases || []).map(p => ({ raw: p, tokens: tokenize(p) }))\n                                          .filter(p => p.tokens.length > 0)\n  };\n}\n\nfunction compile(rules) {\n  return rules.map(compileRule);\n}\n\n/**\n * Score a rule against a tokenised message.\n * Longer matched phrases win — \"2 bedroom price\" resolves to the 2-bedroom\n * card, not the generic price card.\n */\nfunction scoreRule(rule, hay) {\n  let best = null;\n  for (const p of rule._phrases || []) {\n    if (!containsPhrase(hay, p.tokens)) continue;\n    if (!best || p.tokens.length > best.tokens.length) best = p;\n  }\n  if (!best) return null;\n  return { phrase: best.raw, score: best.tokens.length * 100 - (rule.priority || 50) };\n}\n\n/** Deterministic ordering so the same message always resolves the same way. */\nfunction pickBest(hits) {\n  return hits.sort((a, b) =>\n    b.score - a.score ||\n    (a.rule.priority || 50) - (b.rule.priority || 50) ||\n    String(a.rule.rule_id).localeCompare(String(b.rule.rule_id))\n  )[0];\n}\n\n/**\n * Resolve a rule's outbound link from client config.\n * Returns '' when the link cannot be built — never a half-formed URL.\n */\nfunction resolveLink(rule, links) {\n  const cfg = links || {};\n  if (!rule.link_kind || rule.link_kind === 'none') return '';\n  if (rule.link_kind === 'website') return cfg.website || '';\n  if (rule.link_kind === 'whatsapp') {\n    if (cfg.mode !== 'concierge' && cfg.mode !== 'human_line') return '';\n    if (!cfg.wa_e164 || !cfg.whatsapp_template) return '';\n    return cfg.whatsapp_template\n      .replace('{{WA_E164}}', String(cfg.wa_e164))\n      .replace('{{CODE}}', encodeURIComponent(rule.link_code || rule.rule_id));\n  }\n  return '';\n}\n\n/**\n * Is this rule's promotional text in force right now?\n *\n * A promotion is time-bound by definition. The failure mode we are designing\n * out is an automation still quoting a N5,000,000 entry deposit in November\n * for an offer that ended in September -- and a buyer turning up with the\n * wrong money because a robot never got the memo. A promo with no end date\n * cannot be compiled (tools/build-keywords.js enforces it), and an expired\n * one falls back to the standard warranted terms on its own.\n */\nfunction isPromoLive(rule, now) {\n  if (!rule.promo_response) return false;\n\n  if (rule.promo_from) {\n    const start = Date.parse(rule.promo_from + 'T00:00:00Z');\n    if (Number.isFinite(start) && now < start) return false;\n  }\n\n  // A campaign that runs \"until we sell out\" has no end date, and pretending\n  // otherwise would be inventing a fact. What it must have instead is a\n  // REVIEW date: someone re-confirms it is still running, or the assistant\n  // quietly goes back to the signed standard terms. Same safety property,\n  // fitted to how the client actually sells.\n  if (rule.promo_until) {\n    const end = Date.parse(rule.promo_until + 'T23:59:59Z');\n    if (!Number.isFinite(end) || now > end) return false;\n  } else if (rule.promo_review_by) {\n    const due = Date.parse(rule.promo_review_by + 'T23:59:59Z');\n    if (!Number.isFinite(due) || now > due) return false;\n  } else {\n    return false;   // neither an end nor a review date: fail safe\n  }\n  return true;\n}\n\n/**\n * Build the outbound message body for a matched rule.\n * When no link resolves, the call to action degrades to \"reply here\" rather\n * than pointing a buyer at nothing.\n */\nfunction buildBody(rule, cfg, bodyText) {\n  // Every card is lint-guaranteed to close on a question, so an unresolved\n  // link needs no apology bolted on the end -- the question already invites\n  // the reply. Silence beats \"reply here and the team will pick it up\".\n  const link = resolveLink(rule, cfg && cfg.links);\n  const parts = [bodyText || rule.dm_response];\n  if (link) parts.push(link);\n  if (cfg && cfg.assistant_signature) parts.push(cfg.assistant_signature);\n  return parts.join('\\n\\n');\n}\n\n/**\n * Match a message against the compiled rule set.\n *\n * @returns {object} always an object; `matched:false` means \"hand to the brain\".\n */\nfunction match(rules, text, cfg) {\n  const hay = tokenize(text);\n  if (!hay.length) return { matched: false, reason: 'empty_text' };\n\n  const escalations = [];\n  const fast = [];\n\n  for (const rule of rules) {\n    if (rule.status !== 'live') continue;\n    const hit = scoreRule(rule, hay);\n    if (!hit) continue;\n    (rule.class === 'escalate_only' ? escalations : fast).push({ rule, ...hit });\n  }\n\n  // Invariant 1: safety class outranks commercial class, always. A buyer\n  // asking about returns on a specific unit gets a human, not a price card.\n  const winner = escalations.length ? pickBest(escalations) : (fast.length ? pickBest(fast) : null);\n  if (!winner) return { matched: false, reason: 'no_rule_matched' };\n\n  const r = winner.rule;\n  const now = (cfg && cfg.now) || Date.now();\n  const promoLive = isPromoLive(r, now);\n  return {\n    matched: true,\n    rule_id: r.rule_id,\n    intent: r.intent,\n    rule_class: r.class,\n    matched_phrase: winner.phrase,\n    score: winner.score,\n    promo_active: promoLive,\n    promo_until: promoLive ? r.promo_until : '',\n    reply: buildBody(r, cfg, promoLive ? r.promo_response : r.dm_response),\n    public_comment_reply: r.public_comment_reply || '',\n    link: resolveLink(r, cfg && cfg.links),\n    link_code: r.link_code || r.rule_id,\n    escalate: r.escalate === true,\n    escalation_reason: r.escalate === true ? ('keyword rule ' + r.rule_id + ': ' + r.intent) : '',\n    grounded_in: r.grounded_in || [],\n    unit_interest: r.unit_id || ''\n  };\n}\n\n\n\n// The keyword table, compiled from (no keyword table: every message goes to the brain).\n// Rebuild with: node tools/build-keywords.js && node tools/build-workflows.js\nconst TABLE = {\"rules\":[]};\nconst CFG = {\"assistant_signature\":\"\",\"links\":{\"mode\":\"none\"}};\nconst RULES = compile(TABLE.rules);\n\nconst env = $input.first().json;\nconst hit = match(RULES, env.text, CFG);\n\nif (!hit.matched) {\n  // No rule owns this question. The brain gets it, with the KB and the\n  // guardrails — a miss is a fall-through, never a dead end.\n  return [{ json: { ...env, lane: 'brain', keyword_miss_reason: hit.reason } }];\n}\n\n// Shaped exactly like a model response so it flows through the SAME\n// guardrail node the brain's output does. A human edit to the sheet gets\n// policed at runtime, not only at build time.\nreturn [{ json: { ...env, lane: 'keyword', rule_id: hit.rule_id, intent: hit.intent, matched_phrase: hit.matched_phrase,\n  public_comment_reply: hit.public_comment_reply, link_code: hit.link_code,\n  text: JSON.stringify({ reply: hit.reply, escalate: hit.escalate, escalation_reason: hit.escalation_reason,\n                         unit_interest: hit.unit_interest, grounded_in: hit.grounded_in }) } }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        620,
+        60
+      ],
+      "id": "ig-keywords",
+      "name": "Keyword fast lane"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "is-keyword",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              },
+              "leftValue": "={{ $json.lane }}",
+              "rightValue": "keyword"
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        840,
+        60
+      ],
+      "id": "ig-matched",
+      "name": "Keyword matched?"
+    },
+    {
+      "parameters": {
+        "jsCode": "\n// Post-generation guardrails. The model is not trusted to police itself.\nconst raw = $input.first().json;\nconst text = raw?.content?.parts?.[0]?.text\n          ?? raw?.candidates?.[0]?.content?.parts?.[0]?.text\n          ?? raw?.text ?? '';\n\nconst ESCALATION_LINE = \"Let me get you the exact figure from the team — one moment. I'm connecting you with someone now.\";\n\nlet out;\ntry {\n  out = JSON.parse(String(text).replace(/^```json\\s*/i,'').replace(/```\\s*$/,'').trim());\n} catch (e) {\n  // Unparseable output is a failure, not a message to forward.\n  return [{ json: { reply: ESCALATION_LINE, escalate: true, escalation_reason: 'model returned unparseable output', unit_interest: '', grounded_in: [], guard_triggered: 'parse_error' } }];\n}\n\nlet reply    = String(out.reply || '');\nlet escalate = out.escalate === true;\nlet reason   = String(out.escalation_reason || '');\nconst grounded = Array.isArray(out.grounded_in) ? out.grounded_in : [];\nlet guard = '';\n\n// 1. Banned-topic sweep. Catches a model that complied in tone but not substance.\nconst BANNED = [\n  // 'appreciat' needs care: \"I appreciate your question\" is normal Nigerian\n  // business English. Match the investment senses only.\n  { re: /\\b(roi|rental yield|yields?|return on investment|resale value|capital growth)\\b|\\bappreciation\\b|\\b(will|would|should|can|could|may|might)\\s+appreciate\\b|\\bappreciate[sd]?\\s+in\\s+value\\b/i, why: 'investment projection' },\n  { re: /\\b(guarantee|guaranteed|assured returns?)\\b/i, why: 'guarantee language' },\n  { re: /\\baccount (number|details)\\b|\\b\\d{10}\\b/i, why: 'possible account number' },\n  { re: /\\bonly \\d+ (unit|plot|left)/i, why: 'scarcity claim' }\n];\nfor (const b of BANNED) {\n  if (b.re.test(reply)) { escalate = true; guard = b.why; reply = ESCALATION_LINE; reason = reason || b.why; break; }\n}\n\n// 2. Ungrounded factual claim: money or measurements with nothing cited.\n// Curly apostrophes are what models actually emit -- match both forms.\nconst looksFactual = /₦|\\bN\\d|\\bnaira\\b|\\bsqm\\b|\\bbedroom\\b|\\bc of o\\b|governor[\\u2019']?s consent|\\bgovernor'?s consent\\b/i.test(reply);\nif (!guard && looksFactual && grounded.length === 0) {\n  escalate = true; guard = 'ungrounded_factual_claim'; reply = ESCALATION_LINE;\n  reason = reason || 'stated a fact without citing the knowledge base';\n}\n\n// 3. Never return an empty reply.\nif (!reply.trim()) { reply = ESCALATION_LINE; escalate = true; guard = guard || 'empty_reply'; }\n\nreturn [{ json: { reply, escalate, escalation_reason: reason, unit_interest: String(out.unit_interest || ''), grounded_in: grounded, guard_triggered: guard } }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1060,
+        -60
+      ],
+      "id": "ig-guard",
+      "name": "Guardrails"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "SzWrUVB8WYv3sfE5",
+          "mode": "id"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "client_id": "=propel",
+            "channel": "={{ $json.channel }}",
+            "provider_message_id": "={{ $json.provider_message_id }}",
+            "contact_id": "={{ $json.contact_id }}",
+            "contact_hash": "={{ $json.contact_hash }}",
+            "display_name": "={{ $json.display_name }}",
+            "text": "={{ $json.text }}",
+            "thread_ref": "={{ $json.thread_ref }}"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        1060,
+        200
+      ],
+      "id": "ig-core",
+      "name": "Concierge CORE"
+    },
+    {
+      "parameters": {
+        "jsCode": "\n// Merge whichever lane answered back onto the original envelope.\nconst env = $('Normalise').first().json;\nconst src = $input.first().json;\nconst lane = $('Keyword fast lane').first().json;\n\nconst reply = String(src.reply || '');\nconst isComment = env.channel === 'instagram_comment';\n\nreturn [{ json: {\n  send: !!reply,\n  lane: lane.lane,\n  rule_id: lane.rule_id || '',\n  intent: lane.intent || '',\n  matched_phrase: lane.matched_phrase || '',\n  text: env.text,\n  client_id: \"propel\",\n  channel: env.channel,\n  contact_id: env.contact_id,\n  contact_handle: env.contact_handle,\n  thread_ref: env.thread_ref,\n  comment_id: isComment ? env.thread_ref : '',\n  reply,\n  public_comment_reply: isComment ? String(lane.public_comment_reply || '') : '',\n  escalate: src.escalate === true,\n  escalation_reason: src.escalation_reason || '',\n  guard_triggered: src.guard_triggered || '',\n  reason: src.reason || '',\n  ledger: {\n    provider_message_id: env.provider_message_id,\n    contact_hash: env.contact_hash,\n    contact_e164: env.contact_id,\n    channel: env.channel,\n    unit_interest: src.unit_interest || '',\n    grounded_in: src.grounded_in || [],\n    keyword_rule: lane.rule_id || '',\n    link_code: lane.link_code || '',\n    guard_triggered: src.guard_triggered || ''\n  }\n}}];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1280,
+        60
+      ],
+      "id": "ig-prepare",
+      "name": "Prepare send"
+    },
+    {
+      "parameters": {
+        "jsCode": "\n// Meta's two hard limits, enforced before we spend them:\n//   1. ONE private reply per comment, inside a 7-day window\n//   2. ~200 automated DMs an hour\n// Overflow is queued to a human, never dropped. A buyer who gets no answer\n// is a lost lead; a buyer who gets a late human answer is still a lead.\nconst LIMITS = {\"public_reply_enabled\":true,\"private_replies_per_comment\":1,\"private_reply_window_days\":7,\"max_automated_dms_per_hour\":180};\nconst item = $input.first().json;\nif (!item.send) return [{ json: { ...item, send: false, reason: item.reason || 'empty_reply' } }];\n\nconst store = $getWorkflowStaticData('global');\nstore.repliedComments = store.repliedComments || {};\nstore.hourly = store.hourly || { windowStart: 0, count: 0 };\n\nconst now = Date.now();\nconst WINDOW = LIMITS.private_reply_window_days * 24 * 60 * 60 * 1000;\nfor (const k of Object.keys(store.repliedComments)) {\n  if (now - store.repliedComments[k] > WINDOW) delete store.repliedComments[k];\n}\n\nif (item.comment_id) {\n  if (store.repliedComments[item.comment_id]) {\n    return [{ json: { ...item, send: false, reason: 'private_reply_already_used_for_this_comment' } }];\n  }\n  store.repliedComments[item.comment_id] = now;\n}\n\nif (now - store.hourly.windowStart > 60 * 60 * 1000) store.hourly = { windowStart: now, count: 0 };\nif (store.hourly.count >= LIMITS.max_automated_dms_per_hour) {\n  return [{ json: { ...item, send: false, reason: 'hourly_cap_reached', escalate: true,\n                    escalation_reason: 'automation hourly cap reached — needs a human' } }];\n}\nstore.hourly.count++;\n\nreturn [{ json: { ...item, send: true } }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1500,
+        60
+      ],
+      "id": "ig-gate",
+      "name": "Send gate (Meta limits)"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "leftValue": "={{ $json.channel }}",
+                    "rightValue": "instagram_comment"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "outputKey": "comment"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "leftValue": "={{ $json.channel }}",
+                    "rightValue": "instagram_dm"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "outputKey": "dm"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        1720,
+        60
+      ],
+      "id": "ig-route",
+      "name": "Comment or DM?"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://graph.facebook.com/v21.0/me/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ recipient: { comment_id: $json.comment_id }, message: { text: $json.reply } }) }}",
+        "options": {
+          "timeout": 15000,
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1940,
+        -60
+      ],
+      "id": "ig-private-reply",
+      "name": "Private reply to comment"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v21.0/{{ $('Send gate (Meta limits)').first().json.comment_id }}/replies",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ message: $('Send gate (Meta limits)').first().json.public_comment_reply }) }}",
+        "options": {
+          "timeout": 15000,
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2160,
+        -60
+      ],
+      "id": "ig-public-reply",
+      "name": "Public comment reply"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://graph.facebook.com/v21.0/me/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ recipient: { id: $json.contact_id }, message: { text: $json.reply } }) }}",
+        "options": {
+          "timeout": 15000,
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1940,
+        180
+      ],
+      "id": "ig-dm",
+      "name": "Send IG DM"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "oNt2oRixkDbbUa2p",
+          "mode": "id"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "client_id": "={{ $json.client_id }}",
+            "channel": "={{ $json.channel }}",
+            "provider_message_id": "={{ $json.ledger.provider_message_id }}",
+            "contact_id": "={{ $json.contact_id }}",
+            "contact_handle": "={{ $json.contact_handle }}",
+            "contact_hash": "={{ $json.ledger.contact_hash }}",
+            "text": "={{ $json.text }}",
+            "reply": "={{ $json.reply }}",
+            "rule_id": "={{ $json.rule_id }}",
+            "intent": "={{ $json.intent }}",
+            "link_code": "={{ $json.ledger.link_code }}",
+            "unit_interest": "={{ $json.ledger.unit_interest }}",
+            "escalation_reason": "={{ $json.escalation_reason }}",
+            "guard_triggered": "={{ $json.guard_triggered }}",
+            "reason": "={{ $json.reason }}",
+            "escalate": "={{ $json.escalate }}",
+            "send": "={{ $json.send }}"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        1720,
+        380
+      ],
+      "id": "ig-ledger",
+      "name": "Ledger + escalation"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Nothing sent: cap reached, reply already used, or an empty reply.\n// This is the escalation queue until the notifier workflow ships.\nreturn [{ json: { held: true, reason: $json.reason, rule_id: $json.rule_id, handle: $json.contact_handle, channel: $json.channel } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1940,
+        400
+      ],
+      "id": "ig-held",
+      "name": "Held for a human"
+    }
+  ],
+  "connections": {
+    "IG webhook (verify)": {
+      "main": [
+        [
+          {
+            "node": "Handshake",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Handshake": {
+      "main": [
+        [
+          {
+            "node": "Respond challenge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IG webhook (events)": {
+      "main": [
+        [
+          {
+            "node": "Verify signature",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Verify signature": {
+      "main": [
+        [
+          {
+            "node": "ACK Meta",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ACK Meta": {
+      "main": [
+        [
+          {
+            "node": "Normalise",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalise": {
+      "main": [
+        [
+          {
+            "node": "Worth answering?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Worth answering?": {
+      "main": [
+        [
+          {
+            "node": "Seen this message?",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Log ignored event",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Seen this message?": {
+      "main": [
+        [
+          {
+            "node": "Keyword fast lane",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Keyword fast lane": {
+      "main": [
+        [
+          {
+            "node": "Keyword matched?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Keyword matched?": {
+      "main": [
+        [
+          {
+            "node": "Guardrails",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Concierge CORE",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guardrails": {
+      "main": [
+        [
+          {
+            "node": "Prepare send",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Concierge CORE": {
+      "main": [
+        [
+          {
+            "node": "Prepare send",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare send": {
+      "main": [
+        [
+          {
+            "node": "Send gate (Meta limits)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send gate (Meta limits)": {
+      "main": [
+        [
+          {
+            "node": "Comment or DM?",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Ledger + escalation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Comment or DM?": {
+      "main": [
+        [
+          {
+            "node": "Private reply to comment",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send IG DM",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Held for a human",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Private reply to comment": {
+      "main": [
+        [
+          {
+            "node": "Public comment reply",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {}
+}

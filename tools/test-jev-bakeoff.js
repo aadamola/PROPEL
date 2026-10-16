@@ -58,6 +58,11 @@ check('weak Jev escalation does not override a keyword sales card',
   h('AG-PRICE-GEN', ans('AG-ESC-ROI', 0.3)) === 'AG-PRICE-GEN');
 check('keyword sales card wins over a different Jev sales card',
   h('AG-2B', ans('AG-3B', 0.99)) === 'AG-2B');
+check('a very confident Jev card replaces a GENERIC keyword card',
+  h('AG-PRICE-GEN', ans('AG-AMEN', 0.85)) === 'AG-AMEN');
+check('a less confident Jev card does not replace a generic keyword card',
+  h('AG-PRICE-GEN', ans('AG-3B', 0.63)) === 'AG-PRICE-GEN');
+check('Jev saying NONE never wipes out a keyword card', h('AG-PRICE-GEN', ans(B.NONE, 0.99)) === 'AG-PRICE-GEN');
 check('on a keyword miss a confident Jev card is taken', h(B.NONE, ans('AG-PAY', 0.8)) === 'AG-PAY');
 check('on a keyword miss a weak Jev card goes to the brain', h(B.NONE, ans('AG-PAY', 0.5)) === B.NONE);
 check('Jev saying NONE goes to the brain', h(B.NONE, ans(B.NONE, 0.99)) === B.NONE);

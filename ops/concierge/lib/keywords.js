@@ -199,7 +199,15 @@ function match(rules, text, cfg) {
   const winner = escalations.length ? pickBest(escalations) : (fast.length ? pickBest(fast) : null);
   if (!winner) return { matched: false, reason: 'no_rule_matched' };
 
-  const r = winner.rule;
+  return fromRule(winner.rule, cfg, winner.phrase, winner.score);
+}
+
+/**
+ * The full match result for one rule, however it was chosen: by a trigger
+ * phrase here, or by the Jev router (lib/router.js) on intent. Either way the
+ * buyer gets the same human-approved card with the same promo and link rules.
+ */
+function fromRule(r, cfg, phrase, score) {
   const now = (cfg && cfg.now) || Date.now();
   const promoLive = isPromoLive(r, now);
   return {
@@ -207,8 +215,8 @@ function match(rules, text, cfg) {
     rule_id: r.rule_id,
     intent: r.intent,
     rule_class: r.class,
-    matched_phrase: winner.phrase,
-    score: winner.score,
+    matched_phrase: phrase || '',
+    score: score == null ? 0 : score,
     promo_active: promoLive,
     promo_until: promoLive ? r.promo_until : '',
     reply: buildBody(r, cfg, promoLive ? r.promo_response : r.dm_response),
@@ -222,4 +230,4 @@ function match(rules, text, cfg) {
   };
 }
 
-module.exports = { normalizeText, tokenize, containsPhrase, compile, compileRule, match, resolveLink, buildBody, scoreRule, pickBest, isPromoLive };
+module.exports = { normalizeText, tokenize, containsPhrase, compile, compileRule, match, fromRule, resolveLink, buildBody, scoreRule, pickBest, isPromoLive };

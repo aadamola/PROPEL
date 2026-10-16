@@ -122,6 +122,18 @@
       "_ledger": {
         "enabled": true,
         "note": "Every answered message writes a lead row and an append-only event. Commission on one unit is ₦5.5–6m; evidence that lives only in the client's infrastructure is not evidence."
+      },
+      "jev_router": {
+        "enabled": false,
+        "base_url": "https://api.typesafe.ai",
+        "model": "jev-latest",
+        "threshold": 0.7,
+        "esc_threshold": 0.5,
+        "override_threshold": 0.8,
+        "generic_priority": 30,
+        "timeout_ms": 2500,
+        "key_env": "TYPESAFE_API_KEY",
+        "_status": "BUILT 2026-10-16, OFF. TypeSafe Jev as a second opinion on the keyword lane (ops/concierge/lib/router.js). Off until IFT Realty, as data controller, approves TypeSafe as a sub-processor and the privacy page names it (it currently promises message content goes only to a language-model provider, plus a transfer assessment for anything else). Flip to true, rebuild, re-import 05. With it off, or the key missing, or Jev slow or down, the keyword result stands."
       }
     },
     "propel": {

@@ -67,7 +67,13 @@ async function run({ token, sendTo, fetchImpl = fetch, log = console.log }) {
   if (!ptok) return finish(r, log);
 
   // 4 · can it read DMs?
-  const conv = await graph(ver, `${SP.page_id}/conversations?platform=instagram&fields=participants,updated_time&limit=25`, ptok);
+  // Meta answers code 1 "reduce the amount of data" on busy inboxes (seen 2026-10-16 at limit=25),
+  // so ask small and step down rather than fail the check.
+  let conv;
+  for (const n of [10, 3, 1]) {
+    conv = await graph(ver, `${SP.page_id}/conversations?platform=instagram&fields=participants&limit=${n}`, ptok);
+    if (conv.ok || !(conv.body.error && conv.body.error.code === 1)) break;
+  }
   say(conv.ok, 'can read Instagram DMs', conv.ok ? `${(conv.body.data || []).length} recent conversations` : err(conv.body));
 
   // 5 · optional: one real DM
@@ -106,7 +112,7 @@ async function selftest() {
       'GET debug_token': { data: { is_valid: true, app_id: SP.app_id, expires_at: 0, scopes: NEED } },
       'GET me': { id: '61595191243287' },
       [`GET ${SP.page_id}`]: { name: 'Shalom Park Nigeria', access_token: P, instagram_business_account: { id: SP.ig_id } },
-      [`GET ${SP.page_id}/conversations`]: { data: [{ participants: { data: [{ username: 'shalomparknigeria', id: SP.ig_id }, { username: 'collins', id: '999' }] } }] },
+      [`GET ${SP.page_id}/conversations`]: (u) => u.searchParams.get('limit') === '10' ? { error: { code: 1, message: 'Please reduce the amount of data' } } : { data: [{ participants: { data: [{ username: 'shalomparknigeria', id: SP.ig_id }, { username: 'collins', id: '999' }] } }] },
       [`POST ${SP.page_id}/messages`]: { recipient_id: '999' },
       ...over
     };

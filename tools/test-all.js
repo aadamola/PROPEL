@@ -9,6 +9,7 @@ const suites = [
   ['Keyword fast lane (rules + safety class)', 'tools/test-keywords.js'],
   ['Instagram workflow (end-to-end)', 'tools/test-ig-workflow.js'],
   ['On-call routing (who gets the lead)', 'tools/test-oncall.js'],
+  ['Meta Step 0 check (mocked Graph)', 'tools/meta-step0.js', '--selftest'],
   ['Workflow import preflight', 'tools/preflight-workflows.js'],
   ['Legal pages (what getpropel.tech may serve)', 'tools/build-legal-site.js', '--check'],
   ['Attribution ledger (real PostgreSQL)', 'tools/test-ledger-sql.sh'],

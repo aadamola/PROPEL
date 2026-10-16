@@ -2,6 +2,24 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-10-16 — Full access to Shalom Park's Meta portfolio granted
+
+- **ADEDAMOLA has full access** to the IFT Realty Ltd portfolio. No app exists yet.
+- **✅ Step 6 done (15:30 Lagos):** app **`Shalom Park Concierge`** (App ID `1739429447113718`) created with the *Manage messaging & content on Instagram* use case. Business Settings shows **"Owned by: IFT Realty Ltd"**. Basic settings: privacy + data-deletion URLs saved, contact `aadamola@gmail.com`, category Business and pages. Unpublished. Tech Provider route deliberately not taken.
+- **✅ Portfolio confirmed:** `@shalomparknigeria` (IG `17841459679675834`) and Page `Shalom Park Nigeria` (`101077059689474`) are both owned by IFT Realty Ltd, and the Page shows the IG linked. **System user `propel-concierge`** (`61595191243287`) is Employee, with full access to the app and Content, Messages and Community activity on the Page and the IG. No token generated yet.
+- **Built `13-step0-instagram-test.md` + `vps-tools.sh step0`** (`tools/meta-step0.js`, in `test-all` with a mocked Graph). It replaces the WhatsApp-era Step 0. It reads the token with echo off and checks validity, app, expiry, scopes, Graph v21.0 vs v26.0, the Page→IG link, Page-token issuance and DM read access. Optionally it sends ONE DM to a named user, to test messaging someone with no role on the app. Tokens are never printed and are scrubbed out of Graph errors.
+- **Found:** the app dashboard offers **v26.0**, but `05` and `clients.json` call **v21.0**, and `05`'s URLs hardcode the version despite the "never in a node" rule. Step 0 tests both, and I fix the version once it's known.
+- **Also:** `05` posts to `/me/messages`, which needs a **Page** token, not the system-user token. Step 0 confirms a Page token can be issued. At step 10 the n8n credential gets the Page token.
+- **Waiting on ADEDAMOLA:** ⭐ IG "Allow access to messages" ON. Then merge PR #14 and run Step 0 (A–E).
+- ~~**Next (step 6 of the client session in `08-instagram-launch-plan.md`):** confirm the Page and the IG account are both in the portfolio, then create `Shalom Park Concierge` **inside IFT Realty Ltd's portfolio**, Instagram use case, with contact `aadamola@gmail.com` and the two legal URLs under Basic settings. No webhooks, no tokens in chat, and no date to the client until the Step 0 test has run.~~
+
+## 2026-10-15 (night, late) — ✅ PR #10 merged; getpropel.tech live on Vercel
+
+- **PR #10 merged** into `main` (merge commit `c2013be`). `site-legal/` is on `main` with `index.html`, `privacy.html` and `data-deletion.html`.
+- **Vercel set up** (new account, signed in with GitHub): project imported from `aadamola/PROPEL` with **Root Directory `site-legal`** and Framework Preset Other. **DNS at Hostinger:** `A @ → 216.198.79.1` and `CNAME www →` Vercel's project-specific target. `engine` / `flow` / `status` were left alone. ADEDAMOLA confirmed `getpropel.tech` loads the holding page with both legal links.
+- **Vercel Hobby is non-commercial by its terms.** It's fine for unblocking Meta. Before client work goes on it, either move to Pro (~$20/mo) or serve from the VPS via Caddy. Recommendation: the VPS.
+- **Waiting on ADEDAMOLA:** ⭐ paste both legal URLs into the Meta app (App settings → Basic) and save. Then the `hello@getpropel.tech` forwarder before Meta review.
+
 ## 2026-10-15 (late night) — PR #10 opened so Vercel can deploy the legal pages
 
 - **PR #10** (`claude/propel-realestate-marketing-plan-wxjj3x` → `main`, 52 commits): Shalom Park Instagram Phase 0 + Phase 1, VPS tools, and `site-legal/`. The diff was scanned for secrets first; none found. **Vercel Root Directory must be `site-legal`.**

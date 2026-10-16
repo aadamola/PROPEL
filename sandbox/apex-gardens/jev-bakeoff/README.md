@@ -65,7 +65,9 @@ Paraphrases went from 1/24 to 19/24 and typos from 0/8 to 7/8. Latency was p50 1
 
 **Jev alone had zero unsafe routes and fewer wrong cards than the keyword lane.** The hybrid's problems are the keyword table's problems.
 
-Next: fix the keyword table's unsafe triggers, then re-run. Replaying the saved answers costs nothing. After that, consider letting a confident Jev sales card override a short keyword hit like "how much".
+**Keyword fix (2026-10-16):** I added the missing escalation triggers to both this table and Shalom Park's real one. The keyword baseline is now **42/69 correct with 0 unsafe**, up from 32 with 5. Those triggers were written after seeing these messages, so new messages are the honest test of them.
+
+Next: re-run. Replaying the saved answers costs nothing. After that, consider letting a confident Jev sales card override a short keyword hit like "how much".
 
 ## Rules
 

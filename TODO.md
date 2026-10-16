@@ -46,7 +46,6 @@ Testing the bot · the automated pilot · voice notes · first audit calls. Noth
 
 ## WAITING ON ME (AI partner) — nothing for you to do here
 
-- 🔴 **Before cutover:** the keyword table sends 5 kinds of money and legal questions to sales cards (e.g. "Where do I send the money to?" gets the location card). Found by the Jev bake-off. It needs trigger fixes in `keywords.csv`.
 - 🔴 **Before step 10:** make the `DELETE` reply actually work. The privacy page promises it, but no keyword handles it, and the ledger refuses deletes by design. Needs a rule plus an erasure design that keeps the chain verifiable.
 
 - ✅ Website wired to your number · ✅ WhatsApp QR generated (site/assets/whatsapp-qr.png)
@@ -56,6 +55,8 @@ Testing the bot · the automated pilot · voice notes · first audit calls. Noth
 - ✅ Instagram keyword automation built (24 rules, 103 tests green) → goes live the moment the Business Suite session lands
 
 ## ✅ DONE (look how far this has come)
+
+- [x] 🛡️ **You said "fix now": 8 money and legal questions that got sales replies now go to a person** (2026-10-16)
 
 - [x] 🧪 **Ran the Jev test on the VPS.** Jev got 88% right where our keywords got 46% (2026-10-16)
 

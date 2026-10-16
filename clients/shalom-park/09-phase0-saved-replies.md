@@ -12,17 +12,7 @@
 
 ## The 12 that matter
 
-### `condo` — 2-bedroom condominium  🎟️ *promo text — live*  ⚠️ *then tell Collins*
-
-```
-The 2-bedroom condominium is 95,000,000 naira - finished spec, under development, and 5 of the 16 units are available as at our last stock check.
-
-Right now you can secure one with a 5,000,000 naira initial deposit and spread the balance over 12 months. The campaign runs until the units are sold.
-
-Want to see it? Inspections run any day of the week, weekends included.
-```
-
-> ⏰ **Good until 2026-10-15.** After that, if Collins has not re-confirmed it, open this saved reply in Instagram and replace the text with the standard terms below. Instagram won't update it for you.
+### `condo` — 2-bedroom condominium  ⚠️ *then tell Collins*
 
 ```
 The 2-bedroom condominium is 95,000,000 naira - finished spec, under development, and 5 of the 16 units are available as at our last stock check.
@@ -32,17 +22,7 @@ Payment starts from a 50% deposit with the balance over 3, 6 or 12 months.
 Want to see it? Inspections run any day of the week, weekends included.
 ```
 
-### `duplex` — 4-bedroom semi-detached  🎟️ *promo text — live*
-
-```
-The 4-bedroom semi-detached is 185,000,000 naira - completed, finished, and 3 units are available as at our last stock check.
-
-On the campaign running now it is a 70% initial deposit with the balance spread over 12 months. The price covers the purchase itself; legal, utility connection and the association fee come separately.
-
-When would you like to see it? Representatives are on site every day, weekends included.
-```
-
-> ⏰ **Good until 2026-10-15.** After that, if Collins has not re-confirmed it, open this saved reply in Instagram and replace the text with the standard terms below. Instagram won't update it for you.
+### `duplex` — 4-bedroom semi-detached
 
 ```
 The 4-bedroom semi-detached is 185,000,000 naira - completed, finished, and 3 units are available as at our last stock check.
@@ -90,15 +70,7 @@ Shalom Park Estate is developed by IFT Realty Ltd, and there is a large parcel o
 Bulk parcels are structured separately from single plots. What scale are you looking at? I will put you straight with the team.
 ```
 
-### `promo` — Promotion / campaign pricing  🎟️ *promo text — live*  ⚠️ *then tell Collins*
-
-```
-Yes - there is a campaign running. The 2-bedroom condominium opens at a 5,000,000 naira initial deposit with the balance over 12 months, and it runs until the units are sold.
-
-Which one are you looking at? I will get the team to confirm your terms.
-```
-
-> ⏰ **Good until 2026-10-15.** After that, if Collins has not re-confirmed it, open this saved reply in Instagram and replace the text with the standard terms below. Instagram won't update it for you.
+### `promo` — Promotion / campaign pricing  ⚠️ *then tell Collins*
 
 ```
 Let me get the team to tell you exactly what is open to you today. Which unit are you interested in?
@@ -139,17 +111,7 @@ If you would rather not travel, we do virtual inspections over Zoom, FaceTime or
 What day works for you?
 ```
 
-### `pay` — Payment plan  🎟️ *promo text — live*  ⚠️ *then tell Collins*
-
-```
-Payment starts with a 50% deposit and the balance over 3, 6 or 12 months - and there are campaigns running that open it up further.
-
-The 2-bedroom condominium is currently 5,000,000 naira to start, with the balance over 12 months.
-
-Which unit are you looking at? I will get you the exact breakdown in writing.
-```
-
-> ⏰ **Good until 2026-10-15.** After that, if Collins has not re-confirmed it, open this saved reply in Instagram and replace the text with the standard terms below. Instagram won't update it for you.
+### `pay` — Payment plan  ⚠️ *then tell Collins*
 
 ```
 Payment starts with a 50% deposit, and the balance spreads over 3, 6 or 12 months.
@@ -197,17 +159,7 @@ Payments go to IFT Realty Ltd - and I will not put bank information in a chat wi
 Let me get someone from the team to confirm everything with you directly. What number should they call?
 ```
 
-### `disc` — Discount / negotiation  🎟️ *promo text — live*  ⚠️ *then tell Collins*
-
-```
-Prices at Shalom Park are fixed - what moves is how you pay, and there is a campaign running right now.
-
-The 2-bedroom condominium opens at a 5,000,000 naira initial deposit with the balance over 12 months.
-
-Which unit are you looking at? I will get the team to structure it with you.
-```
-
-> ⏰ **Good until 2026-10-15.** After that, if Collins has not re-confirmed it, open this saved reply in Instagram and replace the text with the standard terms below. Instagram won't update it for you.
+### `disc` — Discount / negotiation  ⚠️ *then tell Collins*
 
 ```
 Prices at Shalom Park are fixed - what moves is how you pay.

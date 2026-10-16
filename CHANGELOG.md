@@ -2,6 +2,12 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-10-16 — Shalom Park keyword table: 8 money and legal questions now reach a person
+
+- **ADEDAMOLA chose "fix now".** I added 34 escalation triggers across 5 rules (ROI, refund, pay-to, discount, legal). Examples: "where do I send the money", "changed my mind", "get it back", "already agreed", "419", "fake estate", "how much will I make". **All 8 messages that reached a sales card before now escalate**, locked by KW-49 to KW-56, and all 8 fail on the old table. KW-57 checks that plain questions ("How much is the condo?", "Where is the estate?") still get their cards. Mirrored into the Apex sandbox, where the keyword baseline goes from 32/69 with 5 unsafe to **42/69 with 0 unsafe**. All suites pass.
+- **The rebuild also flipped the promo saved replies to standard terms.** The 2026-10-15 review date has passed with no re-confirmation from Collins, which is the designed behaviour. If Collins says the promo is still on, send me his reply and I'll push the review date out.
+- **Waiting on ADEDAMOLA:** re-paste only the saved replies that changed (the promo ones), after the Collins answer. The new triggers don't change any reply text.
+
 ## 2026-10-16 — First live Jev run: 88% correct alone, zero unsafe; the hybrid failed on keyword errors
 
 - **ADEDAMOLA ran `vps-tools.sh jev`** on the VPS. Jev alone was **61/69 correct (88%)**, with **0 unsafe** and 1 wrong. The keyword lane was 32/69 (46%) with 5 unsafe. Paraphrases went 1→19 of 24 and typos 0→7 of 8. p50 latency was 197ms; 69k tokens cost less than one US cent.

@@ -108,16 +108,34 @@ async function run({ token, sendTo, fetchImpl = fetch, log = console.log }) {
     ? `${scanned} conversation${scanned === 1 ? '' : 's'} checked (${asked}${blind ? `, ${blind} unreadable` : ''})`
     : err(conv.body));
 
-  // 5 · optional: one real DM
-  if (who && conv.ok) {
-    if (!igsid) say(false, `found a conversation with @${who}`, `not in the ${scanned} most recent. They must DM @shalomparknigeria first`);
+  // 5 · optional: one real message to a named user
+  // DM first. Seen 2026-10-16: the inbox listing timed out past the first conversation, so if the
+  // user isn't found there, fall back to a comment they left on a recent post and send a private
+  // reply to it. That's the same send our comment-keyword lane uses, and it needs no inbox listing.
+  const text = 'Propel Step 0 test, please ignore.';
+  const send = (recipient) => graph(ver, `${SP.page_id}/messages`, ptok, {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ recipient, message: { text } })
+  });
+  if (who && igsid) {
+    const sent = await send({ id: igsid });
+    r.sent = sent.ok;
+    say(sent.ok, `sent a DM to @${who}`, sent.ok ? '' : err(sent.body));
+  } else if (who) {
+    if (conv.ok) log(`ℹ @${who} not in the ${scanned} conversation${scanned === 1 ? '' : 's'} Meta would list. Trying comments.`);
+    const media = await graph(ver, `${SP.ig_id}/media?fields=id&limit=3`, ptok);
+    let comment = null, seen = 0;
+    if (media.ok) for (const m of media.body.data || []) {
+      const cs = await graph(ver, `${m.id}/comments?fields=id,username&limit=50`, ptok);
+      if (!cs.ok) continue;
+      for (const c of cs.body.data || []) { seen++; if (!comment && (c.username || '').toLowerCase() === who) comment = c.id; }
+    }
+    say(media.ok, 'can read comments on the 3 latest posts', media.ok ? `${seen} comments visible` : err(media.body));
+    if (!comment) say(false, `found @${who} in DMs or comments`, 'ask them to comment "test" on the latest @shalomparknigeria post');
     else {
-      const sent = await graph(ver, `${SP.page_id}/messages`, ptok, {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ recipient: { id: igsid }, message: { text: 'Propel Step 0 test, please ignore.' } })
-      });
+      const sent = await send({ comment_id: comment });
       r.sent = sent.ok;
-      say(sent.ok, `sent a DM to @${who}`, sent.ok ? '' : err(sent.body));
+      say(sent.ok, `sent a private reply to @${who}'s comment`, sent.ok ? '' : err(sent.body));
     }
   }
   return finish(r, log);
@@ -146,6 +164,8 @@ async function selftest() {
       'GET conv1': { participants: { data: [{ username: 'shalomparknigeria', id: SP.ig_id }, { username: 'dml.xxl', id: '111' }] } },
       'GET conv2': { participants: { data: [{ username: 'shalomparknigeria', id: SP.ig_id }, { username: 'collins', id: '999' }] } },
       [`POST ${SP.page_id}/messages`]: { recipient_id: '999' },
+      [`GET ${SP.ig_id}/media`]: { data: [{ id: 'm1' }] },
+      'GET m1/comments': { data: [{ id: 'cm1', username: 'osijo' }] },
       ...over
     };
     const body = typeof table[key] === 'function' ? table[key](u, opts) : table[key];
@@ -172,10 +192,17 @@ async function selftest() {
 
   quiet.length = 0;
   r = await run({ token: T, sendTo: 'stranger', fetchImpl: mock(), log });
-  assert.ok(quiet.some(l => l.includes('must DM @shalomparknigeria first')), 'no conversation → says why, sends nothing');
+  assert.ok(quiet.some(l => l.includes('comment "test" on the latest')), 'not in DMs or comments → says why, sends nothing');
   assert.strictEqual(r.sent, undefined);
 
-  console.log('✓ meta-step0: 4 scenarios, tokens never printed');
+  quiet.length = 0;
+  const sends = [];
+  const spy = mock();
+  r = await run({ token: T, sendTo: 'osijo', log, fetchImpl: async (u, o = {}) => { if (o.method === 'POST') sends.push(JSON.parse(o.body)); return spy(u, o); } });
+  assert.strictEqual(r.sent, true, 'falls back to a private reply on their comment');
+  assert.deepStrictEqual(sends[0].recipient, { comment_id: 'cm1' });
+
+  console.log('✓ meta-step0: 5 scenarios, tokens never printed');
 }
 
 if (require.main === module) {

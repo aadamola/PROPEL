@@ -42,6 +42,8 @@ It checks: the token is valid, belongs to this app, never expires and has every 
 
 The person must have messaged within the last 24 hours, or Meta refuses the send no matter what permissions the app has.
 
+**If the check can't find them in the DMs** (seen 2026-10-16: Meta times out listing a busy inbox past the first conversation), it falls back to comments. The person comments `test` on the latest @shalomparknigeria post, and the check sends a **private reply** to that comment, the same send the comment-keyword lane uses. Delete the comment afterwards.
+
 ## E · Read the answer
 
 | What you see | What it means | Next |

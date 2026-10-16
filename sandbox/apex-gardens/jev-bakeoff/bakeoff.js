@@ -283,7 +283,7 @@ function report(result, meta = {}) {
     out.push('');
     for (const c of v.checks) out.push(`${c.ok ? '✅' : '✖'} ${c.name}: ${c.detail}`);
     out.push(v.pass
-      ? '✅ Jev clears the bar. Next: vet TypeSafe as a processor before any real message goes near it.'
+      ? '✅ Jev clears the bar. Real buyer messages still need the controller\'s approval and a privacy-page line first.'
       : '✖ Jev does not clear the bar on this run. The keyword lane stays as it is.');
   }
   return out.join('\n');

@@ -79,20 +79,38 @@ async function run({ token, sendTo, fetchImpl = fetch, log = console.log }) {
     if (conv.ok) break outer;
     if (!(conv.body.error && TRANSIENT.includes(conv.body.error.code))) break;
   }
-  if (conv.ok) for (const c of conv.body.data || []) {
-    if (c.participants) continue;
-    const one = await graph(ver, `${c.id}?fields=participants`, ptok);
-    if (one.ok) c.participants = one.body.participants;
+  // Seen 2026-10-16: only limit=1 answered, so "1 conversation" meant one page, not one buyer.
+  // Page through with the cursor until the named user turns up, up to MAX conversations.
+  const MAX = 25, who = sendTo ? sendTo.replace(/^@/, '').toLowerCase() : null;
+  let scanned = 0, blind = 0, igsid = null, edge = asked && asked.startsWith('IG') ? SP.ig_id : SP.page_id;
+  const n = asked ? Number(asked.split(' ').pop()) : 1;
+  let pageBody = conv.ok ? conv.body : null;
+  while (pageBody) {
+    for (const c of pageBody.data || []) {
+      scanned++;
+      let one = c.participants ? { ok: true, body: c } : null;
+      for (let t = 0; t < 3 && !(one && one.ok); t++) one = await graph(ver, `${c.id}?fields=participants`, ptok);
+      if (!one.ok) { blind++; continue; }
+      for (const p of (one.body.participants && one.body.participants.data) || [])
+        if (who && (p.username || '').toLowerCase() === who && p.id !== SP.ig_id) igsid = p.id;
+    }
+    const after = pageBody.paging && pageBody.paging.cursors && pageBody.paging.cursors.after;
+    if (!who || igsid || scanned >= MAX || !after || !(pageBody.paging.next)) break;
+    let next;
+    for (let t = 0; t < 3; t++) {
+      next = await graph(ver, `${edge}/conversations?platform=instagram&limit=${n}&after=${encodeURIComponent(after)}`, ptok);
+      if (next.ok || !(next.body.error && TRANSIENT.includes(next.body.error.code))) break;
+    }
+    pageBody = next.ok ? next.body : null;
+    if (!next.ok) log(`ℹ stopped paging after ${scanned}: ${scrub(err(next.body), r.secrets)}`);
   }
-  say(conv.ok, 'can read Instagram DMs', conv.ok ? `${(conv.body.data || []).length} recent conversations (${asked})` : err(conv.body));
+  say(conv.ok, 'can read Instagram DMs', conv.ok
+    ? `${scanned} conversation${scanned === 1 ? '' : 's'} checked (${asked}${blind ? `, ${blind} unreadable` : ''})`
+    : err(conv.body));
 
   // 5 · optional: one real DM
-  if (sendTo && conv.ok) {
-    const who = sendTo.replace(/^@/, '').toLowerCase();
-    let igsid = null;
-    for (const c of conv.body.data || []) for (const p of (c.participants && c.participants.data) || [])
-      if ((p.username || '').toLowerCase() === who && p.id !== SP.ig_id) igsid = p.id;
-    if (!igsid) say(false, `found a conversation with @${who}`, 'they must DM @shalomparknigeria first');
+  if (who && conv.ok) {
+    if (!igsid) say(false, `found a conversation with @${who}`, `not in the ${scanned} most recent. They must DM @shalomparknigeria first`);
     else {
       const sent = await graph(ver, `${SP.page_id}/messages`, ptok, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
@@ -122,8 +140,11 @@ async function selftest() {
       'GET debug_token': { data: { is_valid: true, app_id: SP.app_id, expires_at: 0, scopes: NEED } },
       'GET me': { id: '61595191243287' },
       [`GET ${SP.page_id}`]: { name: 'Shalom Park Nigeria', access_token: P, instagram_business_account: { id: SP.ig_id } },
-      [`GET ${SP.page_id}/conversations`]: (u) => u.searchParams.get('limit') === '5' ? { error: { code: -2, message: 'Timeout' } } : { data: [{ id: 'conv1' }] },
-      'GET conv1': { participants: { data: [{ username: 'shalomparknigeria', id: SP.ig_id }, { username: 'collins', id: '999' }] } },
+      [`GET ${SP.page_id}/conversations`]: (u) => u.searchParams.get('limit') === '5' ? { error: { code: -2, message: 'Timeout' } }
+        : u.searchParams.get('after') === 'c1' ? { data: [{ id: 'conv2' }] }
+        : { data: [{ id: 'conv1' }], paging: { cursors: { after: 'c1' }, next: 'x' } },
+      'GET conv1': { participants: { data: [{ username: 'shalomparknigeria', id: SP.ig_id }, { username: 'dml.xxl', id: '111' }] } },
+      'GET conv2': { participants: { data: [{ username: 'shalomparknigeria', id: SP.ig_id }, { username: 'collins', id: '999' }] } },
       [`POST ${SP.page_id}/messages`]: { recipient_id: '999' },
       ...over
     };
@@ -135,9 +156,9 @@ async function selftest() {
 
   let r = await run({ token: T, sendTo: '@Collins', fetchImpl: mock(), log });
   assert.ok(r.passed, 'happy path passes');
-  assert.strictEqual(r.sent, true, 'DM sent to the matched participant');
+  assert.strictEqual(r.sent, true, 'DM sent to the participant found on page 2');
   assert.ok(!quiet.join('\n').includes(T) && !quiet.join('\n').includes(P), 'no token printed');
-  assert.ok(quiet.some(l => l.includes('1 recent conversations (Page edge, asked for 2)')), 'says how many it asked for');
+  assert.ok(quiet.some(l => l.includes('2 conversations checked (Page edge, asked for 2)')), 'says how many it asked for');
 
   quiet.length = 0;
   r = await run({ token: T, fetchImpl: mock({ [`POST ${SP.page_id}/messages`]: { error: { code: 10, message: `Application does not have permission (${P})` } } }), sendTo: 'collins', log });

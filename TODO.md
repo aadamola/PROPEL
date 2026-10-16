@@ -29,7 +29,6 @@ Today (15 Oct) is the promo review date. Copy, paste, send:
 
 ## NOT YET — I'm holding these, don't think about them
 
-- 🧪 **Jev test (optional, 10 min):** get an API key at typesafe.ai → add `TYPESAFE_API_KEY=<key>` to `/opt/propel/.env` → on the VPS: `cd /opt/propel-repo && git fetch origin claude/project-thread-7ryu3o && git checkout claude/project-thread-7ryu3o && bash ops/setup/vps-tools.sh jev` → screenshot the output to me. *Fictional data only. Costs under one US cent.*
 - Collins follow-up, 7 open fields: [03-followup-questions.md](clients/shalom-park/03-followup-questions.md). *Moved down to make room for the legal pages.*
 
 **Parked from "this week" to keep the list at five** (the protocol, not a demotion — I'll star them when their turn comes):
@@ -57,6 +56,8 @@ Testing the bot · the automated pilot · voice notes · first audit calls. Noth
 - ✅ Instagram keyword automation built (24 rules, 103 tests green) → goes live the moment the Business Suite session lands
 
 ## ✅ DONE (look how far this has come)
+
+- [x] 🧪 **Ran the Jev test on the VPS.** Jev got 88% right where our keywords got 46% (2026-10-16)
 
 - [x] 🛡️ **Steps 8 + 9: Instagram webhook published and handshake ✅ 3/3.** It answers Meta and refuses strangers (2026-10-15)
 - [x] 🧯 **Flowise stopped; the server is out of CPU throttle** (2026-10-15)

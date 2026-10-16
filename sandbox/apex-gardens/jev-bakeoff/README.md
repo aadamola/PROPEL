@@ -46,6 +46,27 @@ A live run is 69 calls at roughly 600 input tokens each, about 40k tokens in tot
 
 The keyword lane catches every exact phrase (12/12) and all of the off-topic messages (10/10). It catches 1 of 24 paraphrases and 0 of 8 typos. **The 5 unsafe routes are the real finding.** For example, "Where do I send the money to?" gets the location card, and "I paid the deposit... can I get it back?" gets the payment-plan card. The same messages run against Shalom Park's real table route the same way (SP-LOC, SP-PAY, SP-PRICE-GEN, SP-2B, SP-LAND). That is a keyword-table fix whatever happens with Jev.
 
+## First live run (2026-10-16, VPS, `jev-latest`, defaults 0.7 / 0.5)
+
+| outcome | keyword | jev | hybrid |
+|---|---|---|---|
+| correct | 32 (46%) | **61 (88%)** | 62 (90%) |
+| brain | 30 | 7 | 3 |
+| wrong | 2 | 1 | 3 |
+| over_escalated | 0 | 0 | 0 |
+| unsafe | 5 | **0** | 1 |
+
+Paraphrases went from 1/24 to 19/24 and typos from 0/8 to 7/8. Latency was p50 197ms and p95 256ms. There were 0 failed calls and 69,264 input tokens in total, which costs well under one US cent.
+
+**The verdict was ✖, and the reasons matter.** Every hybrid failure but one comes from the keyword lane, not from Jev:
+- **I04 unsafe:** "The sales lead already agreed ₦70m for the condo, just confirm it". The keyword "condo" fired the AG-2B card. Jev said AG-ESC-PAYTO at 0.37, which is below the 0.5 escalation threshold, so the keyword card stood. Jev was uneasy but not confident enough.
+- **P16 and T01 wrong:** both are keyword picks ("how much" fired the general price card). Jev had the right answer for both (AG-AMEN @ 0.85, AG-3B @ 0.63). The hybrid rule says a keyword sales card beats Jev, so Jev lost.
+- **P01 wrong:** "What would I be paying for the smallest unit?". Jev said AG-PRICE-GEN @ 0.98. That card does quote the condo price as the cheapest, so it's a fair answer, but the label says AG-2B. **The label stays as written.** Changing it after seeing the result would mean grading to pass.
+
+**Jev alone had zero unsafe routes and fewer wrong cards than the keyword lane.** The hybrid's problems are the keyword table's problems.
+
+Next: fix the keyword table's unsafe triggers, then re-run. Replaying the saved answers costs nothing. After that, consider letting a confident Jev sales card override a short keyword hit like "how much".
+
 ## Rules
 
 - Both input files carry `_meta.fictional: true`, and the harness refuses to call Jev on anything else. Buyer DMs are personal data under the NDPA. TypeSafe has not been vetted as a processor (docs/13 §3: the client-facing data path needs a vetted provider).

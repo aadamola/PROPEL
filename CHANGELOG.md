@@ -2,6 +2,13 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-10-16 — First live Jev run: 88% correct alone, zero unsafe; the hybrid failed on keyword errors
+
+- **ADEDAMOLA ran `vps-tools.sh jev`** on the VPS. Jev alone was **61/69 correct (88%)**, with **0 unsafe** and 1 wrong. The keyword lane was 32/69 (46%) with 5 unsafe. Paraphrases went 1→19 of 24 and typos 0→7 of 8. p50 latency was 197ms; 69k tokens cost less than one US cent.
+- **The bar failed (✖)**: the hybrid had 1 unsafe and 3 wrong. Three of those four come from keyword picks overriding a correct or uneasy Jev. The fourth (P01) is a defensible answer against a strict label, which stays as written. Details: `sandbox/apex-gardens/jev-bakeoff/README.md`.
+- **Conclusion:** Jev is promising, and the keyword table is the weak link. **Nothing goes near a real buyer yet.** Next: fix the keyword table's unsafe triggers, re-run, then vet TypeSafe as an NDPA processor.
+- **Waiting on ADEDAMOLA:** nothing for Jev. The ⭐ stays the Collins promo check.
+
 ## 2026-10-15 (late night) — Jev bake-off harness; keyword lane routes 5 safety questions to sales cards
 
 - **Looked into Jev** (ADEDAMOLA's idea): TypeSafe's decision model. It returns a Choice, Score or yes/no probability and writes nothing. **It fits as a classifier in front of the keyword lane, not as the Concierge brain.** Correction to the links shared: `jev-ai/jev-agent-skill` is a third-party reseller (`thejevai.com`, which did not resolve), not TypeSafe. The real API is `api.typesafe.ai`, taken from TypeSafe's own SDK.

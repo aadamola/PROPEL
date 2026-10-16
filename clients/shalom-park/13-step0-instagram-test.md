@@ -13,14 +13,15 @@
 developers.facebook.com → **Shalom Park Concierge → Use cases → Manage messaging & content on Instagram → Customize**.
 
 - If it asks *Instagram login* or *Facebook login*, pick **API setup with Facebook login**. Our workflows send through the Page, at `graph.facebook.com`.
-- Add: `instagram_basic` · `instagram_manage_messages` · `instagram_manage_comments` · `pages_show_list` · `pages_manage_metadata`.
+- Click **Add required messaging permissions**. Then, under **Permissions and features**, add `instagram_manage_comments`.
+- The set you need: `instagram_basic` · `instagram_manage_messages` · `instagram_manage_comments` · `pages_show_list` · `pages_read_engagement` · `business_management`. All six showed **Ready for testing** on 2026-10-16. `pages_manage_metadata` isn't offered under this use case any more, so skip it. The check reports whether it's missing but doesn't count that as a failure.
 - **Screenshot the permission list.** Next to each permission it says either *Ready for testing* or something about review, and that wording is part of the answer.
 
 ## B · Make the token (5 min)
 
 business.facebook.com → IFT Realty Ltd → **Users → System users → propel-concierge → Generate token**
 
-- App: **Shalom Park Concierge** · Expiration: **Never** · tick the five permissions above → Generate.
+- App: **Shalom Park Concierge** · Expiration: **Never** · tick the six permissions above → Generate.
 - **Copy it and keep that tab open.** Meta shows it once. Don't paste it into WhatsApp, chat, email or notes. It goes into the server prompt in C and nowhere else.
 
 ## C · Run the check on the server (5 min)

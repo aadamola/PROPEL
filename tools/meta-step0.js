@@ -19,7 +19,10 @@ const SP = {
   current: 'v26.0'                 // what the app dashboard offered on 2026-10-16
 };
 const NEED = ['instagram_basic', 'instagram_manage_messages', 'instagram_manage_comments',
-  'pages_show_list', 'pages_manage_metadata'];
+  'pages_show_list', 'pages_read_engagement', 'business_management'];
+// The Instagram use case (2026-10-16) no longer offers pages_manage_metadata. Reported, never failed:
+// whether webhooks still need it is part of what Step 0 finds out.
+const NICE = ['pages_manage_metadata'];
 
 // Never let a token reach the terminal, even inside a Graph error message.
 const scrub = (s, secrets) => secrets.filter(Boolean).reduce((t, x) => t.split(x).join('‹token›'), String(s));
@@ -43,6 +46,8 @@ async function run({ token, sendTo, fetchImpl = fetch, log = console.log }) {
   say(!d.expires_at, 'token never expires', d.expires_at ? `expires ${new Date(d.expires_at * 1000).toISOString()}` : '');
   const missing = NEED.filter(p => !(d.scopes || []).includes(p));
   say(!missing.length, 'token carries every permission the workflows use', missing.length ? 'missing: ' + missing.join(', ') : '');
+  const absent = NICE.filter(p => !(d.scopes || []).includes(p));
+  if (absent.length) log(`ℹ not on the token (not counted as a failure): ${absent.join(', ')}`);
 
   // 2 · which Graph version answers
   for (const v of [SP.pinned, SP.current]) {
@@ -143,4 +148,4 @@ if (require.main === module) {
       .catch(e => { console.error('✖ ' + scrub(e.message, [token])); process.exit(1); });
   }
 }
-module.exports = { run, SP, NEED };
+module.exports = { run, SP, NEED, NICE };

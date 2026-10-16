@@ -2,6 +2,13 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-10-16 — Promos re-confirmed; Meta admin granted; Step 0 tool built
+
+- **Collins: the promos are still running.** All five promo rules (SP-2B ₦5m condo entry, SP-4B 70%, SP-PAY, SP-ESC-DISC, SP-ESC-PROMO) now have a review date of **2026-11-15**. The reconfirmation is logged in `kb.json → _pending_addendum.reconfirmations`, and the saved replies were regenerated ("Good until 2026-11-15"). The lapse test (KW-42) now reads the review date from the table instead of hardcoding it, so a reconfirmation can't break it.
+- **Shalom Park granted ADEDAMOLA admin on IFT Realty's Meta portfolio.** That removes the blocker that has stood since July. Runbook for the session: `clients/shalom-park/13-meta-setup-step0.md`.
+- **Caught before it bit:** our send nodes call `/me/messages`, which needs a **Page access token**. Putting the system-user token Meta shows first into the credential would have failed every send. **New `vps-tools.sh step0 <slug> [username]`** (`tools/meta-step0.js`): it reads the system-user token hidden through stdin, finds the Page and the Instagram account, derives the Page token and saves it root-only, lists conversations, sends one test DM to an outside account and reads the result as 🟢/🟡/🔴. 9 tests against a fake Graph API (token never printed; sends with the Page token). Playbook, solutions and go-live runbook updated. **Tests: 184 + preflight + legal-site check.**
+- **Waiting on ADEDAMOLA:** ⭐ the Meta setup + Step 0 test; send the output screenshot.
+
 ## 2026-10-15 (approved) — Rate card v2 approved and applied everywhere
 
 - **ADEDAMOLA: "Approved."** Rate card v2 is now the published offer.

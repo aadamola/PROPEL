@@ -271,7 +271,7 @@
     "note": "Terms relayed by Collins (the warrantor) on 2026-09-15 and adopted on ADEDAMOLA's instruction. These are NOT in the signed PDF. They are live in the assistant with a review date, and revert to the signed terms automatically if not re-confirmed. See clients/shalom-park/07-campaign-brief-audit.md.",
     "source": "Collins, relayed by ADEDAMOLA 2026-09-15",
     "campaign_type": "Open-ended — runs until sold out. No end date exists; the control is a review date, not an expiry.",
-    "review_by": "2026-10-15",
+    "review_by": "2026-11-15",
     "items": [
       {
         "field": "2-bed deposit",
@@ -297,6 +297,13 @@
         "signed": "must_not_say: resale or appreciation estimates",
         "live": "SP-INVEST — the case made entirely from warranted delivered facts",
         "status": "LIVE. Carries no projection, percentage, guarantee or claim that value will rise; SP-ESC-ROI still outranks it on any forecast question."
+      }
+    ],
+    "reconfirmations": [
+      {
+        "date": "2026-10-16",
+        "by": "Collins (relayed by ADEDAMOLA)",
+        "result": "Still running: ₦5m condo entry deposit and 70% on the 4-bed. Review moved to 2026-11-15."
       }
     ]
   }

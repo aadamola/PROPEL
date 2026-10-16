@@ -227,7 +227,7 @@ Other answers and what they mean:
 
 Fields: **`comments`** and **`messages`**. Callback URL as above, verify token from `.env`.
 
-**First, swap in the real token:** n8n → Credentials → **Shalom Park IG** → change the value from `Bearer PENDING-META-APP` to `Bearer <IG token>` → Save. Then put the app secret into `.env` (`vps-tools.sh n8n-env`). **Until both are done, a send fails on purpose.**
+**First, swap in the real token:** n8n → Credentials → **Shalom Park IG** → change the value from `Bearer PENDING-META-APP` to `Bearer ` + the **Page token** saved by `vps-tools.sh step0` (`/opt/propel/.secrets/shalom-park-ig-page-token`; not the system-user token) → Save. Then put the app secret into `.env` (`vps-tools.sh n8n-env`). **Until both are done, a send fails on purpose.**
 
 ---
 

@@ -15,6 +15,7 @@
 #   bash ops/setup/vps-tools.sh smtp          # prove a mailbox sends before n8n sees it (asks for what it needs)
 #   bash ops/setup/vps-tools.sh handshake     # step 9: prove the webhook works AND refuses strangers
 #   bash ops/setup/vps-tools.sh n8n-env       # give n8n the settings an older compose file is missing
+#   bash ops/setup/vps-tools.sh step0 <slug> [ig_username]  # Meta Step 0 test; saves the Page token root-only
 #
 set -euo pipefail
 
@@ -34,7 +35,7 @@ need_repo(){
   cd /opt && git clone -b claude/propel-realestate-marketing-plan-wxjj3x https://github.com/aadamola/PROPEL.git propel-repo"
 }
 case "${1:-preflight}" in
-  preflight|test|keywords|schema|ledger) need_repo ;;
+  preflight|test|keywords|schema|ledger|step0) need_repo ;;
 esac
 
 run_node(){ docker run --rm -v "$REPO":/app -w /app "$NODE_IMAGE" node "$@"; }
@@ -254,6 +255,19 @@ case "${1:-preflight}" in
       exit 1
     fi
     ;;
+  step0)
+    # The token is read hidden and handed over stdin -- never argv (visible in
+    # the process list), never echoed, never in shell history.
+    SLUG="${2:-}"; WHO="${3:-}"
+    [ -n "$SLUG" ] || die "usage: vps-tools.sh step0 <client-slug> [instagram_username]"
+    printf 'Paste the System User token (hidden), then Enter: ' >&2
+    read -rs TOKEN; echo >&2
+    [ -n "$TOKEN" ] || die "no token entered"
+    mkdir -p "$STACK/.secrets" && chmod 700 "$STACK/.secrets"
+    printf '%s' "$TOKEN" | docker run --rm -i -v "$REPO":/app -v "$STACK/.secrets":/secrets -w /app \
+      -e GRAPH_VERSION="${GRAPH_VERSION:-v21.0}" "$NODE_IMAGE" node tools/meta-step0.js "$SLUG" $WHO
+    unset TOKEN
+    ;;
   n8n-env)
     # Servers built before these settings existed never pass them to n8n.
     # Rather than hand-edit docker-compose.yml -- where one wrong space stops
@@ -310,5 +324,5 @@ YAML
     echo
     bash "$0" doctor | sed -n '/what n8n can see/,/── repo/p' | sed '$d'
     ;;
-  *) die "Unknown command '$1'. Use: preflight | test | keywords | schema | ledger | doctor | web | smtp | handshake | n8n-env" ;;
+  *) die "Unknown command '$1'. Use: preflight | test | keywords | schema | ledger | doctor | web | smtp | handshake | n8n-env | step0" ;;
 esac

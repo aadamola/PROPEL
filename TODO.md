@@ -4,17 +4,14 @@
 
 ---
 
-## ⭐ DO THIS NEXT: one WhatsApp to Collins (1 min, phone)
+## ⭐ DO THIS NEXT: Shalom Park Meta setup + Step 0 test (45 min, laptop)
 
-> *"Hi Collins, quick check: are the ₦5m entry deposit on the condo and the 70% deposit on the 4-bed still running? I need a yes or no so our Instagram replies stay accurate."*
-
-Until he says yes, use the **standard** saved replies, not the promo ones (marked ⏰ in [09-phase0-saved-replies.md](clients/shalom-park/09-phase0-saved-replies.md)). If he says yes, send me his reply and I'll push the review date out 30 days.
+Follow [clients/shalom-park/13-meta-setup-step0.md](clients/shalom-park/13-meta-setup-step0.md) top to bottom: the portfolio check, the app inside IFT Realty's portfolio, the Employee system user, the app secret onto the server, then `vps-tools.sh step0`. **Send me a screenshot of the step 0 output** (it never shows a token). Don't subscribe the webhook and don't switch the app to Live.
 
 ---
 
 ## THIS WEEK — one per sitting, in this order
 
-- [ ] **(1 message)** 🔴 **Ask Shalom Park who can grant Meta admin.** Script: [04-meta-access-pack.md](clients/shalom-park/04-meta-access-pack.md). Not Collins. This unblocks step 10.
 - [ ] **(20 min)** 🌐 **Legal pages live.** ① Merge PR #10 (github.com/aadamola/PROPEL/pull/10) ② Hostinger → Emails → forwarder **hello@getpropel.tech → aadamola@gmail.com** ③ vercel.com → New Project → `aadamola/PROPEL` → **Root Directory `site-legal`** → Deploy ④ Settings → Domains → `getpropel.tech` + `www` → copy the DNS records into Hostinger.
 - [ ] **(20 min)** 🔥 **Response Test #1.** 7 developers are ready in [ops/growth/response-test.csv](ops/growth/response-test.csv). Check each Instagram handle, then send: *"Hi, what's the current price and payment plan on [estate]?"* Tell me who and when. Never claim to be a buyer. AMG gets the question only.
 - [ ] **(5 min)** ⏰ **VPS renewal: check what Hostinger charged** (overdue since 29 Sep).
@@ -44,6 +41,8 @@ Until he says yes, use the **standard** saved replies, not the promo ones (marke
 
 ## ✅ DONE (look how far this has come)
 
+- [x] 🔑 **Shalom Park granted us Meta admin**: the blocker since July is gone (2026-10-16)
+- [x] 🎟️ **Collins re-confirmed the promos**: they now run to 15 Nov (2026-10-16)
 - [x] 💰 **New prices approved; Propel's assistant and the website switched to the three doors** (2026-10-15)
 - [x] 🧹 **Repo rebased "as if we opened today"**: old plans, packages and demos retired; one onboarding playbook; the engine is ready for client #2 (2026-10-15)
 - [x] 🧭 **Positioning v2 adopted + growth kit built** (docs/15, ops/growth/) (2026-10-15)

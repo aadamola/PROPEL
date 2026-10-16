@@ -250,10 +250,11 @@ const cases = [
 
   { name: 'KW-42 ★ an unreviewed campaign switches itself back to signed terms',
     run: () => {
-      // Nobody re-confirmed by 2026-10-15. The 70% promo stops on its own and
-      // the assistant goes back to the 50% Collins signed — no one has to
-      // remember to do anything.
-      const r = m('4 bedroom', { ...CFG_NO_LINK, now: Date.parse('2026-11-01T12:00:00Z') });
+      // The day after the review date with nobody re-confirming, the 70% promo
+      // stops on its own and the assistant goes back to the 50% Collins signed.
+      // Read from the table, so a reconfirmation never breaks this test.
+      const due = table.rules.find(x => x.rule_id === 'SP-4B').promo_review_by;
+      const r = m('4 bedroom', { ...CFG_NO_LINK, now: Date.parse(due + 'T00:00:00Z') + 2 * 86400000 });
       return r.promo_active === false && !/70%/.test(r.reply) && /50% deposit/.test(r.reply);
     } },
 

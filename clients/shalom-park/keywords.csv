@@ -12,7 +12,7 @@ SP-ESC-DISC,10,escalate_only,Discount / negotiation,disc,discount|negotiate|nego
 
 You can start from a 50% deposit and spread the balance over 3, 6 or 12 months.
 
-Which unit are you looking at? I will get the team to structure it with you.",Sent you a DM - the team will pick this up with you,SP-ESC-DISC,none,TRUE,pricing_terms.negotiable|payment.initial_deposit|payment.plan_durations,live,Negotiability is warranted. No discount authority exists.,,,2026-10-15,"Prices at Shalom Park are fixed - what moves is how you pay, and there is a campaign running right now.
+Which unit are you looking at? I will get the team to structure it with you.",Sent you a DM - the team will pick this up with you,SP-ESC-DISC,none,TRUE,pricing_terms.negotiable|payment.initial_deposit|payment.plan_durations,live,Negotiability is warranted. No discount authority exists.,,,2026-11-15,"Prices at Shalom Park are fixed - what moves is how you pay, and there is a campaign running right now.
 
 The 2-bedroom condominium opens at a 5,000,000 naira initial deposit with the balance over 12 months.
 
@@ -34,7 +34,7 @@ SP-2B,20,fast_lane,2-bedroom condominium,condo,2 bedroom|2 bed|two bedroom|2bedr
 
 Payment starts from a 50% deposit with the balance over 3, 6 or 12 months.
 
-Want to see it? Inspections run any day of the week, weekends included.",Just sent you a DM,SP-2B,whatsapp,TRUE,units[1].price_ngn|units[1].stage|units[1].available|units[1].total_units,live,"PROMO LIVE (open-ended, re-confirm by 2026-10-15). 5,000,000 naira entry deposit per Collins 2026-09-15. Runs until sold out, so it carries a review date instead of an end date - if nobody re-confirms it, the card reverts to the signed 50% terms on its own.",,,2026-10-15,"The 2-bedroom condominium is 95,000,000 naira - finished spec, under development, and 5 of the 16 units are available as at our last stock check.
+Want to see it? Inspections run any day of the week, weekends included.",Just sent you a DM,SP-2B,whatsapp,TRUE,units[1].price_ngn|units[1].stage|units[1].available|units[1].total_units,live,"PROMO LIVE (open-ended, re-confirm by 2026-10-15). 5,000,000 naira entry deposit per Collins 2026-09-15. Runs until sold out, so it carries a review date instead of an end date - if nobody re-confirms it, the card reverts to the signed 50% terms on its own.",,,2026-11-15,"The 2-bedroom condominium is 95,000,000 naira - finished spec, under development, and 5 of the 16 units are available as at our last stock check.
 
 Right now you can secure one with a 5,000,000 naira initial deposit and spread the balance over 12 months. The campaign runs until the units are sold.
 
@@ -43,7 +43,7 @@ SP-4B,20,fast_lane,4-bedroom semi-detached,duplex,4 bedroom|4 bed|four bedroom|4
 
 Payment starts from a 50% deposit with the balance over 3, 6 or 12 months. The price covers the purchase itself; legal, utility connection and the association fee come separately.
 
-When would you like to see it? Representatives are on site every day, weekends included.",Just sent you a DM,SP-4B,whatsapp,FALSE,units[0].price_ngn|units[0].available|units[0].finishing|pricing_terms.excluded_from_price|payment.initial_deposit,live,"PROMO LIVE (open-ended, re-confirm by 2026-10-15). 70% deposit per Collins 2026-09-15, adopted on ADEDAMOLA's instruction. Noted for the record: 70% is higher than the signed 50%, so the assistant asks a buyer for more upfront, not less. Reverts to the signed 50% if the promo is not re-confirmed.",,,2026-10-15,"The 4-bedroom semi-detached is 185,000,000 naira - completed, finished, and 3 units are available as at our last stock check.
+When would you like to see it? Representatives are on site every day, weekends included.",Just sent you a DM,SP-4B,whatsapp,FALSE,units[0].price_ngn|units[0].available|units[0].finishing|pricing_terms.excluded_from_price|payment.initial_deposit,live,"PROMO LIVE (open-ended, re-confirm by 2026-10-15). 70% deposit per Collins 2026-09-15, adopted on ADEDAMOLA's instruction. Noted for the record: 70% is higher than the signed 50%, so the assistant asks a buyer for more upfront, not less. Reverts to the signed 50% if the promo is not re-confirmed.",,,2026-11-15,"The 4-bedroom semi-detached is 185,000,000 naira - completed, finished, and 3 units are available as at our last stock check.
 
 On the campaign running now it is a 70% initial deposit with the balance spread over 12 months. The price covers the purchase itself; legal, utility connection and the association fee come separately.
 
@@ -93,7 +93,7 @@ SP-PAY,20,fast_lane,Payment plan,pay,payment plan|payment|installment|installmen
 
 The price covers the purchase itself; legal, utility connection and the association fee come separately.
 
-Which unit are you looking at? I will get you the exact breakdown in writing.",Just sent you a DM,SP-PAY,whatsapp,TRUE,payment.initial_deposit|payment.plan_durations|payment.interest_or_markup,live,interest_or_markup is null. Any instalment arithmetic is an escalation until that field is filled.,,,2026-10-15,"Payment starts with a 50% deposit and the balance over 3, 6 or 12 months - and there are campaigns running that open it up further.
+Which unit are you looking at? I will get you the exact breakdown in writing.",Just sent you a DM,SP-PAY,whatsapp,TRUE,payment.initial_deposit|payment.plan_durations|payment.interest_or_markup,live,interest_or_markup is null. Any instalment arithmetic is an escalation until that field is filled.,,,2026-11-15,"Payment starts with a 50% deposit and the balance over 3, 6 or 12 months - and there are campaigns running that open it up further.
 
 The 2-bedroom condominium is currently 5,000,000 naira to start, with the balance over 12 months.
 
@@ -119,7 +119,7 @@ SP-INFO,90,fast_lane,Generic interest,info,info|information|details|more info|mo
 We are at Abijo, opposite GRA Second Gate, Ibeju-Lekki, on 10.37 hectares - 4 and 5-bedroom semi-detached homes, 2-bedroom condominiums and serviced plots.
 
 What brings you to us - are you looking for somewhere to live, or to buy?",Just sent you a DM,SP-INFO,whatsapp,FALSE,location.address|development.total_land_size|units,live,Lowest priority - the catch-all. Opens with AI disclosure because it is usually the first touch.,,,,
-SP-ESC-PROMO,10,escalate_only,Promotion / campaign pricing,promo,summer|promo|promotion|promotions|flash sale|flash sales|summer sale|summer flash sales|summer promo|special offer|current offer|any promo|entry price|entry rate|discounted entry,Let me get the team to tell you exactly what is open to you today. Which unit are you interested in?,Sent you a DM - the team will pick this up with you,SP-ESC-PROMO,none,TRUE,escalate_always[7],live,"PROMO LIVE (open-ended, re-confirm by 2026-10-15). Reverts to the neutral ""let me check what is running"" answer if the review lapses.",,,2026-10-15,"Yes - there is a campaign running. The 2-bedroom condominium opens at a 5,000,000 naira initial deposit with the balance over 12 months, and it runs until the units are sold.
+SP-ESC-PROMO,10,escalate_only,Promotion / campaign pricing,promo,summer|promo|promotion|promotions|flash sale|flash sales|summer sale|summer flash sales|summer promo|special offer|current offer|any promo|entry price|entry rate|discounted entry,Let me get the team to tell you exactly what is open to you today. Which unit are you interested in?,Sent you a DM - the team will pick this up with you,SP-ESC-PROMO,none,TRUE,escalate_always[7],live,"PROMO LIVE (open-ended, re-confirm by 2026-10-15). Reverts to the neutral ""let me check what is running"" answer if the review lapses.",,,2026-11-15,"Yes - there is a campaign running. The 2-bedroom condominium opens at a 5,000,000 naira initial deposit with the balance over 12 months, and it runs until the units are sold.
 
 Which one are you looking at? I will get the team to confirm your terms."
 SP-DEVPLOT,10,escalate_only,Developer / bulk land,dev,developer|developer plot|bulk purchase|bulk buy|buy in bulk|joint venture|townhome|townhomes|townhouse|townhouses|multi unit|multiple plots|large parcel|bulk land|block of plots,"Shalom Park Estate is developed by IFT Realty Ltd, and there is a large parcel of about 6,738 sqm available for multi-unit or townhome development.

@@ -21,7 +21,7 @@
 
 ## What we now owe them
 
-The DM + comment Concierge on Shalom Park's Instagram (Instagram-only since 2026-09-15) — the thing they asked for and paid to start. Go-live runbook: `12-phase1-golive.md`; the generic path for future clients: `ops/onboarding/`.
+The DM + comment Concierge on Shalom Park's Instagram (Instagram-only since 2026-09-15) — the thing they asked for and paid to start. Meta setup tonight: `13-meta-setup-step0.md` · go-live runbook: `12-phase1-golive.md`; the generic path for future clients: `ops/onboarding/`.
 
 ## Site visit — 2026-07-26 (ADEDAMOLA, first-hand)
 

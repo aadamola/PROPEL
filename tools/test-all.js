@@ -10,6 +10,7 @@ const suites = [
   ['Instagram workflow (end-to-end)', 'tools/test-ig-workflow.js'],
   ['On-call routing (who gets the lead)', 'tools/test-oncall.js'],
   ['Client onboarding rehearsal (client #2)', 'tools/test-onboarding.js'],
+  ['Meta Step 0 tool (fake Graph)', 'tools/test-meta-step0.js'],
   ['Workflow import preflight', 'tools/preflight-workflows.js'],
   ['Legal pages (what getpropel.tech may serve)', 'tools/build-legal-site.js', '--check'],
   ['Attribution ledger (real PostgreSQL)', 'tools/test-ledger-sql.sh'],

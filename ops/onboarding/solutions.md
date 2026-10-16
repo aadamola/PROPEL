@@ -36,6 +36,8 @@
 | Promo still quoted after the client ended it | Promos without an end | `promo_review_by` makes the automation revert by itself | Lint refuses undated promos |
 | **Saved reply still quotes a lapsed promo** | Instagram keeps its own copy; nothing updates it | Swap the 5 promo replies by hand to the ⏰ standard text in the generated saved-replies file | ⏰ markers on every promo card |
 | DMs never arrive | No Facebook Page connected, or "Allow access to messages" is off on the phone | Session steps 14b and 14c | Playbook |
+| Sends fail with a token error although the token "works" | The credential holds the **system-user** token; the send endpoint (`/me/messages`) needs the **Page** token | `vps-tools.sh step0 <slug>` derives the Page token and saves it root-only; put that in the credential | `tools/test-meta-step0.js` S0-06 |
+| Step 0 "passes" but real buyers get nothing | The tester's Instagram is linked to a Facebook account with a role on the app, so dev mode let it through | Test from an outside account (e.g. @getpropel.tech) | Playbook step 15 |
 | Same buyer counted twice (comment + DM) | Comment author id ≠ DM IGSID (suspected, unverified) | Check during the Step 0 test; reconcile on handle if they differ | Open, tracked in Step 0 |
 
 ## People and process

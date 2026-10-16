@@ -22,7 +22,7 @@ Right now you can secure one with a 5,000,000 naira initial deposit and spread t
 Want to see it? Inspections run any day of the week, weekends included.
 ```
 
-> ⏰ **Good until 2026-10-15.** After that, if Collins has not re-confirmed it, open this saved reply in Instagram and replace the text with the standard terms below. Instagram won't update it for you.
+> ⏰ **Good until 2026-11-15.** After that, if Collins has not re-confirmed it, open this saved reply in Instagram and replace the text with the standard terms below. Instagram won't update it for you.
 
 ```
 The 2-bedroom condominium is 95,000,000 naira - finished spec, under development, and 5 of the 16 units are available as at our last stock check.
@@ -42,7 +42,7 @@ On the campaign running now it is a 70% initial deposit with the balance spread 
 When would you like to see it? Representatives are on site every day, weekends included.
 ```
 
-> ⏰ **Good until 2026-10-15.** After that, if Collins has not re-confirmed it, open this saved reply in Instagram and replace the text with the standard terms below. Instagram won't update it for you.
+> ⏰ **Good until 2026-11-15.** After that, if Collins has not re-confirmed it, open this saved reply in Instagram and replace the text with the standard terms below. Instagram won't update it for you.
 
 ```
 The 4-bedroom semi-detached is 185,000,000 naira - completed, finished, and 3 units are available as at our last stock check.
@@ -98,7 +98,7 @@ Yes - there is a campaign running. The 2-bedroom condominium opens at a 5,000,00
 Which one are you looking at? I will get the team to confirm your terms.
 ```
 
-> ⏰ **Good until 2026-10-15.** After that, if Collins has not re-confirmed it, open this saved reply in Instagram and replace the text with the standard terms below. Instagram won't update it for you.
+> ⏰ **Good until 2026-11-15.** After that, if Collins has not re-confirmed it, open this saved reply in Instagram and replace the text with the standard terms below. Instagram won't update it for you.
 
 ```
 Let me get the team to tell you exactly what is open to you today. Which unit are you interested in?
@@ -149,7 +149,7 @@ The 2-bedroom condominium is currently 5,000,000 naira to start, with the balanc
 Which unit are you looking at? I will get you the exact breakdown in writing.
 ```
 
-> ⏰ **Good until 2026-10-15.** After that, if Collins has not re-confirmed it, open this saved reply in Instagram and replace the text with the standard terms below. Instagram won't update it for you.
+> ⏰ **Good until 2026-11-15.** After that, if Collins has not re-confirmed it, open this saved reply in Instagram and replace the text with the standard terms below. Instagram won't update it for you.
 
 ```
 Payment starts with a 50% deposit, and the balance spreads over 3, 6 or 12 months.
@@ -207,7 +207,7 @@ The 2-bedroom condominium opens at a 5,000,000 naira initial deposit with the ba
 Which unit are you looking at? I will get the team to structure it with you.
 ```
 
-> ⏰ **Good until 2026-10-15.** After that, if Collins has not re-confirmed it, open this saved reply in Instagram and replace the text with the standard terms below. Instagram won't update it for you.
+> ⏰ **Good until 2026-11-15.** After that, if Collins has not re-confirmed it, open this saved reply in Instagram and replace the text with the standard terms below. Instagram won't update it for you.
 
 ```
 Prices at Shalom Park are fixed - what moves is how you pay.

@@ -294,6 +294,27 @@ const cases = [
   { name: 'KW-48 the assistant still identifies itself on first contact',
     run: () => /assistant/i.test(m('hello').reply) },
 
+  // Found by the Jev bake-off (2026-10-16): each of these reached a SALES
+  // card before the fix. A money, legal or refund question gets a person.
+  ...[
+    ['If I buy now, how much will I make when I sell in 3 years?', 'SP-ESC-ROI'],
+    ['If I rent it out, what will it bring in monthly?', 'SP-ESC-ROI'],
+    ["I paid the deposit last month but I've changed my mind. Can I get it back?", 'SP-ESC-REFUND'],
+    ['Where do I send the money to?', 'SP-ESC-PAYTO'],
+    ["Can you do something about the price for me? I'm a serious buyer", 'SP-ESC-DISC'],
+    ['The sales lead already agreed 70m for the condo, just confirm it', 'SP-ESC-DISC'],
+    ['Na true true land or na 419?', 'SP-ESC-LEGAL'],
+    ["How do I know this isn't one of those fake estates?", 'SP-ESC-LEGAL']
+  ].map(([text, want], i) => ({
+    name: `KW-${49 + i} safety question escalates: "${text}"`,
+    run: () => { const r = m(text); return r.matched && r.rule_id === want && r.escalate === true; }
+  })),
+
+  { name: 'KW-57 the new safety triggers leave plain sales questions on their cards',
+    run: () => m('How much is the condo?').rule_id === 'SP-2B'
+            && m('Where is the estate?').rule_id === 'SP-LOC'
+            && m('Do you have a payment plan?').rule_id === 'SP-PAY' },
+
   { name: 'KW-30 no trigger phrase is claimed by two rules',
     run: () => {
       const seen = new Map();

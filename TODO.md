@@ -28,6 +28,8 @@ Step 0 passed 9/9 and the test DM reached you. The last question is whether it r
 
 ## NOT YET — I'm holding these, don't think about them
 
+- 🧠 **Turn Jev on at the server (10 min, when you next touch the VPS):** `cd /opt/propel-repo && git pull && bash ops/setup/vps-tools.sh n8n-env` → in n8n, re-import `05-channel-instagram.json` (replace the old one) → `bash ops/setup/vps-tools.sh jev` and screenshot the table. *Buyers only see it at step 10.*
+
 - Collins follow-up, 7 open fields: [03-followup-questions.md](clients/shalom-park/03-followup-questions.md). *Moved down to make room for the legal pages.*
 
 **Parked from "this week" to keep the list at five** (the protocol, not a demotion — I'll star them when their turn comes):
@@ -55,6 +57,9 @@ Testing the bot · the automated pilot · voice notes · first audit calls. Noth
 
 ## ✅ DONE (look how far this has come)
 
+- [x] 🤝 **Got IFT's yes on Jev, so it's built into Shalom Park's assistant** (2026-10-16)
+- [x] 🛡️ **You said "fix now": 8 money and legal questions that got sales replies now go to a person** (2026-10-16)
+- [x] 🧪 **Ran the Jev test on the VPS.** Jev got 88% right where our keywords got 46% (2026-10-16)
 - [x] 📨 **Step 0: 9/9, and a real DM sent from Shalom Park's app to your Instagram.** Full Meta access, the app, the system user and a never-expiring token, all in one afternoon (2026-10-16)
 - [x] 🌐 **getpropel.tech is LIVE.** PR #10 merged, Vercel set up from scratch, and Hostinger DNS pointed at it, all in one evening (2026-10-15)
 - [x] 🛡️ **Steps 8 + 9: Instagram webhook published and handshake ✅ 3/3.** It answers Meta and refuses strangers (2026-10-15)

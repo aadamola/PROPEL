@@ -2,6 +2,42 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-10-16 (evening) — Jev wired into Shalom Park's Instagram workflow (IFT approved)
+
+- **IFT Realty approved TypeSafe as a sub-processor.** ADEDAMOLA authorised the wiring in the project thread. The privacy page (`site/` + `site-legal/`) now names a "message-classification provider" that receives message words only. The approval and the transfer check are in `clients/shalom-park/README.md`. **Keep IFT's written "yes" on file.**
+- **New node `Jev second opinion`** in `05`, between the keyword lane and `Keyword matched?`. It uses the shared policy in `ops/concierge/lib/router.js`, which is the same code the bake-off scores:
+  - a keyword escalation is final, and Jev isn't even called;
+  - a confident Jev escalation (≥0.5) beats a sales card;
+  - a very confident Jev card (≥0.8) replaces a generic keyword card (priority ≥30);
+  - on a keyword miss, Jev's card is used at ≥0.7, otherwise the brain answers.
+
+  **Jev-chosen cards are built exactly like keyword cards and go through the same guardrail.** TypeSafe receives the message text only, never an IGSID, handle or name. No key, a timeout (2.5s) or TypeSafe being down all leave the keyword answer standing.
+- **Tests:** IGJ-01 to IGJ-08 in the chain suite (23/23). Preflight now parses Code nodes the way n8n runs them (async). All suites pass.
+- **Server:** `n8n-env` now passes `TYPESAFE_API_KEY` to n8n, and `doctor` reports it. **Switch:** `clients.json` → `shalom-park.jev_router.enabled` (on).
+- **Not yet proven:** the 0.8 override rule was set after the first run. Re-running `vps-tools.sh jev` on the new code scores it.
+- **Waiting on ADEDAMOLA:** on the VPS, pull the branch, then `n8n-env`, then re-import `05`. Buyers only see any of this at step 10 cutover.
+
+## 2026-10-16 — Shalom Park keyword table: 8 money and legal questions now reach a person
+
+- **ADEDAMOLA chose "fix now".** I added 34 escalation triggers across 5 rules (ROI, refund, pay-to, discount, legal). Examples: "where do I send the money", "changed my mind", "get it back", "already agreed", "419", "fake estate", "how much will I make". **All 8 messages that reached a sales card before now escalate**, locked by KW-49 to KW-56, and all 8 fail on the old table. KW-57 checks that plain questions ("How much is the condo?", "Where is the estate?") still get their cards. Mirrored into the Apex sandbox, where the keyword baseline goes from 32/69 with 5 unsafe to **42/69 with 0 unsafe**. All suites pass.
+- **The rebuild also flipped the promo saved replies to standard terms.** The 2026-10-15 review date has passed with no re-confirmation from Collins, which is the designed behaviour. If Collins says the promo is still on, send me his reply and I'll push the review date out.
+- **Waiting on ADEDAMOLA:** re-paste only the saved replies that changed (the promo ones), after the Collins answer. The new triggers don't change any reply text.
+
+## 2026-10-16 — First live Jev run: 88% correct alone, zero unsafe; the hybrid failed on keyword errors
+
+- **ADEDAMOLA ran `vps-tools.sh jev`** on the VPS. Jev alone was **61/69 correct (88%)**, with **0 unsafe** and 1 wrong. The keyword lane was 32/69 (46%) with 5 unsafe. Paraphrases went 1→19 of 24 and typos 0→7 of 8. p50 latency was 197ms; 69k tokens cost less than one US cent.
+- **The bar failed (✖)**: the hybrid had 1 unsafe and 3 wrong. Three of those four come from keyword picks overriding a correct or uneasy Jev. The fourth (P01) is a defensible answer against a strict label, which stays as written. Details: `sandbox/apex-gardens/jev-bakeoff/README.md`.
+- **Conclusion:** Jev is promising, and the keyword table is the weak link. **Nothing goes near a real buyer yet.** Next: fix the keyword table's unsafe triggers, re-run, then vet TypeSafe as an NDPA processor.
+- **Waiting on ADEDAMOLA:** nothing for Jev. The ⭐ stays the Collins promo check.
+
+## 2026-10-15 (late night) — Jev bake-off harness; keyword lane routes 5 safety questions to sales cards
+
+- **Looked into Jev** (ADEDAMOLA's idea): TypeSafe's decision model. It returns a Choice, Score or yes/no probability and writes nothing. **It fits as a classifier in front of the keyword lane, not as the Concierge brain.** Correction to the links shared: `jev-ai/jev-agent-skill` is a third-party reseller (`thejevai.com`, which did not resolve), not TypeSafe. The real API is `api.typesafe.ai`, taken from TypeSafe's own SDK.
+- **Built `sandbox/apex-gardens/jev-bakeoff/`:** 20 fictional rules, 69 labelled buyer DMs (exact, paraphrase, Pidgin, typos, off-topic, injection), and a three-lane harness (keyword / Jev / hybrid). **Hybrid rule: Jev can upgrade a message to an escalation, never downgrade one.** It refuses any input not marked fictional. `vps-tools.sh jev` runs it live with the key read from `.env`. 31 offline tests, in `test-all`.
+- **Keyword baseline:** 32/69 correct. 12/12 exact phrases, 1/24 paraphrases, 0/8 typos. **🔴 5 unsafe routes**, e.g. "Where do I send the money to?" gets the location card. **The same messages hit Shalom Park's real table the same way.** That is a keyword-table fix before Phase 1 cutover, whatever happens with Jev.
+- **Not decided:** Jev on any real message. It needs the bake-off bar cleared first, then TypeSafe vetted as an NDPA processor (docs/13 §3).
+- **Waiting on ADEDAMOLA:** (optional, after the ⭐) a TypeSafe API key in `/opt/propel/.env`, then `vps-tools.sh jev`.
+
 ## 2026-10-16 — Full access to Shalom Park's Meta portfolio granted
 
 - **ADEDAMOLA has full access** to the IFT Realty Ltd portfolio. No app exists yet.
@@ -25,6 +61,7 @@
 - **Vercel set up** (new account, signed in with GitHub): project imported from `aadamola/PROPEL` with **Root Directory `site-legal`** and Framework Preset Other. **DNS at Hostinger:** `A @ → 216.198.79.1` and `CNAME www →` Vercel's project-specific target. `engine` / `flow` / `status` were left alone. ADEDAMOLA confirmed `getpropel.tech` loads the holding page with both legal links.
 - **Vercel Hobby is non-commercial by its terms.** It's fine for unblocking Meta. Before client work goes on it, either move to Pro (~$20/mo) or serve from the VPS via Caddy. Recommendation: the VPS.
 - **Waiting on ADEDAMOLA:** ⭐ paste both legal URLs into the Meta app (App settings → Basic) and save. Then the `hello@getpropel.tech` forwarder before Meta review.
+
 
 ## 2026-10-15 (late night) — PR #10 opened so Vercel can deploy the legal pages
 

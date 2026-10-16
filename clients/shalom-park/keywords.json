@@ -34,7 +34,16 @@
         "investment value",
         "passive income",
         "what will it be worth",
-        "how much will it be worth"
+        "how much will it be worth",
+        "how much will i make",
+        "will i make",
+        "profit",
+        "when i sell",
+        "resell",
+        "worth more",
+        "rent it out",
+        "rent out",
+        "bring in monthly"
       ],
       "dm_response": "Good question - and that is one worth having with a person rather than a chat window.\n\nLet me get someone from the team onto it with you. What number is best to reach you on?",
       "public_comment_reply": "Sent you a DM - the team will pick this up with you",
@@ -69,7 +78,12 @@
         "opt out",
         "back out",
         "change my mind",
-        "money back"
+        "money back",
+        "changed my mind",
+        "get it back",
+        "get my money back",
+        "return my money",
+        "refnd"
       ],
       "dm_response": "Straight answer, because it matters. On cancellation for any reason, the purchaser forfeits 25% of the agreed purchase price as a cancellation penalty. Refunds are made only after the property is resold to a third party, and the developer has up to 180 days from the date of resale to make any net refund.\n\nThat is the written policy. Let me get someone from the team to take you through it - what number works for you?",
       "public_comment_reply": "Sent you a DM - the team will pick this up with you",
@@ -104,7 +118,13 @@
         "transfer",
         "i want to pay",
         "ready to pay",
-        "how do i pay"
+        "how do i pay",
+        "send the money",
+        "send money",
+        "where do i send",
+        "where do i pay",
+        "which account",
+        "pay into"
       ],
       "dm_response": "Payments go to IFT Realty Ltd - and I will not put bank information in a chat window, because that is exactly how people get defrauded.\n\nLet me get someone from the team to confirm everything with you directly. What number should they call?",
       "public_comment_reply": "Sent you a DM - the team will pick this up with you",
@@ -140,7 +160,14 @@
         "any discount",
         "price off",
         "make me a price",
-        "bring down the price"
+        "bring down the price",
+        "do something about the price",
+        "better price",
+        "lower price",
+        "already agreed",
+        "we agreed",
+        "agreed price",
+        "promised me"
       ],
       "dm_response": "Prices at Shalom Park are fixed - what moves is how you pay.\n\nYou can start from a 50% deposit and spread the balance over 3, 6 or 12 months.\n\nWhich unit are you looking at? I will get the team to structure it with you.",
       "public_comment_reply": "Sent you a DM - the team will pick this up with you",
@@ -179,7 +206,14 @@
         "fraud",
         "fraudulent",
         "any problem with the land",
-        "encumbrance"
+        "encumbrance",
+        "419",
+        "true true",
+        "fake",
+        "fake estate",
+        "is it real",
+        "is this real",
+        "wayo"
       ],
       "dm_response": "IFT Realty has warranted in writing that there is no litigation, acquisition or dispute on the land, and the estate is held under Governors Consent with confirmed layout approval.\n\nThe documents are there to be seen. Let me arrange for the team to take you through them - would you rather do that on a call, or at the site?",
       "public_comment_reply": "Sent you a DM - the team will pick this up with you",

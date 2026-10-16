@@ -1,0 +1,397 @@
+{
+  "_meta": {
+    "fictional": true,
+    "what": "Apex Gardens (DEMO) keyword rule table for the Jev bake-off. Mirrors the SHAPE of a real client table (escalate_only safety class + fast_lane commercial cards) with invented estate data only. Same fields lib/keywords.js compiles.",
+    "jev_description": "One line per rule, written for the Jev Choice question. It describes what the BUYER is asking, never the answer we give."
+  },
+  "rules": [
+    {
+      "rule_id": "AG-ESC-ROI",
+      "priority": 10,
+      "class": "escalate_only",
+      "status": "live",
+      "escalate": true,
+      "intent": "Returns / yield / appreciation",
+      "jev_description": "Asks about investment returns, rental yield, ROI, appreciation or what the unit will be worth in future",
+      "trigger_phrases": [
+        "roi",
+        "yield",
+        "rental yield",
+        "rental income",
+        "shortlet",
+        "airbnb",
+        "return on investment",
+        "returns",
+        "appreciate",
+        "appreciation",
+        "resale value",
+        "how much will i make",
+        "will i make",
+        "profit",
+        "when i sell",
+        "resell",
+        "worth more",
+        "rent it out",
+        "rent out",
+        "bring in monthly"
+      ],
+      "dm_response": "[DEMO] Great question for a person, not a chat window. Shall I have the sales team call you today?"
+    },
+    {
+      "rule_id": "AG-ESC-REFUND",
+      "priority": 10,
+      "class": "escalate_only",
+      "status": "live",
+      "escalate": true,
+      "intent": "Refund / cancellation",
+      "jev_description": "Wants a refund, to cancel, withdraw or back out of a purchase already made",
+      "trigger_phrases": [
+        "refund",
+        "cancel",
+        "cancellation",
+        "withdraw",
+        "pull out",
+        "back out",
+        "money back",
+        "changed my mind",
+        "get it back",
+        "get my money back",
+        "return my money",
+        "refnd"
+      ],
+      "dm_response": "[DEMO] I'll get a senior member of the team on this for you now. What's the best number to reach you on?"
+    },
+    {
+      "rule_id": "AG-ESC-PAYTO",
+      "priority": 10,
+      "class": "escalate_only",
+      "status": "live",
+      "escalate": true,
+      "intent": "Account details / ready to pay",
+      "jev_description": "Asks for bank or account details, or says they are ready to pay or transfer money now",
+      "trigger_phrases": [
+        "account number",
+        "account details",
+        "bank details",
+        "send account",
+        "pay now",
+        "make payment",
+        "transfer",
+        "send the money",
+        "send money",
+        "where do i send",
+        "where do i pay",
+        "which account",
+        "pay into"
+      ],
+      "dm_response": "[DEMO] Wonderful. For your safety, payment details only ever come from the sales team directly. Can they call you in the next hour?"
+    },
+    {
+      "rule_id": "AG-ESC-DISC",
+      "priority": 10,
+      "class": "escalate_only",
+      "status": "live",
+      "escalate": true,
+      "intent": "Discount / negotiation",
+      "jev_description": "Asks for a discount, a lower price, the last price, or tries to negotiate",
+      "trigger_phrases": [
+        "discount",
+        "negotiate",
+        "negotiable",
+        "best price",
+        "last price",
+        "final price",
+        "reduce",
+        "do something about the price",
+        "better price",
+        "lower price",
+        "already agreed",
+        "we agreed",
+        "agreed price",
+        "promised me"
+      ],
+      "dm_response": "[DEMO] Let me put you straight through to the sales lead on that. When's a good time for a quick call?"
+    },
+    {
+      "rule_id": "AG-ESC-LEGAL",
+      "priority": 10,
+      "class": "escalate_only",
+      "status": "live",
+      "escalate": true,
+      "intent": "Litigation / genuineness",
+      "jev_description": "Asks whether the estate is genuine, a scam, under litigation, in court, or troubled by omonile or land grabbers",
+      "trigger_phrases": [
+        "litigation",
+        "court",
+        "lawsuit",
+        "dispute",
+        "omonile",
+        "land grabber",
+        "is it genuine",
+        "is it legit",
+        "scam",
+        "fraud",
+        "419",
+        "true true",
+        "fake",
+        "fake estate",
+        "is it real",
+        "is this real",
+        "wayo"
+      ],
+      "dm_response": "[DEMO] Completely fair to ask. Our team will walk you through every document in person. Shall I set that up?"
+    },
+    {
+      "rule_id": "AG-ESC-MORTGAGE",
+      "priority": 10,
+      "class": "escalate_only",
+      "status": "live",
+      "escalate": true,
+      "intent": "Mortgage / financing",
+      "jev_description": "Asks about a mortgage, bank loan, NHF, pension-backed or any third-party financing",
+      "trigger_phrases": [
+        "mortgage",
+        "bank loan",
+        "financing",
+        "nhf",
+        "pension",
+        "loan"
+      ],
+      "dm_response": "[DEMO] Our sales lead handles financing questions personally. What's the best number to reach you on?"
+    },
+    {
+      "rule_id": "AG-2B",
+      "priority": 20,
+      "class": "fast_lane",
+      "status": "live",
+      "intent": "2-bedroom condo",
+      "jev_description": "Asks about the 2-bedroom condo or apartment (price, size, features)",
+      "trigger_phrases": [
+        "2 bedroom",
+        "condo",
+        "condominium",
+        "apartment",
+        "flat"
+      ],
+      "dm_response": "[DEMO] The 2-bedroom condo is 110 sqm at ₦95m, with 4 left. Would you like to inspect it this Saturday?"
+    },
+    {
+      "rule_id": "AG-3B",
+      "priority": 20,
+      "class": "fast_lane",
+      "status": "live",
+      "intent": "3-bedroom terrace",
+      "jev_description": "Asks about the 3-bedroom terrace (price, size, features)",
+      "trigger_phrases": [
+        "3 bedroom",
+        "terrace",
+        "terraced"
+      ],
+      "dm_response": "[DEMO] The 3-bedroom terrace is 185 sqm at ₦160m, with boys quarters and two parking spaces. Shall I book you a viewing?"
+    },
+    {
+      "rule_id": "AG-4B",
+      "priority": 20,
+      "class": "fast_lane",
+      "status": "live",
+      "intent": "4-bedroom semi-detached",
+      "jev_description": "Asks about the 4-bedroom semi-detached house (price, size, features)",
+      "trigger_phrases": [
+        "4 bedroom",
+        "semi detached",
+        "semi"
+      ],
+      "dm_response": "[DEMO] The 4-bedroom semi-detached is 260 sqm at ₦240m, with a rooftop terrace. Would a Tuesday or Saturday viewing suit you?"
+    },
+    {
+      "rule_id": "AG-5B",
+      "priority": 20,
+      "class": "fast_lane",
+      "status": "live",
+      "intent": "5-bedroom detached",
+      "jev_description": "Asks about the 5-bedroom detached house (price, size, features)",
+      "trigger_phrases": [
+        "5 bedroom",
+        "detached",
+        "duplex",
+        "mansion"
+      ],
+      "dm_response": "[DEMO] The 5-bedroom detached is 340 sqm at ₦380m, and there is one left. Shall I hold a viewing slot for you?"
+    },
+    {
+      "rule_id": "AG-PRICE-GEN",
+      "priority": 30,
+      "class": "fast_lane",
+      "status": "live",
+      "intent": "General price enquiry",
+      "jev_description": "Asks the price or cost without naming a specific unit type",
+      "trigger_phrases": [
+        "price",
+        "prices",
+        "price list",
+        "how much",
+        "hw much",
+        "cost"
+      ],
+      "dm_response": "[DEMO] Prices run from ₦95m (2-bed condo) to ₦380m (5-bed detached). Which size are you considering?"
+    },
+    {
+      "rule_id": "AG-AVAIL",
+      "priority": 30,
+      "class": "fast_lane",
+      "status": "live",
+      "intent": "Availability / stock",
+      "jev_description": "Asks whether units are still available or how many are left",
+      "trigger_phrases": [
+        "available",
+        "availability",
+        "still available",
+        "how many left",
+        "any left",
+        "sold out"
+      ],
+      "dm_response": "[DEMO] Yes: 4 condos, 2 terraces, 3 semi-detached and 1 detached left. Which one should I tell you about?"
+    },
+    {
+      "rule_id": "AG-LOC",
+      "priority": 30,
+      "class": "fast_lane",
+      "status": "live",
+      "intent": "Location / directions",
+      "jev_description": "Asks where the estate is, the address or directions",
+      "trigger_phrases": [
+        "location",
+        "where",
+        "address",
+        "directions",
+        "map"
+      ],
+      "dm_response": "[DEMO] We're at 1 Apex Gardens Drive, Lekki Phase 1. Would you like to come and see it?"
+    },
+    {
+      "rule_id": "AG-INSPECT",
+      "priority": 30,
+      "class": "fast_lane",
+      "status": "live",
+      "intent": "Inspection booking",
+      "jev_description": "Wants to inspect, visit, view or book a site tour in person",
+      "trigger_phrases": [
+        "inspection",
+        "inspect",
+        "site visit",
+        "visit",
+        "viewing",
+        "tour",
+        "book"
+      ],
+      "dm_response": "[DEMO] Inspections run Tuesdays and Saturdays, 10am to 4pm. Which day works for you?"
+    },
+    {
+      "rule_id": "AG-VIRTUAL",
+      "priority": 20,
+      "class": "fast_lane",
+      "status": "live",
+      "intent": "Diaspora / virtual inspection",
+      "jev_description": "Is abroad or in the diaspora, or wants a video call or virtual tour instead of visiting",
+      "trigger_phrases": [
+        "virtual",
+        "video call",
+        "zoom",
+        "diaspora",
+        "abroad",
+        "overseas",
+        "in the uk",
+        "in london"
+      ],
+      "dm_response": "[DEMO] Live video inspections run Tuesdays 7pm and Saturdays 4pm WAT. Shall I book you in?"
+    },
+    {
+      "rule_id": "AG-PAY",
+      "priority": 20,
+      "class": "fast_lane",
+      "status": "live",
+      "intent": "Payment plan",
+      "jev_description": "Asks about payment plans, instalments, spreading payment or the initial deposit",
+      "trigger_phrases": [
+        "payment plan",
+        "installment",
+        "installments",
+        "instalment",
+        "instalments",
+        "spread payment",
+        "deposit",
+        "initial deposit"
+      ],
+      "dm_response": "[DEMO] Three options: outright with 5% off, 12 months (30% down) or 18 months (35% down). Which suits you best?"
+    },
+    {
+      "rule_id": "AG-DOCS",
+      "priority": 20,
+      "class": "fast_lane",
+      "status": "live",
+      "intent": "Title and documents",
+      "jev_description": "Asks about the title, C of O, Governor's Consent, survey or other land documents",
+      "trigger_phrases": [
+        "title",
+        "documents",
+        "c of o",
+        "certificate of occupancy",
+        "governors consent",
+        "survey"
+      ],
+      "dm_response": "[DEMO] Title is Governor's Consent, and every document is available for your lawyer to review. Shall I arrange that?"
+    },
+    {
+      "rule_id": "AG-AMEN",
+      "priority": 30,
+      "class": "fast_lane",
+      "status": "live",
+      "intent": "Amenities and service charge",
+      "jev_description": "Asks about amenities, power, security, water, roads, gym or the service charge",
+      "trigger_phrases": [
+        "amenities",
+        "facilities",
+        "security",
+        "power",
+        "light",
+        "water",
+        "gym",
+        "service charge"
+      ],
+      "dm_response": "[DEMO] Underground power, a water treatment plant, CCTV and 24-hour security. Service charge from ₦1.2m a year. Would you like the full list?"
+    },
+    {
+      "rule_id": "AG-COMPLETE",
+      "priority": 20,
+      "class": "fast_lane",
+      "status": "live",
+      "intent": "Completion / handover",
+      "jev_description": "Asks when the estate will be completed, finished or handed over",
+      "trigger_phrases": [
+        "completion",
+        "handover",
+        "when will it be ready",
+        "when will it be completed",
+        "finished"
+      ],
+      "dm_response": "[DEMO] Phase 1 handover is scheduled for Q2 2027, with monthly construction updates. Shall I add you to them?"
+    },
+    {
+      "rule_id": "AG-INFO",
+      "priority": 90,
+      "class": "fast_lane",
+      "status": "live",
+      "intent": "Generic interest",
+      "jev_description": "Expresses general interest or asks for more information without a specific question",
+      "trigger_phrases": [
+        "info",
+        "information",
+        "details",
+        "more info",
+        "tell me more",
+        "interested"
+      ],
+      "dm_response": "[DEMO] Apex Gardens has 2- to 5-bedroom homes in Lekki Phase 1 from ₦95m. What size are you looking for?"
+    }
+  ]
+}

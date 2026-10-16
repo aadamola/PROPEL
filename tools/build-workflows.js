@@ -369,11 +369,69 @@ return [{ json: { ...env, lane: 'keyword', rule_id: hit.rule_id, intent: hit.int
                          unit_interest: hit.unit_interest, grounded_in: hit.grounded_in }) } }];
 `;
 
+const routerSrc = R('ops/concierge/lib/router.js')
+  .replace(/^'use strict';$/m, '')
+  .replace(/^module\.exports[\s\S]*$/m, '');
+const spJev = registry.clients['shalom-park'].jev_router || { enabled: false };
+
+const igJev = `
+${keywordsSrc}
+${routerSrc}
+
+// Second opinion from TypeSafe Jev on what the keyword lane decided.
+// Policy: ops/concierge/lib/router.js, scored by the Apex Gardens bake-off.
+// Jev picks one of OUR approved cards or NONE; it writes nothing.
+// IFT approved TypeSafe as a sub-processor on 2026-10-16 (client README).
+// Off, no key, slow or down: the keyword result stands untouched.
+const TABLE = ${JSON.stringify(kwTable)};
+const CFG = ${JSON.stringify({ assistant_signature: spKw.assistant_signature, links: spKw.links })};
+const JEV = ${JSON.stringify(spJev)};
+const BY_ID = new Map(TABLE.rules.filter(r => r.status === 'live').map(r => [r.rule_id, r]));
+
+const lane = $input.first().json;
+const kwId = lane.lane === 'keyword' ? lane.rule_id : NONE;
+const key = String($env[JEV.key_env || 'TYPESAFE_API_KEY'] || '');
+
+const skip = !JEV.enabled ? 'disabled' : !key ? 'no_key'
+  : (kwId !== NONE && BY_ID.get(kwId) && BY_ID.get(kwId).class === 'escalate_only') ? 'keyword_escalation' : '';
+if (skip) return [{ json: { ...lane, jev_used: false, jev_skip: skip } }];
+
+// Data minimisation: only the buyer's words go out -- no id, name or handle.
+const buyer = $('Seen this message?').first().json;
+let answer = null, jevError = '';
+try {
+  const body = await this.helpers.httpRequest({
+    method: 'POST', url: JEV.base_url + '/v1/systemone',
+    headers: { Authorization: 'Bearer ' + key, 'Content-Type': 'application/json' },
+    body: buildRequest([...BY_ID.values()], buyer.text, JEV.model), json: true, timeout: JEV.timeout_ms || 2500
+  });
+  answer = parseAnswer(body);
+  if (!answer) jevError = 'unparseable_answer';
+} catch (e) {
+  // A second opinion that fails is no opinion; the buyer still gets answered.
+  jevError = String((e && (e.httpCode || e.message)) || 'error').slice(0, 80);
+}
+
+const d = decide(kwId, answer, BY_ID, JEV);
+const trace = { jev_used: true, jev_choice: answer ? answer.choice : '', jev_confidence: answer ? answer.confidence : null,
+                jev_source: d.source, jev_error: jevError };
+if (d.source !== 'jev') return [{ json: { ...lane, ...trace } }];
+
+// Jev chose a card the keyword lane did not: build it exactly as the keyword
+// lane would, so it passes the same guardrail node.
+const hit = fromRule(BY_ID.get(d.pick), CFG, 'jev ' + answer.confidence.toFixed(2), 0);
+const why = hit.escalate ? 'jev router ' + hit.rule_id + ': ' + hit.intent : '';
+return [{ json: { ...buyer, ...trace, lane: 'keyword', rule_id: hit.rule_id, intent: hit.intent, matched_phrase: hit.matched_phrase,
+  public_comment_reply: hit.public_comment_reply, link_code: hit.link_code,
+  text: JSON.stringify({ reply: hit.reply, escalate: hit.escalate, escalation_reason: why,
+                         unit_interest: hit.unit_interest, grounded_in: hit.grounded_in }) } }];
+`;
+
 const igPrepare = `
 // Merge whichever lane answered back onto the original envelope.
 const env = $('Normalise').first().json;
 const src = $input.first().json;
-const lane = $('Keyword fast lane').first().json;
+const lane = $('Jev second opinion').first().json;
 
 const reply = String(src.reply || '');
 const isComment = env.channel === 'instagram_comment';
@@ -483,6 +541,7 @@ const instagram = {
 
     code('ig-seen', 'Seen this message?', [400, 60], igSeen),
     code('ig-keywords', 'Keyword fast lane', [620, 60], igFastLane),
+    code('ig-jev', 'Jev second opinion', [730, 60], igJev),
     { parameters: { conditions: { options: { caseSensitive: true, version: 2 }, conditions: [
         { id: 'is-keyword', operator: { type: 'string', operation: 'equals' },
           leftValue: '={{ $json.lane }}', rightValue: 'keyword' } ], combinator: 'and' }, options: {} },
@@ -561,7 +620,8 @@ const instagram = {
       [{ node: 'Seen this message?', type: 'main', index: 0 }],
       [{ node: 'Log ignored event', type: 'main', index: 0 }] ] },
     'Seen this message?':   { main: [[{ node: 'Keyword fast lane', type: 'main', index: 0 }]] },
-    'Keyword fast lane':    { main: [[{ node: 'Keyword matched?', type: 'main', index: 0 }]] },
+    'Keyword fast lane':    { main: [[{ node: 'Jev second opinion', type: 'main', index: 0 }]] },
+    'Jev second opinion':   { main: [[{ node: 'Keyword matched?', type: 'main', index: 0 }]] },
     'Keyword matched?':     { main: [
       [{ node: 'Guardrails', type: 'main', index: 0 }],
       [{ node: 'Concierge CORE', type: 'main', index: 0 }] ] },

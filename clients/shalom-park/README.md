@@ -76,6 +76,17 @@ Reason: commission on a single unit is ₦5.5m–₦6m at 3%. If our only eviden
 
 *Interim while that runs:* build both instances on our own assets, prepare their KB skeleton, and run manual/assisted response coverage on their enquiries if they want cover from day one.
 
+## Sub-processors (NDPA): who reads buyer messages
+
+IFT Realty is the controller and Propel is the processor. Any new company that reads buyer messages needs IFT's approval first.
+
+| Provider | Role | What it receives | Where | Approved |
+|---|---|---|---|---|
+| Google (Gemini) | Writes replies the keyword lane can't answer | Message text + KB | US | At onboarding (privacy page, 2026-09-15) |
+| **TypeSafe (Jev)** | Picks which pre-approved card answers a message; writes nothing | **Message text only**, with no name, handle or ID | US West | **IFT approved 2026-10-16** (ADEDAMOLA asked; IFT said yes). *Keep IFT's reply on file.* |
+
+**Transfer check (TypeSafe, 2026-10-16):** the privacy policy says inputs are not used to train or fine-tune models. A DPA with EU standard contractual clauses exists. No retention period is stated, and zero-retention is offered on enterprise request. This is the same US position we already accepted for Gemini (docs/13). Data is minimised to the message words alone. The privacy page now names a "message-classification provider". Switch: `clients.json` → `shalom-park.jev_router.enabled`. Turning it off and rebuilding removes TypeSafe from the path.
+
 ## Log
 
 - **2026-07-26** — Contacted, agreed, **setup fee paid**. Marketing-use rights granted. Client file opened; facts sheet + kickoff drafts prepared.

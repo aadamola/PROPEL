@@ -15,6 +15,7 @@
 #   bash ops/setup/vps-tools.sh smtp          # prove a mailbox sends before n8n sees it (asks for what it needs)
 #   bash ops/setup/vps-tools.sh handshake     # step 9: prove the webhook works AND refuses strangers
 #   bash ops/setup/vps-tools.sh n8n-env       # give n8n the settings an older compose file is missing
+#   bash ops/setup/vps-tools.sh jev           # sandbox only: Jev vs keyword lane on fictional Apex Gardens messages
 #   bash ops/setup/vps-tools.sh step0         # what Meta lets the Shalom Park app do (asks for the token, never shows it)
 #
 set -euo pipefail
@@ -35,7 +36,7 @@ need_repo(){
   cd /opt && git clone -b main https://github.com/aadamola/PROPEL.git propel-repo"
 }
 case "${1:-preflight}" in
-  preflight|test|keywords|schema|ledger|step0) need_repo ;;
+  preflight|test|keywords|schema|ledger|jev|step0) need_repo ;;
 esac
 
 run_node(){ docker run --rm -v "$REPO":/app -w /app "$NODE_IMAGE" node "$@"; }
@@ -79,7 +80,7 @@ case "${1:-preflight}" in
     # The workflows read these at runtime. If the container was started from
     # an older compose file, they are simply absent, and the first symptom is
     # an "access to env vars denied" or a handshake that 403s every time.
-    for V in N8N_BLOCK_ENV_ACCESS_IN_NODE NODE_FUNCTION_ALLOW_BUILTIN META_VERIFY_TOKEN_SHALOM_PARK SHALOM_PARK_APP_SECRET; do
+    for V in N8N_BLOCK_ENV_ACCESS_IN_NODE NODE_FUNCTION_ALLOW_BUILTIN META_VERIFY_TOKEN_SHALOM_PARK SHALOM_PARK_APP_SECRET TYPESAFE_API_KEY; do
       val=$(docker compose exec -T n8n printenv "$V" 2>/dev/null || true)
       if [ "$V" = "NODE_FUNCTION_ALLOW_BUILTIN" ]; then
         echo ",$val," | grep -Eq ',(crypto|\*),' && echo "  ✓ $V allows crypto" || echo "  ✗ $V is '${val:-unset}' — must include crypto. Fix with: bash /opt/propel-repo/ops/setup/vps-tools.sh n8n-env"
@@ -186,6 +187,19 @@ case "${1:-preflight}" in
       exit 1
     fi
     ;;
+  jev)
+    # Sandbox only. Sends the FICTIONAL Apex Gardens messages to TypeSafe Jev
+    # and scores it against the keyword lane. The harness refuses any file not
+    # marked fictional, so no real buyer message can ride along.
+    # The key is read from .env and handed to the container through the
+    # environment, never on a command line, so it is not in ps or history.
+    TYPESAFE_API_KEY=$(grep -E "^TYPESAFE_API_KEY=" "$STACK/.env" 2>/dev/null | head -1 | cut -d= -f2-)
+    [ -n "$TYPESAFE_API_KEY" ] || die "TYPESAFE_API_KEY is not in $STACK/.env yet. Add one line:
+  TYPESAFE_API_KEY=<your key>"
+    export TYPESAFE_API_KEY
+    docker run --rm -e TYPESAFE_API_KEY -v "$REPO":/app -w /app/sandbox/apex-gardens/jev-bakeoff \
+      "$NODE_IMAGE" node bakeoff.js --jev "${@:2}"
+    ;;
   handshake)
     # Step 9 without the secret ever reaching the screen. The token is read
     # from .env inside this script and never echoed, so neither shell history
@@ -275,6 +289,7 @@ services:
       NODE_FUNCTION_ALLOW_BUILTIN: "crypto"
       META_VERIFY_TOKEN_SHALOM_PARK: ${META_VERIFY_TOKEN_SHALOM_PARK:-}
       SHALOM_PARK_APP_SECRET: ${SHALOM_PARK_APP_SECRET:-}
+      TYPESAFE_API_KEY: ${TYPESAFE_API_KEY:-}
 YAML
 
     # Prove the merged result parses BEFORE anything running is restarted.
@@ -311,5 +326,5 @@ YAML
     docker run --rm -e META_TOKEN -e STEP0_SEND_TO \
       -v "$REPO":/app -w /app "$NODE_IMAGE" node tools/meta-step0.js
     ;;
-  *) die "Unknown command '$1'. Use: preflight | test | keywords | schema | ledger | doctor | web | smtp | handshake | n8n-env | step0" ;;
+  *) die "Unknown command '$1'. Use: preflight | test | keywords | schema | ledger | doctor | web | smtp | handshake | n8n-env | jev | step0" ;;
 esac

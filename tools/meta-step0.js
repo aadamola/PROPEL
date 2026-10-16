@@ -67,12 +67,21 @@ async function run({ token, sendTo, fetchImpl = fetch, log = console.log }) {
   if (!ptok) return finish(r, log);
 
   // 4 · can it read DMs?
-  // Meta answers code 1 "reduce the amount of data" on busy inboxes (seen 2026-10-16 at limit=25),
-  // so ask small and step down rather than fail the check.
+  // The inbox listing is the heavy call. Seen 2026-10-16: code 1 "reduce the amount of data" at
+  // limit=25, then -2 "Timeout" at limit=10 with participants. So list ids only, ask small, step
+  // down on any transient code, try the IG-user edge too, then fetch participants one by one.
+  const TRANSIENT = [1, 2, -2, 4, 17, 32, 613];
   let conv;
-  for (const n of [10, 3, 1]) {
-    conv = await graph(ver, `${SP.page_id}/conversations?platform=instagram&fields=participants&limit=${n}`, ptok);
-    if (conv.ok || !(conv.body.error && conv.body.error.code === 1)) break;
+  outer:
+  for (const edge of [SP.page_id, SP.ig_id]) for (const n of [5, 2, 1]) {
+    conv = await graph(ver, `${edge}/conversations?platform=instagram&limit=${n}`, ptok);
+    if (conv.ok) break outer;
+    if (!(conv.body.error && TRANSIENT.includes(conv.body.error.code))) break;
+  }
+  if (conv.ok) for (const c of conv.body.data || []) {
+    if (c.participants) continue;
+    const one = await graph(ver, `${c.id}?fields=participants`, ptok);
+    if (one.ok) c.participants = one.body.participants;
   }
   say(conv.ok, 'can read Instagram DMs', conv.ok ? `${(conv.body.data || []).length} recent conversations` : err(conv.body));
 
@@ -112,7 +121,8 @@ async function selftest() {
       'GET debug_token': { data: { is_valid: true, app_id: SP.app_id, expires_at: 0, scopes: NEED } },
       'GET me': { id: '61595191243287' },
       [`GET ${SP.page_id}`]: { name: 'Shalom Park Nigeria', access_token: P, instagram_business_account: { id: SP.ig_id } },
-      [`GET ${SP.page_id}/conversations`]: (u) => u.searchParams.get('limit') === '10' ? { error: { code: 1, message: 'Please reduce the amount of data' } } : { data: [{ participants: { data: [{ username: 'shalomparknigeria', id: SP.ig_id }, { username: 'collins', id: '999' }] } }] },
+      [`GET ${SP.page_id}/conversations`]: (u) => u.searchParams.get('limit') === '5' ? { error: { code: -2, message: 'Timeout' } } : { data: [{ id: 'conv1' }] },
+      'GET conv1': { participants: { data: [{ username: 'shalomparknigeria', id: SP.ig_id }, { username: 'collins', id: '999' }] } },
       [`POST ${SP.page_id}/messages`]: { recipient_id: '999' },
       ...over
     };

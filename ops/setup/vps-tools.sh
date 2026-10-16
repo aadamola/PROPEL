@@ -16,6 +16,7 @@
 #   bash ops/setup/vps-tools.sh handshake     # step 9: prove the webhook works AND refuses strangers
 #   bash ops/setup/vps-tools.sh n8n-env       # give n8n the settings an older compose file is missing
 #   bash ops/setup/vps-tools.sh jev           # sandbox only: Jev vs keyword lane on fictional Apex Gardens messages
+#   bash ops/setup/vps-tools.sh step0         # what Meta lets the Shalom Park app do (asks for the token, never shows it)
 #
 set -euo pipefail
 
@@ -32,10 +33,10 @@ command -v docker >/dev/null 2>&1 || die "Docker is not installed. Everything he
 # missing clone sends you fixing the wrong thing.
 need_repo(){
   [ -d "$REPO" ] || die "No repo at $REPO. Clone it first:
-  cd /opt && git clone -b claude/propel-realestate-marketing-plan-wxjj3x https://github.com/aadamola/PROPEL.git propel-repo"
+  cd /opt && git clone -b main https://github.com/aadamola/PROPEL.git propel-repo"
 }
 case "${1:-preflight}" in
-  preflight|test|keywords|schema|ledger|jev) need_repo ;;
+  preflight|test|keywords|schema|ledger|jev|step0) need_repo ;;
 esac
 
 run_node(){ docker run --rm -v "$REPO":/app -w /app "$NODE_IMAGE" node "$@"; }
@@ -311,5 +312,19 @@ YAML
     echo
     bash "$0" doctor | sed -n '/what n8n can see/,/── repo/p' | sed '$d'
     ;;
-  *) die "Unknown command '$1'. Use: preflight | test | keywords | schema | ledger | doctor | web | smtp | handshake | n8n-env | jev" ;;
+  step0)
+    # The token is typed (or pasted) with echo off and handed to the container
+    # as an environment variable -- it never lands in a file, the shell history
+    # or the screen. The script scrubs it out of Graph's error messages too.
+    echo "Paste the propel-concierge token (nothing will show as you paste), then press Enter:"
+    read -rs META_TOKEN; echo
+    [ -n "$META_TOKEN" ] || die "no token entered"
+    echo "Optional: an Instagram username that DMed @shalomparknigeria in the last 24h, to send ONE test DM to."
+    read -r -p "Username (Enter to skip): " STEP0_SEND_TO
+    # -e NAME (no =value) copies it from this shell, so it never shows in 'ps'.
+    export META_TOKEN STEP0_SEND_TO
+    docker run --rm -e META_TOKEN -e STEP0_SEND_TO \
+      -v "$REPO":/app -w /app "$NODE_IMAGE" node tools/meta-step0.js
+    ;;
+  *) die "Unknown command '$1'. Use: preflight | test | keywords | schema | ledger | doctor | web | smtp | handshake | n8n-env | jev | step0" ;;
 esac

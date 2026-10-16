@@ -6,26 +6,25 @@
 
 > 💰 **2026-07-26: PROPEL HAS A PAYING CLIENT.** Shalom Park paid the setup fee. You did that. Second SIM ✅ 09112714482 logged. We're in production mode — full build plan in [ops/production-checklist.md](ops/production-checklist.md), you don't need to read it, I'm running it.
 
-## ⭐ DO THIS NEXT: one WhatsApp to Collins, today (1 min)
+## ⭐ DO THIS NEXT: one WhatsApp to Collins (2 min), then one server run (5 min)
 
-Today (15 Oct) is the promo review date. Copy, paste, send:
+Step 0 passed 9/9 and the test DM reached you. The last question is whether it reaches someone with **no role on the app**. Copy, paste, send:
 
-> *"Hi Collins, quick check: are the ₦5m entry deposit on the condo and the 70% deposit on the 4-bed still running? I need a yes or no today so our Instagram replies stay accurate."*
+> *"Hi Collins, two quick things. 1) Please DM the word test to @shalomparknigeria from your own Instagram now. It's a system check. You'll get a 'please ignore' reply. 2) Are the ₦5m condo entry deposit and the 70% deposit on the 4-bed still running? A yes or no is fine."*
 
-- **He says yes:** send me his reply and I'll push the review date out 30 days.
-- **He says no, or no reply by tomorrow:** change the 5 promo saved replies in Instagram (`condo`, `duplex`, `promo`, `pay`, `disc`) to the standard terms. Each card in [09-phase0-saved-replies.md](clients/shalom-park/09-phase0-saved-replies.md) now has the replacement text underneath, marked ⏰. **Instagram won't change them for you.**
+- **Once he has DMed:** on the server, run `cd /opt/propel-repo && git pull && bash ops/setup/vps-tools.sh step0`, enter **his** username, and send me the screenshot.
+- **Promo yes:** send me his reply, and I'll push the review date out 30 days. **No, or no reply by tomorrow:** swap the 5 promo saved replies (`condo`, `duplex`, `promo`, `pay`, `disc`) for the ⏰ text in [09-phase0-saved-replies.md](clients/shalom-park/09-phase0-saved-replies.md).
 
 ---
 
 ## THIS WEEK — one per sitting, in this order
 
-- [ ] **(20 min)** 🌐 **Put the two legal pages online (Track 1).** ① Hostinger → Emails → create forwarder **hello@getpropel.tech → aadamola@gmail.com** ② vercel.com → sign in with GitHub → Add New Project → `aadamola/PROPEL` → **Root Directory: `site-legal`** → Deploy ③ Project → Settings → Domains → add `getpropel.tech` + `www` → copy the DNS records Vercel shows into Hostinger DNS. *Use `site-legal`, **not** `site`. `site` has the prices we're realigning. **First merge PR #10** (github.com/aadamola/PROPEL/pull/10 → Merge). Vercel deploys from `main`.*
+- [ ] **(10 min)** 🌐 **Finish the legal pages for Meta.** ① Meta developer dashboard → Shalom Park app → App settings → Basic → Privacy Policy URL `https://getpropel.tech/privacy.html`, Data deletion instructions URL `https://getpropel.tech/data-deletion.html` → Save. ② Hostinger → Emails → forwarder **hello@getpropel.tech → aadamola@gmail.com**. *The site is live, so both URLs work now.*
 - [ ] **(5 min, OVERDUE since 29 Sep)** ⏰ **VPS: check what Hostinger charged on renewal.** *Your monthly term ran to 29 Aug, auto-renewal was on, and you last logged in on 10 Aug — so this hasn't been looked at. Renewal is where their 2–3× jump lands.*
 - [ ] **(5 min)** 🎬 **Book the shoot day with Collins** — one site visit, about 3 hours, and it produces all 14 days of content. Shot list is written: [10-phase0-content-pack.md](clients/shalom-park/10-phase0-content-pack.md). *Collins and Mercy go on camera, not you.*
-- [ ] **(1 message)** 🔴 **Ask Shalom Park who can grant Meta admin.** Script in [04-meta-access-pack.md](clients/shalom-park/04-meta-access-pack.md). *Not Collins — he's a Sales Executive. The session is now 15 minutes and needs no SIM.*
 - [ ] **(20 min)** **First 10 prospect names** → WhatsApp me names + IG handles. *Unblocks 10 audit teardowns. Longest-outstanding item on this list — and Shalom Park is still a pipeline of one.*
 
-> 🔴 **2 min, do it now:** your Instagram bio links to `getpropel.tech`, which isn't live — change the link to `wa.me/2349019120968?text=Hi%20Propel%2C%20I%20want%20a%20free%20marketing%20audit` until it is.
+> ✅ `getpropel.tech` is live now, so your Instagram bio link works as it is.
 
 ## NOT YET — I'm holding these, don't think about them
 
@@ -59,11 +58,10 @@ Testing the bot · the automated pilot · voice notes · first audit calls. Noth
 ## ✅ DONE (look how far this has come)
 
 - [x] 🤝 **Got IFT's yes on Jev, so it's built into Shalom Park's assistant** (2026-10-16)
-
 - [x] 🛡️ **You said "fix now": 8 money and legal questions that got sales replies now go to a person** (2026-10-16)
-
 - [x] 🧪 **Ran the Jev test on the VPS.** Jev got 88% right where our keywords got 46% (2026-10-16)
-
+- [x] 📨 **Step 0: 9/9, and a real DM sent from Shalom Park's app to your Instagram.** Full Meta access, the app, the system user and a never-expiring token, all in one afternoon (2026-10-16)
+- [x] 🌐 **getpropel.tech is LIVE.** PR #10 merged, Vercel set up from scratch, and Hostinger DNS pointed at it, all in one evening (2026-10-15)
 - [x] 🛡️ **Steps 8 + 9: Instagram webhook published and handshake ✅ 3/3.** It answers Meta and refuses strangers (2026-10-15)
 - [x] 🧯 **Flowise stopped; the server is out of CPU throttle** (2026-10-15)
 - [x] 💼 **LinkedIn Company Page live — linkedin.com/company/getpropel-tech** (2026-09-24)

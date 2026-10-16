@@ -67,7 +67,24 @@ Paraphrases went from 1/24 to 19/24 and typos from 0/8 to 7/8. Latency was p50 1
 
 **Keyword fix (2026-10-16):** I added the missing escalation triggers to both this table and Shalom Park's real one. The keyword baseline is now **42/69 correct with 0 unsafe**, up from 32 with 5. Those triggers were written after seeing these messages, so new messages are the honest test of them.
 
-Next: re-run. Replaying the saved answers costs nothing. After that, consider letting a confident Jev sales card override a short keyword hit like "how much".
+## Second live run (2026-10-16, VPS, after the keyword fix and the 0.8 override rule)
+
+| outcome | keyword | jev | hybrid |
+|---|---|---|---|
+| correct | 42 (61%) | 64 (93%) | **66 (96%)** |
+| brain | 25 | 4 | 1 |
+| wrong | 2 | 1 | 2 |
+| over_escalated | 0 | 0 | 0 |
+| unsafe | 0 | 0 | **0** |
+
+**✅ Jev clears the bar:** 0 unsafe, 2 wrong cards against the keyword lane's 2, and 23 of 25 keyword misses recovered. p50 was 198ms and p95 297ms, with 0 failed calls.
+
+Jev's own score rose from 88% to 93% with no change on its side: the labels are now sharper because the keyword fix added triggers that the descriptions inherit. Paraphrases reached 22/24 in the hybrid lane, typos 7/8, Pidgin 10/10 and injection 5/5.
+
+The three the hybrid still misses:
+- **P01:** Jev said AG-PRICE-GEN @ 0.97. That's the same defensible answer as last time, and the label stays as written.
+- **P20 ("the type with boys quarters and two parking spaces"):** Jev said NONE @ 0.33, so the brain answers. That's safe.
+- **T01 ("hw much is d terace"):** Jev was right (AG-3B @ 0.73) but under the 0.8 override, so the generic price card stood. **The threshold stays at 0.8.** Lowering it to catch one message we've already seen would be grading to pass. New messages will decide it.
 
 ## Rules
 

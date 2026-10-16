@@ -2,6 +2,13 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-10-16 (night) — Jev clears the bar on the VPS; PR #13 merged
+
+- **PR #13 merged** into `main` (merge commit `d80fa54`). ADEDAMOLA pulled `main` on the VPS and ran `n8n-env`. `doctor` shows `✓ TYPESAFE_API_KEY set`, and the handshake still passes **3/3**.
+- **Second live bake-off: ✅ the bar is cleared.** The hybrid lane got **66/69 right (96%) with 0 unsafe**, up from 62 with 1 unsafe. It gave 2 wrong cards, the same as the keyword lane, and recovered 23 of 25 keyword misses. The keyword lane alone is now 42/69 with 0 unsafe. Jev alone got 64/69 (93%). Details: `sandbox/apex-gardens/jev-bakeoff/README.md`.
+- **The 0.8 override threshold stays.** It cost one message ("hw much is d terace"). Retuning on a message we've already seen would be grading to pass.
+- **Waiting on ADEDAMOLA:** confirm that `05` was re-imported in n8n (the canvas shows `Jev second opinion`) and published with **Shalom Park IG** re-attached. Buyers still see none of this until step 10.
+
 ## 2026-10-16 (evening) — Jev wired into Shalom Park's Instagram workflow (IFT approved)
 
 - **IFT Realty approved TypeSafe as a sub-processor.** ADEDAMOLA authorised the wiring in the project thread. The privacy page (`site/` + `site-legal/`) now names a "message-classification provider" that receives message words only. The approval and the transfer check are in `clients/shalom-park/README.md`. **Keep IFT's written "yes" on file.**

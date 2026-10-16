@@ -57,6 +57,7 @@ Testing the bot · the automated pilot · voice notes · first audit calls. Noth
 
 ## ✅ DONE (look how far this has come)
 
+- [x] 🏁 **Jev passed its exam on your server: 96% right, zero unsafe.** PR merged, key live, handshake still 3/3 (2026-10-16)
 - [x] 🤝 **Got IFT's yes on Jev, so it's built into Shalom Park's assistant** (2026-10-16)
 - [x] 🛡️ **You said "fix now": 8 money and legal questions that got sales replies now go to a person** (2026-10-16)
 - [x] 🧪 **Ran the Jev test on the VPS.** Jev got 88% right where our keywords got 46% (2026-10-16)

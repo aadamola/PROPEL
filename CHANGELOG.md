@@ -5,7 +5,9 @@
 ## 2026-10-16 — Full access to Shalom Park's Meta portfolio granted
 
 - **ADEDAMOLA has full access** to the IFT Realty Ltd portfolio. No app exists yet.
-- **Next (step 6 of the client session in `08-instagram-launch-plan.md`):** confirm the Page and the IG account are both in the portfolio, then create `Shalom Park Concierge` **inside IFT Realty Ltd's portfolio**, Instagram use case, with contact `aadamola@gmail.com` and the two legal URLs under Basic settings. No webhooks, no tokens in chat, and no date to the client until the Step 0 test has run.
+- **✅ Step 6 done (15:30 Lagos):** app **`Shalom Park Concierge`** (App ID `1739429447113718`) created with the *Manage messaging & content on Instagram* use case. Business Settings shows **"Owned by: IFT Realty Ltd"**. Basic settings: privacy + data-deletion URLs saved, contact `aadamola@gmail.com`, category Business and pages. Unpublished. Tech Provider route deliberately not taken.
+- **Next:** confirm the IG account and the Page are in the portfolio, then a system user (Employee) + token, then the Step 0 test.
+- ~~**Next (step 6 of the client session in `08-instagram-launch-plan.md`):** confirm the Page and the IG account are both in the portfolio, then create `Shalom Park Concierge` **inside IFT Realty Ltd's portfolio**, Instagram use case, with contact `aadamola@gmail.com` and the two legal URLs under Basic settings. No webhooks, no tokens in chat, and no date to the client until the Step 0 test has run.~~
 
 ## 2026-10-15 (night, late) — ✅ PR #10 merged; getpropel.tech live on Vercel
 

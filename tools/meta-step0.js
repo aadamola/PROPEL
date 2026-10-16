@@ -71,10 +71,11 @@ async function run({ token, sendTo, fetchImpl = fetch, log = console.log }) {
   // limit=25, then -2 "Timeout" at limit=10 with participants. So list ids only, ask small, step
   // down on any transient code, try the IG-user edge too, then fetch participants one by one.
   const TRANSIENT = [1, 2, -2, 4, 17, 32, 613];
-  let conv;
+  let conv, asked;
   outer:
   for (const edge of [SP.page_id, SP.ig_id]) for (const n of [5, 2, 1]) {
     conv = await graph(ver, `${edge}/conversations?platform=instagram&limit=${n}`, ptok);
+    asked = `${edge === SP.page_id ? 'Page' : 'IG'} edge, asked for ${n}`;
     if (conv.ok) break outer;
     if (!(conv.body.error && TRANSIENT.includes(conv.body.error.code))) break;
   }
@@ -83,7 +84,7 @@ async function run({ token, sendTo, fetchImpl = fetch, log = console.log }) {
     const one = await graph(ver, `${c.id}?fields=participants`, ptok);
     if (one.ok) c.participants = one.body.participants;
   }
-  say(conv.ok, 'can read Instagram DMs', conv.ok ? `${(conv.body.data || []).length} recent conversations` : err(conv.body));
+  say(conv.ok, 'can read Instagram DMs', conv.ok ? `${(conv.body.data || []).length} recent conversations (${asked})` : err(conv.body));
 
   // 5 · optional: one real DM
   if (sendTo && conv.ok) {
@@ -136,6 +137,7 @@ async function selftest() {
   assert.ok(r.passed, 'happy path passes');
   assert.strictEqual(r.sent, true, 'DM sent to the matched participant');
   assert.ok(!quiet.join('\n').includes(T) && !quiet.join('\n').includes(P), 'no token printed');
+  assert.ok(quiet.some(l => l.includes('1 recent conversations (Page edge, asked for 2)')), 'says how many it asked for');
 
   quiet.length = 0;
   r = await run({ token: T, fetchImpl: mock({ [`POST ${SP.page_id}/messages`]: { error: { code: 10, message: `Application does not have permission (${P})` } } }), sendTo: 'collins', log });

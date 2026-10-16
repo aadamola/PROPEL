@@ -79,7 +79,7 @@ case "${1:-preflight}" in
     # The workflows read these at runtime. If the container was started from
     # an older compose file, they are simply absent, and the first symptom is
     # an "access to env vars denied" or a handshake that 403s every time.
-    for V in N8N_BLOCK_ENV_ACCESS_IN_NODE NODE_FUNCTION_ALLOW_BUILTIN META_VERIFY_TOKEN_SHALOM_PARK SHALOM_PARK_APP_SECRET; do
+    for V in N8N_BLOCK_ENV_ACCESS_IN_NODE NODE_FUNCTION_ALLOW_BUILTIN META_VERIFY_TOKEN_SHALOM_PARK SHALOM_PARK_APP_SECRET TYPESAFE_API_KEY; do
       val=$(docker compose exec -T n8n printenv "$V" 2>/dev/null || true)
       if [ "$V" = "NODE_FUNCTION_ALLOW_BUILTIN" ]; then
         echo ",$val," | grep -Eq ',(crypto|\*),' && echo "  ✓ $V allows crypto" || echo "  ✗ $V is '${val:-unset}' — must include crypto. Fix with: bash /opt/propel-repo/ops/setup/vps-tools.sh n8n-env"
@@ -288,6 +288,7 @@ services:
       NODE_FUNCTION_ALLOW_BUILTIN: "crypto"
       META_VERIFY_TOKEN_SHALOM_PARK: ${META_VERIFY_TOKEN_SHALOM_PARK:-}
       SHALOM_PARK_APP_SECRET: ${SHALOM_PARK_APP_SECRET:-}
+      TYPESAFE_API_KEY: ${TYPESAFE_API_KEY:-}
 YAML
 
     # Prove the merged result parses BEFORE anything running is restarted.
@@ -310,5 +311,5 @@ YAML
     echo
     bash "$0" doctor | sed -n '/what n8n can see/,/── repo/p' | sed '$d'
     ;;
-  *) die "Unknown command '$1'. Use: preflight | test | keywords | schema | ledger | doctor | web | smtp | handshake | n8n-env" ;;
+  *) die "Unknown command '$1'. Use: preflight | test | keywords | schema | ledger | doctor | web | smtp | handshake | n8n-env | jev" ;;
 esac

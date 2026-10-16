@@ -2,6 +2,21 @@
 
 *Dated record of decisions and deliverables. Newest first. Every meaningful session ends with an entry here — if it's not in the changelog, it didn't happen.*
 
+## 2026-10-16 (evening) — Jev wired into Shalom Park's Instagram workflow (IFT approved)
+
+- **IFT Realty approved TypeSafe as a sub-processor.** ADEDAMOLA authorised the wiring in the project thread. The privacy page (`site/` + `site-legal/`) now names a "message-classification provider" that receives message words only. The approval and the transfer check are in `clients/shalom-park/README.md`. **Keep IFT's written "yes" on file.**
+- **New node `Jev second opinion`** in `05`, between the keyword lane and `Keyword matched?`. It uses the shared policy in `ops/concierge/lib/router.js`, which is the same code the bake-off scores:
+  - a keyword escalation is final, and Jev isn't even called;
+  - a confident Jev escalation (≥0.5) beats a sales card;
+  - a very confident Jev card (≥0.8) replaces a generic keyword card (priority ≥30);
+  - on a keyword miss, Jev's card is used at ≥0.7, otherwise the brain answers.
+
+  **Jev-chosen cards are built exactly like keyword cards and go through the same guardrail.** TypeSafe receives the message text only, never an IGSID, handle or name. No key, a timeout (2.5s) or TypeSafe being down all leave the keyword answer standing.
+- **Tests:** IGJ-01 to IGJ-08 in the chain suite (23/23). Preflight now parses Code nodes the way n8n runs them (async). All suites pass.
+- **Server:** `n8n-env` now passes `TYPESAFE_API_KEY` to n8n, and `doctor` reports it. **Switch:** `clients.json` → `shalom-park.jev_router.enabled` (on).
+- **Not yet proven:** the 0.8 override rule was set after the first run. Re-running `vps-tools.sh jev` on the new code scores it.
+- **Waiting on ADEDAMOLA:** on the VPS, pull the branch, then `n8n-env`, then re-import `05`. Buyers only see any of this at step 10 cutover.
+
 ## 2026-10-16 — Shalom Park keyword table: 8 money and legal questions now reach a person
 
 - **ADEDAMOLA chose "fix now".** I added 34 escalation triggers across 5 rules (ROI, refund, pay-to, discount, legal). Examples: "where do I send the money", "changed my mind", "get it back", "already agreed", "419", "fake estate", "how much will I make". **All 8 messages that reached a sales card before now escalate**, locked by KW-49 to KW-56, and all 8 fail on the old table. KW-57 checks that plain questions ("How much is the condo?", "Where is the estate?") still get their cards. Mirrored into the Apex sandbox, where the keyword baseline goes from 32/69 with 5 unsafe to **42/69 with 0 unsafe**. All suites pass.

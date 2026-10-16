@@ -39,7 +39,10 @@ for (const [file, w] of Object.entries(wf)) {
 
     // 1. Code nodes must parse.
     if (n.parameters.jsCode) {
-      try { new Function(n.parameters.jsCode); }
+      // n8n runs Code nodes inside an async wrapper, so top-level await is
+      // legal there; parse the same way so an await is not a false alarm.
+      const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
+      try { new AsyncFunction(n.parameters.jsCode); }
       catch (e) { P(file, `"${n.name}" has a syntax error: ${e.message}`); }
 
       // 1b. Built-in modules must be on the server's allow-list.

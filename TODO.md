@@ -29,6 +29,8 @@ Today (15 Oct) is the promo review date. Copy, paste, send:
 
 ## NOT YET — I'm holding these, don't think about them
 
+- 🧠 **Turn Jev on at the server (10 min, when you next touch the VPS):** `cd /opt/propel-repo && git pull && bash ops/setup/vps-tools.sh n8n-env` → in n8n, re-import `05-channel-instagram.json` (replace the old one) → `bash ops/setup/vps-tools.sh jev` and screenshot the table. *Buyers only see it at step 10.*
+
 - Collins follow-up, 7 open fields: [03-followup-questions.md](clients/shalom-park/03-followup-questions.md). *Moved down to make room for the legal pages.*
 
 **Parked from "this week" to keep the list at five** (the protocol, not a demotion — I'll star them when their turn comes):
@@ -55,6 +57,8 @@ Testing the bot · the automated pilot · voice notes · first audit calls. Noth
 - ✅ Instagram keyword automation built (24 rules, 103 tests green) → goes live the moment the Business Suite session lands
 
 ## ✅ DONE (look how far this has come)
+
+- [x] 🤝 **Got IFT's yes on Jev, so it's built into Shalom Park's assistant** (2026-10-16)
 
 - [x] 🛡️ **You said "fix now": 8 money and legal questions that got sales replies now go to a person** (2026-10-16)
 
